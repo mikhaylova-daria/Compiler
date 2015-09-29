@@ -1,60 +1,70 @@
 %option noyywrap
 
 %{
-#include "tokens_processing.h"
-extern "C" {
-    void yyerror(char*) {}
-    int yyparse(void);
-    int yylex(void);
-}
+    #include "JavaHelp.h"
+    #include "Declaration.h"
+    #include "tokens.h"
+    void yyerror(const char*);
 %}
 
-IDENT 	[A-Za-z_][A-Za-z0-9_]*
-INT 	([1-9]([0-9])*)|0
-BOOLEAN	("true"|"false")
-SPACE 	[ \t]+
-LINE_SEPARATOR [\n]+
+%option yylineno
 
 %%
-if          {    processToken("IF", yytext);	}
-else		{ 	 processToken("ELSE", yytext);	}
-while		{	 processToken("WHILE", yytext);	}
-return		{	 processToken("RETURN", yytext);	}
-public:		{	 processToken("PUBLIC", yytext);	}
-class		{	 processToken("CLASS", yytext);	}
-static		{	 processToken("STATIC", yytext);	}
-void		{	 processToken("TYPE_VOID", yytext);	}
-main		{	 processToken("MAIN", yytext);	}
-int 		{    processToken("TYPE_INT", yytext);	}
-boolean		{    processToken("TYPE_BOOL", yytext);	}
-String		{	 processToken("TYPE_STRING", yytext);	}
-"{"		{	 processToken("{", yytext);	}
-"}"		{	 processToken("}", yytext);	}
-"("		{	 processToken("(", yytext);	}
-")"		{	 processToken(")", yytext);	}
-"["		{	 processToken("[", yytext);	}
-"]"		{	 processToken("]", yytext);	}
-"<"		{	 processToken("<", yytext);	}
-"<="		{	 processToken("LESSEQ", yytext);	}
-">"		{	 processToken(">", yytext);	}
-">="		{	 processToken("MOREEQ", yytext);	}
-"=="		{	 processToken("EQ", yytext);	}
-"!="		{	 processToken("NONEQ", yytext);	}
-"="		{	 processToken("=", yytext);	}
-"&&"		{	 processToken("AND", yytext);	}
-"||"		{	 processToken("OR", yytext);	}
-"+"		{	 processToken("+", yytext);	}
-"-"		{	 processToken("-", yytext);	}
-"*"		{	 processToken("*", yytext);	}
-"/"		{	 processToken("/", yytext);	}
-";"		{	 processToken(";", yytext);	}
-","		{	 processToken(",", yytext);	}
-"!"		{	 processToken("!", yytext);	}
-"."		{	 processToken(".", yytext);	}
-{BOOLEAN} { processValue("BOOLEAN", yytext); }
-{INT} { processValue("INT", yytext); }
-{IDENT}	{ processValue("IDENT", yytext); }
-{SPACE}	{ processSpace(yytext); }
-{LINE_SEPARATOR} {	processNewLine(yytext);	}
-. { processErrorToken(yytext); }
+[/][/].*\n      ; // comment
+[ \t\n] ;
+
+[0-9]+ {
+    yylval.value.type = Int;
+    yylval.value.int_value = atoi(yytext);
+    return INT;
+}
+
+"true" {
+    yylval.value.type = Bool;
+    yylval.value.bool_value = true;
+    return BOOL;
+}
+"false" {
+    yylval.value.type = Bool;
+    yylval.value.bool_value = false;
+    return BOOL;
+}
+
+"int" {
+    yylval.type = Int;
+    return TYPE;
+}
+"boolean" {
+    yylval.type = Bool;
+    return TYPE;
+}
+
+"public"    { return PUBLIC; }
+"void"      { return VOID; }
+"class"     { return CLASS; }
+"static"    { return STATIC;}
+"return"    { return RETURN; }
+"if"        { return IF; }
+"else"      { return ELSE; }
+"while"     { return WHILE; }
+"break"     { return BREAK; }
+"main"      { return MAIN; }
+"String[]" { return MAIN_ARGS; }
+"&&"        { return AND; }
+"||"        { return OR; }
+"!"         { return NOT; }
+"<="        { return LE; }
+">="        { return GE; }
+"=="        { return EQ; }
+"!="        { return NEQ; }
+"<"         { return LT; }
+">"         { return GT; }
+
+[a-zA-Z_][a-zA-Z0-9_]* {
+    strcpy(yylval.word, yytext);
+    return ID;
+}
+
+[-+*/()_{}=;,<>.{}%] { return *yytext; }
+.        { yyerror("Unknown symbol\n"); }
 %%
