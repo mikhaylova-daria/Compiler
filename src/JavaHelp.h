@@ -17,7 +17,39 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <typeinfo>
 using namespace std;
+
+struct Location  {
+    int firstLine;
+    int firstColumn;
+    int lastLine;
+    int lastColumn;
+    Location() {}
+    Location(int _firstLine, int _firstColumn, int _lastLine, int _lastColumn)
+            : firstLine(_firstLine), firstColumn(_firstColumn), lastLine(_lastLine), lastColumn(_lastColumn) {}
+    void update(int line, int column) {
+        firstLine = lastLine;
+        firstColumn = lastColumn;
+        lastLine = line;
+        lastColumn = column;
+    }
+    void print() {
+        std::cout << firstLine << ' ' << firstColumn;
+        std::cout << ' ' << lastLine << ' ' << lastColumn << std::endl;
+    }
+};
+
+extern Location getLocation();
+extern char* yytext;
+
+class Token {
+    Location location;
+public:
+    void setLocation(Location _location) { location = _location; }
+    Token() : location(getLocation()) { }
+    virtual ~Token() {}
+};
 
 #include "Declaration.h"
 
@@ -92,17 +124,17 @@ public:
     }
 };
 
-class MyExpr {
+class MyExpr : public Token {
 public:
     virtual MyValue exec(Node* node) = 0;
 };
 
-class Statement {
+class Statement : public Token {
 public:
     virtual InterruptionType execute(Node* node) = 0;
 };
 
-class Argument {
+class Argument : public Token {
 private:
     string Id;
     VarType type;
@@ -118,7 +150,7 @@ public:
     friend class Method;
 };
 
-class ArgumentList {
+class ArgumentList : public Token {
 private:
     vector<Argument*> args;
 public:
@@ -138,7 +170,7 @@ public:
     }
 };
 
-class Method {
+class Method : public Token {
 protected:
     Node* methodNode;
     VarType returnType;
@@ -227,7 +259,7 @@ public:
 };
 
 
-class MainClass {
+class MainClass : public Token {
 public:
     Node* classNode;
     StatementList* FieldsDeclaration;
@@ -588,7 +620,7 @@ public:
     }
 };
 
-class ParamList {
+class ParamList : public Token {
 private:
     vector<MyExpr*> params;
 public:
