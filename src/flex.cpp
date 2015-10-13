@@ -1,6 +1,6 @@
-#line 2 "/home/daria/Compiler/src/flex.cpp"
+#line 2 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.cpp"
 
-#line 4 "/home/daria/Compiler/src/flex.cpp"
+#line 4 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -9,7 +9,7 @@
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 35
+#define YY_FLEX_SUBMINOR_VERSION 37
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -142,15 +142,7 @@ typedef unsigned int flex_uint32_t;
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
-#define YY_BUF_SIZE 32768
-#else
 #define YY_BUF_SIZE 16384
-#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -162,7 +154,12 @@ typedef unsigned int flex_uint32_t;
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #endif
 
-extern int yyleng;
+#ifndef YY_TYPEDEF_YY_SIZE_T
+#define YY_TYPEDEF_YY_SIZE_T
+typedef size_t yy_size_t;
+#endif
+
+extern yy_size_t yyleng;
 
 extern FILE *yyin, *yyout;
 
@@ -201,11 +198,6 @@ extern FILE *yyin, *yyout;
 
 #define unput(c) yyunput( c, (yytext_ptr)  )
 
-#ifndef YY_TYPEDEF_YY_SIZE_T
-#define YY_TYPEDEF_YY_SIZE_T
-typedef size_t yy_size_t;
-#endif
-
 #ifndef YY_STRUCT_YY_BUFFER_STATE
 #define YY_STRUCT_YY_BUFFER_STATE
 struct yy_buffer_state
@@ -223,7 +215,7 @@ struct yy_buffer_state
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
-	int yy_n_chars;
+	yy_size_t yy_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -293,8 +285,8 @@ static YY_BUFFER_STATE * yy_buffer_stack = 0; /**< Stack as an array. */
 
 /* yy_hold_char holds the character lost when yytext is formed. */
 static char yy_hold_char;
-static int yy_n_chars;		/* number of characters read into yy_ch_buf */
-int yyleng;
+static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */
+yy_size_t yyleng;
 
 /* Points to current character in buffer. */
 static char *yy_c_buf_p = (char *) 0;
@@ -322,7 +314,7 @@ static void yy_init_buffer (YY_BUFFER_STATE b,FILE *file  );
 
 YY_BUFFER_STATE yy_scan_buffer (char *base,yy_size_t size  );
 YY_BUFFER_STATE yy_scan_string (yyconst char *yy_str  );
-YY_BUFFER_STATE yy_scan_bytes (yyconst char *bytes,int len  );
+YY_BUFFER_STATE yy_scan_bytes (yyconst char *bytes,yy_size_t len  );
 
 void *yyalloc (yy_size_t  );
 void *yyrealloc (void *,yy_size_t  );
@@ -354,7 +346,7 @@ void yyfree (void *  );
 
 /* Begin user sect3 */
 
-#define yywrap(n) 1
+#define yywrap() 1
 #define YY_SKIP_YYWRAP
 
 typedef unsigned char YY_CHAR;
@@ -567,8 +559,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/home/daria/Compiler/src/flex.l"
-#line 4 "/home/daria/Compiler/src/flex.l"
+#line 1 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
+#line 4 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
     #include "JavaHelp.h"
     #include "Declaration.h"
     #include "tokens.h"
@@ -587,7 +579,7 @@ char *yytext;
         yylloc.last_line = yy_line;
         yylloc.last_column = yy_column;
     }
-#line 591 "/home/daria/Compiler/src/flex.cpp"
+#line 583 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.cpp"
 
 #define INITIAL 0
 
@@ -626,7 +618,7 @@ FILE *yyget_out (void );
 
 void yyset_out  (FILE * out_str  );
 
-int yyget_leng (void );
+yy_size_t yyget_leng (void );
 
 char *yyget_text (void );
 
@@ -668,12 +660,7 @@ static int input (void );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k */
-#define YY_READ_BUF_SIZE 16384
-#else
 #define YY_READ_BUF_SIZE 8192
-#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -774,9 +761,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 26 "/home/daria/Compiler/src/flex.l"
+#line 26 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 
-#line 780 "/home/daria/Compiler/src/flex.cpp"
+#line 767 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -872,23 +859,23 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 27 "/home/daria/Compiler/src/flex.l"
+#line 27 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { ++yy_line; yy_column = 1; updateLocation(); } // comment
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 28 "/home/daria/Compiler/src/flex.l"
+#line 28 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation();}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 29 "/home/daria/Compiler/src/flex.l"
+#line 29 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_line += strlen(yytext); yy_column = 1; updateLocation();}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 30 "/home/daria/Compiler/src/flex.l"
+#line 30 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -897,7 +884,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 36 "/home/daria/Compiler/src/flex.l"
+#line 36 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -906,7 +893,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 41 "/home/daria/Compiler/src/flex.l"
+#line 41 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -915,7 +902,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 47 "/home/daria/Compiler/src/flex.l"
+#line 47 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -924,7 +911,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 52 "/home/daria/Compiler/src/flex.l"
+#line 52 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -933,142 +920,142 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 58 "/home/daria/Compiler/src/flex.l"
+#line 58 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return PRINT; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 59 "/home/daria/Compiler/src/flex.l"
+#line 59 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return THIS; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 60 "/home/daria/Compiler/src/flex.l"
+#line 60 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LENGTH; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 61 "/home/daria/Compiler/src/flex.l"
+#line 61 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NEW; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 62 "/home/daria/Compiler/src/flex.l"
+#line 62 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return EXTENDS; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 63 "/home/daria/Compiler/src/flex.l"
+#line 63 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return PUBLIC; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 64 "/home/daria/Compiler/src/flex.l"
+#line 64 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return VOID; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 65 "/home/daria/Compiler/src/flex.l"
+#line 65 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return CLASS; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 66 "/home/daria/Compiler/src/flex.l"
+#line 66 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return STATIC;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 67 "/home/daria/Compiler/src/flex.l"
+#line 67 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return RETURN; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 68 "/home/daria/Compiler/src/flex.l"
+#line 68 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return IF; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 69 "/home/daria/Compiler/src/flex.l"
+#line 69 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return ELSE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 70 "/home/daria/Compiler/src/flex.l"
+#line 70 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return WHILE; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 71 "/home/daria/Compiler/src/flex.l"
+#line 71 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return BREAK; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 72 "/home/daria/Compiler/src/flex.l"
+#line 72 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return MAIN; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 73 "/home/daria/Compiler/src/flex.l"
+#line 73 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return MAIN_ARGS; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 74 "/home/daria/Compiler/src/flex.l"
+#line 74 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return AND; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 75 "/home/daria/Compiler/src/flex.l"
+#line 75 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return OR; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 76 "/home/daria/Compiler/src/flex.l"
+#line 76 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NOT; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 77 "/home/daria/Compiler/src/flex.l"
+#line 77 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LE; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 78 "/home/daria/Compiler/src/flex.l"
+#line 78 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return GE; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 79 "/home/daria/Compiler/src/flex.l"
+#line 79 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return EQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 80 "/home/daria/Compiler/src/flex.l"
+#line 80 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NEQ; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 81 "/home/daria/Compiler/src/flex.l"
+#line 81 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 82 "/home/daria/Compiler/src/flex.l"
+#line 82 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return GT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 83 "/home/daria/Compiler/src/flex.l"
+#line 83 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return '['; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 84 "/home/daria/Compiler/src/flex.l"
+#line 84 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return ']'; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 86 "/home/daria/Compiler/src/flex.l"
+#line 86 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -1077,20 +1064,20 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 92 "/home/daria/Compiler/src/flex.l"
+#line 92 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { ++yy_column; updateLocation(); return *yytext; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 93 "/home/daria/Compiler/src/flex.l"
+#line 93 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 { yyerror("Unknown symbol\n"); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 94 "/home/daria/Compiler/src/flex.l"
+#line 94 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 ECHO;
 	YY_BREAK
-#line 1094 "/home/daria/Compiler/src/flex.cpp"
+#line 1081 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1276,21 +1263,21 @@ static int yy_get_next_buffer (void)
 
 	else
 		{
-			int num_to_read =
+			yy_size_t num_to_read =
 			YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
 
 		while ( num_to_read <= 0 )
 			{ /* Not enough room in the buffer - grow it. */
 
 			/* just a shorter name for the current buffer */
-			YY_BUFFER_STATE b = YY_CURRENT_BUFFER;
+			YY_BUFFER_STATE b = YY_CURRENT_BUFFER_LVALUE;
 
 			int yy_c_buf_p_offset =
 				(int) ((yy_c_buf_p) - b->yy_ch_buf);
 
 			if ( b->yy_is_our_buffer )
 				{
-				int new_size = b->yy_buf_size * 2;
+				yy_size_t new_size = b->yy_buf_size * 2;
 
 				if ( new_size <= 0 )
 					b->yy_buf_size += b->yy_buf_size / 8;
@@ -1321,7 +1308,7 @@ static int yy_get_next_buffer (void)
 
 		/* Read in more data. */
 		YY_INPUT( (&YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[number_to_move]),
-			(yy_n_chars), (size_t) num_to_read );
+			(yy_n_chars), num_to_read );
 
 		YY_CURRENT_BUFFER_LVALUE->yy_n_chars = (yy_n_chars);
 		}
@@ -1416,7 +1403,7 @@ static int yy_get_next_buffer (void)
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 140);
 
-	return yy_is_jam ? 0 : yy_current_state;
+		return yy_is_jam ? 0 : yy_current_state;
 }
 
     static void yyunput (int c, register char * yy_bp )
@@ -1431,7 +1418,7 @@ static int yy_get_next_buffer (void)
 	if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
 		{ /* need to shift things up to make room */
 		/* +2 for EOB chars. */
-		register int number_to_move = (yy_n_chars) + 2;
+		register yy_size_t number_to_move = (yy_n_chars) + 2;
 		register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
 					YY_CURRENT_BUFFER_LVALUE->yy_buf_size + 2];
 		register char *source =
@@ -1484,7 +1471,7 @@ static int yy_get_next_buffer (void)
 
 		else
 			{ /* need more input */
-			int offset = (yy_c_buf_p) - (yytext_ptr);
+			yy_size_t offset = (yy_c_buf_p) - (yytext_ptr);
 			++(yy_c_buf_p);
 
 			switch ( yy_get_next_buffer(  ) )
@@ -1649,10 +1636,6 @@ static void yy_load_buffer_state  (void)
 	yyfree((void *) b  );
 }
 
-#ifndef __cplusplus
-extern int isatty (int );
-#endif /* __cplusplus */
-    
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
  * such as during a yyrestart() or at EOF.
@@ -1765,7 +1748,7 @@ void yypop_buffer_state (void)
  */
 static void yyensure_buffer_stack (void)
 {
-	int num_to_alloc;
+	yy_size_t num_to_alloc;
     
 	if (!(yy_buffer_stack)) {
 
@@ -1862,7 +1845,7 @@ YY_BUFFER_STATE yy_scan_string (yyconst char * yystr )
  * 
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len )
+YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )
 {
 	YY_BUFFER_STATE b;
 	char *buf;
@@ -1949,7 +1932,7 @@ FILE *yyget_out  (void)
 /** Get the length of the current token.
  * 
  */
-int yyget_leng  (void)
+yy_size_t yyget_leng  (void)
 {
         return yyleng;
 }
@@ -2100,7 +2083,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 94 "/home/daria/Compiler/src/flex.l"
+#line 94 "/Users/ava-katushka/Documents/botanstvo/Compilers/Compiler/src/flex.l"
 
 
 
