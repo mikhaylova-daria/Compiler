@@ -9,16 +9,17 @@ extern "C" FILE* yyin;
 
 extern int yyparse();
 
-#include "iostream"
+#include <iostream>
+#include <vector>
 #include "JavaHelp.h"
 
-extern MainClass mainClass;
 
 using namespace std;
 
 vector<string> text;
 
 void printTextPart(Location loc) {
+    loc.firstColumn--; loc.firstLine--; loc.lastColumn--; loc.lastLine--;
     if (loc.firstLine == loc.lastLine)
         cout << text[loc.firstLine].substr(loc.firstColumn, loc.lastColumn - loc.firstColumn) << endl;
     else {
@@ -40,12 +41,7 @@ int main(int argc, const char* argv[])
         text.push_back(line);
 
     yyin = fopen(argv[1], "r");
-    for(int i = 2; i < argc; ++i)
-    {
-        mainArgs.push_back(argv[i]);
-    }
     yyparse();
-    mainClass.run();
     return 0;
 }
 

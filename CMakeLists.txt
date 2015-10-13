@@ -11,8 +11,8 @@ IF(BISON_FOUND)
             OUTPUT ${BisonOutput}
             COMMAND ${BISON_EXECUTABLE}
             --defines=${CMAKE_SOURCE_DIR}/src/tokens.h
-            --output=${BisonOutput}
-            ${CMAKE_SOURCE_DIR}/src/bison.y
+            --output=${BisonOutput} -v -d
+            ${CMAKE_SOURCE_DIR}/src/minijava.y
             COMMENT "Generating bison.cpp"
     )
 ENDIF()

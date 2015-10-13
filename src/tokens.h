@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
-# define YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
+#ifndef YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
+# define YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -54,45 +54,39 @@ extern int yydebug;
     RETURN = 264,
     WHILE = 265,
     BREAK = 266,
-    TYPE = 267,
-    INT = 268,
-    BOOL = 269,
-    ID = 270,
-    OR = 271,
-    AND = 272,
-    GE = 273,
-    LE = 274,
-    GT = 275,
-    LT = 276,
-    EQ = 277,
-    NEQ = 278,
-    NOT = 279,
-    IF = 280,
-    ELSE = 281
+    PRINT = 267,
+    LENGTH = 268,
+    NEW = 269,
+    EXTENDS = 270,
+    THIS = 271,
+    INT = 272,
+    BOOL = 273,
+    ID = 274,
+    INT_VALUE = 275,
+    BOOL_VALUE = 276,
+    STATEMENTS = 277,
+    DECLARATION = 278,
+    FIELD_DECLARATION = 279,
+    RETURN_STATEMENT = 280,
+    BREAK_STATEMENT = 281,
+    INVOKE_STATEMENT = 282,
+    OR = 283,
+    AND = 284,
+    GE = 285,
+    LE = 286,
+    GT = 287,
+    LT = 288,
+    EQ = 289,
+    NEQ = 290,
+    NOT = 291,
+    IF = 292,
+    ELSE = 293
   };
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
-union YYSTYPE
-{
-#line 45 "/home/daria/Compiler/src/bison.y" /* yacc.c:1909  */
-
-    Method* method;
-    MyExpr* expr;
-    ArgumentList* args;
-    Argument* arg;
-    StatementList* stmts;
-    Statement* stmt;
-    ParamList* params;
-    VarType type;
-    operation op;
-    MyValue value;
-    char word[256];
-
-#line 95 "/home/daria/Compiler/src/tokens.h" /* yacc.c:1909  */
-};
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -116,4 +110,4 @@ extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED  */

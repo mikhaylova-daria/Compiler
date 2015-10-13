@@ -8,8 +8,8 @@
     void yyerror(const char*);
     //extern char* yytext;
     //extern Location yylloc;
-    int yy_line = 0;
-    int yy_column = 0;
+    int yy_line = 1;
+    int yy_column = 1;
     //Location currLocation(0,0,0,0);
     void updateLocation() {
         //currLocation.update(yy_line, yy_column);
@@ -24,45 +24,42 @@
 %option yylineno
 
 %%
-[/][/].*\n  { ++yy_line; yy_column = 0; updateLocation(); } // comment
+[/][/].*\n  { ++yy_line; yy_column = 1; updateLocation(); } // comment
 [ \t]+  { yy_column += strlen(yytext); updateLocation();}
-[\n]+ { yy_line += strlen(yytext); yy_column = 0; updateLocation();}
+[\n]+ { yy_line += strlen(yytext); yy_column = 1; updateLocation();}
 [0-9]+ {
     yy_column += strlen(yytext);
-    yylval.value.type = Int;
-    yylval.value.int_value = atoi(yytext);
     updateLocation();
-    return INT;
+    return INT_VALUE;
 }
 
 "true" {
     yy_column += strlen(yytext);
-    yylval.value.type = Bool;
-    yylval.value.bool_value = true;
     updateLocation();
-    return BOOL;
+    return BOOL_VALUE;
 }
 "false" {
     yy_column += strlen(yytext);
-    yylval.value.type = Bool;
-    yylval.value.bool_value = false;
     updateLocation();
-    return BOOL;
+    return BOOL_VALUE;
 }
 
 "int" {
     yy_column += strlen(yytext);
-    yylval.type = Int;
     updateLocation();
-    return TYPE;
+    return INT;
 }
 "boolean" {
     yy_column += strlen(yytext);
-    yylval.type = Bool;
     updateLocation();
-    return TYPE;
+    return BOOL;
 }
 
+"System.out.println"    { yy_column += strlen(yytext); updateLocation(); return PRINT; }
+"this"      { yy_column += strlen(yytext); updateLocation(); return THIS; }
+"length"    { yy_column += strlen(yytext); updateLocation(); return LENGTH; }
+"new"       { yy_column += strlen(yytext); updateLocation(); return NEW; }
+"extends"   { yy_column += strlen(yytext); updateLocation(); return EXTENDS; }
 "public"    { yy_column += strlen(yytext); updateLocation(); return PUBLIC; }
 "void"      { yy_column += strlen(yytext); updateLocation(); return VOID; }
 "class"     { yy_column += strlen(yytext); updateLocation(); return CLASS; }
@@ -86,7 +83,6 @@
 
 [a-zA-Z_][a-zA-Z0-9_]* {
     yy_column += strlen(yytext);
-    strcpy(yylval.word, yytext);
     updateLocation();
     return ID;
 }
