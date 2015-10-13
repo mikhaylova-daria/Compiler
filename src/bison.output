@@ -1,0 +1,2555 @@
+Терминалы не используются в грамматике
+
+   BREAK
+   STATEMENTS
+   DECLARATION
+   FIELD_DECLARATION
+   RETURN_STATEMENT
+   BREAK_STATEMENT
+   INVOKE_STATEMENT
+
+
+Грамматика
+
+    0 $accept: GOAL $end
+
+    1 GOAL: MAIN_CLASS CLASS_LIST
+
+    2 CLASS_LIST: CLASS_LIST CLASS_DECLARATION
+    3           | %empty
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    5 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
+
+    6 BASE_CLASS: %empty
+    7           | EXTENDS ID
+
+    8 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION VAR_AND_METHOD_DECLARATION
+    9                           | METHOD_DECLARATION VAR_AND_METHOD_DECLARATION
+   10                           | %empty
+
+   11 VAR_DECLARATION: TYPE ID ';'
+
+   12 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY '}'
+
+   13 METHOD_HEADER: PUBLIC TYPE ID '(' ARGS_DECLARATION ')'
+
+   14 ARGS_DECLARATION: PARAM_DECLARATION
+   15                 | ARGS_DECLARATION ',' PARAM_DECLARATION
+
+   16 PARAM_DECLARATION: TYPE ID
+   17                  | %empty
+
+   18 TYPE: INT_ARRAY
+   19     | BOOL
+   20     | INT
+   21     | ID
+
+   22 INT_ARRAY: INT '[' ']'
+
+   23 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';'
+
+   24 VAR_AND_STATEMENT_DECLARATIONS: VAR_DECLARATION VAR_AND_STATEMENT_DECLARATIONS
+   25                               | STATEMENT_DECLARATION
+
+   26 STATEMENT_DECLARATION: STATEMENT STATEMENT_DECLARATION
+   27                      | %empty
+
+   28 STATEMENT: '{' STATEMENT_DECLARATION '}'
+   29          | IF_STATEMENT
+   30          | WHILE_STATEMENT
+   31          | PRINT_STATEMENT
+   32          | ASSIGNMENT
+   33          | ARRAY_ASSIGNMENT
+
+   34 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE STATEMENT
+
+   35 WHILE_STATEMENT: WHILE '(' EXPR ')' STATEMENT
+
+   36 PRINT_STATEMENT: PRINT '(' EXPR ')' ';'
+
+   37 ASSIGNMENT: ID '=' EXPR ';'
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' EXPR ';'
+
+   39 EXPR: EXPR '+' EXPR
+   40     | EXPR '-' EXPR
+   41     | EXPR '/' EXPR
+   42     | EXPR '%' EXPR
+   43     | EXPR '*' EXPR
+   44     | EXPR AND EXPR
+   45     | EXPR OR EXPR
+   46     | EXPR LT EXPR
+   47     | EXPR LE EXPR
+   48     | EXPR GT EXPR
+   49     | EXPR GE EXPR
+   50     | EXPR NEQ EXPR
+   51     | EXPR EQ EXPR
+   52     | NOT EXPR
+   53     | '(' EXPR ')'
+   54     | NEW_EXPR
+   55     | ID '[' EXPR ']'
+   56     | ID
+   57     | THIS
+   58     | CONSTANT
+   59     | EXPR '[' EXPR ']'
+   60     | EXPR '.' LENGTH
+   61     | EXPR '.' ID '(' PARAMS ')'
+
+   62 CONSTANT: INT_VALUE
+   63         | BOOL_VALUE
+
+   64 PARAMS: %empty
+   65       | EXPR
+   66       | PARAMS ',' EXPR
+
+   67 NEW_EXPR: NEW INT '[' EXPR ']'
+   68         | NEW ID '(' ')'
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+'%' (37) 42
+'(' (40) 4 13 34 35 36 53 61 68
+')' (41) 4 13 34 35 36 53 61 68
+'*' (42) 43
+'+' (43) 39
+',' (44) 15 66
+'-' (45) 40
+'.' (46) 60 61
+'/' (47) 41
+';' (59) 11 23 36 37 38
+'=' (61) 37 38
+'[' (91) 22 38 55 59 67
+']' (93) 22 38 55 59 67
+'{' (123) 4 5 12 28
+'}' (125) 4 5 12 28
+error (256)
+MAIN (258) 4
+MAIN_ARGS (259) 4
+PUBLIC (260) 4 13
+VOID (261) 4
+STATIC (262) 4
+CLASS (263) 4 5
+RETURN (264) 23
+WHILE (265) 35
+BREAK (266)
+PRINT (267) 36
+LENGTH (268) 60
+NEW (269) 67 68
+EXTENDS (270) 7
+THIS (271) 57
+INT (272) 20 22 67
+BOOL (273) 19
+ID (274) 4 5 7 11 13 16 21 37 38 55 56 61 68
+INT_VALUE (275) 62
+BOOL_VALUE (276) 63
+STATEMENTS (277)
+DECLARATION (278)
+FIELD_DECLARATION (279)
+RETURN_STATEMENT (280)
+BREAK_STATEMENT (281)
+INVOKE_STATEMENT (282)
+OR (283) 45
+AND (284) 44
+GE (285) 49
+LE (286) 47
+GT (287) 48
+LT (288) 46
+EQ (289) 51
+NEQ (290) 50
+NOT (291) 52
+IF (292) 34
+ELSE (293) 34
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (54)
+    налево: 0
+GOAL (55)
+    налево: 1, направо: 0
+CLASS_LIST (56)
+    налево: 2 3, направо: 1 2
+MAIN_CLASS (57)
+    налево: 4, направо: 1
+CLASS_DECLARATION (58)
+    налево: 5, направо: 2
+BASE_CLASS (59)
+    налево: 6 7, направо: 5
+VAR_AND_METHOD_DECLARATION (60)
+    налево: 8 9 10, направо: 5 8 9
+VAR_DECLARATION (61)
+    налево: 11, направо: 8 24
+METHOD_DECLARATION (62)
+    налево: 12, направо: 9
+METHOD_HEADER (63)
+    налево: 13, направо: 12
+ARGS_DECLARATION (64)
+    налево: 14 15, направо: 13 15
+PARAM_DECLARATION (65)
+    налево: 16 17, направо: 14 15
+TYPE (66)
+    налево: 18 19 20 21, направо: 11 13 16
+INT_ARRAY (67)
+    налево: 22, направо: 18
+METHOD_BODY (68)
+    налево: 23, направо: 12
+VAR_AND_STATEMENT_DECLARATIONS (69)
+    налево: 24 25, направо: 23 24
+STATEMENT_DECLARATION (70)
+    налево: 26 27, направо: 25 26 28
+STATEMENT (71)
+    налево: 28 29 30 31 32 33, направо: 4 26 34 35
+IF_STATEMENT (72)
+    налево: 34, направо: 29
+WHILE_STATEMENT (73)
+    налево: 35, направо: 30
+PRINT_STATEMENT (74)
+    налево: 36, направо: 31
+ASSIGNMENT (75)
+    налево: 37, направо: 32
+ARRAY_ASSIGNMENT (76)
+    налево: 38, направо: 33
+EXPR (77)
+    налево: 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55
+    56 57 58 59 60 61, направо: 23 34 35 36 37 38 39 40 41 42
+    43 44 45 46 47 48 49 50 51 52 53 55 59 60 61 65 66 67
+CONSTANT (78)
+    налево: 62 63, направо: 58
+PARAMS (79)
+    налево: 64 65 66, направо: 61 66
+NEW_EXPR (80)
+    налево: 67 68, направо: 54
+
+
+State 0
+
+    0 $accept: . GOAL $end
+
+    CLASS  сдвиг, и переход в состояние 1
+
+    GOAL        переход в состояние 2
+    MAIN_CLASS  переход в состояние 3
+
+
+State 1
+
+    4 MAIN_CLASS: CLASS . ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    ID  сдвиг, и переход в состояние 4
+
+
+State 2
+
+    0 $accept: GOAL . $end
+
+    $end  сдвиг, и переход в состояние 5
+
+
+State 3
+
+    1 GOAL: MAIN_CLASS . CLASS_LIST
+
+    $default  вывод с использованием правила 3 (CLASS_LIST)
+
+    CLASS_LIST  переход в состояние 6
+
+
+State 4
+
+    4 MAIN_CLASS: CLASS ID . '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    '{'  сдвиг, и переход в состояние 7
+
+
+State 5
+
+    0 $accept: GOAL $end .
+
+    $default  принять
+
+
+State 6
+
+    1 GOAL: MAIN_CLASS CLASS_LIST .
+    2 CLASS_LIST: CLASS_LIST . CLASS_DECLARATION
+
+    CLASS  сдвиг, и переход в состояние 8
+
+    $default  вывод с использованием правила 1 (GOAL)
+
+    CLASS_DECLARATION  переход в состояние 9
+
+
+State 7
+
+    4 MAIN_CLASS: CLASS ID '{' . PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    PUBLIC  сдвиг, и переход в состояние 10
+
+
+State 8
+
+    5 CLASS_DECLARATION: CLASS . ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
+
+    ID  сдвиг, и переход в состояние 11
+
+
+State 9
+
+    2 CLASS_LIST: CLASS_LIST CLASS_DECLARATION .
+
+    $default  вывод с использованием правила 2 (CLASS_LIST)
+
+
+State 10
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC . STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    STATIC  сдвиг, и переход в состояние 12
+
+
+State 11
+
+    5 CLASS_DECLARATION: CLASS ID . BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
+
+    EXTENDS  сдвиг, и переход в состояние 13
+
+    $default  вывод с использованием правила 6 (BASE_CLASS)
+
+    BASE_CLASS  переход в состояние 14
+
+
+State 12
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC . VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    VOID  сдвиг, и переход в состояние 15
+
+
+State 13
+
+    7 BASE_CLASS: EXTENDS . ID
+
+    ID  сдвиг, и переход в состояние 16
+
+
+State 14
+
+    5 CLASS_DECLARATION: CLASS ID BASE_CLASS . '{' VAR_AND_METHOD_DECLARATION '}'
+
+    '{'  сдвиг, и переход в состояние 17
+
+
+State 15
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID . MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    MAIN  сдвиг, и переход в состояние 18
+
+
+State 16
+
+    7 BASE_CLASS: EXTENDS ID .
+
+    $default  вывод с использованием правила 7 (BASE_CLASS)
+
+
+State 17
+
+    5 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' . VAR_AND_METHOD_DECLARATION '}'
+
+    PUBLIC  сдвиг, и переход в состояние 19
+    INT     сдвиг, и переход в состояние 20
+    BOOL    сдвиг, и переход в состояние 21
+    ID      сдвиг, и переход в состояние 22
+
+    $default  вывод с использованием правила 10 (VAR_AND_METHOD_DECLARATION)
+
+    VAR_AND_METHOD_DECLARATION  переход в состояние 23
+    VAR_DECLARATION             переход в состояние 24
+    METHOD_DECLARATION          переход в состояние 25
+    METHOD_HEADER               переход в состояние 26
+    TYPE                        переход в состояние 27
+    INT_ARRAY                   переход в состояние 28
+
+
+State 18
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN . '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    '('  сдвиг, и переход в состояние 29
+
+
+State 19
+
+   13 METHOD_HEADER: PUBLIC . TYPE ID '(' ARGS_DECLARATION ')'
+
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 22
+
+    TYPE       переход в состояние 30
+    INT_ARRAY  переход в состояние 28
+
+
+State 20
+
+   20 TYPE: INT .
+   22 INT_ARRAY: INT . '[' ']'
+
+    '['  сдвиг, и переход в состояние 31
+
+    $default  вывод с использованием правила 20 (TYPE)
+
+
+State 21
+
+   19 TYPE: BOOL .
+
+    $default  вывод с использованием правила 19 (TYPE)
+
+
+State 22
+
+   21 TYPE: ID .
+
+    $default  вывод с использованием правила 21 (TYPE)
+
+
+State 23
+
+    5 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION . '}'
+
+    '}'  сдвиг, и переход в состояние 32
+
+
+State 24
+
+    8 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION . VAR_AND_METHOD_DECLARATION
+
+    PUBLIC  сдвиг, и переход в состояние 19
+    INT     сдвиг, и переход в состояние 20
+    BOOL    сдвиг, и переход в состояние 21
+    ID      сдвиг, и переход в состояние 22
+
+    $default  вывод с использованием правила 10 (VAR_AND_METHOD_DECLARATION)
+
+    VAR_AND_METHOD_DECLARATION  переход в состояние 33
+    VAR_DECLARATION             переход в состояние 24
+    METHOD_DECLARATION          переход в состояние 25
+    METHOD_HEADER               переход в состояние 26
+    TYPE                        переход в состояние 27
+    INT_ARRAY                   переход в состояние 28
+
+
+State 25
+
+    9 VAR_AND_METHOD_DECLARATION: METHOD_DECLARATION . VAR_AND_METHOD_DECLARATION
+
+    PUBLIC  сдвиг, и переход в состояние 19
+    INT     сдвиг, и переход в состояние 20
+    BOOL    сдвиг, и переход в состояние 21
+    ID      сдвиг, и переход в состояние 22
+
+    $default  вывод с использованием правила 10 (VAR_AND_METHOD_DECLARATION)
+
+    VAR_AND_METHOD_DECLARATION  переход в состояние 34
+    VAR_DECLARATION             переход в состояние 24
+    METHOD_DECLARATION          переход в состояние 25
+    METHOD_HEADER               переход в состояние 26
+    TYPE                        переход в состояние 27
+    INT_ARRAY                   переход в состояние 28
+
+
+State 26
+
+   12 METHOD_DECLARATION: METHOD_HEADER . '{' METHOD_BODY '}'
+
+    '{'  сдвиг, и переход в состояние 35
+
+
+State 27
+
+   11 VAR_DECLARATION: TYPE . ID ';'
+
+    ID  сдвиг, и переход в состояние 36
+
+
+State 28
+
+   18 TYPE: INT_ARRAY .
+
+    $default  вывод с использованием правила 18 (TYPE)
+
+
+State 29
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' . MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
+
+    MAIN_ARGS  сдвиг, и переход в состояние 37
+
+
+State 30
+
+   13 METHOD_HEADER: PUBLIC TYPE . ID '(' ARGS_DECLARATION ')'
+
+    ID  сдвиг, и переход в состояние 38
+
+
+State 31
+
+   22 INT_ARRAY: INT '[' . ']'
+
+    ']'  сдвиг, и переход в состояние 39
+
+
+State 32
+
+    5 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}' .
+
+    $default  вывод с использованием правила 5 (CLASS_DECLARATION)
+
+
+State 33
+
+    8 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION VAR_AND_METHOD_DECLARATION .
+
+    $default  вывод с использованием правила 8 (VAR_AND_METHOD_DECLARATION)
+
+
+State 34
+
+    9 VAR_AND_METHOD_DECLARATION: METHOD_DECLARATION VAR_AND_METHOD_DECLARATION .
+
+    $default  вывод с использованием правила 9 (VAR_AND_METHOD_DECLARATION)
+
+
+State 35
+
+   12 METHOD_DECLARATION: METHOD_HEADER '{' . METHOD_BODY '}'
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    INT    сдвиг, и переход в состояние 20
+    BOOL   сдвиг, и переход в состояние 21
+    ID     сдвиг, и переход в состояние 42
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    $default  вывод с использованием правила 27 (STATEMENT_DECLARATION)
+
+    VAR_DECLARATION                 переход в состояние 45
+    TYPE                            переход в состояние 27
+    INT_ARRAY                       переход в состояние 28
+    METHOD_BODY                     переход в состояние 46
+    VAR_AND_STATEMENT_DECLARATIONS  переход в состояние 47
+    STATEMENT_DECLARATION           переход в состояние 48
+    STATEMENT                       переход в состояние 49
+    IF_STATEMENT                    переход в состояние 50
+    WHILE_STATEMENT                 переход в состояние 51
+    PRINT_STATEMENT                 переход в состояние 52
+    ASSIGNMENT                      переход в состояние 53
+    ARRAY_ASSIGNMENT                переход в состояние 54
+
+
+State 36
+
+   11 VAR_DECLARATION: TYPE ID . ';'
+
+    ';'  сдвиг, и переход в состояние 55
+
+
+State 37
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS . ID ')' '{' STATEMENT '}' '}'
+
+    ID  сдвиг, и переход в состояние 56
+
+
+State 38
+
+   13 METHOD_HEADER: PUBLIC TYPE ID . '(' ARGS_DECLARATION ')'
+
+    '('  сдвиг, и переход в состояние 57
+
+
+State 39
+
+   22 INT_ARRAY: INT '[' ']' .
+
+    $default  вывод с использованием правила 22 (INT_ARRAY)
+
+
+State 40
+
+   35 WHILE_STATEMENT: WHILE . '(' EXPR ')' STATEMENT
+
+    '('  сдвиг, и переход в состояние 58
+
+
+State 41
+
+   36 PRINT_STATEMENT: PRINT . '(' EXPR ')' ';'
+
+    '('  сдвиг, и переход в состояние 59
+
+
+State 42
+
+   21 TYPE: ID .
+   37 ASSIGNMENT: ID . '=' EXPR ';'
+   38 ARRAY_ASSIGNMENT: ID . '[' EXPR ']' '=' EXPR ';'
+
+    '['  сдвиг, и переход в состояние 60
+    '='  сдвиг, и переход в состояние 61
+
+    $default  вывод с использованием правила 21 (TYPE)
+
+
+State 43
+
+   34 IF_STATEMENT: IF . '(' EXPR ')' STATEMENT ELSE STATEMENT
+
+    '('  сдвиг, и переход в состояние 62
+
+
+State 44
+
+   28 STATEMENT: '{' . STATEMENT_DECLARATION '}'
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    $default  вывод с использованием правила 27 (STATEMENT_DECLARATION)
+
+    STATEMENT_DECLARATION  переход в состояние 64
+    STATEMENT              переход в состояние 49
+    IF_STATEMENT           переход в состояние 50
+    WHILE_STATEMENT        переход в состояние 51
+    PRINT_STATEMENT        переход в состояние 52
+    ASSIGNMENT             переход в состояние 53
+    ARRAY_ASSIGNMENT       переход в состояние 54
+
+
+State 45
+
+   24 VAR_AND_STATEMENT_DECLARATIONS: VAR_DECLARATION . VAR_AND_STATEMENT_DECLARATIONS
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    INT    сдвиг, и переход в состояние 20
+    BOOL   сдвиг, и переход в состояние 21
+    ID     сдвиг, и переход в состояние 42
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    $default  вывод с использованием правила 27 (STATEMENT_DECLARATION)
+
+    VAR_DECLARATION                 переход в состояние 45
+    TYPE                            переход в состояние 27
+    INT_ARRAY                       переход в состояние 28
+    VAR_AND_STATEMENT_DECLARATIONS  переход в состояние 65
+    STATEMENT_DECLARATION           переход в состояние 48
+    STATEMENT                       переход в состояние 49
+    IF_STATEMENT                    переход в состояние 50
+    WHILE_STATEMENT                 переход в состояние 51
+    PRINT_STATEMENT                 переход в состояние 52
+    ASSIGNMENT                      переход в состояние 53
+    ARRAY_ASSIGNMENT                переход в состояние 54
+
+
+State 46
+
+   12 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY . '}'
+
+    '}'  сдвиг, и переход в состояние 66
+
+
+State 47
+
+   23 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS . RETURN EXPR ';'
+
+    RETURN  сдвиг, и переход в состояние 67
+
+
+State 48
+
+   25 VAR_AND_STATEMENT_DECLARATIONS: STATEMENT_DECLARATION .
+
+    $default  вывод с использованием правила 25 (VAR_AND_STATEMENT_DECLARATIONS)
+
+
+State 49
+
+   26 STATEMENT_DECLARATION: STATEMENT . STATEMENT_DECLARATION
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    $default  вывод с использованием правила 27 (STATEMENT_DECLARATION)
+
+    STATEMENT_DECLARATION  переход в состояние 68
+    STATEMENT              переход в состояние 49
+    IF_STATEMENT           переход в состояние 50
+    WHILE_STATEMENT        переход в состояние 51
+    PRINT_STATEMENT        переход в состояние 52
+    ASSIGNMENT             переход в состояние 53
+    ARRAY_ASSIGNMENT       переход в состояние 54
+
+
+State 50
+
+   29 STATEMENT: IF_STATEMENT .
+
+    $default  вывод с использованием правила 29 (STATEMENT)
+
+
+State 51
+
+   30 STATEMENT: WHILE_STATEMENT .
+
+    $default  вывод с использованием правила 30 (STATEMENT)
+
+
+State 52
+
+   31 STATEMENT: PRINT_STATEMENT .
+
+    $default  вывод с использованием правила 31 (STATEMENT)
+
+
+State 53
+
+   32 STATEMENT: ASSIGNMENT .
+
+    $default  вывод с использованием правила 32 (STATEMENT)
+
+
+State 54
+
+   33 STATEMENT: ARRAY_ASSIGNMENT .
+
+    $default  вывод с использованием правила 33 (STATEMENT)
+
+
+State 55
+
+   11 VAR_DECLARATION: TYPE ID ';' .
+
+    $default  вывод с использованием правила 11 (VAR_DECLARATION)
+
+
+State 56
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID . ')' '{' STATEMENT '}' '}'
+
+    ')'  сдвиг, и переход в состояние 69
+
+
+State 57
+
+   13 METHOD_HEADER: PUBLIC TYPE ID '(' . ARGS_DECLARATION ')'
+
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 22
+
+    $default  вывод с использованием правила 17 (PARAM_DECLARATION)
+
+    ARGS_DECLARATION   переход в состояние 70
+    PARAM_DECLARATION  переход в состояние 71
+    TYPE               переход в состояние 72
+    INT_ARRAY          переход в состояние 28
+
+
+State 58
+
+   35 WHILE_STATEMENT: WHILE '(' . EXPR ')' STATEMENT
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 80
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 59
+
+   36 PRINT_STATEMENT: PRINT '(' . EXPR ')' ';'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 83
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 60
+
+   38 ARRAY_ASSIGNMENT: ID '[' . EXPR ']' '=' EXPR ';'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 84
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 61
+
+   37 ASSIGNMENT: ID '=' . EXPR ';'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 85
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 62
+
+   34 IF_STATEMENT: IF '(' . EXPR ')' STATEMENT ELSE STATEMENT
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 86
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 63
+
+   37 ASSIGNMENT: ID . '=' EXPR ';'
+   38 ARRAY_ASSIGNMENT: ID . '[' EXPR ']' '=' EXPR ';'
+
+    '['  сдвиг, и переход в состояние 60
+    '='  сдвиг, и переход в состояние 61
+
+
+State 64
+
+   28 STATEMENT: '{' STATEMENT_DECLARATION . '}'
+
+    '}'  сдвиг, и переход в состояние 87
+
+
+State 65
+
+   24 VAR_AND_STATEMENT_DECLARATIONS: VAR_DECLARATION VAR_AND_STATEMENT_DECLARATIONS .
+
+    $default  вывод с использованием правила 24 (VAR_AND_STATEMENT_DECLARATIONS)
+
+
+State 66
+
+   12 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY '}' .
+
+    $default  вывод с использованием правила 12 (METHOD_DECLARATION)
+
+
+State 67
+
+   23 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN . EXPR ';'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 88
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 68
+
+   26 STATEMENT_DECLARATION: STATEMENT STATEMENT_DECLARATION .
+
+    $default  вывод с использованием правила 26 (STATEMENT_DECLARATION)
+
+
+State 69
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' . '{' STATEMENT '}' '}'
+
+    '{'  сдвиг, и переход в состояние 89
+
+
+State 70
+
+   13 METHOD_HEADER: PUBLIC TYPE ID '(' ARGS_DECLARATION . ')'
+   15 ARGS_DECLARATION: ARGS_DECLARATION . ',' PARAM_DECLARATION
+
+    ')'  сдвиг, и переход в состояние 90
+    ','  сдвиг, и переход в состояние 91
+
+
+State 71
+
+   14 ARGS_DECLARATION: PARAM_DECLARATION .
+
+    $default  вывод с использованием правила 14 (ARGS_DECLARATION)
+
+
+State 72
+
+   16 PARAM_DECLARATION: TYPE . ID
+
+    ID  сдвиг, и переход в состояние 92
+
+
+State 73
+
+   67 NEW_EXPR: NEW . INT '[' EXPR ']'
+   68         | NEW . ID '(' ')'
+
+    INT  сдвиг, и переход в состояние 93
+    ID   сдвиг, и переход в состояние 94
+
+
+State 74
+
+   57 EXPR: THIS .
+
+    $default  вывод с использованием правила 57 (EXPR)
+
+
+State 75
+
+   55 EXPR: ID . '[' EXPR ']'
+   56     | ID .
+
+    '['  сдвиг, и переход в состояние 95
+
+    $default  вывод с использованием правила 56 (EXPR)
+
+
+State 76
+
+   62 CONSTANT: INT_VALUE .
+
+    $default  вывод с использованием правила 62 (CONSTANT)
+
+
+State 77
+
+   63 CONSTANT: BOOL_VALUE .
+
+    $default  вывод с использованием правила 63 (CONSTANT)
+
+
+State 78
+
+   52 EXPR: NOT . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 96
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 79
+
+   53 EXPR: '(' . EXPR ')'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 97
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 80
+
+   35 WHILE_STATEMENT: WHILE '(' EXPR . ')' STATEMENT
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ')'  сдвиг, и переход в состояние 113
+
+
+State 81
+
+   58 EXPR: CONSTANT .
+
+    $default  вывод с использованием правила 58 (EXPR)
+
+
+State 82
+
+   54 EXPR: NEW_EXPR .
+
+    $default  вывод с использованием правила 54 (EXPR)
+
+
+State 83
+
+   36 PRINT_STATEMENT: PRINT '(' EXPR . ')' ';'
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ')'  сдвиг, и переход в состояние 114
+
+
+State 84
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR . ']' '=' EXPR ';'
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ']'  сдвиг, и переход в состояние 115
+
+
+State 85
+
+   37 ASSIGNMENT: ID '=' EXPR . ';'
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ';'  сдвиг, и переход в состояние 116
+
+
+State 86
+
+   34 IF_STATEMENT: IF '(' EXPR . ')' STATEMENT ELSE STATEMENT
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ')'  сдвиг, и переход в состояние 117
+
+
+State 87
+
+   28 STATEMENT: '{' STATEMENT_DECLARATION '}' .
+
+    $default  вывод с использованием правила 28 (STATEMENT)
+
+
+State 88
+
+   23 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR . ';'
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ';'  сдвиг, и переход в состояние 118
+
+
+State 89
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' . STATEMENT '}' '}'
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    STATEMENT         переход в состояние 119
+    IF_STATEMENT      переход в состояние 50
+    WHILE_STATEMENT   переход в состояние 51
+    PRINT_STATEMENT   переход в состояние 52
+    ASSIGNMENT        переход в состояние 53
+    ARRAY_ASSIGNMENT  переход в состояние 54
+
+
+State 90
+
+   13 METHOD_HEADER: PUBLIC TYPE ID '(' ARGS_DECLARATION ')' .
+
+    $default  вывод с использованием правила 13 (METHOD_HEADER)
+
+
+State 91
+
+   15 ARGS_DECLARATION: ARGS_DECLARATION ',' . PARAM_DECLARATION
+
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 22
+
+    $default  вывод с использованием правила 17 (PARAM_DECLARATION)
+
+    PARAM_DECLARATION  переход в состояние 120
+    TYPE               переход в состояние 72
+    INT_ARRAY          переход в состояние 28
+
+
+State 92
+
+   16 PARAM_DECLARATION: TYPE ID .
+
+    $default  вывод с использованием правила 16 (PARAM_DECLARATION)
+
+
+State 93
+
+   67 NEW_EXPR: NEW INT . '[' EXPR ']'
+
+    '['  сдвиг, и переход в состояние 121
+
+
+State 94
+
+   68 NEW_EXPR: NEW ID . '(' ')'
+
+    '('  сдвиг, и переход в состояние 122
+
+
+State 95
+
+   55 EXPR: ID '[' . EXPR ']'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 123
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 96
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   52     | NOT EXPR .
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 52 (EXPR)
+
+
+State 97
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   53     | '(' EXPR . ')'
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ')'  сдвиг, и переход в состояние 124
+
+
+State 98
+
+   45 EXPR: EXPR OR . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 125
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 99
+
+   44 EXPR: EXPR AND . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 126
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 100
+
+   49 EXPR: EXPR GE . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 127
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 101
+
+   47 EXPR: EXPR LE . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 128
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 102
+
+   48 EXPR: EXPR GT . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 129
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 103
+
+   46 EXPR: EXPR LT . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 130
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 104
+
+   51 EXPR: EXPR EQ . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 131
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 105
+
+   50 EXPR: EXPR NEQ . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 132
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 106
+
+   39 EXPR: EXPR '+' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 133
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 107
+
+   40 EXPR: EXPR '-' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 134
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 108
+
+   60 EXPR: EXPR '.' . LENGTH
+   61     | EXPR '.' . ID '(' PARAMS ')'
+
+    LENGTH  сдвиг, и переход в состояние 135
+    ID      сдвиг, и переход в состояние 136
+
+
+State 109
+
+   43 EXPR: EXPR '*' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 137
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 110
+
+   41 EXPR: EXPR '/' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 138
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 111
+
+   42 EXPR: EXPR '%' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 139
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 112
+
+   59 EXPR: EXPR '[' . EXPR ']'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 140
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 113
+
+   35 WHILE_STATEMENT: WHILE '(' EXPR ')' . STATEMENT
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    STATEMENT         переход в состояние 141
+    IF_STATEMENT      переход в состояние 50
+    WHILE_STATEMENT   переход в состояние 51
+    PRINT_STATEMENT   переход в состояние 52
+    ASSIGNMENT        переход в состояние 53
+    ARRAY_ASSIGNMENT  переход в состояние 54
+
+
+State 114
+
+   36 PRINT_STATEMENT: PRINT '(' EXPR ')' . ';'
+
+    ';'  сдвиг, и переход в состояние 142
+
+
+State 115
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR ']' . '=' EXPR ';'
+
+    '='  сдвиг, и переход в состояние 143
+
+
+State 116
+
+   37 ASSIGNMENT: ID '=' EXPR ';' .
+
+    $default  вывод с использованием правила 37 (ASSIGNMENT)
+
+
+State 117
+
+   34 IF_STATEMENT: IF '(' EXPR ')' . STATEMENT ELSE STATEMENT
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    STATEMENT         переход в состояние 144
+    IF_STATEMENT      переход в состояние 50
+    WHILE_STATEMENT   переход в состояние 51
+    PRINT_STATEMENT   переход в состояние 52
+    ASSIGNMENT        переход в состояние 53
+    ARRAY_ASSIGNMENT  переход в состояние 54
+
+
+State 118
+
+   23 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';' .
+
+    $default  вывод с использованием правила 23 (METHOD_BODY)
+
+
+State 119
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT . '}' '}'
+
+    '}'  сдвиг, и переход в состояние 145
+
+
+State 120
+
+   15 ARGS_DECLARATION: ARGS_DECLARATION ',' PARAM_DECLARATION .
+
+    $default  вывод с использованием правила 15 (ARGS_DECLARATION)
+
+
+State 121
+
+   67 NEW_EXPR: NEW INT '[' . EXPR ']'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 146
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 122
+
+   68 NEW_EXPR: NEW ID '(' . ')'
+
+    ')'  сдвиг, и переход в состояние 147
+
+
+State 123
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   55     | ID '[' EXPR . ']'
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ']'  сдвиг, и переход в состояние 148
+
+
+State 124
+
+   53 EXPR: '(' EXPR ')' .
+
+    $default  вывод с использованием правила 53 (EXPR)
+
+
+State 125
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   45     | EXPR OR EXPR .
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 45 (EXPR)
+
+
+State 126
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   44     | EXPR AND EXPR .
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 44 (EXPR)
+
+
+State 127
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   49     | EXPR GE EXPR .
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 49 (EXPR)
+
+
+State 128
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   47     | EXPR LE EXPR .
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 47 (EXPR)
+
+
+State 129
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   48     | EXPR GT EXPR .
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 48 (EXPR)
+
+
+State 130
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   46     | EXPR LT EXPR .
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 46 (EXPR)
+
+
+State 131
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   51     | EXPR EQ EXPR .
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 51 (EXPR)
+
+
+State 132
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   50     | EXPR NEQ EXPR .
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 50 (EXPR)
+
+
+State 133
+
+   39 EXPR: EXPR . '+' EXPR
+   39     | EXPR '+' EXPR .
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 39 (EXPR)
+
+
+State 134
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   40     | EXPR '-' EXPR .
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 40 (EXPR)
+
+
+State 135
+
+   60 EXPR: EXPR '.' LENGTH .
+
+    $default  вывод с использованием правила 60 (EXPR)
+
+
+State 136
+
+   61 EXPR: EXPR '.' ID . '(' PARAMS ')'
+
+    '('  сдвиг, и переход в состояние 149
+
+
+State 137
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   43     | EXPR '*' EXPR .
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 43 (EXPR)
+
+
+State 138
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   41     | EXPR '/' EXPR .
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 41 (EXPR)
+
+
+State 139
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   42     | EXPR '%' EXPR .
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 42 (EXPR)
+
+
+State 140
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   59     | EXPR '[' EXPR . ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ']'  сдвиг, и переход в состояние 150
+
+
+State 141
+
+   35 WHILE_STATEMENT: WHILE '(' EXPR ')' STATEMENT .
+
+    $default  вывод с использованием правила 35 (WHILE_STATEMENT)
+
+
+State 142
+
+   36 PRINT_STATEMENT: PRINT '(' EXPR ')' ';' .
+
+    $default  вывод с использованием правила 36 (PRINT_STATEMENT)
+
+
+State 143
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' . EXPR ';'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 151
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 144
+
+   34 IF_STATEMENT: IF '(' EXPR ')' STATEMENT . ELSE STATEMENT
+
+    ELSE  сдвиг, и переход в состояние 152
+
+
+State 145
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' . '}'
+
+    '}'  сдвиг, и переход в состояние 153
+
+
+State 146
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+   67 NEW_EXPR: NEW INT '[' EXPR . ']'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ']'  сдвиг, и переход в состояние 154
+
+
+State 147
+
+   68 NEW_EXPR: NEW ID '(' ')' .
+
+    $default  вывод с использованием правила 68 (NEW_EXPR)
+
+
+State 148
+
+   55 EXPR: ID '[' EXPR ']' .
+
+    $default  вывод с использованием правила 55 (EXPR)
+
+
+State 149
+
+   61 EXPR: EXPR '.' ID '(' . PARAMS ')'
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    $default  вывод с использованием правила 64 (PARAMS)
+
+    EXPR      переход в состояние 155
+    CONSTANT  переход в состояние 81
+    PARAMS    переход в состояние 156
+    NEW_EXPR  переход в состояние 82
+
+
+State 150
+
+   59 EXPR: EXPR '[' EXPR ']' .
+
+    $default  вывод с использованием правила 59 (EXPR)
+
+
+State 151
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' EXPR . ';'
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+    ';'  сдвиг, и переход в состояние 157
+
+
+State 152
+
+   34 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE . STATEMENT
+
+    WHILE  сдвиг, и переход в состояние 40
+    PRINT  сдвиг, и переход в состояние 41
+    ID     сдвиг, и переход в состояние 63
+    IF     сдвиг, и переход в состояние 43
+    '{'    сдвиг, и переход в состояние 44
+
+    STATEMENT         переход в состояние 158
+    IF_STATEMENT      переход в состояние 50
+    WHILE_STATEMENT   переход в состояние 51
+    PRINT_STATEMENT   переход в состояние 52
+    ASSIGNMENT        переход в состояние 53
+    ARRAY_ASSIGNMENT  переход в состояние 54
+
+
+State 153
+
+    4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}' .
+
+    $default  вывод с использованием правила 4 (MAIN_CLASS)
+
+
+State 154
+
+   67 NEW_EXPR: NEW INT '[' EXPR ']' .
+
+    $default  вывод с использованием правила 67 (NEW_EXPR)
+
+
+State 155
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+   65 PARAMS: EXPR .
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 65 (PARAMS)
+
+
+State 156
+
+   61 EXPR: EXPR '.' ID '(' PARAMS . ')'
+   66 PARAMS: PARAMS . ',' EXPR
+
+    ')'  сдвиг, и переход в состояние 159
+    ','  сдвиг, и переход в состояние 160
+
+
+State 157
+
+   38 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' EXPR ';' .
+
+    $default  вывод с использованием правила 38 (ARRAY_ASSIGNMENT)
+
+
+State 158
+
+   34 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE STATEMENT .
+
+    $default  вывод с использованием правила 34 (IF_STATEMENT)
+
+
+State 159
+
+   61 EXPR: EXPR '.' ID '(' PARAMS ')' .
+
+    $default  вывод с использованием правила 61 (EXPR)
+
+
+State 160
+
+   66 PARAMS: PARAMS ',' . EXPR
+
+    NEW         сдвиг, и переход в состояние 73
+    THIS        сдвиг, и переход в состояние 74
+    ID          сдвиг, и переход в состояние 75
+    INT_VALUE   сдвиг, и переход в состояние 76
+    BOOL_VALUE  сдвиг, и переход в состояние 77
+    NOT         сдвиг, и переход в состояние 78
+    '('         сдвиг, и переход в состояние 79
+
+    EXPR      переход в состояние 161
+    CONSTANT  переход в состояние 81
+    NEW_EXPR  переход в состояние 82
+
+
+State 161
+
+   39 EXPR: EXPR . '+' EXPR
+   40     | EXPR . '-' EXPR
+   41     | EXPR . '/' EXPR
+   42     | EXPR . '%' EXPR
+   43     | EXPR . '*' EXPR
+   44     | EXPR . AND EXPR
+   45     | EXPR . OR EXPR
+   46     | EXPR . LT EXPR
+   47     | EXPR . LE EXPR
+   48     | EXPR . GT EXPR
+   49     | EXPR . GE EXPR
+   50     | EXPR . NEQ EXPR
+   51     | EXPR . EQ EXPR
+   59     | EXPR . '[' EXPR ']'
+   60     | EXPR . '.' LENGTH
+   61     | EXPR . '.' ID '(' PARAMS ')'
+   66 PARAMS: PARAMS ',' EXPR .
+
+    OR   сдвиг, и переход в состояние 98
+    AND  сдвиг, и переход в состояние 99
+    GE   сдвиг, и переход в состояние 100
+    LE   сдвиг, и переход в состояние 101
+    GT   сдвиг, и переход в состояние 102
+    LT   сдвиг, и переход в состояние 103
+    EQ   сдвиг, и переход в состояние 104
+    NEQ  сдвиг, и переход в состояние 105
+    '+'  сдвиг, и переход в состояние 106
+    '-'  сдвиг, и переход в состояние 107
+    '.'  сдвиг, и переход в состояние 108
+    '*'  сдвиг, и переход в состояние 109
+    '/'  сдвиг, и переход в состояние 110
+    '%'  сдвиг, и переход в состояние 111
+    '['  сдвиг, и переход в состояние 112
+
+    $default  вывод с использованием правила 66 (PARAMS)

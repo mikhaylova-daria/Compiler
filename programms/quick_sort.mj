@@ -29,7 +29,7 @@ class QS{
 
     // Sort array of integers using Quicksort method
     public int Sort(int left, int right){
-	int v ;
+	int v;
 	int i ;
 	int j ;
 	int nt;
@@ -95,7 +95,7 @@ class QS{
 	size = sz ;
 	number = new int[sz] ;
 
-	number[0] = 20 ;
+	number[000] = 20 ;
 	number[1] = 7  ;
 	number[2] = 12 ;
 	number[3] = 18 ;

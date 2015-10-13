@@ -83,10 +83,12 @@ ARGS_DECLARATION : PARAM_DECLARATION { processRule(@$, "ARGS_DECLARATION"); }
 PARAM_DECLARATION : TYPE ID { processRule(@$, "PARAM_DECLARATION"); }
 | { processRule(@$, "PARAM_DECLARATION"); }
 
-TYPE : INT '[' ']' { processRule(@$, "TYPE"); }
+TYPE : INT_ARRAY { processRule(@$, "INT_ARRAY"); }
 | BOOL { processRule(@$, "TYPE"); }
 | INT { processRule(@$, "TYPE"); }
 | ID { processRule(@$, "TYPE"); }
+
+INT_ARRAY: INT '[' ']' { processRule(@$, "INT_ARRAY"); }
 
 METHOD_BODY : VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';' { processRule(@$, "METHOD_BODY"); }
 
@@ -126,8 +128,8 @@ EXPR :
 | NOT EXPR { processRule(@$, "EXPR"); }
 | '(' EXPR ')' { processRule(@$, "EXPR"); }
 | NEW_EXPR { processRule(@$, "EXPR"); }
-| ID { processRule(@$, "EXPR ID"); }
 | ID '[' EXPR ']' { processRule(@$, "EXPR"); }
+| ID { processRule(@$, "EXPR ID"); }
 | THIS { processRule(@$, "EXPR"); }
 | CONSTANT { processRule(@$, "EXPR"); }
 | EXPR '[' EXPR ']' { processRule(@$, "INVOKE_EXPR"); }

@@ -80,6 +80,8 @@
 "!="        { yy_column += strlen(yytext); updateLocation(); return NEQ; }
 "<"         { yy_column += strlen(yytext); updateLocation(); return LT; }
 ">"         { yy_column += strlen(yytext); updateLocation(); return GT; }
+"["         { yy_column += strlen(yytext); updateLocation(); return '['; }
+"]"         { yy_column += strlen(yytext); updateLocation(); return ']'; }
 
 [a-zA-Z_][a-zA-Z0-9_]* {
     yy_column += strlen(yytext);

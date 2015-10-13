@@ -1,3 +1,5 @@
+//Error^ 19 line 	"MyVisitor v [int x = 7;];"
+
 // The classes are basically the same as the BinaryTree
 // file except the visitor classes and the accept method
 // in the Tree class
@@ -14,7 +16,7 @@ class TV {
 	Tree root ;
 	boolean ntb ;
 	int nti ;
-	MyVisitor v ;
+	MyVisitor v [int x = 7;];
 
 	root = new Tree();
 	ntb = root.Init(16);

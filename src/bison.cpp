@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 2 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:339  */
+#line 2 "/home/daria/Compiler/src/minijava.y" /* yacc.c:339  */
 
 
     #include "JavaHelp.h"
@@ -98,7 +98,7 @@
     }
 
 
-#line 102 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:339  */
+#line 102 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -118,8 +118,8 @@
 
 /* In a future release of Bison, this section will be replaced
    by #include "tokens.h".  */
-#ifndef YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
-# define YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
+#ifndef YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
+# define YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -198,11 +198,11 @@ extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED  */
+#endif /* !YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 206 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:358  */
+#line 206 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -451,11 +451,11 @@ union yyalloc
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  54
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  26
+#define YYNNTS  27
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  68
+#define YYNRULES  69
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  161
+#define YYNSTATES  162
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -507,11 +507,11 @@ static const yytype_uint8 yyrline[] =
 {
        0,    58,    58,    60,    61,    63,    65,    67,    68,    70,
       71,    72,    74,    76,    78,    80,    81,    83,    84,    86,
-      87,    88,    89,    91,    93,    94,    96,    97,    99,   100,
-     101,   102,   103,   104,   106,   107,   108,   109,   110,   113,
-     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
-     124,   125,   126,   127,   128,   129,   130,   131,   132,   133,
-     134,   135,   137,   137,   141,   142,   143,   145,   146
+      87,    88,    89,    91,    93,    95,    96,    98,    99,   101,
+     102,   103,   104,   105,   106,   108,   109,   110,   111,   112,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   126,   127,   128,   129,   130,   131,   132,   133,   134,
+     135,   136,   137,   139,   139,   143,   144,   145,   147,   148
 };
 #endif
 
@@ -530,10 +530,11 @@ static const char *const yytname[] =
   "'='", "$accept", "GOAL", "CLASS_LIST", "MAIN_CLASS",
   "CLASS_DECLARATION", "BASE_CLASS", "VAR_AND_METHOD_DECLARATION",
   "VAR_DECLARATION", "METHOD_DECLARATION", "METHOD_HEADER",
-  "ARGS_DECLARATION", "PARAM_DECLARATION", "TYPE", "METHOD_BODY",
-  "VAR_AND_STATEMENT_DECLARATIONS", "STATEMENT_DECLARATION", "STATEMENT",
-  "IF_STATEMENT", "WHILE_STATEMENT", "PRINT_STATEMENT", "ASSIGNMENT",
-  "ARRAY_ASSIGNMENT", "EXPR", "CONSTANT", "PARAMS", "NEW_EXPR", YY_NULLPTR
+  "ARGS_DECLARATION", "PARAM_DECLARATION", "TYPE", "INT_ARRAY",
+  "METHOD_BODY", "VAR_AND_STATEMENT_DECLARATIONS", "STATEMENT_DECLARATION",
+  "STATEMENT", "IF_STATEMENT", "WHILE_STATEMENT", "PRINT_STATEMENT",
+  "ASSIGNMENT", "ARRAY_ASSIGNMENT", "EXPR", "CONSTANT", "PARAMS",
+  "NEW_EXPR", YY_NULLPTR
 };
 #endif
 
@@ -551,10 +552,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -85
+#define YYPACT_NINF -86
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-85)))
+  (!!((Yystate) == (-86)))
 
 #define YYTABLE_NINF -1
 
@@ -565,23 +566,23 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-       9,    18,    54,   -85,    -8,   -85,    47,    52,    45,   -85,
-      59,    56,    76,    72,    51,    92,   -85,    55,    53,    75,
-      67,   -85,   -85,    50,    55,    55,   136,    79,   179,   165,
-     133,   -85,   -85,   -85,    12,   137,   167,   150,   -85,   158,
-     159,   -38,   160,    15,    12,   171,   199,   -85,    15,   -85,
-     -85,   -85,   -85,   -85,   -85,   162,    75,    49,    49,    49,
-      49,    49,   -38,   180,   -85,   -85,    49,   -85,   163,   -30,
-     -85,   209,    16,   -85,   187,   -85,   -85,    49,    49,   207,
-     -85,   -85,   228,    74,   138,   249,   -85,   161,    15,   -85,
-      75,   -85,   188,   185,    49,    38,   270,    49,    49,    49,
-      49,    49,    49,    49,    49,    49,    49,    -6,    49,    49,
-      49,    49,    15,   183,   190,   -85,    15,   -85,   202,   -85,
-      49,   204,    90,   -85,    38,    38,    38,    38,    38,    38,
-      38,    38,    46,    46,   -85,   206,   211,   211,   211,   106,
-     -85,   -85,    49,   219,   223,   122,   -85,   -85,    49,   -85,
-     184,    15,   -85,   -85,   291,   -25,   -85,   -85,   -85,    49,
-     291
+       9,    14,    35,   -86,     8,   -86,    47,    52,    45,   -86,
+      59,    56,    76,    72,    51,    92,   -86,    55,    53,    75,
+      67,   -86,   -86,    50,    55,    55,   136,    79,   -86,   179,
+     165,   133,   -86,   -86,   -86,    12,   137,   167,   150,   -86,
+     158,   159,   -38,   160,    15,    12,   171,   199,   -86,    15,
+     -86,   -86,   -86,   -86,   -86,   -86,   162,    75,    49,    49,
+      49,    49,    49,   -38,   180,   -86,   -86,    49,   -86,   163,
+     -30,   -86,   209,    -7,   -86,   187,   -86,   -86,    49,    49,
+     207,   -86,   -86,   228,    74,   138,   249,   -86,   161,    15,
+     -86,    75,   -86,   188,   185,    49,    38,   270,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    -6,    49,
+      49,    49,    49,    15,   183,   190,   -86,    15,   -86,   202,
+     -86,    49,   204,    90,   -86,    38,    38,    38,    38,    38,
+      38,    38,    38,    46,    46,   -86,   206,   211,   211,   211,
+     106,   -86,   -86,    49,   219,   223,   122,   -86,   -86,    49,
+     -86,   184,    15,   -86,   -86,   291,   -25,   -86,   -86,   -86,
+      49,   291
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -591,37 +592,37 @@ static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     4,     0,     1,     2,     0,     0,     3,
        0,     7,     0,     0,     0,     0,     8,    11,     0,     0,
-      21,    20,    22,     0,    11,    11,     0,     0,     0,     0,
-       0,     6,     9,    10,    27,     0,     0,     0,    19,     0,
-       0,    22,     0,    27,    27,     0,     0,    25,    27,    29,
-      30,    31,    32,    33,    12,     0,    18,     0,     0,     0,
-       0,     0,     0,     0,    24,    13,     0,    26,     0,     0,
-      15,     0,     0,    57,    55,    62,    63,     0,     0,     0,
-      58,    54,     0,     0,     0,     0,    28,     0,     0,    14,
-      18,    17,     0,     0,     0,    52,     0,     0,     0,     0,
+      21,    20,    22,     0,    11,    11,     0,     0,    19,     0,
+       0,     0,     6,     9,    10,    28,     0,     0,     0,    23,
+       0,     0,    22,     0,    28,    28,     0,     0,    26,    28,
+      30,    31,    32,    33,    34,    12,     0,    18,     0,     0,
+       0,     0,     0,     0,     0,    25,    13,     0,    27,     0,
+       0,    15,     0,     0,    58,    57,    63,    64,     0,     0,
+       0,    59,    55,     0,     0,     0,     0,    29,     0,     0,
+      14,    18,    17,     0,     0,     0,    53,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    37,     0,    23,     0,    16,
-       0,     0,     0,    53,    45,    44,    49,    47,    48,    46,
-      51,    50,    39,    40,    60,     0,    43,    41,    42,     0,
-      35,    36,     0,     0,     0,     0,    68,    56,    64,    59,
-       0,     0,     5,    67,    65,     0,    38,    34,    61,     0,
-      66
+       0,     0,     0,     0,     0,     0,    38,     0,    24,     0,
+      16,     0,     0,     0,    54,    46,    45,    50,    48,    49,
+      47,    52,    51,    40,    41,    61,     0,    44,    42,    43,
+       0,    36,    37,     0,     0,     0,     0,    69,    56,    65,
+      60,     0,     0,     5,    68,    66,     0,    39,    35,    62,
+       0,    67
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -85,   -85,   -85,   -85,   -85,   -85,   -14,   -28,   -85,   -85,
-     -85,   195,    -7,   -85,   229,   -34,   -84,   -85,   -85,   -85,
-     -85,   -85,   -58,   -85,   -85,   -85
+     -86,   -86,   -86,   -86,   -86,   -86,    13,   -29,   -86,   -86,
+     -86,   182,    -8,   -86,   -86,   229,   -35,   -85,   -86,   -86,
+     -86,   -86,   -86,   -59,   -86,   -86,   -86
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
       -1,     2,     6,     3,     9,    14,    23,    24,    25,    26,
-      69,    70,    27,    45,    46,    47,    48,    49,    50,    51,
-      52,    53,    79,    80,   155,    81
+      70,    71,    27,    28,    46,    47,    48,    49,    50,    51,
+      52,    53,    54,    80,    81,   156,    82
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -629,55 +630,55 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      82,    83,    84,    85,   118,    59,    44,   134,    87,    63,
-      32,    33,    29,   135,    67,    60,    44,     1,    89,    95,
-      96,    90,    39,   158,    40,    39,   159,    40,   140,    20,
-      21,    41,   143,    92,    62,    93,   122,     4,     7,   124,
-     125,   126,   127,   128,   129,   130,   131,   132,   133,    71,
-     136,   137,   138,   139,     5,     8,    42,    10,    43,    42,
-      19,    43,   145,    72,    11,    73,    12,   157,    74,    75,
-      76,    13,    20,    21,    22,   105,   106,   107,   108,   109,
-     110,   111,    15,    71,   150,    77,   108,   109,   110,   111,
-     154,    16,    20,    21,    22,    18,    78,    17,    35,    31,
-      28,   160,    97,    98,    99,   100,   101,   102,   103,   104,
-      30,   105,   106,   107,   108,   109,   110,   111,    97,    98,
-      99,   100,   101,   102,   103,   104,   114,   105,   106,   107,
-     108,   109,   110,   111,    97,    98,    99,   100,   101,   102,
-     103,   104,   147,   105,   106,   107,   108,   109,   110,   111,
-      97,    98,    99,   100,   101,   102,   103,   104,   149,   105,
-     106,   107,   108,   109,   110,   111,    97,    98,    99,   100,
-     101,   102,   103,   104,   153,   105,   106,   107,   108,   109,
-     110,   111,    34,    36,    37,    38,    55,    54,   115,    97,
-      98,    99,   100,   101,   102,   103,   104,    56,   105,   106,
-     107,   108,   109,   110,   111,    57,    58,    61,    66,    88,
-      68,   117,    97,    98,    99,   100,   101,   102,   103,   104,
-      65,   105,   106,   107,   108,   109,   110,   111,    91,    86,
-      94,   120,   121,   141,   156,    97,    98,    99,   100,   101,
-     102,   103,   104,   142,   105,   106,   107,   108,   109,   110,
-     111,   144,   146,   148,   111,   112,    97,    98,    99,   100,
-     101,   102,   103,   104,   151,   105,   106,   107,   108,   109,
-     110,   111,   152,    64,     0,     0,   113,    97,    98,    99,
-     100,   101,   102,   103,   104,   119,   105,   106,   107,   108,
-     109,   110,   111,     0,     0,     0,     0,   116,    97,    98,
-      99,   100,   101,   102,   103,   104,     0,   105,   106,   107,
-     108,   109,   110,   111,     0,     0,     0,     0,   123,    97,
-      98,    99,   100,   101,   102,   103,   104,     0,   105,   106,
-     107,   108,   109,   110,   111
+      83,    84,    85,    86,   119,    60,    45,   135,    88,    64,
+      93,    30,    94,   136,    68,    61,    45,     1,    90,    96,
+      97,    91,    40,   159,    41,    40,   160,    41,   141,    20,
+      21,    42,   144,     4,    63,     5,   123,    33,    34,   125,
+     126,   127,   128,   129,   130,   131,   132,   133,   134,    72,
+     137,   138,   139,   140,     7,     8,    43,    10,    44,    43,
+      19,    44,   146,    73,    11,    74,    12,   158,    75,    76,
+      77,    13,    20,    21,    22,   106,   107,   108,   109,   110,
+     111,   112,    15,    72,   151,    78,   109,   110,   111,   112,
+     155,    16,    20,    21,    22,    18,    79,    17,    36,    32,
+      29,   161,    98,    99,   100,   101,   102,   103,   104,   105,
+      31,   106,   107,   108,   109,   110,   111,   112,    98,    99,
+     100,   101,   102,   103,   104,   105,   115,   106,   107,   108,
+     109,   110,   111,   112,    98,    99,   100,   101,   102,   103,
+     104,   105,   148,   106,   107,   108,   109,   110,   111,   112,
+      98,    99,   100,   101,   102,   103,   104,   105,   150,   106,
+     107,   108,   109,   110,   111,   112,    98,    99,   100,   101,
+     102,   103,   104,   105,   154,   106,   107,   108,   109,   110,
+     111,   112,    35,    37,    38,    39,    56,    55,   116,    98,
+      99,   100,   101,   102,   103,   104,   105,    57,   106,   107,
+     108,   109,   110,   111,   112,    58,    59,    62,    67,    89,
+      69,   118,    98,    99,   100,   101,   102,   103,   104,   105,
+      66,   106,   107,   108,   109,   110,   111,   112,    92,    87,
+      95,   121,   122,   142,   157,    98,    99,   100,   101,   102,
+     103,   104,   105,   143,   106,   107,   108,   109,   110,   111,
+     112,   145,   147,   149,   112,   113,    98,    99,   100,   101,
+     102,   103,   104,   105,   152,   106,   107,   108,   109,   110,
+     111,   112,   153,   120,    65,     0,   114,    98,    99,   100,
+     101,   102,   103,   104,   105,     0,   106,   107,   108,   109,
+     110,   111,   112,     0,     0,     0,     0,   117,    98,    99,
+     100,   101,   102,   103,   104,   105,     0,   106,   107,   108,
+     109,   110,   111,   112,     0,     0,     0,     0,   124,    98,
+      99,   100,   101,   102,   103,   104,   105,     0,   106,   107,
+     108,   109,   110,   111,   112
 };
 
 static const yytype_int16 yycheck[] =
 {
-      58,    59,    60,    61,    88,    43,    34,    13,    66,    43,
-      24,    25,    19,    19,    48,    53,    44,     8,    48,    77,
-      78,    51,    10,    48,    12,    10,    51,    12,   112,    17,
-      18,    19,   116,    17,    19,    19,    94,    19,    46,    97,
-      98,    99,   100,   101,   102,   103,   104,   105,   106,    56,
-     108,   109,   110,   111,     0,     8,    44,     5,    46,    44,
-       5,    46,   120,    14,    19,    16,     7,   151,    19,    20,
+      59,    60,    61,    62,    89,    43,    35,    13,    67,    44,
+      17,    19,    19,    19,    49,    53,    45,     8,    48,    78,
+      79,    51,    10,    48,    12,    10,    51,    12,   113,    17,
+      18,    19,   117,    19,    19,     0,    95,    24,    25,    98,
+      99,   100,   101,   102,   103,   104,   105,   106,   107,    57,
+     109,   110,   111,   112,    46,     8,    44,     5,    46,    44,
+       5,    46,   121,    14,    19,    16,     7,   152,    19,    20,
       21,    15,    17,    18,    19,    37,    38,    39,    40,    41,
-      42,    43,     6,    90,   142,    36,    40,    41,    42,    43,
-     148,    19,    17,    18,    19,     3,    47,    46,    19,    49,
-      47,   159,    28,    29,    30,    31,    32,    33,    34,    35,
+      42,    43,     6,    91,   143,    36,    40,    41,    42,    43,
+     149,    19,    17,    18,    19,     3,    47,    46,    19,    49,
+      47,   160,    28,    29,    30,    31,    32,    33,    34,    35,
       43,    37,    38,    39,    40,    41,    42,    43,    28,    29,
       30,    31,    32,    33,    34,    35,    52,    37,    38,    39,
       40,    41,    42,    43,    28,    29,    30,    31,    32,    33,
@@ -694,8 +695,8 @@ static const yytype_int16 yycheck[] =
       33,    34,    35,    53,    37,    38,    39,    40,    41,    42,
       43,    49,    48,    47,    43,    48,    28,    29,    30,    31,
       32,    33,    34,    35,    45,    37,    38,    39,    40,    41,
-      42,    43,    49,    44,    -1,    -1,    48,    28,    29,    30,
-      31,    32,    33,    34,    35,    90,    37,    38,    39,    40,
+      42,    43,    49,    91,    45,    -1,    48,    28,    29,    30,
+      31,    32,    33,    34,    35,    -1,    37,    38,    39,    40,
       41,    42,    43,    -1,    -1,    -1,    -1,    48,    28,    29,
       30,    31,    32,    33,    34,    35,    -1,    37,    38,    39,
       40,    41,    42,    43,    -1,    -1,    -1,    -1,    48,    28,
@@ -709,21 +710,21 @@ static const yytype_uint8 yystos[] =
 {
        0,     8,    55,    57,    19,     0,    56,    46,     8,    58,
        5,    19,     7,    15,    59,     6,    19,    46,     3,     5,
-      17,    18,    19,    60,    61,    62,    63,    66,    47,    66,
-      43,    49,    60,    60,    46,    19,     4,    19,    52,    10,
-      12,    19,    44,    46,    61,    67,    68,    69,    70,    71,
-      72,    73,    74,    75,    50,    19,    47,    47,    47,    43,
-      53,    47,    19,    69,    68,    49,     9,    69,    48,    64,
-      65,    66,    14,    16,    19,    20,    21,    36,    47,    76,
-      77,    79,    76,    76,    76,    76,    49,    76,    46,    48,
-      51,    19,    17,    19,    43,    76,    76,    28,    29,    30,
-      31,    32,    33,    34,    35,    37,    38,    39,    40,    41,
-      42,    43,    48,    48,    52,    50,    48,    50,    70,    65,
-      43,    47,    76,    48,    76,    76,    76,    76,    76,    76,
-      76,    76,    76,    76,    13,    19,    76,    76,    76,    76,
-      70,    50,    53,    70,    49,    76,    48,    52,    47,    52,
-      76,    45,    49,    52,    76,    78,    50,    70,    48,    51,
-      76
+      17,    18,    19,    60,    61,    62,    63,    66,    67,    47,
+      66,    43,    49,    60,    60,    46,    19,     4,    19,    52,
+      10,    12,    19,    44,    46,    61,    68,    69,    70,    71,
+      72,    73,    74,    75,    76,    50,    19,    47,    47,    47,
+      43,    53,    47,    19,    70,    69,    49,     9,    70,    48,
+      64,    65,    66,    14,    16,    19,    20,    21,    36,    47,
+      77,    78,    80,    77,    77,    77,    77,    49,    77,    46,
+      48,    51,    19,    17,    19,    43,    77,    77,    28,    29,
+      30,    31,    32,    33,    34,    35,    37,    38,    39,    40,
+      41,    42,    43,    48,    48,    52,    50,    48,    50,    71,
+      65,    43,    47,    77,    48,    77,    77,    77,    77,    77,
+      77,    77,    77,    77,    77,    13,    19,    77,    77,    77,
+      77,    71,    50,    53,    71,    49,    77,    48,    52,    47,
+      52,    77,    45,    49,    52,    77,    79,    50,    71,    48,
+      51,    77
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -731,23 +732,23 @@ static const yytype_uint8 yyr1[] =
 {
        0,    54,    55,    56,    56,    57,    58,    59,    59,    60,
       60,    60,    61,    62,    63,    64,    64,    65,    65,    66,
-      66,    66,    66,    67,    68,    68,    69,    69,    70,    70,
-      70,    70,    70,    70,    71,    72,    73,    74,    75,    76,
-      76,    76,    76,    76,    76,    76,    76,    76,    76,    76,
-      76,    76,    76,    76,    76,    76,    76,    76,    76,    76,
-      76,    76,    77,    77,    78,    78,    78,    79,    79
+      66,    66,    66,    67,    68,    69,    69,    70,    70,    71,
+      71,    71,    71,    71,    71,    72,    73,    74,    75,    76,
+      77,    77,    77,    77,    77,    77,    77,    77,    77,    77,
+      77,    77,    77,    77,    77,    77,    77,    77,    77,    77,
+      77,    77,    77,    78,    78,    79,    79,    79,    80,    80
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     2,     2,     0,    15,     6,     0,     2,     2,
-       2,     0,     3,     4,     6,     1,     3,     2,     0,     3,
-       1,     1,     1,     4,     2,     1,     2,     0,     3,     1,
-       1,     1,     1,     1,     7,     5,     5,     4,     7,     3,
+       2,     0,     3,     4,     6,     1,     3,     2,     0,     1,
+       1,     1,     1,     3,     4,     2,     1,     2,     0,     3,
+       1,     1,     1,     1,     1,     7,     5,     5,     4,     7,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     2,     3,     1,     1,     4,     1,     1,     4,
-       3,     6,     1,     1,     0,     1,     3,     5,     4
+       3,     3,     3,     2,     3,     1,     4,     1,     1,     1,
+       4,     3,     6,     1,     1,     0,     1,     3,     5,     4
 };
 
 
@@ -1517,403 +1518,409 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 58 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 58 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "GOAL"); }
-#line 1523 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1524 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 60 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 60 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "CLASS_LIST"); }
-#line 1529 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1530 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 61 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 61 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1535 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1536 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 63 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 63 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "MAIN_CLASS"); }
-#line 1541 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1542 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 65 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 65 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "CLASS_DECLARATION"); }
-#line 1547 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1548 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 67 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 67 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "BASE_CLASS"); }
-#line 1553 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1554 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 68 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 68 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "BASE_CLASS"); }
-#line 1559 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1560 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 70 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 70 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1565 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1566 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 71 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 71 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1571 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1572 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 72 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 72 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1577 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1578 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 74 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 74 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_DECLARATION"); }
-#line 1583 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1584 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 76 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 76 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_DECLARATION"); }
-#line 1589 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1590 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 78 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 78 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_HEADER"); }
-#line 1595 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1596 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 80 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 80 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1601 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1602 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 81 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 81 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1607 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1608 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 83 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 83 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAM_DECLARATION"); }
-#line 1613 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1614 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 84 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 84 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAM_DECLARATION"); }
-#line 1619 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1620 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 86 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "TYPE"); }
-#line 1625 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 86 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "INT_ARRAY"); }
+#line 1626 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 87 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 87 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1631 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1632 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 88 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 88 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1637 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1638 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 89 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 89 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1643 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1644 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 91 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "METHOD_BODY"); }
-#line 1649 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 91 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "INT_ARRAY"); }
+#line 1650 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 93 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS"); }
-#line 1655 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 93 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "METHOD_BODY"); }
+#line 1656 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 94 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 95 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS"); }
-#line 1661 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1662 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 96 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "STATEMENT_DECLARATION"); }
-#line 1667 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 96 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS"); }
+#line 1668 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 97 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 98 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT_DECLARATION"); }
-#line 1673 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1674 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 99 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "STATEMENT"); }
-#line 1679 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 99 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "STATEMENT_DECLARATION"); }
+#line 1680 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 100 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 101 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1685 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1686 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 101 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 102 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1691 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1692 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 102 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 103 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1697 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1698 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 103 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 104 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1703 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1704 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 104 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 105 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1709 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1710 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 106 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "IF_STATEMENT"); }
-#line 1715 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 106 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "STATEMENT"); }
+#line 1716 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 107 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "WHILE_STATEMENT"); }
-#line 1721 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 108 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "IF_STATEMENT"); }
+#line 1722 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 108 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "PRINT_STATEMENT"); }
-#line 1727 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 109 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "WHILE_STATEMENT"); }
+#line 1728 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 109 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "ASSIGNMENT"); }
-#line 1733 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 110 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "PRINT_STATEMENT"); }
+#line 1734 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 110 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "ARRAY_ASSIGNMENT"); }
-#line 1739 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 111 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "ASSIGNMENT"); }
+#line 1740 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 113 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "EXPR"); }
-#line 1745 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 112 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "ARRAY_ASSIGNMENT"); }
+#line 1746 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 114 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 115 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1751 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1752 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 115 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 116 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1757 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1758 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 116 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 117 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1763 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1764 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 117 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 118 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1769 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1770 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 118 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 119 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1775 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1776 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 119 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 120 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1781 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1782 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 120 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 121 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1787 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1788 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 121 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 122 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1793 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1794 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 122 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 123 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1799 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1800 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 123 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 124 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1805 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1806 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 124 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 125 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1811 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1812 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 125 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 126 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1817 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1818 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 126 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 127 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1823 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1824 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 127 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 128 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1829 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1830 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 128 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 129 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1835 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1836 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 129 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "EXPR ID"); }
-#line 1841 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 130 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "EXPR"); }
+#line 1842 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 130 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 131 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1847 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1848 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 131 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "EXPR"); }
-#line 1853 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 132 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "EXPR ID"); }
+#line 1854 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 132 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 133 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1859 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1860 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 133 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "INVOKE_EXPR"); }
-#line 1865 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 134 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "EXPR"); }
+#line 1866 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 134 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 135 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 1871 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1872 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 135 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 136 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 1877 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1878 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 63:
-#line 137 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "CONSTANT"); }
-#line 1883 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+  case 62:
+#line 137 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "INVOKE_EXPR"); }
+#line 1884 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 141 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "PARAMS"); }
-#line 1889 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 139 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "CONSTANT"); }
+#line 1890 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 142 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 143 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAMS"); }
-#line 1895 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1896 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 143 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 144 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAMS"); }
-#line 1901 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1902 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 145 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    { processRule((yyloc), "NEW_EXPR"); }
-#line 1907 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 145 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "PARAMS"); }
+#line 1908 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 146 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 147 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "NEW_EXPR"); }
-#line 1913 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1914 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 69:
+#line 148 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+    { processRule((yyloc), "NEW_EXPR"); }
+#line 1920 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1917 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1924 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2148,7 +2155,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 148 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
+#line 150 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1906  */
 
 
 void yyerror(const char *s)

@@ -1,4 +1,5 @@
-class LinkedList{
+//Error in declar. class: "class LinkedList()"
+class LinkedList(){
     public static void main(String[] a){
 	System.out.println(new LL().Start());
     }
