@@ -18,7 +18,7 @@
     extern int yylineno;
     extern FILE * yyin;
 
-    extern void printTextPart(Location loc);
+    extern void printTextPart(Location loc, ostream &out = std::cout);
     Location currLocation;
     Location getLocation() {
         return currLocation;
@@ -35,15 +35,12 @@
 
 %}
 
-%token MAIN MAIN_ARGS PUBLIC VOID STATIC CLASS RETURN WHILE BREAK PRINT LENGTH NEW EXTENDS THIS
+%token MAIN MAIN_ARGS PUBLIC VOID STATIC CLASS RETURN WHILE PRINT LENGTH NEW EXTENDS THIS
 
 %token INT BOOL
 %token ID
 
 %token INT_VALUE BOOL_VALUE
-%token STATEMENTS
-%token DECLARATION FIELD_DECLARATION
-%token RETURN_STATEMENT BREAK_STATEMENT INVOKE_STATEMENT
 
 %left OR AND GE LE GT LT EQ NEQ NOT
 %left '+' '-' '.'
@@ -128,8 +125,7 @@ EXPR :
 | NOT EXPR { processRule(@$, "EXPR"); }
 | '(' EXPR ')' { processRule(@$, "EXPR"); }
 | NEW_EXPR { processRule(@$, "EXPR"); }
-| ID '[' EXPR ']' { processRule(@$, "EXPR"); }
-| ID { processRule(@$, "EXPR ID"); }
+| ID { processRule(@$, "EXPR"); }
 | THIS { processRule(@$, "EXPR"); }
 | CONSTANT { processRule(@$, "EXPR"); }
 | EXPR '[' EXPR ']' { processRule(@$, "INVOKE_EXPR"); }
@@ -149,10 +145,9 @@ NEW_EXPR : NEW INT '[' EXPR ']' { processRule(@$, "NEW_EXPR"); }
 
 %%
 
+extern void printError(Location location, const char *s);
 void yyerror(const char *s)
 {
-    fprintf(stderr, "line number %d: ", yylineno);
-    fprintf(stderr, "%s\n", s);
+    printError(Location(yylloc.first_line, yylloc.first_column, yylloc.last_line, yylloc.last_column), s);
 }
-
 extern int main(int argc, const char* argv[]);

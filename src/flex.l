@@ -6,8 +6,6 @@
     #include "tokens.h"
     #include <string.h>
     void yyerror(const char*);
-    //extern char* yytext;
-    //extern Location yylloc;
     int yy_line = 1;
     int yy_column = 1;
     //Location currLocation(0,0,0,0);
@@ -68,7 +66,6 @@
 "if"        { yy_column += strlen(yytext); updateLocation(); return IF; }
 "else"      { yy_column += strlen(yytext); updateLocation(); return ELSE; }
 "while"     { yy_column += strlen(yytext); updateLocation(); return WHILE; }
-"break"     { yy_column += strlen(yytext); updateLocation(); return BREAK; }
 "main"      { yy_column += strlen(yytext); updateLocation(); return MAIN; }
 "String[]"  { yy_column += strlen(yytext); updateLocation(); return MAIN_ARGS; }
 "&&"        { yy_column += strlen(yytext); updateLocation(); return AND; }
