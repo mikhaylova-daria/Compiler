@@ -14,8 +14,8 @@
     void updateLocation() {
         //currLocation.update(yy_line, yy_column);
         //yylloc.update(yy_line, yy_column);
-        yylloc.first_line = yylloc.last_line;
-        yylloc.first_column = yylloc.last_column;
+        yylloc.first_line = max(yylloc.last_line, 1);
+        yylloc.first_column = max(yylloc.last_column, 1);
         yylloc.last_line = yy_line;
         yylloc.last_column = yy_column;
     }
