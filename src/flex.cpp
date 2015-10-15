@@ -1,6 +1,6 @@
-#line 2 "/home/nicolai/work/MiniJavaCompiler/src/flex.cpp"
+#line 2 "/home/daria/Compiler/src/flex.cpp"
 
-#line 4 "/home/nicolai/work/MiniJavaCompiler/src/flex.cpp"
+#line 4 "/home/daria/Compiler/src/flex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -559,8 +559,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
-#line 4 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 1 "/home/daria/Compiler/src/flex.l"
+#line 4 "/home/daria/Compiler/src/flex.l"
     #include "JavaHelp.h"
     #include "Declaration.h"
     #include "tokens.h"
@@ -577,7 +577,7 @@ char *yytext;
         yylloc.last_line = yy_line;
         yylloc.last_column = yy_column;
     }
-#line 581 "/home/nicolai/work/MiniJavaCompiler/src/flex.cpp"
+#line 581 "/home/daria/Compiler/src/flex.cpp"
 
 #define INITIAL 0
 
@@ -764,9 +764,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 24 "/home/daria/Compiler/src/flex.l"
 
-#line 770 "/home/nicolai/work/MiniJavaCompiler/src/flex.cpp"
+#line 770 "/home/daria/Compiler/src/flex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -862,23 +862,23 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 25 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 25 "/home/daria/Compiler/src/flex.l"
 { ++yy_line; yy_column = 1; updateLocation(); } // comment
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 26 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 26 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation();}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 27 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 27 "/home/daria/Compiler/src/flex.l"
 { yy_line += strlen(yytext); yy_column = 1; updateLocation();}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 28 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 28 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -887,7 +887,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 34 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 34 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -896,7 +896,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 39 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 39 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -905,7 +905,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 45 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 45 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -914,7 +914,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 50 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 50 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -923,137 +923,137 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 56 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 56 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return PRINT; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 57 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 57 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return THIS; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 58 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 58 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LENGTH; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 59 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 59 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NEW; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 60 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 60 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return EXTENDS; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 61 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 61 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return PUBLIC; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 62 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 62 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return VOID; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 63 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 63 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return CLASS; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 64 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 64 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return STATIC;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 65 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 65 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return RETURN; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 66 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 66 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return IF; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 67 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 67 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return ELSE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 68 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 68 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return WHILE; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 69 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 69 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return MAIN; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 70 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 70 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return MAIN_ARGS; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 71 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 71 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return AND; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 72 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 72 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return OR; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 73 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 73 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NOT; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 74 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 74 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LE; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 75 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 75 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return GE; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 76 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 76 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return EQ; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 77 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 77 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return NEQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 78 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 78 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return LT; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 79 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 79 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return GT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 80 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 80 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return '['; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 81 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 81 "/home/daria/Compiler/src/flex.l"
 { yy_column += strlen(yytext); updateLocation(); return ']'; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 83 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 83 "/home/daria/Compiler/src/flex.l"
 {
     yy_column += strlen(yytext);
     updateLocation();
@@ -1062,20 +1062,20 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 89 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 89 "/home/daria/Compiler/src/flex.l"
 { ++yy_column; updateLocation(); return *yytext; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 90 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 90 "/home/daria/Compiler/src/flex.l"
 { yyerror("Unknown symbol\n"); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 91 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 91 "/home/daria/Compiler/src/flex.l"
 ECHO;
 	YY_BREAK
-#line 1079 "/home/nicolai/work/MiniJavaCompiler/src/flex.cpp"
+#line 1079 "/home/daria/Compiler/src/flex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2085,7 +2085,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 91 "/home/nicolai/work/MiniJavaCompiler/src/flex.l"
+#line 91 "/home/daria/Compiler/src/flex.l"
 
 
 
