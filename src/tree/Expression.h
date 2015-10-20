@@ -31,10 +31,35 @@ public:
             LeftExpr(leftExpr),
             RightExpr(rightExpr),
             BinaryExpressionType(type) {}
+
     const IExpression* LeftExpr;
     const IExpression* RightExpr;
     TBinaryExpression BinaryExpressionType;
-    void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    ~CBinaryExpression() {
+        delete LeftExpr;
+        delete RightExpr;
+    }
 };
+
+class CNotExpression : public IExpression {
+public:
+    CNotExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
+    ~CNotExpression() { delete Expression; }
+
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+
+    IExpression* Expression;
+};
+
+class CLengthExpression : public IExpression {
+    CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
+    ~CLengthExpression() { delete Expression; }
+
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+
+    IExpression* Expression;
+};
+
 
 #endif //MINIJAVACOMPILER_EXPRESSION_H

@@ -6,7 +6,7 @@
 #define MINIJAVACOMPILER_CONSTANT_H
 
 #include <string>
-#include "Location.h"
+#include "Expression.h"
 #include "Visitor.h"
 
 enum TConstantType {
@@ -14,10 +14,10 @@ enum TConstantType {
     CT_BOOL
 };
 
-class CConstant : public IToken {
+class CConstant : public IExpression {
 public:
     CConstant(const Location location, const TConstantType type, const char* value) :
-            IToken(location), Type(type), Value(value) { }
+            IExpression(location), Type(type), Value(value) { }
 
     void Accept(IVisitor* visitor) const { visitor->Visit(this); }
     const TConstantType Type;

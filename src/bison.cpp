@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 2 "/home/daria/Compiler/src/minijava.y" /* yacc.c:339  */
+#line 2 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:339  */
 
 
     #include "JavaHelp.h"
@@ -99,7 +99,7 @@
     }
 
 
-#line 103 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:339  */
+#line 103 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -119,8 +119,8 @@
 
 /* In a future release of Bison, this section will be replaced
    by #include "tokens.h".  */
-#ifndef YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
-# define YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
+#ifndef YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
+# define YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -192,11 +192,11 @@ extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 200 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:358  */
+#line 200 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1563,511 +1563,511 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 56 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 56 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "GOAL"); }
-#line 1569 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1569 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 58 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 58 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "CLASS_LIST"); }
-#line 1575 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1575 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 59 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 59 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1581 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1581 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 61 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 61 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "MAIN_CLASS"); }
-#line 1587 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1587 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 62 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 62 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "MAIN_CLASS"); }
-#line 1593 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1593 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 63 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 63 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "MAIN_CLASS"); }
-#line 1599 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1599 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 65 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 65 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "CLASS_DECLARATION"); }
-#line 1605 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1605 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 67 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 67 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "BASE_CLASS"); }
-#line 1611 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1611 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 68 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 68 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "BASE_CLASS"); }
-#line 1617 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1617 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 70 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 70 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1623 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1623 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 71 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 71 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1629 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1629 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 72 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 72 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_METHOD_DECLARATION"); }
-#line 1635 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1635 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 74 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 74 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_DECLARATION"); }
-#line 1641 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1641 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 75 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 75 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_DECLARATION"); }
-#line 1647 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1647 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 77 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 77 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_DECLARATION"); }
-#line 1653 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1653 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 79 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 79 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_HEADER"); }
-#line 1659 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1659 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 80 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 80 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_HEADER"); }
-#line 1665 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1665 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 81 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 81 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_HEADER"); }
-#line 1671 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1671 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 83 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 83 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1677 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1677 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 84 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 84 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARGS_DECLARATION"); }
-#line 1683 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1683 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 86 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 86 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAM_DECLARATION"); }
-#line 1689 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1689 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 87 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 87 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAM_DECLARATION"); }
-#line 1695 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1695 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 89 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 89 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INT_ARRAY"); }
-#line 1701 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1701 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 90 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 90 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1707 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1707 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 91 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 91 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1713 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1713 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 92 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 92 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "TYPE"); }
-#line 1719 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1719 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 94 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 94 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INT_ARRAY"); }
-#line 1725 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1725 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 95 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 95 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INT_ARRAY"); }
-#line 1731 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1731 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 97 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 97 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "METHOD_BODY"); }
-#line 1737 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1737 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 99 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 99 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS"); }
-#line 1743 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1743 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 100 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 100 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS"); }
-#line 1749 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1749 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 102 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 102 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT_DECLARATION"); }
-#line 1755 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1755 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 103 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 103 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT_DECLARATION"); }
-#line 1761 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1761 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 105 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 105 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1767 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1767 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 106 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 106 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1773 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1773 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 107 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 107 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1779 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1779 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 108 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 108 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1785 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1785 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 109 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 109 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1791 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1791 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 110 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 110 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "STATEMENT"); }
-#line 1797 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1797 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 112 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 112 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "IF_STATEMENT"); }
-#line 1803 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1803 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 113 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 113 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "IF_STATEMENT"); }
-#line 1809 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1809 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 114 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 114 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "IF_STATEMENT"); }
-#line 1815 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1815 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 115 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 115 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "IF_STATEMENT"); }
-#line 1821 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1821 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 117 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 117 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "WHILE_STATEMENT"); }
-#line 1827 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1827 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 118 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 118 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "WHILE_STATEMENT"); }
-#line 1833 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1833 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 120 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 120 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PRINT_STATEMENT"); }
-#line 1839 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1839 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 121 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 121 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PRINT_STATEMENT"); }
-#line 1845 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1845 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 123 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 123 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ASSIGNMENT"); }
-#line 1851 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1851 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 124 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 124 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ASSIGNMENT"); }
-#line 1857 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1857 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 126 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 126 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARRAY_ASSIGNMENT"); }
-#line 1863 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1863 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 127 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 127 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARRAY_ASSIGNMENT"); }
-#line 1869 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1869 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 128 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 128 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "ARRAY_ASSIGNMENT"); }
-#line 1875 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1875 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 131 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 131 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1881 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1881 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 132 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 132 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1887 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1887 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 133 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 133 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1893 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1893 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 134 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 134 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1899 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1899 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 135 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 135 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1905 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1905 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 136 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 136 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1911 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1911 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 137 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 137 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1917 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1917 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 138 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 138 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1923 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1923 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 139 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 139 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1929 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1929 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 140 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 140 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1935 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1935 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 141 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 141 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1941 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1941 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 142 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 142 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1947 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1947 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 143 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 143 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1953 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1953 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 144 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 144 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1959 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1959 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 145 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 145 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1965 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1965 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 146 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 146 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1971 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1971 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 147 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 147 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1977 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1977 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 148 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 148 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1983 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1983 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 149 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 149 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "EXPR"); }
-#line 1989 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1989 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 150 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 150 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 1995 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1995 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 151 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 151 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 2001 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2001 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 152 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 152 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 2007 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2007 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 153 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 153 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 2013 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2013 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 154 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 154 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "INVOKE_EXPR"); }
-#line 2019 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2019 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 156 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 156 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "CONSTANT"); }
-#line 2025 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2025 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 160 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 160 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAMS"); }
-#line 2031 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2031 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 161 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 161 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAMS"); }
-#line 2037 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2037 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 162 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 162 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "PARAMS"); }
-#line 2043 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2043 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 164 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 164 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "NEW_EXPR"); }
-#line 2049 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2049 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 165 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 165 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "NEW_EXPR"); }
-#line 2055 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2055 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 166 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 166 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "NEW_EXPR"); }
-#line 2061 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2061 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 167 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1646  */
+#line 167 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     { processRule((yyloc), "NEW_EXPR"); }
-#line 2067 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2067 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2071 "/home/daria/Compiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2071 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2302,7 +2302,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 169 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1906  */
+#line 169 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
 
 
 extern void printError(Location location, const char *s);
