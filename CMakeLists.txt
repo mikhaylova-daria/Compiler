@@ -30,6 +30,6 @@ IF(FLEX_FOUND)
     )
 ENDIF()
 
-set(SOURCE_FILES ${BisonOutput} ${FlexOutput} src/main.cpp src/tokens_processing.cpp src/tokens_processing.h src/minijava_types.h src/Declaration.h src/JavaHelp.h src/Utils.cpp)
+set(SOURCE_FILES ${BisonOutput} ${FlexOutput} src/main.cpp src/tokens_processing.cpp src/tokens_processing.h src/Declaration.h src/JavaHelp.h src/Utils.cpp src/tree/MinijavaTree.h src/tree/Location.h src/tree/Visitor.h src/tree/Type.h src/tree/Constant.h src/tree/Expression.h src/tree/Invocation.h src/tree/Indentifier.h)
 
 add_executable(mjc ${SOURCE_FILES})

@@ -12,26 +12,35 @@ extern int yyparse();
 #include <iostream>
 #include <vector>
 #include "JavaHelp.h"
-
+#include "tokens.h"
 
 using namespace std;
 
 vector<string> text;
 
-void printTextPart(Location loc) {
+void printTextPart(Location loc, ostream &out = std::cout)
+{
     loc.firstColumn--; loc.firstLine--; loc.lastColumn--; loc.lastLine--;
-    if (loc.firstLine == loc.lastLine)
-        cout << text[loc.firstLine].substr(loc.firstColumn, loc.lastColumn - loc.firstColumn) << endl;
-    else {
+    if (loc.firstLine == loc.lastLine) {
+        out << text[loc.firstLine].substr(loc.firstColumn, loc.lastColumn - loc.firstColumn) << endl;
+    } else {
         //cout << text[loc.firstColumn].size() << endl;
         for (int i = 0; i < loc.firstColumn; i++)
-            cout << ' ';
-        cout << text[loc.firstLine].substr(loc.firstColumn, text[loc.firstLine].size() - loc.firstColumn) << endl;
+            out << ' ';
+        out << text[loc.firstLine].substr(loc.firstColumn, text[loc.firstLine].size() - loc.firstColumn) << endl;
         for (int i = loc.firstLine + 1; i < loc.lastLine; i++)
-            cout << text[i] << endl;
-        cout << text[loc.lastLine].substr(0, loc.lastColumn) << endl;
+            out << text[i] << endl;
+        out << text[loc.lastLine].substr(0, loc.lastColumn) << endl;
     }
 }
+
+void printError(Location location, const char *s)
+{
+    std::cerr << "error in position (" << location.lastLine << ' ' << location.firstColumn << ' ';
+    std::cerr << location.lastLine << ' ' << location.lastColumn << "): " << s << " : ";
+    printTextPart(location, std::cerr);
+}
+
 
 int main(int argc, const char* argv[])
 {

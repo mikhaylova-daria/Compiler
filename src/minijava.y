@@ -11,6 +11,7 @@
     #include <string>
     using namespace std;
 
+    string error_msg;
 
     int yylex();
     void yyerror(const char *);
@@ -18,7 +19,7 @@
     extern int yylineno;
     extern FILE * yyin;
 
-    extern void printTextPart(Location loc);
+    extern void printTextPart(Location loc, ostream &out = std::cout);
     Location currLocation;
     Location getLocation() {
         return currLocation;
@@ -35,15 +36,12 @@
 
 %}
 
-%token MAIN MAIN_ARGS PUBLIC VOID STATIC CLASS RETURN WHILE BREAK PRINT LENGTH NEW EXTENDS THIS
+%token MAIN MAIN_ARGS PUBLIC VOID STATIC CLASS RETURN WHILE PRINT LENGTH NEW EXTENDS THIS
 
 %token INT BOOL
 %token ID
 
 %token INT_VALUE BOOL_VALUE
-%token STATEMENTS
-%token DECLARATION FIELD_DECLARATION
-%token RETURN_STATEMENT BREAK_STATEMENT INVOKE_STATEMENT
 
 %left OR AND GE LE GT LT EQ NEQ NOT
 %left '+' '-' '.'
@@ -61,6 +59,8 @@ CLASS_LIST : CLASS_LIST CLASS_DECLARATION { processRule(@$, "CLASS_LIST"); }
 | { processRule(@$, "ARGS_DECLARATION"); }
 
 MAIN_CLASS : CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}' { processRule(@$, "MAIN_CLASS"); }
+| CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}' { processRule(@$, "MAIN_CLASS"); }
+| CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}' { processRule(@$, "MAIN_CLASS"); }
 
 CLASS_DECLARATION : CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}' { processRule(@$, "CLASS_DECLARATION"); }
 
@@ -72,10 +72,13 @@ VAR_AND_METHOD_DECLARATION : VAR_DECLARATION VAR_AND_METHOD_DECLARATION { proces
 | { processRule(@$, "VAR_AND_METHOD_DECLARATION"); }
 
 VAR_DECLARATION : TYPE ID ';'  { processRule(@$, "VAR_DECLARATION"); }
+| error ID ';' { processRule(@$, "VAR_DECLARATION"); }
 
 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY '}' { processRule(@$, "METHOD_DECLARATION"); }
 
 METHOD_HEADER : PUBLIC TYPE ID '(' ARGS_DECLARATION ')' { processRule(@$, "METHOD_HEADER"); }
+| PUBLIC TYPE ID '(' error ')' { processRule(@$, "METHOD_HEADER"); }
+| error ID '(' ARGS_DECLARATION ')' { processRule(@$, "METHOD_HEADER"); }
 
 ARGS_DECLARATION : PARAM_DECLARATION { processRule(@$, "ARGS_DECLARATION"); }
 | ARGS_DECLARATION ',' PARAM_DECLARATION { processRule(@$, "ARGS_DECLARATION"); }
@@ -89,6 +92,7 @@ TYPE : INT_ARRAY { processRule(@$, "INT_ARRAY"); }
 | ID { processRule(@$, "TYPE"); }
 
 INT_ARRAY: INT '[' ']' { processRule(@$, "INT_ARRAY"); }
+| INT '[' error ']' { processRule(@$, "INT_ARRAY"); }
 
 METHOD_BODY : VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';' { processRule(@$, "METHOD_BODY"); }
 
@@ -106,10 +110,22 @@ STATEMENT : '{' STATEMENT_DECLARATION '}' { processRule(@$, "STATEMENT"); }
 | ARRAY_ASSIGNMENT { processRule(@$, "STATEMENT"); }
 
 IF_STATEMENT : IF '(' EXPR ')' STATEMENT ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
+| IF '(' error ')' STATEMENT ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
+| IF '(' EXPR ')' error ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
+| IF '(' EXPR ')' STATEMENT ELSE error { processRule(@$, "IF_STATEMENT"); }
+
 WHILE_STATEMENT : WHILE '(' EXPR ')' STATEMENT { processRule(@$, "WHILE_STATEMENT"); }
+| WHILE '(' error ')' STATEMENT { processRule(@$, "WHILE_STATEMENT"); }
+
 PRINT_STATEMENT : PRINT '(' EXPR ')' ';' { processRule(@$, "PRINT_STATEMENT"); }
+| PRINT '(' error ')' ';' { processRule(@$, "PRINT_STATEMENT"); }
+
 ASSIGNMENT : ID '=' EXPR ';' { processRule(@$, "ASSIGNMENT"); }
+| ID '=' error ';' { processRule(@$, "ASSIGNMENT"); }
+
 ARRAY_ASSIGNMENT : ID '[' EXPR ']' '=' EXPR ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
+| ID '[' error ']' '=' EXPR ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
+| ID '[' EXPR ']' '=' error ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
 
 EXPR :
   EXPR '+' EXPR { processRule(@$, "EXPR"); }
@@ -128,13 +144,14 @@ EXPR :
 | NOT EXPR { processRule(@$, "EXPR"); }
 | '(' EXPR ')' { processRule(@$, "EXPR"); }
 | NEW_EXPR { processRule(@$, "EXPR"); }
-| ID '[' EXPR ']' { processRule(@$, "EXPR"); }
-| ID { processRule(@$, "EXPR ID"); }
+| ID { processRule(@$, "EXPR"); }
 | THIS { processRule(@$, "EXPR"); }
 | CONSTANT { processRule(@$, "EXPR"); }
 | EXPR '[' EXPR ']' { processRule(@$, "INVOKE_EXPR"); }
+| EXPR '[' error ']' { processRule(@$, "INVOKE_EXPR"); }
 | EXPR '.' LENGTH { processRule(@$, "INVOKE_EXPR"); }
 | EXPR '.' ID '(' PARAMS ')' { processRule(@$, "INVOKE_EXPR"); }
+| EXPR '.' ID '(' error ')' { processRule(@$, "INVOKE_EXPR"); }
 
 CONSTANT : INT_VALUE | BOOL_VALUE { processRule(@$, "CONSTANT"); }
 
@@ -145,14 +162,15 @@ PARAMS : { processRule(@$, "PARAMS"); }
 | PARAMS ',' EXPR { processRule(@$, "PARAMS"); }
 
 NEW_EXPR : NEW INT '[' EXPR ']' { processRule(@$, "NEW_EXPR"); }
+| NEW INT '[' error ']' { processRule(@$, "NEW_EXPR"); }
 | NEW ID '(' ')' { processRule(@$, "NEW_EXPR"); }
+| NEW ID '(' error ')' { processRule(@$, "NEW_EXPR"); }
 
 %%
 
+extern void printError(Location location, const char *s);
 void yyerror(const char *s)
 {
-    fprintf(stderr, "line number %d: ", yylineno);
-    fprintf(stderr, "%s\n", s);
+    printError(Location(yylloc.first_line, yylloc.first_column, yylloc.last_line, yylloc.last_column), s);
 }
-
 extern int main(int argc, const char* argv[]);

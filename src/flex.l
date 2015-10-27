@@ -6,16 +6,14 @@
     #include "tokens.h"
     #include <string.h>
     void yyerror(const char*);
-    //extern char* yytext;
-    //extern Location yylloc;
     int yy_line = 1;
     int yy_column = 1;
     //Location currLocation(0,0,0,0);
     void updateLocation() {
         //currLocation.update(yy_line, yy_column);
         //yylloc.update(yy_line, yy_column);
-        yylloc.first_line = yylloc.last_line;
-        yylloc.first_column = yylloc.last_column;
+        yylloc.first_line = max(yylloc.last_line, 1);
+        yylloc.first_column = max(yylloc.last_column, 1);
         yylloc.last_line = yy_line;
         yylloc.last_column = yy_column;
     }
@@ -68,7 +66,6 @@
 "if"        { yy_column += strlen(yytext); updateLocation(); return IF; }
 "else"      { yy_column += strlen(yytext); updateLocation(); return ELSE; }
 "while"     { yy_column += strlen(yytext); updateLocation(); return WHILE; }
-"break"     { yy_column += strlen(yytext); updateLocation(); return BREAK; }
 "main"      { yy_column += strlen(yytext); updateLocation(); return MAIN; }
 "String[]"  { yy_column += strlen(yytext); updateLocation(); return MAIN_ARGS; }
 "&&"        { yy_column += strlen(yytext); updateLocation(); return AND; }
