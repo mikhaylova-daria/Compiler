@@ -27,3 +27,4 @@ bin/*
 *.exe
 *.out
 *.app
+./idea
