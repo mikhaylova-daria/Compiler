@@ -8,6 +8,7 @@
 #include "Visitor.h"
 
 class CPrinter : public IVisitor {
+public:
     virtual ~IVisitor() {}
 
     virtual void Visit(const CConstant* constant);
