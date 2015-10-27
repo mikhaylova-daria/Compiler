@@ -8,6 +8,8 @@
 #include "Visitor.h"
 
 class CPrinter : public IVisitor {
+    int countTab = 0;
+public:
     virtual ~IVisitor() {}
 
     virtual void Visit(const CConstant* constant);
