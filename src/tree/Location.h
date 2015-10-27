@@ -27,6 +27,7 @@ struct Location  {
     }
 };
 
+//IToken only keeps location; it's it only point
 class IToken {
 public:
     Location location;

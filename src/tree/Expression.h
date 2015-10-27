@@ -14,12 +14,14 @@ public:
     virtual void Accept(IVisitor* visitor) const = 0;
 };
 
+//Types of binary expression
 enum TBinaryExpression {
     BE_PLUS,
     BE_MINUS,
     BE_MULTIPLICATION,
     BE_LESS,
     BE_AND,
+    //squere brackets
     BE_SQ_BRACKETS
 };
 
