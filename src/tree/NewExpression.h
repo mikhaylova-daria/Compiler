@@ -9,6 +9,7 @@
 #include "Indentifier.h"
 #include "Expression.h"
 
+//"new" Identifier "(" ")"
 class CNewExpression : public IToken {
 public:
     CNewExpression(Location location, CIdentifier* id) : IToken(location), Id(id) {}
@@ -19,6 +20,7 @@ public:
     CIdentifier* Id;
 };
 
+//"new" "int" "[" Expression "]"
 class CIntArrayNewExpression : public IToken {
 public:
     CIntArrayNewExpression(Location location, IExpression* expression) : IToken(location), Expression(expression) {}
