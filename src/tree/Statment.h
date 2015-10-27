@@ -10,7 +10,7 @@
 
 class IStatement : public IToken {
 public:
-    IStatement(Location location1) : IToken(location) {}
+    IStatement(Location location) : IToken(location) {}
     virtual ~IStatement() {}
 
     virtual void Accept(IStatement* visit) const = 0;
