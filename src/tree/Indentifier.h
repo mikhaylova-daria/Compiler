@@ -7,10 +7,11 @@
 
 #include "Location.h"
 #include "Visitor.h"
+#include "Expression.h"
 
-class CIdentifier : public IToken {
+class CIdentifier : public IExpression {
 public:
-    CIdentifier(Location location, const char* id) : IToken(location), Id(id) {}
+    CIdentifier(Location location, const char* id) : IExpression(location), Id(id) {}
 
     virtual void Accept(IVisitor* visitor) { return visitor->Visit(this); }
 

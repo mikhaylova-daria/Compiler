@@ -69,14 +69,9 @@
 "main"      { yy_column += strlen(yytext); updateLocation(); return MAIN; }
 "String[]"  { yy_column += strlen(yytext); updateLocation(); return MAIN_ARGS; }
 "&&"        { yy_column += strlen(yytext); updateLocation(); return AND; }
-"||"        { yy_column += strlen(yytext); updateLocation(); return OR; }
 "!"         { yy_column += strlen(yytext); updateLocation(); return NOT; }
-"<="        { yy_column += strlen(yytext); updateLocation(); return LE; }
-">="        { yy_column += strlen(yytext); updateLocation(); return GE; }
 "=="        { yy_column += strlen(yytext); updateLocation(); return EQ; }
-"!="        { yy_column += strlen(yytext); updateLocation(); return NEQ; }
-"<"         { yy_column += strlen(yytext); updateLocation(); return LT; }
-">"         { yy_column += strlen(yytext); updateLocation(); return GT; }
+"<"         { yy_column += strlen(yytext); updateLocation(); return '<'; }
 "["         { yy_column += strlen(yytext); updateLocation(); return '['; }
 "]"         { yy_column += strlen(yytext); updateLocation(); return ']'; }
 

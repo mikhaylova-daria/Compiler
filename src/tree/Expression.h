@@ -22,7 +22,8 @@ enum TBinaryExpression {
     BE_MULTIPLICATION,
     BE_LESS,
     BE_AND,
-    BE_SQ_BRACKETS
+    BE_SQ_BRACKETS,
+    BE_EQUAL
 };
 
 class CBinaryExpression : public IExpression {
@@ -57,6 +58,15 @@ public:
 class CLengthExpression : public IExpression {
     CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CLengthExpression() { delete Expression; }
+
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+
+    IExpression* Expression;
+};
+
+class CBracketExpression : public IExpression {
+    CBracketExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
+    virtual ~CBracketExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
 

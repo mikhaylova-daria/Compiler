@@ -98,62 +98,177 @@ INT_ARRAY: INT '[' ']' { processRule(@$, "INT_ARRAY"); }
 METHOD_BODY : VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';' { processRule(@$, "METHOD_BODY"); }
 
 VAR_AND_STATEMENT_DECLARATIONS : VAR_DECLARATION VAR_AND_STATEMENT_DECLARATIONS { processRule(@$, "VAR_AND_STATEMENT_DECLARATIONS"); }
-| STATEMENT_DECLARATION { processRule(@$, "VAR_AND_STATEMENT_DECLARATIONS"); }
+| STATEMENT_DECLARATION {
+    processRule(@$, "VAR_AND_STATEMENT_DECLARATIONS");
+    $$ = $1;
+}
 
-STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION { processRule(@$, "STATEMENT_DECLARATION"); }
-| { processRule(@$, "STATEMENT_DECLARATION"); }
+STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION {
+    processRule(@$, "STATEMENT_DECLARATION");
+    $$ = new CStatementList(getLocation(), $1, $2)
+}
+| {
+    processRule(@$, "STATEMENT_DECLARATION");
+    $$ = nullptr;
+}
 
-STATEMENT : '{' STATEMENT_DECLARATION '}' { processRule(@$, "STATEMENT"); }
-| IF_STATEMENT { processRule(@$, "STATEMENT"); }
-| WHILE_STATEMENT { processRule(@$, "STATEMENT"); }
-| PRINT_STATEMENT { processRule(@$, "STATEMENT"); }
-| ASSIGNMENT { processRule(@$, "STATEMENT"); }
-| ARRAY_ASSIGNMENT { processRule(@$, "STATEMENT"); }
+STATEMENT : '{' STATEMENT_DECLARATION '}' {
+    processRule(@$, "STATEMENT");
+    $$ = new CBracketStatement(getLocation(), $2);
+}
+| IF_STATEMENT {
+    processRule(@$, "STATEMENT");
+    $$ = $1;
+}
+| WHILE_STATEMENT {
+    processRule(@$, "STATEMENT");
+    $$ = $1;
+}
+| PRINT_STATEMENT {
+    processRule(@$, "STATEMENT");
+    $$ = $1;
+}
+| ASSIGNMENT {
+    processRule(@$, "STATEMENT");
+    $$ = $1;
+}
+| ARRAY_ASSIGNMENT {
+    processRule(@$, "STATEMENT");
+    $$ = $1;
+}
 
-IF_STATEMENT : IF '(' EXPR ')' STATEMENT ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
-| IF '(' error ')' STATEMENT ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
-| IF '(' EXPR ')' error ELSE STATEMENT { processRule(@$, "IF_STATEMENT"); }
-| IF '(' EXPR ')' STATEMENT ELSE error { processRule(@$, "IF_STATEMENT"); }
+IF_STATEMENT : IF '(' EXPR ')' STATEMENT ELSE STATEMENT {
+    processRule(@$, "IF_STATEMENT");
+    $$ = new CIfStatement(getLocation(), $3, $5, $7);
+}
+| IF '(' error ')' STATEMENT ELSE STATEMENT {
+    processRule(@$, "IF_STATEMENT");
+    delete $5;
+    delete $7;
+    $$ = nullptr;
+}
+| IF '(' EXPR ')' error ELSE STATEMENT {
+    processRule(@$, "IF_STATEMENT");
+    delete $3;
+    delete $7;
+    $$ = nullptr;
+}
+| IF '(' EXPR ')' STATEMENT ELSE error {
+    processRule(@$, "IF_STATEMENT");
+    delete $3;
+    delete $5;
+    $$ = nullptr;
+}
 
-WHILE_STATEMENT : WHILE '(' EXPR ')' STATEMENT { processRule(@$, "WHILE_STATEMENT"); }
-| WHILE '(' error ')' STATEMENT { processRule(@$, "WHILE_STATEMENT"); }
+WHILE_STATEMENT : WHILE '(' EXPR ')' STATEMENT {
+    processRule(@$, "WHILE_STATEMENT");
+    $$ = CWhileStatement(getLocation(), $3, $5);
+}
+| WHILE '(' error ')' STATEMENT {
+    processRule(@$, "WHILE_STATEMENT");
+    $$ = nullptr;
+}
 
-PRINT_STATEMENT : PRINT '(' EXPR ')' ';' { processRule(@$, "PRINT_STATEMENT"); }
-| PRINT '(' error ')' ';' { processRule(@$, "PRINT_STATEMENT"); }
+PRINT_STATEMENT : PRINT '(' EXPR ')' ';' {
+    processRule(@$, "PRINT_STATEMENT");
+    $$ = CPrintStatement(getLocation(), $3);
+}
+| PRINT '(' error ')' ';' {
+    processRule(@$, "PRINT_STATEMENT");
+    $$ = nullptr;
+}
 
-ASSIGNMENT : ID '=' EXPR ';' { processRule(@$, "ASSIGNMENT"); }
-| ID '=' error ';' { processRule(@$, "ASSIGNMENT"); }
+ASSIGNMENT : ID '=' EXPR ';' {
+    processRule(@$, "ASSIGNMENT");
+    $$ = new CAssignmentExpression(getLocation(), $3, $1);
+}
+| ID '=' error ';' {
+    processRule(@$, "ASSIGNMENT");
+    delete $1;
+    $$ = nullptr;
+}
 
-ARRAY_ASSIGNMENT : ID '[' EXPR ']' '=' EXPR ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
-| ID '[' error ']' '=' EXPR ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
-| ID '[' EXPR ']' '=' error ';' { processRule(@$, "ARRAY_ASSIGNMENT"); }
+ARRAY_ASSIGNMENT : ID '[' EXPR ']' '=' EXPR ';' {
+    processRule(@$, "ARRAY_ASSIGNMENT");
+    $$ = CIntArrayAssignmentExpression(getLocation(), $3, $6, $1);
+}
+| ID '[' error ']' '=' EXPR ';' {
+    processRule(@$, "ARRAY_ASSIGNMENT");
+    delete $1;
+    delete $6;
+    $$ = nullptr;
+}
+| ID '[' EXPR ']' '=' error ';' {
+    processRule(@$, "ARRAY_ASSIGNMENT");
+    delete $1;
+    delete $3;
+    $$ = nullptr;
+}
 
 EXPR :
-  EXPR '+' EXPR { processRule(@$, "EXPR"); }
-| EXPR '-' EXPR { processRule(@$, "EXPR"); }
-| EXPR '/' EXPR { processRule(@$, "EXPR"); }
-| EXPR '%' EXPR { processRule(@$, "EXPR"); }
-| EXPR '*' EXPR { processRule(@$, "EXPR"); }
-| EXPR AND EXPR { processRule(@$, "EXPR"); }
-| EXPR OR EXPR { processRule(@$, "EXPR"); }
-| EXPR LT EXPR { processRule(@$, "EXPR"); }
-| EXPR LE EXPR { processRule(@$, "EXPR"); }
-| EXPR GT EXPR { processRule(@$, "EXPR"); }
-| EXPR GE EXPR { processRule(@$, "EXPR"); }
-| EXPR NEQ EXPR { processRule(@$, "EXPR"); }
-| EXPR EQ EXPR { processRule(@$, "EXPR"); }
-| NOT EXPR { processRule(@$, "EXPR"); }
-| '(' EXPR ')' { processRule(@$, "EXPR"); }
-| NEW_EXPR { processRule(@$, "EXPR"); }
-| ID { processRule(@$, "EXPR"); }
-| THIS { processRule(@$, "EXPR"); }
-| CONSTANT { processRule(@$, "EXPR"); }
-| EXPR '[' EXPR ']' { processRule(@$, "INVOKE_EXPR"); }
-| EXPR '[' error ']' { processRule(@$, "INVOKE_EXPR"); }
-| EXPR '.' LENGTH { processRule(@$, "INVOKE_EXPR"); }
+  EXPR '+' EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_PLUS);
+}
+| EXPR '-' EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_MINUS);
+}
+| EXPR '*' EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_MULTIPLICATION);
+}
+| EXPR AND EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_AND);
+}
+| EXPR '<' EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_LESS);
+}
+| EXPR EQ EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_EQ);
+}
+| NOT EXPR {
+    processRule(@$, "EXPR");
+    $$ = new CNotExpression(getLocation(), $2);
+}
+| '(' EXPR ')' {
+    processRule(@$, "EXPR");
+    $$ = new CLengthExpression(getLocation(), $2);
+}
+| NEW_EXPR {
+    processRule(@$, "EXPR");
+    $$ = $1;
+}
+| ID {
+    processRule(@$, "EXPR");
+    $$ = new CIdentifier(getLocation(), yytext);
+}
+| THIS {
+    processRule(@$, "EXPR");
+    $$ = new CThisIdentifier(getLocation());
+}
+| CONSTANT {
+    processRule(@$, "EXPR");
+    $$ = $1;
+}
+| EXPR '[' EXPR ']' {
+    processRule(@$, "INVOKE_EXPR");
+    $$ = new CBinaryExpression(getLocation(), $1, $3, BE_SQ_BRACKETS);
+}
+| EXPR '[' error ']' {
+    processRule(@$, "INVOKE_EXPR");
+    $$ = 0;
+}
+| EXPR '.' LENGTH {
+    processRule(@$, "INVOKE_EXPR");
+    $$ = new CLengthExpression(getLocation(), $1);
+}
 | EXPR '.' ID '(' PARAMS ')' {
     processRule(@$, "INVOKE_EXPR");
-
+    $$ = new CInvocation(getLocation(), $1, $3, $5);
 }
 | EXPR '.' ID '(' error ')' {
     processRule(@$, "INVOKE_EXPR");

@@ -10,13 +10,24 @@
 
 class IStatement : public IToken {
 public:
-    IStatement(Location location1) : IToken(location) {}
+    IStatement(Location location) : IToken(location) {}
     virtual ~IStatement() {}
 
     virtual void Accept(IStatement* visit) const = 0;
 };
 
-#endif //MINIJAVACOMPILER_STATMENT_H
+class CBracketStatement : public IStatement {
+    CBracketStatement(Location location, IStatement* statement) :
+    IStatement(location),
+    Statement(statement) {}
+    virtual ~CStatementList() {
+        delete Statement;
+    }
+
+    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+
+    IStatement* Statement;
+};
 
 class CStatementList : public IStatement {
 public:
@@ -84,8 +95,8 @@ class CPrintStatement : public IStatement {
     IExpression* Expression;
 };
 
-class CAssignmentExpression : public IStatement {
-    CAssignmentExpression(Location location, IExpression* expression, CIdentifier* identifier) :
+class CAssignmentStatement : public IStatement {
+    CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
             Identifier(identifier) {}
@@ -100,8 +111,8 @@ class CAssignmentExpression : public IStatement {
     CIdentifier* Identifier;
 };
 
-class CIntArrayAssignmentExpression : public IStatement {
-    CIntArrayAssignmentExpression(Location location, IExpression* expression,
+class CIntArrayAssignmentStatement : public IStatement {
+    CIntArrayAssignmentStatement(Location location, IExpression* expression,
                                   IExpression* index, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
@@ -119,3 +130,6 @@ class CIntArrayAssignmentExpression : public IStatement {
     IExpression* Index;
     CIdentifier* Identifier;
 };
+
+
+#endif //MINIJAVACOMPILER_STATMENT_H

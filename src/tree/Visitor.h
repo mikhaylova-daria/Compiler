@@ -20,10 +20,11 @@ class CStatementList;
 class CIfStatement;
 class CWhileStatement;
 class CPrintStatement;
-class CAssignmentExpression;
-class CIntArrayAssignmentExpression;
+class CAssignmentStatement;
+class CIntArrayAssignmentStatement;
 class CVarDeclaration;
 class CVarDeclarationList;
+class CBracketExpression;
 
 class IVisitor {
 public:
@@ -44,10 +45,11 @@ public:
     virtual void Visit(const CIfStatement* ifStatement) = 0;
     virtual void Visit(const CWhileStatement* whileStatement) = 0;
     virtual void Visit(const CPrintStatement* printStatement) = 0;
-    virtual void Visit(const CAssignmentExpression* assignmentExpression) = 0;
-    virtual void Visit(const CIntArrayAssignmentExpression* arrayAssignmentExpression) = 0;
+    virtual void Visit(const CAssignmentStatement* assignmentStatement) = 0;
+    virtual void Visit(const CIntArrayAssignmentStatement* intArrayAssignmentStatement) = 0;
     virtual void Visit(const CVarDeclaration* varDeclaration) = 0;
     virtual void Visit(const CVarDeclarationList* varDeclarationList) = 0;
+    virtual void Visit(const CBracketExpression* bracketExpression) = 0;
 };
 
 #endif //MINIJAVACOMPILER_VISITOR_H
