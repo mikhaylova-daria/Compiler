@@ -9,7 +9,7 @@
 #define MINIJAVACOMPILER_STATMENT_H
 
 //It is the Interface all statements should implement
-//Accoding to rule:
+//According to rule:
 /* TODO: Statement	::=	"{" ( Statement )* "}"
 |	"if" "(" Expression ")" Statement "else" Statement
 |	"while" "(" Expression ")" Statement
