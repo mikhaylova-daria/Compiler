@@ -10,17 +10,17 @@
 
 class IStatement : public IToken {
 public:
-    IStatement(Location location1) : IToken(location) {}
+    IStatement(Location location) : IToken(location) {}
     virtual ~IStatement() {}
 
     virtual void Accept(IStatement* visit) const = 0;
 };
 
 #endif //MINIJAVACOMPILER_STATMENT_H
-
+//( Statement )* by rule STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION
 class CStatementList : public IStatement {
 public:
-    CStatementList(Location location, IStatement* statement, CStatementList* next = 0) :
+    CStatementList(Location location, IStatement* statement, CStatementList* next = nullptr) :
             IStatement(location),
             Statement(statement),
             Next(next) {}
@@ -35,6 +35,9 @@ public:
     CStatementList* Next;
 };
 
+//"if" "(" Expression ")" Statement "else" Statement
+//First Statement is TrueStatement
+//Second Statement is FalseStatement
 class CIfStatement : public IStatement {
     CIfStatement(Location location, IExpression* expression, IStatement* trueStatement, IStatement* falseStatement) :
             IStatement(location),
@@ -54,6 +57,7 @@ class CIfStatement : public IStatement {
     IStatement* FalseStatement;
 };
 
+//"while" "(" Expression ")" Statement
 class CWhileStatement : public IStatement {
     CWhileStatement(Location location, IExpression* expression, IStatement* statement) :
             IStatement(location),
@@ -71,6 +75,7 @@ class CWhileStatement : public IStatement {
 };
 
 
+//	"System.out.println" "(" Expression ")" ";"
 class CPrintStatement : public IStatement {
     CPrintStatement(Location location, IExpression* expression) :
             IStatement(location),
@@ -84,6 +89,7 @@ class CPrintStatement : public IStatement {
     IExpression* Expression;
 };
 
+// Identifier "=" Expression ";
 class CAssignmentExpression : public IStatement {
     CAssignmentExpression(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
@@ -100,6 +106,9 @@ class CAssignmentExpression : public IStatement {
     CIdentifier* Identifier;
 };
 
+//Identifier "[" Expression "]" "=" Expression ";"
+// First Expression is Index
+// Second Expression is Expression
 class CIntArrayAssignmentExpression : public IStatement {
     CIntArrayAssignmentExpression(Location location, IExpression* expression,
                                   IExpression* index, CIdentifier* identifier) :
