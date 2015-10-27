@@ -4,24 +4,28 @@
 
 #ifndef MINIJAVACOMPILER_VISITOR_H
 #define MINIJAVACOMPILER_VISITOR_H
-
+//Help classes
 class CConstant;
+class CIdentifier;
+class CInvocation;
+//Types
 class CBasicType;
 class CClassType;
+//Expressions
 class CBinaryExpression;
 class CNotExpression;
 class CLengthExpression;
 class CExpressionList;
-class CIdentifier;
-class CInvocation;
 class CNewExpression;
 class CIntArrayNewExpression;
+class CAssignmentExpression;
+class CIntArrayAssignmentExpression;
+//Statements
 class CStatementList;
 class CIfStatement;
 class CWhileStatement;
 class CPrintStatement;
-class CAssignmentExpression;
-class CIntArrayAssignmentExpression;
+//Declarations
 class CVarDeclaration;
 class CVarDeclarationList;
 
