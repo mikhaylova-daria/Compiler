@@ -12,9 +12,16 @@ class CIdentifier : public IToken {
 public:
     CIdentifier(Location location, const char* id) : IToken(location), Id(id) {}
 
-    void Accept(IVisitor* visitor) { return visitor->Visit(this); }
+    virtual void Accept(IVisitor* visitor) { return visitor->Visit(this); }
 
     std::string Id;
+};
+
+class CThisIdentifier : public CIdentifier {
+public:
+    CThisIdentifier(Location location) : CIdentifier(location, "this") {}
+
+    virtual void Accept(IVisitor* visitor) { return visitor->Visit(this); }
 };
 
 #endif //MINIJAVACOMPILER_INDENTIFIER_H

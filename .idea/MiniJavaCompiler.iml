@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Declaration.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/JavaHelp.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Utils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bison.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/flex.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tokens_processing.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tokens_processing.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Assignment.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Constant.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Declaration.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Expression.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Indentifier.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Invocation.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Location.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/MinijavaTree.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/NewExpression.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Statment.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Type.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/Visitor.h" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/bin" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include/cilk" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include/sanitizer" />
+          <root url="file:///usr/local/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include/cilk" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.9/include/sanitizer" />
+          <root url="file:///usr/local/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
