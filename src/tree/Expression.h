@@ -11,6 +11,8 @@
 class IExpression : public IToken {
 public:
     IExpression(Location location) : IToken(location) {}
+    virtual ~IExpression() {}
+
     virtual void Accept(IVisitor* visitor) const = 0;
 };
 
@@ -38,7 +40,7 @@ public:
     const IExpression* RightExpr;
     TBinaryExpression BinaryExpressionType;
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
-    ~CBinaryExpression() {
+    virtual ~CBinaryExpression() {
         delete LeftExpr;
         delete RightExpr;
     }
@@ -47,7 +49,7 @@ public:
 class CNotExpression : public IExpression {
 public:
     CNotExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
-    ~CNotExpression() { delete Expression; }
+    virtual ~CNotExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
 
@@ -56,7 +58,7 @@ public:
 
 class CLengthExpression : public IExpression {
     CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
-    ~CLengthExpression() { delete Expression; }
+    virtual ~CLengthExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
 

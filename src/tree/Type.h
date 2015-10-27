@@ -20,6 +20,8 @@ enum TType {
 class IType : public IToken {
 public:
     IType(Location location, TType type) : IToken(location), Type(type) {}
+    virtual ~IType() {}
+
     TType Type;
     virtual void Accept(IVisitor* visit) const = 0;
 };
@@ -29,6 +31,7 @@ public:
     CBasicType(Location location, TType type) : IType(location, type) {
         assert(type == T_INT || type == T_INT_ARRAY || type == T_BOOL);
     }
+    virtual ~CBasicType() {}
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
 };
 
@@ -37,6 +40,7 @@ public:
     CClassType(Location location, const char* className) :
             IType(location, T_CLASS),
             ClassName(className) {}
+    virtual ~CClassType() {}
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
     const std::string ClassName;
 };

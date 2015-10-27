@@ -16,7 +16,7 @@ public:
             IToken(location),
             Expression(expression),
             ExpressionList(expressionList) {}
-    ~CExpressionList() {
+    virtual ~CExpressionList() {
         delete Expression;
         delete ExpressionList;
     }
@@ -34,7 +34,7 @@ public:
         Expression(expression),
         Identifier(identifier),
         ExpressionList(expressionList) {}
-    ~CInvocation() {
+    virtual ~CInvocation() {
         delete Expression;
         delete Identifier;
         delete Expression;

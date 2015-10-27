@@ -18,6 +18,7 @@ class CConstant : public IExpression {
 public:
     CConstant(const Location location, const TConstantType type, const char* value) :
             IExpression(location), Type(type), Value(value) { }
+    virtual ~CConstant() {}
 
     void Accept(IVisitor* visitor) const { visitor->Visit(this); }
     const TConstantType Type;

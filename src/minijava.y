@@ -2,6 +2,7 @@
 %{
 
     #include "JavaHelp.h"
+    #include "MinijavaTree.h"
     //#define YYLTYPE Location
 
     #include "Declaration.h"
@@ -150,21 +151,56 @@ EXPR :
 | EXPR '[' EXPR ']' { processRule(@$, "INVOKE_EXPR"); }
 | EXPR '[' error ']' { processRule(@$, "INVOKE_EXPR"); }
 | EXPR '.' LENGTH { processRule(@$, "INVOKE_EXPR"); }
-| EXPR '.' ID '(' PARAMS ')' { processRule(@$, "INVOKE_EXPR"); }
-| EXPR '.' ID '(' error ')' { processRule(@$, "INVOKE_EXPR"); }
+| EXPR '.' ID '(' PARAMS ')' {
+    processRule(@$, "INVOKE_EXPR");
 
-CONSTANT : INT_VALUE | BOOL_VALUE { processRule(@$, "CONSTANT"); }
+}
+| EXPR '.' ID '(' error ')' {
+    processRule(@$, "INVOKE_EXPR");
+    $$ = 0;
+}
+
+CONSTANT : INT_VALUE {
+    processRule(@$, "CONSTANT");
+    $$ = new CConstant(getLocation(), CT_INT, yytext);
+}
+| BOOL_VALUE {
+    processRule(@$, "CONSTANT");
+    $$ = new CConstant(getLocation(), CT_BOOL, yytext);
+}
 
 
 
-PARAMS : { processRule(@$, "PARAMS"); }
-| EXPR { processRule(@$, "PARAMS"); }
-| PARAMS ',' EXPR { processRule(@$, "PARAMS"); }
+PARAMS : {
+    processRule(@$, "PARAMS");
+    $$ = 0;
+}
+| EXPR {
+    processRule(@$, "PARAMS");
+    $$ = CExpressionList(getLocation(), $1, 0);
+}
+| PARAMS ',' EXPR {
+    processRule(@$, "PARAMS");
+    $$ = CExpressionList(getLocation(), $3, $1);
+}
 
-NEW_EXPR : NEW INT '[' EXPR ']' { processRule(@$, "NEW_EXPR"); }
-| NEW INT '[' error ']' { processRule(@$, "NEW_EXPR"); }
-| NEW ID '(' ')' { processRule(@$, "NEW_EXPR"); }
-| NEW ID '(' error ')' { processRule(@$, "NEW_EXPR"); }
+NEW_EXPR :
+NEW INT '[' EXPR ']' {
+    processRule(@$, "NEW_EXPR");
+    $$ = new CIntArrayNewExpression(getLocation(), $4);
+}
+| NEW INT '[' error ']' {
+    processRule(@$, "NEW_EXPR");
+    $$ = 0;
+}
+| NEW ID '(' ')' {
+    processRule(@$, "NEW_EXPR");
+    $$ = new CNewExpression(getLocation(), new CIdentifier(yytext));
+}
+| NEW ID '(' error ')' {
+    processRule(@$, "NEW_EXPR");
+    $$ = 0;
+}
 
 %%
 

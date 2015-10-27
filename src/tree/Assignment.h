@@ -1,0 +1,10 @@
+//
+// Created by nicolai on 27.10.15.
+//
+
+#ifndef MINIJAVACOMPILER_ASSIGNMENT_H
+#define MINIJAVACOMPILER_ASSIGNMENT_H
+
+
+
+#endif //MINIJAVACOMPILER_ASSIGNMENT_H
