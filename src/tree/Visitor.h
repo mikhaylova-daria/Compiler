@@ -27,7 +27,7 @@ class CVarDeclarationList;
 
 class IVisitor {
 public:
-    virtual ~IVisitor() = 0 {}
+    virtual ~IVisitor() {};
 
     virtual void Visit(const CConstant* constant) = 0;
     virtual void Visit(const CBasicType* basicType) = 0;
@@ -51,3 +51,4 @@ public:
 };
 
 #endif //MINIJAVACOMPILER_VISITOR_H
+

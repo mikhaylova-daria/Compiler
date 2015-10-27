@@ -10,7 +10,7 @@
 class CPrinter : public IVisitor {
     int countTab = 0;
 public:
-    virtual ~IVisitor() {}
+    virtual ~CPrinter() {}
 
     virtual void Visit(const CConstant* constant);
     virtual void Visit(const CBasicType* basicType);
