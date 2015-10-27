@@ -8,6 +8,15 @@
 #ifndef MINIJAVACOMPILER_STATMENT_H
 #define MINIJAVACOMPILER_STATMENT_H
 
+//It is the Interface all statements should implement
+//Accoding to rule:
+/* TODO: Statement	::=	"{" ( Statement )* "}"
+|	"if" "(" Expression ")" Statement "else" Statement
+|	"while" "(" Expression ")" Statement
+|	"System.out.println" "(" Expression ")" ";"
+|	Identifier "=" Expression ";"
+|	Identifier "[" Expression "]" "=" Expression ";" */
+
 class IStatement : public IToken {
 public:
     IStatement(Location location) : IToken(location) {}
