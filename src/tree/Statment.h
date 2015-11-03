@@ -169,8 +169,6 @@ public:
     CIdentifier* Identifier;
 };
 
-};
-
 //Identifier "[" Expression "]" "=" Expression ";"
 // First Expression is Index
 // Second Expression is Expression

@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "CPrinter.h"
-#include "MinijavaTree.h"
 
 
 void print( const std::string& what ) {

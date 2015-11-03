@@ -24,6 +24,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/tree/TreeBuildHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Visitor.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.h" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
     </content>
     <orderEntry type="inheritedJdk" />
