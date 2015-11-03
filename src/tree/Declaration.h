@@ -13,7 +13,7 @@
 class CVarDeclaration : public IToken {
     std::string name = "CVarDeclaration";
 public:
-    const std::string& GetName() const const {
+    const std::string& GetName() const {
         return name;
     }
 

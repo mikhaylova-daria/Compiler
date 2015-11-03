@@ -5,7 +5,7 @@
 #ifndef MINIJAVACOMPILER_CPRINTER_H
 #define MINIJAVACOMPILER_CPRINTER_H
 
-#include "Visitor.h"
+#include "../tree/MinijavaTree.h"
 
 class CPrinter : public IVisitor {
     int countTab = 0;
