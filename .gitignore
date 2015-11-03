@@ -16,6 +16,10 @@
 # Fortran module files
 *.mod
 
+# Idea files
+*.idea
+*.xml
+
 # Compiled Static libraries
 *.lai
 *.la
@@ -27,3 +31,4 @@ bin/*
 *.exe
 *.out
 *.app
+./idea

@@ -8,6 +8,8 @@
 #include "Expression.h"
 #include "Indentifier.h"
 
+
+// Arguments of function call
 class CExpressionList : public IToken {
 public:
     CExpressionList(Location location, IExpression* expression, CExpressionList* expressionList) :
@@ -24,6 +26,7 @@ public:
     const CExpressionList* ExpressionList;
 };
 
+//It's a dot. Rule  Expression "." Identifier "(" ( Expression ( "," Expression )* )?
 class CInvocation : public IExpression {
 public:
     CInvocation(Location location, IExpression* expression, CIdentifier* identifier, CExpressionList* expressionList) :

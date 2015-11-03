@@ -8,6 +8,15 @@
 #ifndef MINIJAVACOMPILER_STATMENT_H
 #define MINIJAVACOMPILER_STATMENT_H
 
+//It is the Interface all statements should implement
+//According to rule:
+/* TODO: Statement	::=	"{" ( Statement )* "}"
+|	"if" "(" Expression ")" Statement "else" Statement
+|	"while" "(" Expression ")" Statement
+|	"System.out.println" "(" Expression ")" ";"
+|	Identifier "=" Expression ";"
+|	Identifier "[" Expression "]" "=" Expression ";" */
+
 class IStatement : public IToken {
 public:
     IStatement(Location location) : IToken(location) {}
@@ -30,9 +39,10 @@ public:
     IStatement* Statement;
 };
 
+//( Statement )* by rule STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION
 class CStatementList : public IStatement {
 public:
-    CStatementList(Location location, IStatement* statement, CStatementList* next = 0) :
+    CStatementList(Location location, IStatement* statement, CStatementList* next = nullptr) :
             IStatement(location),
             Statement(statement),
             Next(next) {}
@@ -47,6 +57,9 @@ public:
     CStatementList* Next;
 };
 
+//"if" "(" Expression ")" Statement "else" Statement
+//First Statement is TrueStatement
+//Second Statement is FalseStatement
 class CIfStatement : public IStatement {
 public:
     CIfStatement(Location location, IExpression* expression, IStatement* trueStatement, IStatement* falseStatement) :
@@ -67,6 +80,7 @@ public:
     IStatement* FalseStatement;
 };
 
+//"while" "(" Expression ")" Statement
 class CWhileStatement : public IStatement {
 public:
     CWhileStatement(Location location, IExpression* expression, IStatement* statement) :
@@ -85,6 +99,7 @@ public:
 };
 
 
+//	"System.out.println" "(" Expression ")" ";"
 class CPrintStatement : public IStatement {
 public:
     CPrintStatement(Location location, IExpression* expression) :
@@ -102,6 +117,9 @@ public:
 class CAssignmentStatement : public IStatement {
 public:
     CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
+// Identifier "=" Expression ";
+class CAssignmentExpression : public IStatement {
+    CAssignmentExpression(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
             Identifier(identifier) {}
@@ -115,7 +133,10 @@ public:
     IExpression* Expression;
     CIdentifier* Identifier;
 };
-
+    
+//Identifier "[" Expression "]" "=" Expression ";"
+// First Expression is Index
+// Second Expression is Expression
 class CIntArrayAssignmentStatement : public IStatement {
 public:
     CIntArrayAssignmentStatement(Location location, IExpression* expression,

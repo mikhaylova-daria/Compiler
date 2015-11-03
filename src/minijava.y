@@ -430,7 +430,6 @@ CONSTANT : INT_VALUE {
 }
 
 
-
 PARAMS : {
     processRule(@$, "PARAMS");
     $$ = 0;

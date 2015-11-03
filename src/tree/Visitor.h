@@ -4,10 +4,14 @@
 
 #ifndef MINIJAVACOMPILER_VISITOR_H
 #define MINIJAVACOMPILER_VISITOR_H
-
+//Help classes
 class CConstant;
+class CIdentifier;
+class CInvocation;
+//Types
 class CBasicType;
 class CClassType;
+//Expressions
 class CBinaryExpression;
 class CNotExpression;
 class CLengthExpression;
@@ -73,3 +77,4 @@ public:
 };
 
 #endif //MINIJAVACOMPILER_VISITOR_H
+
