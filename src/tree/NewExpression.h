@@ -11,6 +11,12 @@
 
 //"new" Identifier "(" ")"
 class CNewExpression : public IExpression {
+    std::string name = "CNewExpression";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CNewExpression(Location location, CIdentifier* id) : IExpression(location), Id(id) {}
     virtual ~CNewExpression() { delete Id; }
@@ -22,6 +28,12 @@ public:
 
 //"new" "int" "[" Expression "]"
 class CIntArrayNewExpression : public IExpression {
+    std::string name = "CIntArrayNewExpression";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CIntArrayNewExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CIntArrayNewExpression() { delete Expression; }

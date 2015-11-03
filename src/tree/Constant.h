@@ -15,7 +15,12 @@ enum TConstantType {
 };
 
 class CConstant : public IExpression {
+    std::string name = "CConstant";
 public:
+    const std::string& GetName() const {
+        return name;
+    }
+
     CConstant(const Location location, const TConstantType type, const char* value) :
             IExpression(location), Type(type), Value(value) { }
     virtual ~CConstant() {}

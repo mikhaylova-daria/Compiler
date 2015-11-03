@@ -39,6 +39,12 @@ public:
 |	"int" */
 
 class CBasicType : public IType {
+    std::string name = "CBasicType";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CBasicType(Location location, TType type) : IType(location, type) {
         assert(type == T_INT || type == T_INT_ARRAY || type == T_BOOL);
@@ -50,6 +56,13 @@ public:
 //Class type
 /* Type ::= Identifier */
 class CClassType : public IType {
+    std::string name = "CClassType";
+
+public:
+    const std::string& GetName() const  {
+	    return name;
+    }
+
 public:
     CClassType(Location location, CIdentifier* className) :
             IType(location, T_CLASS),

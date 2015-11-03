@@ -28,6 +28,12 @@ enum TBinaryExpression {
 };
 
 class CBinaryExpression : public IExpression {
+    std::string name = "CBinaryExpression";
+
+public:
+    const std::string& GetName() const {
+        return name;
+    }
 public:
     CBinaryExpression(Location location, const IExpression* leftExpr,
                       const IExpression* rightExpr, TBinaryExpression type) :
@@ -47,6 +53,12 @@ public:
 };
 
 class CNotExpression : public IExpression {
+    std::string name = "CNotExpression";
+
+public:
+    const std::string& GetName() const{
+        return name;
+    }
 public:
     CNotExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CNotExpression() { delete Expression; }
@@ -57,6 +69,12 @@ public:
 };
 
 class CLengthExpression : public IExpression {
+    std::string name = "CLengthExpression";
+
+public:
+    const std::string& GetName() const{
+	    return name;
+    }
 public:
     CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CLengthExpression() { delete Expression; }
@@ -67,6 +85,12 @@ public:
 };
 
 class CBracketExpression : public IExpression {
+    std::string name = "CBracketExpression";
+
+public:
+    const std::string& GetName() const{
+	    return name;
+    }
     CBracketExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CBracketExpression() { delete Expression; }
 

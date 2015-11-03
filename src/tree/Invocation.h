@@ -11,6 +11,11 @@
 
 // Arguments of function call
 class CExpressionList : public IToken {
+    std::string name = "CExpressionList";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CExpressionList(Location location, IExpression* expression, CExpressionList* expressionList) :
             IToken(location),
@@ -28,6 +33,12 @@ public:
 
 //It's a dot. Rule  Expression "." Identifier "(" ( Expression ( "," Expression )* )?
 class CInvocation : public IExpression {
+    std::string name = "CInvocation";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CInvocation(Location location, IExpression* expression, CIdentifier* identifier, CExpressionList* expressionList) :
         IExpression(location),

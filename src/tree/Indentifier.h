@@ -10,6 +10,12 @@
 #include "Expression.h"
 
 class CIdentifier : public IExpression {
+    std::string name = "CIdentifier";
+
+public:
+    const std::string& GetName() const{
+	    return name;
+    }
 public:
     CIdentifier(Location location, const char* id) : IExpression(location), Id(id) {}
 
@@ -19,6 +25,12 @@ public:
 };
 
 class CThisIdentifier : public CIdentifier {
+    std::string name = "CThisIdentifier";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CThisIdentifier(Location location) : CIdentifier(location, "this") {}
 
