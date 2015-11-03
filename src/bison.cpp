@@ -530,8 +530,8 @@ static const yytype_uint16 yyrline[] =
      280,   285,   289,   295,   301,   308,   312,   317,   321,   326,
      330,   336,   340,   346,   354,   358,   362,   366,   370,   374,
      378,   382,   386,   390,   394,   398,   402,   406,   410,   414,
-     418,   423,   427,   434,   438,   442,   448,   452,   456,   460,
-     465
+     418,   423,   427,   433,   437,   441,   447,   451,   455,   459,
+     464
 };
 #endif
 
@@ -2234,7 +2234,7 @@ yyreduce:
     break;
 
   case 73:
-#line 434 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 433 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = 0;
@@ -2243,7 +2243,7 @@ yyreduce:
     break;
 
   case 74:
-#line 438 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 437 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = new CExpressionList(getLocation(), (yyvsp[0].expression), 0);
@@ -2252,7 +2252,7 @@ yyreduce:
     break;
 
   case 75:
-#line 442 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 441 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = new CExpressionList(getLocation(), (yyvsp[0].expression), (yyvsp[-2].expressionList));
@@ -2261,7 +2261,7 @@ yyreduce:
     break;
 
   case 76:
-#line 448 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 447 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = new CIntArrayNewExpression(getLocation(), (yyvsp[-1].expression));
@@ -2270,7 +2270,7 @@ yyreduce:
     break;
 
   case 77:
-#line 452 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 451 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = 0;
@@ -2279,7 +2279,7 @@ yyreduce:
     break;
 
   case 78:
-#line 456 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 455 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = new CNewExpression(getLocation(), (yyvsp[-2].identifier));
@@ -2288,7 +2288,7 @@ yyreduce:
     break;
 
   case 79:
-#line 460 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 459 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = 0;
@@ -2297,7 +2297,7 @@ yyreduce:
     break;
 
   case 80:
-#line 465 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 464 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.identifier) = new CIdentifier(getLocation(), yytext);
@@ -2541,7 +2541,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 470 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
+#line 469 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
 
 
 extern void printError(Location location, const char *s);

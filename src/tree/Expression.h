@@ -23,6 +23,7 @@ enum TBinaryExpression {
     BE_MULTIPLICATION,
     BE_LESS,
     BE_AND,
+    BE_EQUAL,
     //squere brackets
     BE_SQ_BRACKETS
 };

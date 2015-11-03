@@ -114,12 +114,10 @@ public:
     IExpression* Expression;
 };
 
+// Identifier "=" Expression ";
 class CAssignmentStatement : public IStatement {
 public:
     CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
-// Identifier "=" Expression ";
-class CAssignmentExpression : public IStatement {
-    CAssignmentExpression(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
             Identifier(identifier) {}
