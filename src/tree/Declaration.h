@@ -11,6 +11,12 @@
 #include "Statment.h"
 
 class CVarDeclaration : public IToken {
+    std::string name = "CVarDeclaration";
+public:
+    const std::string& GetName() const const {
+        return name;
+    }
+
 public:
     CVarDeclaration(Location location, IType* type, CIdentifier* identifier) :
             IToken(location),
@@ -28,6 +34,11 @@ public:
 };
 
 class CVarDeclarationList : public IToken {
+    std::string name = "CVarDeclarationList";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CVarDeclarationList(Location location, CVarDeclaration* varDeclaration, CVarDeclarationList* next) :
             IToken(location),
@@ -45,6 +56,11 @@ public:
 };
 
 class CMethodArgumentsList : public IToken {
+    std::string name = "CMethodArgumentsList";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMethodArgumentsList(Location location, CVarDeclaration* varDeclaration, CMethodArgumentsList* next) :
         IToken(location),
@@ -62,6 +78,12 @@ public:
 };
 
 class CMethodHeaderDeclaration : public IToken {
+    std::string name = "CMethodHeaderDeclaration";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMethodHeaderDeclaration(Location location, IType* returnType,
                              CIdentifier* methodName,CMethodArgumentsList* methodArgumentList) :
@@ -83,6 +105,12 @@ public:
 };
 
 class CMethodBodyDeclaration : public IToken {
+    std::string name = "CMethodBodyDeclaration";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMethodBodyDeclaration(Location location, CVarDeclarationList* varDeclarationList,
                            CStatementList* statementList, IExpression* returnExpression) :
@@ -105,6 +133,12 @@ public:
 };
 
 class CMethodDeclaration : public IToken {
+    std::string name = "CMethodDeclaration";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMethodDeclaration(Location location, CMethodHeaderDeclaration* methodHeaderDeclaration,
                        CMethodBodyDeclaration* methodBodyDeclaration) :
@@ -123,6 +157,12 @@ public:
 };
 
 class CMethodDeclarationList : public IToken {
+    std::string name = "CMethodDeclarationList";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMethodDeclarationList(Location location, CMethodDeclaration* methodDeclaration,
                            CMethodDeclarationList* methodDeclarationList) :
@@ -141,6 +181,12 @@ public:
 };
 
 class CClassDeclaration : public IToken {
+    std::string name = "CClassDeclaration";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CClassDeclaration(Location location, CIdentifier* className, CIdentifier* baseClassName,
                       CVarDeclarationList* varDeclarationList, CMethodDeclarationList* methodDeclarationList) :
@@ -165,6 +211,12 @@ public:
 };
 
 class CMainClass : public IToken {
+    std::string name = "CMainClass";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CMainClass(Location location, CIdentifier* className,
                CIdentifier* argumentName, IStatement* mainFunctionStatement) :
@@ -186,6 +238,12 @@ public:
 };
 
 class CClassDeclarationList : public IToken {
+    std::string name = "CClassDeclarationList";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CClassDeclarationList(Location location, CClassDeclaration* classDeclaration,
                           CClassDeclarationList* classDeclarationList) :
@@ -204,6 +262,12 @@ public:
 };
 
 class CGoal : public IToken {
+    std::string name = "CGoal";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CGoal(Location location, CMainClass* mainClass, CClassDeclarationList* classDeclarationList) :
             IToken(location),

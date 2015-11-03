@@ -26,6 +26,12 @@ public:
 };
 
 class CBracketStatement : public IStatement {
+    std::string name = "CBracketStatement";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
+
 public:
     CBracketStatement(Location location, IStatement* statement) :
     IStatement(location),
@@ -41,6 +47,13 @@ public:
 
 //( Statement )* by rule STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION
 class CStatementList : public IStatement {
+    std::string name = "CStatementList";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
+
 public:
     CStatementList(Location location, IStatement* statement, CStatementList* next = nullptr) :
             IStatement(location),
@@ -61,6 +74,13 @@ public:
 //First Statement is TrueStatement
 //Second Statement is FalseStatement
 class CIfStatement : public IStatement {
+    std::string name = "CIfStatement";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
+
 public:
     CIfStatement(Location location, IExpression* expression, IStatement* trueStatement, IStatement* falseStatement) :
             IStatement(location),
@@ -82,6 +102,12 @@ public:
 
 //"while" "(" Expression ")" Statement
 class CWhileStatement : public IStatement {
+    std::string name = "CWhileStatement";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
+
 public:
     CWhileStatement(Location location, IExpression* expression, IStatement* statement) :
             IStatement(location),
@@ -101,6 +127,11 @@ public:
 
 //	"System.out.println" "(" Expression ")" ";"
 class CPrintStatement : public IStatement {
+    std::string name = "CWhileStatement";
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CPrintStatement(Location location, IExpression* expression) :
             IStatement(location),
@@ -116,6 +147,12 @@ public:
 
 // Identifier "=" Expression ";
 class CAssignmentStatement : public IStatement {
+    std::string name = "CAssignmentStatement";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
@@ -131,22 +168,31 @@ public:
     IExpression* Expression;
     CIdentifier* Identifier;
 };
-    
+
+};
+
 //Identifier "[" Expression "]" "=" Expression ";"
 // First Expression is Index
 // Second Expression is Expression
+
 class CIntArrayAssignmentStatement : public IStatement {
+    std::string name = "CIntArrayAssignmentStatement";
+
+public:
+    const std::string& GetName() const {
+	    return name;
+    }
 public:
     CIntArrayAssignmentStatement(Location location, IExpression* expression,
-                                  IExpression* index, CIdentifier* identifier) :
-            IStatement(location),
-            Expression(expression),
-            Index(index),
-            Identifier(identifier) {}
+                                 IExpression* index, CIdentifier* identifier) :
+		    IStatement(location),
+		    Expression(expression),
+		    Index(index),
+		    Identifier(identifier) {}
     virtual ~CIntArrayAssignmentStatement() {
-        delete Expression;
-        delete Index;
-        delete Identifier;
+	    delete Expression;
+	    delete Index;
+	    delete Identifier;
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
