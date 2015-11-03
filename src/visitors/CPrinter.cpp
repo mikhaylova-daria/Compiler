@@ -121,6 +121,7 @@ void CPrinter::Visit( const CClassDeclaration* classDeclaration ) {
 
 void CPrinter::Visit( const CMainClass* mainClass ) {
 	print(mainClass->GetName());
+
 	mainClass->ClassName->Accept(this);
 	mainClass->ArgumentName->Accept(this);
 	mainClass->MainFunctionStatement->Accept(this);
