@@ -21,6 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/tree/MinijavaTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/NewExpression.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Statment.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/TreeBuildHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Visitor.h" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />

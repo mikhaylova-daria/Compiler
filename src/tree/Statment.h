@@ -13,14 +13,15 @@ public:
     IStatement(Location location) : IToken(location) {}
     virtual ~IStatement() {}
 
-    virtual void Accept(IStatement* visit) const = 0;
+    virtual void Accept(IVisitor* visit) const = 0;
 };
 
 class CBracketStatement : public IStatement {
+public:
     CBracketStatement(Location location, IStatement* statement) :
     IStatement(location),
     Statement(statement) {}
-    virtual ~CStatementList() {
+    virtual ~CBracketStatement() {
         delete Statement;
     }
 
@@ -47,6 +48,7 @@ public:
 };
 
 class CIfStatement : public IStatement {
+public:
     CIfStatement(Location location, IExpression* expression, IStatement* trueStatement, IStatement* falseStatement) :
             IStatement(location),
             Expression(expression),
@@ -66,11 +68,12 @@ class CIfStatement : public IStatement {
 };
 
 class CWhileStatement : public IStatement {
+public:
     CWhileStatement(Location location, IExpression* expression, IStatement* statement) :
             IStatement(location),
             Expression(expression),
             Statement(statement) {}
-    virtual ~CIfStatement() {
+    virtual ~CWhileStatement() {
         delete Expression;
         delete Statement;
     }
@@ -83,6 +86,7 @@ class CWhileStatement : public IStatement {
 
 
 class CPrintStatement : public IStatement {
+public:
     CPrintStatement(Location location, IExpression* expression) :
             IStatement(location),
             Expression(expression) {}
@@ -96,11 +100,12 @@ class CPrintStatement : public IStatement {
 };
 
 class CAssignmentStatement : public IStatement {
+public:
     CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
             Identifier(identifier) {}
-    virtual ~CIfStatement() {
+    virtual ~CAssignmentStatement() {
         delete Expression;
         delete Identifier;
     }
@@ -112,13 +117,14 @@ class CAssignmentStatement : public IStatement {
 };
 
 class CIntArrayAssignmentStatement : public IStatement {
+public:
     CIntArrayAssignmentStatement(Location location, IExpression* expression,
                                   IExpression* index, CIdentifier* identifier) :
             IStatement(location),
             Expression(expression),
             Index(index),
             Identifier(identifier) {}
-    virtual ~CIfStatement() {
+    virtual ~CIntArrayAssignmentStatement() {
         delete Expression;
         delete Index;
         delete Identifier;
@@ -130,6 +136,5 @@ class CIntArrayAssignmentStatement : public IStatement {
     IExpression* Index;
     CIdentifier* Identifier;
 };
-
 
 #endif //MINIJAVACOMPILER_STATMENT_H

@@ -8,6 +8,7 @@
 #include <cassert>
 #include "Location.h"
 #include "Visitor.h"
+#include "Indentifier.h"
 
 enum TType {
     T_UNDEFINED,
@@ -37,12 +38,15 @@ public:
 
 class CClassType : public IType {
 public:
-    CClassType(Location location, const char* className) :
+    CClassType(Location location, CIdentifier* className) :
             IType(location, T_CLASS),
             ClassName(className) {}
-    virtual ~CClassType() {}
+    virtual ~CClassType() {
+        delete ClassName;
+    }
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
-    const std::string ClassName;
+
+    CIdentifier* ClassName;
 };
 
 #endif //MINIJAVACOMPILER_TYPE_H

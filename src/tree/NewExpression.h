@@ -9,9 +9,9 @@
 #include "Indentifier.h"
 #include "Expression.h"
 
-class CNewExpression : public IToken {
+class CNewExpression : public IExpression {
 public:
-    CNewExpression(Location location, CIdentifier* id) : IToken(location), Id(id) {}
+    CNewExpression(Location location, CIdentifier* id) : IExpression(location), Id(id) {}
     virtual ~CNewExpression() { delete Id; }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
@@ -19,9 +19,9 @@ public:
     CIdentifier* Id;
 };
 
-class CIntArrayNewExpression : public IToken {
+class CIntArrayNewExpression : public IExpression {
 public:
-    CIntArrayNewExpression(Location location, IExpression* expression) : IToken(location), Expression(expression) {}
+    CIntArrayNewExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CIntArrayNewExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }

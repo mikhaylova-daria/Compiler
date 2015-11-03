@@ -56,6 +56,7 @@ public:
 };
 
 class CLengthExpression : public IExpression {
+public:
     CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CLengthExpression() { delete Expression; }
 

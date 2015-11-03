@@ -16,6 +16,7 @@ class CIdentifier;
 class CInvocation;
 class CNewExpression;
 class CIntArrayNewExpression;
+class CBracketStatement;
 class CStatementList;
 class CIfStatement;
 class CWhileStatement;
@@ -25,10 +26,19 @@ class CIntArrayAssignmentStatement;
 class CVarDeclaration;
 class CVarDeclarationList;
 class CBracketExpression;
+class CMethodArgumentsList;
+class CMethodHeaderDeclaration;
+class CMethodBodyDeclaration;
+class CMethodDeclaration;
+class CMethodDeclarationList;
+class CClassDeclaration;
+class CMainClass;
+class CClassDeclarationList;
+class CGoal;
 
 class IVisitor {
 public:
-    virtual ~IVisitor() = 0 {}
+    virtual ~IVisitor() {}
 
     virtual void Visit(const CConstant* constant) = 0;
     virtual void Visit(const CBasicType* basicType) = 0;
@@ -42,6 +52,7 @@ public:
     virtual void Visit(const CNewExpression* newExpression) = 0;
     virtual void Visit(const CIntArrayNewExpression* intArrayNewExpression) = 0;
     virtual void Visit(const CStatementList* statementList) = 0;
+    virtual void Visit(const CBracketStatement* bracketStatement) = 0;
     virtual void Visit(const CIfStatement* ifStatement) = 0;
     virtual void Visit(const CWhileStatement* whileStatement) = 0;
     virtual void Visit(const CPrintStatement* printStatement) = 0;
@@ -50,6 +61,15 @@ public:
     virtual void Visit(const CVarDeclaration* varDeclaration) = 0;
     virtual void Visit(const CVarDeclarationList* varDeclarationList) = 0;
     virtual void Visit(const CBracketExpression* bracketExpression) = 0;
+    virtual void Visit(const CMethodArgumentsList* methodArgumentsList) = 0;
+    virtual void Visit(const CMethodHeaderDeclaration* methodHeaderDeclaration) = 0;
+    virtual void Visit(const CMethodBodyDeclaration* methodBodyDeclaration) = 0;
+    virtual void Visit(const CMethodDeclaration* methodDeclaration) = 0;
+    virtual void Visit(const CMethodDeclarationList* methodDeclarationList) = 0;
+    virtual void Visit(const CClassDeclaration* classDeclaration) = 0;
+    virtual void Visit(const CMainClass* mainClass) = 0;
+    virtual void Visit(const CClassDeclarationList* classDeclarationList) = 0;
+    virtual void Visit(const CGoal* goal) = 0;
 };
 
 #endif //MINIJAVACOMPILER_VISITOR_H

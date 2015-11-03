@@ -11,8 +11,9 @@ extern int yyparse();
 
 #include <iostream>
 #include <vector>
-#include "JavaHelp.h"
-#include "tokens.h"
+#include "tree/MinijavaTree.h"
+//#include "JavaHelp.h"
+//#include "tokens.h"
 
 using namespace std;
 

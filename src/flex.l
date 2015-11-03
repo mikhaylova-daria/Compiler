@@ -1,8 +1,10 @@
 %option noyywrap
 
 %{
-    #include "JavaHelp.h"
-    #include "Declaration.h"
+    //#include "JavaHelp.h"
+    //#include "Declaration.h"
+    #include "tree/MinijavaTree.h"
+    #include "tree/TreeBuildHelp.h"
     #include "tokens.h"
     #include <string.h>
     void yyerror(const char*);
@@ -12,8 +14,8 @@
     void updateLocation() {
         //currLocation.update(yy_line, yy_column);
         //yylloc.update(yy_line, yy_column);
-        yylloc.first_line = max(yylloc.last_line, 1);
-        yylloc.first_column = max(yylloc.last_column, 1);
+        yylloc.first_line = yylloc.last_line >  1 ? yylloc.last_line : 1;
+        yylloc.first_column = yylloc.last_column > 1 ? yylloc.last_column : 1;
         yylloc.last_line = yy_line;
         yylloc.last_column = yy_column;
     }
@@ -78,7 +80,7 @@
 [a-zA-Z_][a-zA-Z0-9_]* {
     yy_column += strlen(yytext);
     updateLocation();
-    return ID;
+    return _ID;
 }
 
 [-+*/()_{}=;,<>.{}%] { ++yy_column; updateLocation(); return *yytext; }
