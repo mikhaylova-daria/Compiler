@@ -7,9 +7,9 @@
 
 #include "Location.h"
 #include "Visitor.h"
-#include "Expression.h"
+//#include "Expression.h"
 
-class CIdentifier : public IExpression {
+class CIdentifier : public IToken {
     std::string name = "CIdentifier";
 
 public:
@@ -17,24 +17,10 @@ public:
 	    return name;
     }
 public:
-    CIdentifier(Location location, const char* id) : IExpression(location), Id(id) {}
+    CIdentifier(Location location, const char* id) : IToken(location), Id(id) {}
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
 
     std::string Id;
 };
-
-class CThisIdentifier : public CIdentifier {
-    std::string name = "CThisIdentifier";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
-public:
-    CThisIdentifier(Location location) : CIdentifier(location, "this") {}
-
-    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
-};
-
 #endif //MINIJAVACOMPILER_INDENTIFIER_H

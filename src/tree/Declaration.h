@@ -6,8 +6,8 @@
 #define MINIJAVACOMPILER_DECLARATION_H
 
 #include "Location.h"
-#include "Type.h"
-#include "Expression.h"
+//#include "Type.h"
+//#include "Expression.h"
 #include "Statment.h"
 
 class CVarDeclaration : public IToken {

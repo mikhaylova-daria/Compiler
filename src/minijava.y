@@ -389,11 +389,11 @@ EXPR :
 }
 | ID {
     processRule(@$, "EXPR");
-    $$ = $1;
+    $$ = new CVariable(getLocation(), $1);
 }
 | THIS {
     processRule(@$, "EXPR");
-    $$ = new CThisIdentifier(getLocation());
+    $$ = new CThisExpression(getLocation());
 }
 | CONSTANT {
     processRule(@$, "EXPR");
@@ -422,11 +422,11 @@ EXPR :
 
 CONSTANT : INT_VALUE {
     processRule(@$, "CONSTANT");
-    $$ = new CConstant(getLocation(), CT_INT, yytext);
+    $$ = new CConstant(getLocation(), T_INT, yytext);
 }
 | BOOL_VALUE {
     processRule(@$, "CONSTANT");
-    $$ = new CConstant(getLocation(), CT_BOOL, yytext);
+    $$ = new CConstant(getLocation(), T_BOOL, yytext);
 }
 
 

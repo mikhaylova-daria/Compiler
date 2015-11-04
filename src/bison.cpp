@@ -2147,7 +2147,7 @@ yyreduce:
 #line 390 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
-    (yyval.expression) = (yyvsp[0].identifier);
+    (yyval.expression) = new CVariable(getLocation(), (yyvsp[0].identifier));
 }
 #line 2153 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
@@ -2156,7 +2156,7 @@ yyreduce:
 #line 394 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
-    (yyval.expression) = new CThisIdentifier(getLocation());
+    (yyval.expression) = new CThisExpression(getLocation());
 }
 #line 2162 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
@@ -2219,7 +2219,7 @@ yyreduce:
 #line 423 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "CONSTANT");
-    (yyval.constant) = new CConstant(getLocation(), CT_INT, yytext);
+    (yyval.constant) = new CConstant(getLocation(), T_INT, yytext);
 }
 #line 2225 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
@@ -2228,7 +2228,7 @@ yyreduce:
 #line 427 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "CONSTANT");
-    (yyval.constant) = new CConstant(getLocation(), CT_BOOL, yytext);
+    (yyval.constant) = new CConstant(getLocation(), T_BOOL, yytext);
 }
 #line 2234 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;

@@ -7,6 +7,7 @@
 
 #include "Location.h"
 #include "Visitor.h"
+#include "Type.h"
 
 class IExpression : public IToken {
 public:
@@ -15,6 +16,51 @@ public:
 
     virtual void Accept(IVisitor* visitor) const = 0;
 };
+
+class CVariable : public IExpression {
+    std::string name = "CVariable";
+public:
+    const std::string& GetName() const {
+        return name;
+    }
+    CVariable(Location location, CIdentifier* identifier) : IExpression(location), Identifier(identifier) {}
+    ~CVariable() {
+        delete Identifier;
+    }
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+
+    CIdentifier* Identifier;
+};
+
+class CThisExpression : public CVariable {
+    std::string name = "CThisIdentifier";
+
+public:
+    const std::string& GetName() const {
+        return name;
+    }
+public:
+    CThisExpression(Location location) : CVariable(location, new CIdentifier(location, "this")) {}
+
+    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+};
+
+class CConstant : public IExpression {
+    std::string name = "CConstant";
+public:
+    const std::string& GetName() const {
+        return name;
+    }
+
+    CConstant(const Location location, const TType type, const char* value) :
+            IExpression(location), Type(type), Value(value) { }
+    virtual ~CConstant() {}
+
+    void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    const TType Type;
+    const std::string Value;
+};
+
 
 //Types of binary expression
 enum TBinaryExpression {

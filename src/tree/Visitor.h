@@ -4,6 +4,9 @@
 
 #ifndef MINIJAVACOMPILER_VISITOR_H
 #define MINIJAVACOMPILER_VISITOR_H
+
+#include "Expression.h"
+
 //Help classes
 class CConstant;
 class CIdentifier;
@@ -12,6 +15,7 @@ class CInvocation;
 class CBasicType;
 class CClassType;
 //Expressions
+class CVariable;
 class CBinaryExpression;
 class CNotExpression;
 class CLengthExpression;
@@ -45,6 +49,7 @@ public:
     virtual ~IVisitor() {}
 
     virtual void Visit(const CConstant* constant) = 0;
+    virtual void Visit(const CVariable* variable) = 0;
     virtual void Visit(const CBasicType* basicType) = 0;
     virtual void Visit(const CClassType* classType) = 0;
     virtual void Visit(const CBinaryExpression* binaryExpression) = 0;
