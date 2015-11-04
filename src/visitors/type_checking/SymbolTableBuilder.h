@@ -20,10 +20,6 @@ public:
 
     virtual void Visit(const CConstant *constant) override;
 
-    virtual void Visit(const CBasicType *basicType) override;
-
-    virtual void Visit(const CClassType *classType) override;
-
     virtual void Visit(const CBinaryExpression *binaryExpression) override;
 
     virtual void Visit(const CNotExpression *notExpression) override;

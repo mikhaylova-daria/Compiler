@@ -10,14 +10,6 @@ void CTypeChecker::Visit(const CConstant *constant) {
     lastType = constant->Type;
 }
 
-void CTypeChecker::Visit(const CBasicType *basicType) {
-
-}
-
-void CTypeChecker::Visit(const CClassType *classType) {
-
-}
-
 void CTypeChecker::Visit(const CBinaryExpression *binaryExpression) {
     binaryExpression->LeftExpr->Accept(this);
     TType leftType = lastType;

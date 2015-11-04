@@ -1,5 +1,8 @@
 #include <cstdio>
 #include <fstream>
+#include "symbol/Symbol.h"
+
+Symbol::CStorage globalStorage;
 
 extern "C" {
     int yylex();

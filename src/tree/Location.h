@@ -6,6 +6,7 @@
 #define MINIJAVACOMPILER_LOCATION_H
 
 #include <iostream>
+#include <typeinfo>
 
 struct Location  {
     int firstLine;

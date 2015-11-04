@@ -6,19 +6,15 @@
 #define MINIJAVACOMPILER_DECLARATION_H
 
 #include "Location.h"
-//#include "Type.h"
-//#include "Expression.h"
+#include "Type.h"
+#include "Expression.h"
 #include "Statment.h"
 
 class CVarDeclaration : public IToken {
-    std::string name = "CVarDeclaration";
-public:
-    const std::string& GetName() const {
-        return name;
-    }
+    const std::string name = "CVarDeclaration";
 
 public:
-    CVarDeclaration(Location location, IType* type, CIdentifier* identifier) :
+    CVarDeclaration(Location location, CType* type, CIdentifier* identifier) :
             IToken(location),
             Type(type),
             Identifier(identifier) {}
@@ -28,17 +24,15 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
-    IType* Type;
+    CType* Type;
     CIdentifier* Identifier;
 };
 
 class CVarDeclarationList : public IToken {
-    std::string name = "CVarDeclarationList";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CVarDeclarationList";
+
 public:
     CVarDeclarationList(Location location, CVarDeclaration* varDeclaration, CVarDeclarationList* next) :
             IToken(location),
@@ -50,17 +44,14 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CVarDeclaration* VarDeclaration;
     CVarDeclarationList* Next;
 };
 
 class CMethodArgumentsList : public IToken {
-    std::string name = "CMethodArgumentsList";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CMethodArgumentsList";
 public:
     CMethodArgumentsList(Location location, CVarDeclaration* varDeclaration, CMethodArgumentsList* next) :
         IToken(location),
@@ -72,20 +63,16 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CVarDeclaration* VarDeclaration;
     CMethodArgumentsList* Next;
 };
 
 class CMethodHeaderDeclaration : public IToken {
-    std::string name = "CMethodHeaderDeclaration";
-
+    const std::string name = "CMethodHeaderDeclaration";
 public:
-    const std::string& GetName() const {
-	    return name;
-    }
-public:
-    CMethodHeaderDeclaration(Location location, IType* returnType,
+    CMethodHeaderDeclaration(Location location, CType* returnType,
                              CIdentifier* methodName,CMethodArgumentsList* methodArgumentList) :
             IToken(location),
             ReturnType(returnType),
@@ -98,19 +85,16 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
-    IType* ReturnType;
+    CType* ReturnType;
     CIdentifier* MethodName;
     CMethodArgumentsList* MethodArgumentList;
 };
 
 class CMethodBodyDeclaration : public IToken {
-    std::string name = "CMethodBodyDeclaration";
+    const std::string name = "CMethodBodyDeclaration";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CMethodBodyDeclaration(Location location, CVarDeclarationList* varDeclarationList,
                            CStatementList* statementList, IExpression* returnExpression) :
@@ -126,6 +110,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CVarDeclarationList* VarDeclarationList;
     CStatementList* StatementList;
@@ -133,12 +118,8 @@ public:
 };
 
 class CMethodDeclaration : public IToken {
-    std::string name = "CMethodDeclaration";
+    const std::string name = "CMethodDeclaration";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CMethodDeclaration(Location location, CMethodHeaderDeclaration* methodHeaderDeclaration,
                        CMethodBodyDeclaration* methodBodyDeclaration) :
@@ -151,18 +132,15 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CMethodHeaderDeclaration* MethodHeaderDeclaration;
     CMethodBodyDeclaration* MethodBodyDeclaration;
 };
 
 class CMethodDeclarationList : public IToken {
-    std::string name = "CMethodDeclarationList";
+    const std::string name = "CMethodDeclarationList";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CMethodDeclarationList(Location location, CMethodDeclaration* methodDeclaration,
                            CMethodDeclarationList* methodDeclarationList) :
@@ -175,18 +153,14 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CMethodDeclaration* MethodDeclaration;
     CMethodDeclarationList* MethodDeclarationList;
 };
 
 class CClassDeclaration : public IToken {
-    std::string name = "CClassDeclaration";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CClassDeclaration";
 public:
     CClassDeclaration(Location location, CIdentifier* className, CIdentifier* baseClassName,
                       CVarDeclarationList* varDeclarationList, CMethodDeclarationList* methodDeclarationList) :
@@ -203,6 +177,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CIdentifier* ClassName;
     CIdentifier* BaseClassName;
@@ -211,12 +186,8 @@ public:
 };
 
 class CMainClass : public IToken {
-    std::string name = "CMainClass";
+    const std::string name = "CMainClass";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CMainClass(Location location, CIdentifier* className,
                CIdentifier* argumentName, IStatement* mainFunctionStatement) :
@@ -231,6 +202,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CIdentifier* ClassName;
     CIdentifier* ArgumentName;
@@ -238,12 +210,7 @@ public:
 };
 
 class CClassDeclarationList : public IToken {
-    std::string name = "CClassDeclarationList";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CClassDeclarationList";
 public:
     CClassDeclarationList(Location location, CClassDeclaration* classDeclaration,
                           CClassDeclarationList* classDeclarationList) :
@@ -256,18 +223,15 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CClassDeclaration* ClassDeclaration;
     CClassDeclarationList* ClassDeclarationList;
 };
 
 class CGoal : public IToken {
-    std::string name = "CGoal";
+    const std::string name = "CGoal";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CGoal(Location location, CMainClass* mainClass, CClassDeclarationList* classDeclarationList) :
             IToken(location),
@@ -279,6 +243,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     CMainClass* MainClass;
     CClassDeclarationList* ClassDeclarationList;

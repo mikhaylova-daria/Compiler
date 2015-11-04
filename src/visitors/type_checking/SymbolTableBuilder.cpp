@@ -9,15 +9,7 @@ CSymbolTableBuilder::~CSymbolTableBuilder() {
 }
 
 void CSymbolTableBuilder::Visit(const CConstant *constant) {
-    lastType = CTypeInfo(storage.Get(""), constant->Type);
-}
-
-void CSymbolTableBuilder::Visit(const CBasicType *basicType) {
-
-}
-
-void CSymbolTableBuilder::Visit(const CClassType *classType) {
-
+    //lastType = CTypeInfo(storage.Get(""), constant->Type);
 }
 
 void CSymbolTableBuilder::Visit(const CBinaryExpression *binaryExpression) {

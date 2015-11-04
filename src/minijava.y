@@ -1,18 +1,21 @@
 %locations
 %{
 
-    //#include "JavaHelp.h"
     #include "tree/MinijavaTree.h"
     #include "tree/TreeBuildHelp.h"
-    //#define YYLTYPE Location
 
-    //#include "Declaration.h"
     #include "tokens.h"
+
     #include <vector>
     #include <iostream>
     #include <string>
     #include <memory>
     using namespace std;
+
+    #include "symbol/Symbol.h"
+    using namespace Symbol;
+
+    extern CStorage globalStorage;
 
     string error_msg;
 
@@ -22,6 +25,7 @@
     extern int yylineno;
     extern FILE * yyin;
     extern char* yytext;
+
 
     extern void printTextPart(Location loc, ostream &out = std::cout);
     Location currLocation;
@@ -48,7 +52,7 @@
     IStatement* statement;
     CStatementList* statementList;
     CMethodBodyDeclaration* methodBodyDeclaration;
-    IType* type;
+    CType* type;
     CVarDeclaration* varDeclaration;
     CMethodArgumentsList* methodArgumentsList;
     CMethodHeaderDeclaration* methodHeaderDeclaration;
@@ -212,20 +216,21 @@ TYPE : INT_ARRAY {
 }
 | BOOL {
     processRule(@$, "TYPE");
-    $$ = new CBasicType(getLocation(), T_BOOL);
+    $$ = new CType(getLocation(), T_BOOL, globalStorage.Get("boolean"));
 }
 | INT {
     processRule(@$, "TYPE");
-    $$ = new CBasicType(getLocation(), T_INT);
+    $$ = new CType(getLocation(), T_INT, globalStorage.Get("int"));
 }
 | ID {
     processRule(@$, "TYPE");
-    $$ = new CClassType(getLocation(), $1);
+    $$ = new CType(getLocation(), T_CLASS, $1->Symbol);
+    delete $1;
 }
 
 INT_ARRAY: INT '[' ']' {
     processRule(@$, "INT_ARRAY");
-    $$ = new CBasicType(getLocation(), T_INT_ARRAY);
+    $$ = new CType(getLocation(), T_INT_ARRAY, globalStorage.Get("int[]"));
 }
 | INT '[' error ']' {
     processRule(@$, "INT_ARRAY");
@@ -393,7 +398,7 @@ EXPR :
 }
 | THIS {
     processRule(@$, "EXPR");
-    $$ = new CThisExpression(getLocation());
+    $$ = new CVariable(getLocation(), new CIdentifier(getLocation(), globalStorage.Get("this")));
 }
 | CONSTANT {
     processRule(@$, "EXPR");
@@ -463,7 +468,7 @@ NEW INT '[' EXPR ']' {
 
 ID : _ID {
     processRule(@$, "NEW_EXPR");
-    $$ = new CIdentifier(getLocation(), yytext);
+    $$ = new CIdentifier(getLocation(), globalStorage.Get(yytext));
 }
 
 %%

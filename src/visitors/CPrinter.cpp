@@ -10,17 +10,11 @@ void print( const std::string& what ) {
 	std::cout << what << std::endl;
 }
 
-void CPrinter::Visit( const CBasicType* basicType ) {
-	print( basicType->GetName());
-}
 
 void CPrinter::Visit( const CBinaryExpression* binaryExpression ) {
 	print( binaryExpression->GetName());
 }
 
-void CPrinter::Visit( const CClassType* classType ) {
-	print( classType->GetName());
-}
 
 void CPrinter::Visit( const CConstant* constant ) {
 	print( constant->GetName());
