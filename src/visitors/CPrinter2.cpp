@@ -212,7 +212,7 @@ void CPrinter2::Visit( const CBracketExpression* bracketExpression ) {
     ++treeDeep;
 	print( bracketExpression->GetName());
 
-	
+
 	bracketExpression->Expression->Accept( this );
     --treeDeep;
 }

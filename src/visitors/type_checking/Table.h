@@ -31,8 +31,7 @@ public:
 class CMethodInfo {
 public:
 
-    CMethodInfo(const CSymbol* Name, const std::vector<CVarInfo> &Arguments, const std::vector<CVarInfo> &Vars) :
-            Name(Name), Arguments(Arguments), Vars(Vars) { }
+    CMethodInfo(const CSymbol* Name) : Name(Name) { }
     CMethodInfo() : Name(nullptr) {}
 
     const CSymbol* Name;
@@ -42,8 +41,7 @@ public:
 
 class CClassInfo {
 public:
-    CClassInfo(const CSymbol *name, const std::vector<CVarInfo> &vars, const std::vector<CMethodInfo> &methods) :
-            Name(name), Vars(vars), Methods(methods) { }
+    CClassInfo(const CSymbol *name) : Name(name) { }
     CClassInfo() : Name(nullptr) {}
 
     const CSymbol* Name;

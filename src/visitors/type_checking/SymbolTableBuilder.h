@@ -9,17 +9,9 @@
 #include "../../tree/MinijavaTree.h"
 #include "Table.h"
 
+extern void printTextPart(Location loc, std::ostream &out);
+
 class CSymbolTableBuilder : public IVisitor {
-    CClassInfo currentClass;
-    CMethodInfo currentMethod;
-    CTable& table;
-    CTypeInfo lastType;
-    enum TScope {
-        S_Global,
-        S_Class,
-        S_Function
-    };
-    //CStorage& storage;
 public:
     CSymbolTableBuilder(CTable& table) : table(table) {}
     virtual ~CSymbolTableBuilder();
@@ -83,6 +75,32 @@ public:
     virtual void Visit(const CClassDeclarationList *classDeclarationList) override;
 
     virtual void Visit(const CGoal *goal) override;
+
+private:
+    CClassInfo currentClass;
+    CMethodInfo currentMethod;
+    CTable& table;
+    CTypeInfo lastType;
+    std::vector<CVarInfo> currentValList;
+    bool isError = false;
+    enum TScope {
+        S_Global,
+        S_Class,
+        S_Function
+    };
+    bool checkVarDuplicateDefinition(const std::vector<CVarInfo> &varInfoList, const CVarInfo& varInfo) {
+        for (size_t i = 0; i < varInfoList.size(); i++) {
+            if (varInfoList[i].VarName == varInfo.VarName) {
+                return false;
+            }
+        }
+        return true;
+    }
+    void processError(const std::string& reason, const IToken* token) {
+        isError = false;
+        std::cerr << "Type error: " << reason << std::endl;
+        printTextPart(token->location, std::cerr);
+    }
 };
 
 
