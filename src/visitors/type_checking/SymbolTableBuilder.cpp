@@ -8,8 +8,16 @@ CSymbolTableBuilder::~CSymbolTableBuilder() {
 
 }
 
+void CSymbolTableBuilder::Visit(const CType* type) {
+    lastType = CTypeInfo(type->Name, type->Type);
+}
+
+void CSymbolTableBuilder::Visit(const CVariable* variable) {
+
+}
+
 void CSymbolTableBuilder::Visit(const CConstant *constant) {
-    //lastType = CTypeInfo(storage.Get(""), constant->Type);
+    lastType = CTypeInfo(constant->Type->Name, constant->Type->Type);
 }
 
 void CSymbolTableBuilder::Visit(const CBinaryExpression *binaryExpression) {

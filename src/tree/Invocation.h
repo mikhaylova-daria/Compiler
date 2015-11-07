@@ -43,7 +43,7 @@ public:
     virtual ~CInvocation() {
         delete Expression;
         delete Identifier;
-        delete Expression;
+        delete ExpressionList;
     }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }

@@ -6,17 +6,17 @@
 #define MINIJAVACOMPILER_CPRINTER_H
 
 #include "../tree/MinijavaTree.h"
+#include "../Utils/ConsolePrinter.hpp"
 
 class CPrinter2 : public IVisitor {
-    int countTab = 0;
 public:
-    virtual ~CPrinter() { }
+    virtual ~CPrinter2() { }
 
     virtual void Visit( const CConstant* constant );
 
-    virtual void Visit( const CBasicType* basicType );
+    virtual void Visit( const CType* basicType );
 
-    virtual void Visit( const CClassType* classType );
+    virtual void Visit( const CVariable* variable );
 
     virtual void Visit( const CBinaryExpression* binaryExpression );
 
@@ -71,6 +71,33 @@ public:
     virtual void Visit( const CClassDeclarationList* classDeclarationList );
 
     virtual void Visit( const CGoal* goal );
+
+private:
+    void print( const std::string& what ) {
+        printTabs();
+        ConsolePrinter::print(what);
+        ConsolePrinter::printNewLine();
+    }
+
+    void printTabs() {
+        for (int i = 0; i < treeDeep; i++) {
+            ConsolePrinter::printTab();
+        }
+    }
+
+    void print(TType type) {
+        printTabs();
+        ConsolePrinter::print(type);
+        ConsolePrinter::printNewLine();
+    }
+
+    void print(TBinaryExpression type) {
+        printTabs();
+        ConsolePrinter::print(type);
+        ConsolePrinter::printNewLine();
+    }
+
+    int treeDeep = 0;
 };
 
 

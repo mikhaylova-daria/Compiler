@@ -7,7 +7,7 @@
 extern void printTextPart(Location loc, std::ostream &out = std::cout);
 
 void CTypeChecker::Visit(const CConstant *constant) {
-    lastType = constant->Type;
+    lastType = constant->Type->Type;
 }
 
 void CTypeChecker::Visit(const CBinaryExpression *binaryExpression) {

@@ -101,9 +101,9 @@
     }
     void processRule(YYLTYPE loc, const char* ruleName) {
         setLocation(loc);
-        printf("%s ", ruleName);
-        currLocation.print();
-        printTextPart(currLocation);
+        //printf("%s ", ruleName);
+        //currLocation.print();
+        //printTextPart(currLocation);
     }
 
     std::shared_ptr<CGoal> Goal;
@@ -476,7 +476,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  29
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  80
+#define YYNRULES  81
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  210
 
@@ -528,14 +528,14 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint16 yyrline[] =
 {
        0,   105,   105,   110,   114,   119,   123,   129,   137,   142,
-     146,   151,   155,   160,   163,   167,   171,   177,   182,   186,
-     192,   199,   203,   208,   213,   217,   221,   225,   231,   235,
-     240,   245,   250,   256,   260,   265,   269,   273,   277,   281,
-     285,   290,   294,   300,   306,   313,   317,   322,   326,   331,
-     335,   341,   345,   351,   359,   363,   367,   371,   375,   379,
-     383,   387,   391,   395,   399,   403,   407,   411,   415,   419,
-     423,   428,   432,   438,   442,   446,   452,   456,   460,   464,
-     469
+     146,   151,   156,   161,   164,   168,   172,   178,   183,   187,
+     193,   200,   204,   208,   213,   218,   222,   226,   230,   236,
+     240,   245,   250,   255,   261,   265,   270,   274,   278,   282,
+     286,   290,   295,   299,   305,   311,   318,   322,   327,   331,
+     336,   340,   346,   350,   356,   364,   368,   372,   376,   380,
+     384,   388,   392,   396,   400,   404,   408,   412,   416,   420,
+     424,   428,   433,   437,   443,   447,   451,   457,   461,   465,
+     469,   474
 };
 #endif
 
@@ -577,7 +577,7 @@ static const yytype_uint16 yytoknum[] =
 #define yypact_value_is_default(Yystate) \
   (!!((Yystate) == (-71)))
 
-#define YYTABLE_NINF -74
+#define YYTABLE_NINF -75
 
 #define yytable_value_is_error(Yytable_value) \
   0
@@ -614,27 +614,27 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     4,    80,     0,     1,     0,     2,     4,
+       0,     0,     0,     4,    81,     0,     1,     0,     2,     4,
        0,     9,     3,     0,     0,     0,     0,     0,     0,    10,
-       0,     0,     0,     0,     0,    26,    25,     0,    12,     0,
-       0,     0,     0,    24,    27,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    27,    26,     0,    12,     0,
+       0,     0,     0,    25,    28,     0,     0,     0,     0,     0,
        8,    11,     0,    13,     0,     0,     0,     0,    21,    16,
-       0,     0,    28,     0,     0,     0,     0,     0,    34,     0,
-       0,     0,    32,    34,    36,    37,    38,    39,    40,    27,
-      15,     0,     0,     0,     0,     0,     0,     0,    29,     0,
-       0,     0,     0,     0,     0,    31,    17,     0,    33,     0,
-       0,     0,     0,     0,    20,    21,    23,     0,     0,     0,
-       0,    64,    71,    72,     0,     0,     0,    65,    62,    63,
-       0,     0,     0,     0,    35,     0,     0,     0,     0,     0,
-       0,     0,     0,    22,    19,    18,     0,     0,     0,    60,
+       0,     0,    29,     0,     0,     0,     0,     0,    35,     0,
+       0,     0,    33,    35,    37,    38,    39,    40,    41,    28,
+      15,     0,     0,     0,     0,    22,     0,     0,    30,     0,
+       0,     0,     0,     0,     0,    32,    17,     0,    34,     0,
+       0,     0,     0,     0,    20,    21,    24,     0,     0,     0,
+       0,    65,    72,    73,     0,     0,     0,    66,    63,    64,
+       0,     0,     0,     0,    36,     0,     0,     0,     0,     0,
+       0,     0,     0,    23,    19,    18,     0,     0,     0,    61,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    30,     0,     0,    50,    49,     0,
-       0,     0,    46,     0,     0,    61,    57,    59,    54,    55,
-      68,     0,    58,    56,     0,     0,    45,    48,    47,     0,
+       0,     0,     0,     0,    31,     0,     0,    51,    50,     0,
+       0,     0,    47,     0,     0,    62,    58,    60,    55,    56,
+      69,     0,    59,    57,     0,     0,    46,    49,    48,     0,
        0,     0,     0,     0,     7,     0,     0,     0,     0,     0,
-      78,     0,    67,    66,     0,     0,     0,     0,     0,     0,
-       6,     0,    77,    76,    79,     0,    74,     0,    42,    43,
-      44,    41,    52,    53,    51,     5,    70,    69,     0,    75
+      79,     0,    68,    67,     0,     0,     0,     0,     0,     0,
+       6,     0,    78,    77,    80,     0,    75,     0,    43,    44,
+      45,    42,    53,    54,    52,     5,    71,    70,     0,    76
 };
 
   /* YYPGOTO[NTERM-NUM].  */
@@ -662,7 +662,7 @@ static const yytype_int16 yytable[] =
       48,    13,   195,    49,    19,    14,    42,    59,    38,    34,
       24,     4,    37,    34,   100,   123,   101,     1,    34,   102,
      103,    45,     6,   104,    46,   120,   180,    50,    52,     4,
-     127,    53,    76,    69,   105,   -73,     7,    34,   -73,    89,
+     127,    53,    76,    69,   105,   -74,     7,    34,   -74,    89,
      -14,    72,     4,    79,    73,   111,   113,    84,    69,    90,
       10,   115,    84,   117,   119,   150,   137,    15,   138,    23,
      152,    76,    93,    24,   207,    96,    34,   208,   129,   130,
@@ -685,7 +685,7 @@ static const yytype_int16 yytable[] =
       57,     4,    58,   186,   190,   100,   105,   101,   194,   188,
      102,   103,   191,   192,   104,   203,   205,   206,    12,   200,
        4,   100,    41,   101,    54,   105,   102,   103,    55,    56,
-     104,    43,   -34,    55,    56,    85,     4,     0,     0,    25,
+     104,    43,   -35,    55,    56,    85,     4,     0,     0,    25,
       26,   105,     0,     0,     0,     0,     4,     0,    57,     0,
       58,     4,   100,    57,   101,    58,     0,   102,   103,     0,
        0,   104,     0,     0,     0,     0,     0,     4,     0,     0,
@@ -788,13 +788,13 @@ static const yytype_uint8 yyr1[] =
 {
        0,    40,    41,    42,    42,    43,    43,    43,    44,    45,
       45,    46,    46,    47,    47,    48,    48,    49,    50,    50,
-      50,    51,    51,    52,    53,    53,    53,    53,    54,    54,
-      55,    56,    56,    57,    57,    58,    58,    58,    58,    58,
-      58,    59,    59,    59,    59,    60,    60,    61,    61,    62,
-      62,    63,    63,    63,    64,    64,    64,    64,    64,    64,
+      50,    51,    51,    51,    52,    53,    53,    53,    53,    54,
+      54,    55,    56,    56,    57,    57,    58,    58,    58,    58,
+      58,    58,    59,    59,    59,    59,    60,    60,    61,    61,
+      62,    62,    63,    63,    63,    64,    64,    64,    64,    64,
       64,    64,    64,    64,    64,    64,    64,    64,    64,    64,
-      64,    65,    65,    66,    66,    66,    67,    67,    67,    67,
-      68
+      64,    64,    65,    65,    66,    66,    66,    67,    67,    67,
+      67,    68
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -802,13 +802,13 @@ static const yytype_uint8 yyr2[] =
 {
        0,     2,     2,     2,     0,    15,    14,    13,     6,     0,
        2,     2,     1,     2,     0,     3,     3,     4,     6,     6,
-       5,     0,     3,     2,     1,     1,     1,     1,     3,     4,
-       4,     2,     1,     2,     0,     3,     1,     1,     1,     1,
-       1,     7,     7,     7,     7,     5,     5,     5,     5,     4,
-       4,     7,     7,     7,     3,     3,     3,     3,     3,     3,
-       2,     3,     1,     1,     1,     1,     4,     4,     3,     6,
-       6,     1,     1,     0,     1,     3,     5,     5,     4,     5,
-       1
+       5,     0,     1,     3,     2,     1,     1,     1,     1,     3,
+       4,     4,     2,     1,     2,     0,     3,     1,     1,     1,
+       1,     1,     7,     7,     7,     7,     5,     5,     5,     5,
+       4,     4,     7,     7,     7,     3,     3,     3,     3,     3,
+       3,     2,     3,     1,     1,     1,     1,     4,     4,     3,
+       6,     6,     1,     1,     0,     1,     3,     5,     5,     4,
+       5,     1
 };
 
 
@@ -1668,191 +1668,191 @@ yyreduce:
     {
     processRule((yyloc), "VAR_AND_METHOD_DECLARATION");
     (yyvsp[0].varAndMethodDeclaration).varDeclList = new CVarDeclarationList(getLocation(), (yyvsp[-1].varDeclaration), (yyvsp[0].varAndMethodDeclaration).varDeclList);
+    (yyval.varAndMethodDeclaration) = (yyvsp[0].varAndMethodDeclaration);
 }
-#line 1673 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1674 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 155 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 156 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     (yyval.varAndMethodDeclaration).varDeclList = nullptr;
     (yyval.varAndMethodDeclaration).methodDeclList = (yyvsp[0].methodDeclarationList);
 }
-#line 1682 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1683 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 160 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 161 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     (yyval.methodDeclarationList) = new CMethodDeclarationList(getLocation(), (yyvsp[-1].methodDeclaration), (yyvsp[0].methodDeclarationList));
 }
-#line 1690 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1691 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 163 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 164 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     (yyval.methodDeclarationList) = nullptr;
 }
-#line 1698 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1699 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 167 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 168 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "VAR_DECLARATION");
     (yyval.varDeclaration) = new CVarDeclaration(getLocation(), (yyvsp[-2].type), (yyvsp[-1].identifier));
 }
-#line 1707 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1708 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 171 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 172 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "VAR_DECLARATION");
     delete (yyvsp[-1].identifier);
     (yyval.varDeclaration) = nullptr;
 }
-#line 1717 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1718 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 177 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 178 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "METHOD_DECLARATION");
     (yyval.methodDeclaration) = new CMethodDeclaration(getLocation(), (yyvsp[-3].methodHeaderDeclaration), (yyvsp[-1].methodBodyDeclaration));
 }
-#line 1726 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1727 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 182 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 183 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "METHOD_HEADER");
     (yyval.methodHeaderDeclaration) = new CMethodHeaderDeclaration(getLocation(), (yyvsp[-4].type), (yyvsp[-3].identifier), (yyvsp[-1].methodArgumentsList));
 }
-#line 1735 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1736 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 186 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 187 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "METHOD_HEADER");
     delete (yyvsp[-4].type);
     delete (yyvsp[-3].identifier);
     (yyval.methodHeaderDeclaration) = nullptr;
 }
-#line 1746 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1747 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 192 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 193 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "METHOD_HEADER");
     delete (yyvsp[-3].identifier);
     delete (yyvsp[-1].methodArgumentsList);
     (yyval.methodHeaderDeclaration) = nullptr;
 }
-#line 1757 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1758 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 199 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 200 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ARGS_DECLARATION");
     (yyval.methodArgumentsList) = nullptr;
 }
-#line 1766 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1767 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 203 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 204 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "ARGS_DECLARATION");
-    (yyval.methodArgumentsList) = new CMethodArgumentsList(getLocation(), (yyvsp[-2].varDeclaration), (yyvsp[0].methodArgumentsList));
-}
-#line 1775 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+     processRule((yyloc), "ARGS_DECLARATION");
+     (yyval.methodArgumentsList) = new CMethodArgumentsList(getLocation(), (yyvsp[0].varDeclaration), nullptr);
+ }
+#line 1776 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 208 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "PARAM_DECLARATION");
-    (yyval.varDeclaration) = new CVarDeclaration(getLocation(), (yyvsp[-1].type), (yyvsp[0].identifier));
+    processRule((yyloc), "ARGS_DECLARATION");
+    (yyval.methodArgumentsList) = new CMethodArgumentsList(getLocation(), (yyvsp[-2].varDeclaration), (yyvsp[0].methodArgumentsList));
 }
-#line 1784 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1785 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 213 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "INT_ARRAY");
-    (yyval.type) = (yyvsp[0].type);
+    processRule((yyloc), "PARAM_DECLARATION");
+    (yyval.varDeclaration) = new CVarDeclaration(getLocation(), (yyvsp[-1].type), (yyvsp[0].identifier));
 }
-#line 1793 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1794 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 217 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 218 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "INT_ARRAY");
+    (yyval.type) = (yyvsp[0].type);
+}
+#line 1803 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 26:
+#line 222 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "TYPE");
     (yyval.type) = new CType(getLocation(), T_BOOL, globalStorage.Get("boolean"));
 }
-#line 1802 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 26:
-#line 221 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "TYPE");
-    (yyval.type) = new CType(getLocation(), T_INT, globalStorage.Get("int"));
-}
-#line 1811 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1812 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 225 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 226 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "TYPE");
-    (yyval.type) = new CType(getLocation(), T_CLASS, (yyvsp[0].identifier)->Symbol);
-    delete (yyvsp[0].identifier);
+    (yyval.type) = new CType(getLocation(), T_INT, globalStorage.Get("int"));
 }
 #line 1821 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 231 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 230 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "TYPE");
+    (yyval.type) = new CType(getLocation(), T_CLASS, (yyvsp[0].identifier)->Symbol);
+    delete (yyvsp[0].identifier);
+}
+#line 1831 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 29:
+#line 236 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "INT_ARRAY");
     (yyval.type) = new CType(getLocation(), T_INT_ARRAY, globalStorage.Get("int[]"));
 }
-#line 1830 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 29:
-#line 235 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "INT_ARRAY");
-    (yyval.type) = nullptr;
-}
-#line 1839 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1840 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 240 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "METHOD_BODY");
-    (yyval.methodBodyDeclaration) = new CMethodBodyDeclaration(getLocation(), (yyvsp[-3].varAndStatementDeclaration).varDeclList, (yyvsp[-3].varAndStatementDeclaration).statementList, (yyvsp[-1].expression));
+    processRule((yyloc), "INT_ARRAY");
+    (yyval.type) = nullptr;
 }
-#line 1848 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1849 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 245 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS");
-    (yyvsp[0].varAndStatementDeclaration).varDeclList = new CVarDeclarationList(getLocation(), (yyvsp[-1].varDeclaration), (yyvsp[0].varAndStatementDeclaration).varDeclList);
-    (yyval.varAndStatementDeclaration) = (yyvsp[0].varAndStatementDeclaration);
+    processRule((yyloc), "METHOD_BODY");
+    (yyval.methodBodyDeclaration) = new CMethodBodyDeclaration(getLocation(), (yyvsp[-3].varAndStatementDeclaration).varDeclList, (yyvsp[-3].varAndStatementDeclaration).statementList, (yyvsp[-1].expression));
 }
 #line 1858 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
@@ -1861,457 +1861,467 @@ yyreduce:
 #line 250 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS");
-    (yyval.varAndStatementDeclaration).statementList = (yyvsp[0].statementList);
-    (yyval.varAndStatementDeclaration).varDeclList = nullptr;
+    (yyvsp[0].varAndStatementDeclaration).varDeclList = new CVarDeclarationList(getLocation(), (yyvsp[-1].varDeclaration), (yyvsp[0].varAndStatementDeclaration).varDeclList);
+    (yyval.varAndStatementDeclaration) = (yyvsp[0].varAndStatementDeclaration);
 }
 #line 1868 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 256 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 255 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "VAR_AND_STATEMENT_DECLARATIONS");
+    (yyval.varAndStatementDeclaration).statementList = (yyvsp[0].statementList);
+    (yyval.varAndStatementDeclaration).varDeclList = nullptr;
+}
+#line 1878 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 34:
+#line 261 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT_DECLARATION");
     (yyval.statementList) = new CStatementList(getLocation(), (yyvsp[-1].statement), (yyvsp[0].statementList));
 }
-#line 1877 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 34:
-#line 260 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "STATEMENT_DECLARATION");
-    (yyval.statementList) = nullptr;
-}
-#line 1886 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1887 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 265 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "STATEMENT");
-    (yyval.statement) = new CBracketStatement(getLocation(), (yyvsp[-1].statementList));
+    processRule((yyloc), "STATEMENT_DECLARATION");
+    (yyval.statementList) = nullptr;
 }
-#line 1895 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1896 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 269 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 270 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT");
-    (yyval.statement) = (yyvsp[0].statement);
+    (yyval.statement) = new CBracketStatement(getLocation(), (yyvsp[-1].statementList));
 }
-#line 1904 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1905 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 273 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 274 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT");
     (yyval.statement) = (yyvsp[0].statement);
 }
-#line 1913 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1914 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 277 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 278 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT");
     (yyval.statement) = (yyvsp[0].statement);
 }
-#line 1922 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1923 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 281 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 282 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT");
     (yyval.statement) = (yyvsp[0].statement);
 }
-#line 1931 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1932 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 285 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 286 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "STATEMENT");
     (yyval.statement) = (yyvsp[0].statement);
 }
-#line 1940 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1941 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 290 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "IF_STATEMENT");
-    (yyval.statement) = new CIfStatement(getLocation(), (yyvsp[-4].expression), (yyvsp[-2].statement), (yyvsp[0].statement));
+    processRule((yyloc), "STATEMENT");
+    (yyval.statement) = (yyvsp[0].statement);
 }
-#line 1949 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1950 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 294 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 295 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "IF_STATEMENT");
-    delete (yyvsp[-2].statement);
-    delete (yyvsp[0].statement);
-    (yyval.statement) = nullptr;
+    (yyval.statement) = new CIfStatement(getLocation(), (yyvsp[-4].expression), (yyvsp[-2].statement), (yyvsp[0].statement));
 }
-#line 1960 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1959 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 300 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 299 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "IF_STATEMENT");
+    delete (yyvsp[-2].statement);
+    delete (yyvsp[0].statement);
+    (yyval.statement) = nullptr;
+}
+#line 1970 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 44:
+#line 305 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "IF_STATEMENT");
     delete (yyvsp[-4].expression);
     delete (yyvsp[0].statement);
     (yyval.statement) = nullptr;
 }
-#line 1971 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1981 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 44:
-#line 306 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 45:
+#line 311 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "IF_STATEMENT");
     delete (yyvsp[-4].expression);
     delete (yyvsp[-2].statement);
     (yyval.statement) = nullptr;
 }
-#line 1982 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 1992 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 45:
-#line 313 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 46:
+#line 318 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "WHILE_STATEMENT");
     (yyval.statement) = new CWhileStatement(getLocation(), (yyvsp[-2].expression), (yyvsp[0].statement));
 }
-#line 1991 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 46:
-#line 317 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "WHILE_STATEMENT");
-    (yyval.statement) = nullptr;
-}
-#line 2000 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2001 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
 #line 322 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "PRINT_STATEMENT");
-    (yyval.statement) = new CPrintStatement(getLocation(), (yyvsp[-2].expression));
+    processRule((yyloc), "WHILE_STATEMENT");
+    (yyval.statement) = nullptr;
 }
-#line 2009 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2010 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 326 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 327 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PRINT_STATEMENT");
-    (yyval.statement) = nullptr;
+    (yyval.statement) = new CPrintStatement(getLocation(), (yyvsp[-2].expression));
 }
-#line 2018 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2019 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 331 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "ASSIGNMENT");
-    (yyval.statement) = new CAssignmentStatement(getLocation(), (yyvsp[-1].expression), (yyvsp[-3].identifier));
+    processRule((yyloc), "PRINT_STATEMENT");
+    (yyval.statement) = nullptr;
 }
-#line 2027 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2028 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 335 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 336 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ASSIGNMENT");
-    delete (yyvsp[-3].identifier);
-    (yyval.statement) = nullptr;
+    (yyval.statement) = new CAssignmentStatement(getLocation(), (yyvsp[-1].expression), (yyvsp[-3].identifier));
 }
 #line 2037 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 341 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 340 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "ASSIGNMENT");
+    delete (yyvsp[-3].identifier);
+    (yyval.statement) = nullptr;
+}
+#line 2047 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 52:
+#line 346 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ARRAY_ASSIGNMENT");
     (yyval.statement) = new CIntArrayAssignmentStatement(getLocation(), (yyvsp[-4].expression), (yyvsp[-1].expression), (yyvsp[-6].identifier));
 }
-#line 2046 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2056 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 52:
-#line 345 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 53:
+#line 350 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ARRAY_ASSIGNMENT");
     delete (yyvsp[-6].identifier);
     delete (yyvsp[-1].expression);
     (yyval.statement) = nullptr;
 }
-#line 2057 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2067 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 53:
-#line 351 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 54:
+#line 356 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ARRAY_ASSIGNMENT");
     delete (yyvsp[-6].identifier);
     delete (yyvsp[-4].expression);
     (yyval.statement) = nullptr;
 }
-#line 2068 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2078 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 54:
-#line 359 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 55:
+#line 364 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_PLUS);
 }
-#line 2077 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2087 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 55:
-#line 363 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 56:
+#line 368 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_MINUS);
 }
-#line 2086 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2096 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 56:
-#line 367 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 57:
+#line 372 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_MULTIPLICATION);
 }
-#line 2095 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2105 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 57:
-#line 371 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 58:
+#line 376 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_AND);
 }
-#line 2104 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2114 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 58:
-#line 375 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 59:
+#line 380 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_LESS);
 }
-#line 2113 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2123 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 59:
-#line 379 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 60:
+#line 384 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-2].expression), (yyvsp[0].expression), BE_EQUAL);
 }
-#line 2122 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2132 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 60:
-#line 383 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 61:
+#line 388 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CNotExpression(getLocation(), (yyvsp[0].expression));
 }
-#line 2131 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2141 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 61:
-#line 387 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 62:
+#line 392 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CLengthExpression(getLocation(), (yyvsp[-1].expression));
 }
-#line 2140 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2150 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 62:
-#line 391 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 63:
+#line 396 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = (yyvsp[0].expression);
 }
-#line 2149 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2159 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 63:
-#line 395 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 64:
+#line 400 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CVariable(getLocation(), (yyvsp[0].identifier));
 }
-#line 2158 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2168 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 64:
-#line 399 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 65:
+#line 404 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = new CVariable(getLocation(), new CIdentifier(getLocation(), globalStorage.Get("this")));
 }
-#line 2167 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2177 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 65:
-#line 403 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 66:
+#line 408 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
     (yyval.expression) = (yyvsp[0].constant);
 }
-#line 2176 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2186 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 66:
-#line 407 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 67:
+#line 412 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "INVOKE_EXPR");
     (yyval.expression) = new CBinaryExpression(getLocation(), (yyvsp[-3].expression), (yyvsp[-1].expression), BE_SQ_BRACKETS);
 }
-#line 2185 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2195 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 67:
-#line 411 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 68:
+#line 416 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "INVOKE_EXPR");
     (yyval.expression) = 0;
 }
-#line 2194 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2204 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 68:
-#line 415 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 69:
+#line 420 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "INVOKE_EXPR");
     (yyval.expression) = new CLengthExpression(getLocation(), (yyvsp[-2].expression));
 }
-#line 2203 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2213 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 69:
-#line 419 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 70:
+#line 424 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "INVOKE_EXPR");
     (yyval.expression) = new CInvocation(getLocation(), (yyvsp[-5].expression), (yyvsp[-3].identifier), (yyvsp[-1].expressionList));
 }
-#line 2212 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 70:
-#line 423 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "INVOKE_EXPR");
-    (yyval.expression) = 0;
-}
-#line 2221 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2222 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
 #line 428 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
-    processRule((yyloc), "CONSTANT");
-    (yyval.constant) = new CConstant(getLocation(), T_INT, yytext);
+    processRule((yyloc), "INVOKE_EXPR");
+    (yyval.expression) = 0;
 }
-#line 2230 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2231 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 432 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 433 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "CONSTANT");
-    (yyval.constant) = new CConstant(getLocation(), T_BOOL, yytext);
+    (yyval.constant) = new CConstant(getLocation(), new CType(getLocation(), T_INT, globalStorage.Get("int")), yytext);
 }
-#line 2239 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2240 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 438 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+#line 437 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "CONSTANT");
+    (yyval.constant) = new CConstant(getLocation(), new CType(getLocation(), T_BOOL, globalStorage.Get("bool")), yytext);
+}
+#line 2249 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 74:
+#line 443 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = 0;
 }
-#line 2248 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2258 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 74:
-#line 442 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 75:
+#line 447 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = new CExpressionList(getLocation(), (yyvsp[0].expression), 0);
 }
-#line 2257 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2267 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 75:
-#line 446 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 76:
+#line 451 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "PARAMS");
     (yyval.expressionList) = new CExpressionList(getLocation(), (yyvsp[0].expression), (yyvsp[-2].expressionList));
 }
-#line 2266 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2276 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 76:
-#line 452 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 77:
+#line 457 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = new CIntArrayNewExpression(getLocation(), (yyvsp[-1].expression));
 }
-#line 2275 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2285 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 77:
-#line 456 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 78:
+#line 461 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = 0;
 }
-#line 2284 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2294 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
-  case 78:
-#line 460 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+  case 79:
+#line 465 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
     (yyval.expression) = new CNewExpression(getLocation(), (yyvsp[-2].identifier));
 }
-#line 2293 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
-    break;
-
-  case 79:
-#line 464 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
-    {
-    processRule((yyloc), "NEW_EXPR");
-    (yyval.expression) = 0;
-}
-#line 2302 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2303 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
 #line 469 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "NEW_EXPR");
+    (yyval.expression) = 0;
+}
+#line 2312 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+    break;
+
+  case 81:
+#line 474 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
+    {
+    processRule((yyloc), "NEW_EXPR");
     (yyval.identifier) = new CIdentifier(getLocation(), globalStorage.Get(yytext));
 }
-#line 2311 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2321 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2315 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
+#line 2325 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2546,7 +2556,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 474 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
+#line 479 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1906  */
 
 
 extern void printError(Location location, const char *s);
