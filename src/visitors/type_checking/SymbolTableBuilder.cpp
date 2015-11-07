@@ -33,7 +33,10 @@ void CSymbolTableBuilder::Visit(const CLengthExpression *lengthExpression) {
 }
 
 void CSymbolTableBuilder::Visit(const CExpressionList *expressionList) {
-
+    if (expressionList != nullptr) {
+        expressionList->Expression->Accept(this);
+        expressionList->ExpressionList->Accept(this);
+    }
 }
 
 void CSymbolTableBuilder::Visit(const CIdentifier *identifier) {

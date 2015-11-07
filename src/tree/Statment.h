@@ -25,42 +25,43 @@ public:
     virtual void Accept(IVisitor* visit) const = 0;
 };
 
-class CBracketStatement : public IStatement {
-    const std::string name = "CBracketStatement";
-
-public:
-    CBracketStatement(Location location, IStatement* statement) :
-    IStatement(location),
-    Statement(statement) {}
-    virtual ~CBracketStatement() {
-        delete Statement;
-    }
-
-    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
-    virtual const std::string& GetName() const { return name; }
-
-    IStatement* Statement;
-};
-
 //( Statement )* by rule STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION
-class CStatementList : public IStatement {
+class CStatementList : public IToken {
     const std::string name = "CStatementList";
 
 public:
     CStatementList(Location location, IStatement* statement, CStatementList* next = nullptr) :
-            IStatement(location),
+            IToken(location),
             Statement(statement),
-            Next(next) {}
+            StatementList(next) {}
     virtual ~CStatementList() {
+        delete StatementList;
         delete Statement;
-        delete Next;
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
     virtual const std::string& GetName() const { return name; }
 
+    CStatementList* StatementList;
     IStatement* Statement;
-    CStatementList* Next;
+};
+
+
+class CBracketStatement : public IStatement {
+    const std::string name = "CBracketStatement";
+
+public:
+    CBracketStatement(Location location, CStatementList* statementList) :
+            IStatement(location),
+            StatementList(statementList) {}
+    virtual ~CBracketStatement() {
+        delete StatementList;
+    }
+
+    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
+
+    CStatementList* StatementList;
 };
 
 //"if" "(" Expression ")" Statement "else" Statement
