@@ -1,8 +1,14 @@
 #include <cstdio>
 #include <fstream>
+#include <iostream>
 #include "symbol/Symbol.h"
+#include "tree/MinijavaTree.h"
+#include "visitors/CPrinter2.hpp"
+#include "visitors/type_checking/TypeChecker.h"
+#include "visitors/type_checking/SymbolTableBuilder.h"
 
 Symbol::CStorage globalStorage;
+extern std::shared_ptr<CGoal> Goal;
 
 extern "C" {
     int yylex();
@@ -11,12 +17,6 @@ extern "C" {
 extern "C" FILE* yyin;
 
 extern int yyparse();
-
-#include <iostream>
-#include <vector>
-#include "tree/MinijavaTree.h"
-//#include "JavaHelp.h"
-//#include "tokens.h"
 
 using namespace std;
 
@@ -55,6 +55,11 @@ int main(int argc, const char* argv[])
 
     yyin = fopen(argv[1], "r");
     yyparse();
+    CPrinter2 printer2;
+    printer2.Visit(Goal.get());
+    CTable table;
+    CSymbolTableBuilder symbolTableBuilder(table);
+    symbolTableBuilder.Visit(Goal.get());
     return 0;
 }
 

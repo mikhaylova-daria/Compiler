@@ -37,9 +37,9 @@
     }
     void processRule(YYLTYPE loc, const char* ruleName) {
         setLocation(loc);
-        printf("%s ", ruleName);
-        currLocation.print();
-        printTextPart(currLocation);
+        //printf("%s ", ruleName);
+        //currLocation.print();
+        //printTextPart(currLocation);
     }
 
     std::shared_ptr<CGoal> Goal;
@@ -151,6 +151,7 @@ BASE_CLASS : {
 VAR_AND_METHOD_DECLARATION : VAR_DECLARATION VAR_AND_METHOD_DECLARATION {
     processRule(@$, "VAR_AND_METHOD_DECLARATION");
     $2.varDeclList = new CVarDeclarationList(getLocation(), $1, $2.varDeclList);
+    $$ = $2;
 }
 | METHOD_DECLARATION_LIST {
     $$.varDeclList = nullptr;
@@ -200,6 +201,10 @@ ARGS_DECLARATION : {
     processRule(@$, "ARGS_DECLARATION");
     $$ = nullptr;
 }
+| PARAM_DECLARATION {
+     processRule(@$, "ARGS_DECLARATION");
+     $$ = new CMethodArgumentsList(getLocation(), $1, nullptr);
+ }
 | PARAM_DECLARATION ',' ARGS_DECLARATION {
     processRule(@$, "ARGS_DECLARATION");
     $$ = new CMethodArgumentsList(getLocation(), $1, $3);
@@ -427,11 +432,11 @@ EXPR :
 
 CONSTANT : INT_VALUE {
     processRule(@$, "CONSTANT");
-    $$ = new CConstant(getLocation(), T_INT, yytext);
+    $$ = new CConstant(getLocation(), new CType(getLocation(), T_INT, globalStorage.Get("int")), yytext);
 }
 | BOOL_VALUE {
     processRule(@$, "CONSTANT");
-    $$ = new CConstant(getLocation(), T_BOOL, yytext);
+    $$ = new CConstant(getLocation(), new CType(getLocation(), T_BOOL, globalStorage.Get("bool")), yytext);
 }
 
 

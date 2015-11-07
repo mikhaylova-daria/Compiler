@@ -113,7 +113,7 @@ public:
 
 //	"System.out.println" "(" Expression ")" ";"
 class CPrintStatement : public IStatement {
-    const std::string name = "CWhileStatement";
+    const std::string name = "CPrintStatement";
 
 public:
     CPrintStatement(Location location, IExpression* expression) :

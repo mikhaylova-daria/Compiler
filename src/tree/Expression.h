@@ -36,14 +36,16 @@ class CConstant : public IExpression {
     const std::string name = "CConstant";
 
 public:
-    CConstant(const Location location, const TType type, const char* value) :
+    CConstant(const Location location, const CType* type, const char* value) :
             IExpression(location), Type(type), Value(value) { }
-    virtual ~CConstant() {}
+    virtual ~CConstant() {
+        delete Type;
+    }
 
     void Accept(IVisitor* visitor) const { visitor->Visit(this); }
 
     virtual const std::string& GetName() const { return name; }
-    const TType Type;
+    const CType* Type;
     const std::string Value;
 };
 

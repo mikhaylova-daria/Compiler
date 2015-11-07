@@ -12,37 +12,41 @@
 
 class CTypeInfo {
 public:
-    CTypeInfo(const CSymbol &ClassName, const TType &VarType) : ClassName(ClassName), VarType(VarType) { }
+    CTypeInfo(const CSymbol* typeName, TType VarType) : TypeName(typeName), VarType(VarType) { }
+    CTypeInfo() : TypeName(nullptr) {}
 
     TType VarType;
-    CSymbol ClassName;
+    const CSymbol* TypeName;
 };
 
 class CVarInfo {
 public:
-    CVarInfo(const CSymbol &VarName, const CTypeInfo &TypeInfo) : VarName(VarName), TypeInfo(TypeInfo) { }
+    CVarInfo(const CSymbol* varName, const CTypeInfo& typeInfo) : VarName(varName), TypeInfo(typeInfo) { }
+    CVarInfo() : VarName(nullptr) {}
 
-    CSymbol VarName;
+    const CSymbol* VarName;
     CTypeInfo TypeInfo;
 };
 
 class CMethodInfo {
 public:
-    CSymbol Name;
 
-    CMethodInfo(const CSymbol &Name, const std::vector<CVarInfo> &Arguments, const std::vector<CVarInfo> &Vars) :
+    CMethodInfo(const CSymbol* Name, const std::vector<CVarInfo> &Arguments, const std::vector<CVarInfo> &Vars) :
             Name(Name), Arguments(Arguments), Vars(Vars) { }
+    CMethodInfo() : Name(nullptr) {}
 
+    const CSymbol* Name;
     std::vector<CVarInfo> Arguments;
     std::vector<CVarInfo> Vars;
 };
 
 class CClassInfo {
 public:
-    CClassInfo(const CSymbol &Name, const std::vector<CVarInfo> &Vars, const std::vector<CMethodInfo> &Methods) :
-            Name(Name), Vars(Vars), Methods(Methods) { }
+    CClassInfo(const CSymbol *name, const std::vector<CVarInfo> &vars, const std::vector<CMethodInfo> &methods) :
+            Name(name), Vars(vars), Methods(methods) { }
+    CClassInfo() : Name(nullptr) {}
 
-    CSymbol Name;
+    const CSymbol* Name;
     std::vector<CVarInfo> Vars;
     std::vector<CMethodInfo> Methods;
 };

@@ -12,19 +12,34 @@ class ConsolePrinter {
 
 public:
     static void print( const std::string& what ) {
-	    std::cout << what << std::endl;
+	    std::cout << what;
     }
 
     static void printTab() {
 	    std::cout << "  ";
     }
 
-    static void print(TConstantType type) {
-	    if (type == TConstantType::CT_INT) {
-		    print("INT");
-	    } else if (type == TConstantType::CT_BOOL) {
-		    print("BOOL");
-	    }
+    static void printNewLine() {
+        std::cout << "\n";
+    }
+
+    static void print(TType type) {
+		switch (type) {
+			case T_INT :
+				print("INT");
+				break;
+			case T_BOOL :
+				print("BOOL");
+				break;
+			case T_INT_ARRAY :
+				print("INT_ARRAY");
+				break;
+			case T_CLASS :
+				print("CLASS");
+				break;
+			default:
+				assert(false);
+		}
     }
 
     static void print(TBinaryExpression type) {

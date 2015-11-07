@@ -10,13 +10,23 @@
 #include "Table.h"
 
 class CSymbolTableBuilder : public IVisitor {
-    CClassInfo currentCLass;
+    CClassInfo currentClass;
     CMethodInfo currentMethod;
-    CTable table;
+    CTable& table;
     CTypeInfo lastType;
-    CStorage storage;
+    enum TScope {
+        S_Global,
+        S_Class,
+        S_Function
+    };
+    //CStorage& storage;
 public:
+    CSymbolTableBuilder(CTable& table) : table(table) {}
     virtual ~CSymbolTableBuilder();
+
+    virtual void Visit(const CType* type) override;
+
+    virtual void Visit(const CVariable* variable) override;
 
     virtual void Visit(const CConstant *constant) override;
 
