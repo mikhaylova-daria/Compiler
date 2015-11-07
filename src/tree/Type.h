@@ -18,11 +18,11 @@
 |	Identifier  */
 
 enum TType {
-    T_UNDEFINED, //It's just to be here. Maybe somebody would need it
     T_INT,
     T_INT_ARRAY,
     T_BOOL,
-    T_CLASS
+    T_CLASS,
+    T_COUNT
 };
 
 class CType : public IToken {

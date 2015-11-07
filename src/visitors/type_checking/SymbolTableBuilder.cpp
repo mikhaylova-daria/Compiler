@@ -8,28 +8,28 @@ CSymbolTableBuilder::~CSymbolTableBuilder() {
 
 }
 
-void CSymbolTableBuilder::Visit(const CType* type) {
-    lastType = CTypeInfo(type->Name, type->Type);
+void CSymbolTableBuilder::Visit(const CType*) {
 }
 
 void CSymbolTableBuilder::Visit(const CVariable* variable) {
-
+    variable->Identifier->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CConstant *constant) {
-    lastType = CTypeInfo(constant->Type->Name, constant->Type->Type);
+    constant->Type->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CBinaryExpression *binaryExpression) {
-
+    binaryExpression->LeftExpr->Accept(this);
+    binaryExpression->RightExpr->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CNotExpression *notExpression) {
-
+    notExpression->Expression->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CLengthExpression *lengthExpression) {
-
+    lengthExpression->Expression->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CExpressionList *expressionList) {
@@ -39,20 +39,21 @@ void CSymbolTableBuilder::Visit(const CExpressionList *expressionList) {
     }
 }
 
-void CSymbolTableBuilder::Visit(const CIdentifier *identifier) {
+void CSymbolTableBuilder::Visit(const CIdentifier*) {
 
 }
 
 void CSymbolTableBuilder::Visit(const CInvocation *invocation) {
-
+    invocation->Expression->Accept(this);
+    invocation->Identifier->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CNewExpression *newExpression) {
-
+    newExpression->Id->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CIntArrayNewExpression *intArrayNewExpression) {
-
+    intArrayNewExpression->Expression->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CStatementList *statementList) {
@@ -97,8 +98,9 @@ void CSymbolTableBuilder::Visit(const CIntArrayAssignmentStatement *intArrayAssi
 void CSymbolTableBuilder::Visit(const CVarDeclaration *varDeclaration) {
     varDeclaration->Type->Accept(this);
 
-    CVarInfo varInfo(varDeclaration->Identifier->Symbol, lastType);
-    if (!checkVarDuplicateDefinition(currentValList, varInfo)) {
+    CTypeInfo typeInfo = CTypeInfo(varDeclaration->Type->Name, varDeclaration->Type->Type);
+    CVarInfo varInfo(varDeclaration->Identifier->Symbol, typeInfo);//lastType);
+    if (!checkDuplicateDefinition<CVarInfo,&CVarInfo::VarName>(currentValList, varInfo)) {
         processError("duplicate variable declaration", varDeclaration);
     }
     currentValList.push_back(varInfo);
@@ -143,13 +145,21 @@ void CSymbolTableBuilder::Visit(const CMethodBodyDeclaration *methodBodyDeclarat
 }
 
 void CSymbolTableBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
-    currentMethod = CMethodInfo(methodDeclaration->MethodHeaderDeclaration->MethodName->Symbol);
+    CType* returnType = methodDeclaration->MethodHeaderDeclaration->ReturnType;
+    CTypeInfo returnTypeInfo = CTypeInfo(returnType->Name, returnType->Type);
+    currentMethod = CMethodInfo(methodDeclaration->MethodHeaderDeclaration->MethodName->Symbol, returnTypeInfo);
+
     currentMethod.Arguments.swap(currentValList);
     methodDeclaration->MethodHeaderDeclaration->Accept(this);
     currentMethod.Arguments.swap(currentValList);
+
     currentMethod.Vars.swap(currentValList);
     methodDeclaration->MethodBodyDeclaration->Accept(this);
     currentMethod.Vars.swap(currentValList);
+
+    if (!checkDuplicateDefinition<CMethodInfo,&CMethodInfo::Name>(currentClass.Methods, currentMethod)) {
+        processError("duplicate class declaration", methodDeclaration);
+    }
     currentClass.Methods.push_back(currentMethod);
 }
 
@@ -176,6 +186,9 @@ void CSymbolTableBuilder::Visit(const CClassDeclaration *classDeclaration) {
         classDeclaration->MethodDeclarationList->Accept(this);
     }
 
+    if (!checkDuplicateDefinition<CClassInfo,&CClassInfo::Name>(table.Classes, currentClass)) {
+        processError("duplicate class declaration", classDeclaration);
+    }
     table.Classes.push_back(currentClass);
 }
 
