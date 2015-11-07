@@ -26,11 +26,7 @@ public:
 };
 
 class CBracketStatement : public IStatement {
-    std::string name = "CBracketStatement";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CBracketStatement";
 
 public:
     CBracketStatement(Location location, IStatement* statement) :
@@ -41,18 +37,14 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IStatement* Statement;
 };
 
 //( Statement )* by rule STATEMENT_DECLARATION : STATEMENT STATEMENT_DECLARATION
 class CStatementList : public IStatement {
-    std::string name = "CStatementList";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CStatementList";
 
 public:
     CStatementList(Location location, IStatement* statement, CStatementList* next = nullptr) :
@@ -65,6 +57,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IStatement* Statement;
     CStatementList* Next;
@@ -74,12 +67,7 @@ public:
 //First Statement is TrueStatement
 //Second Statement is FalseStatement
 class CIfStatement : public IStatement {
-    std::string name = "CIfStatement";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CIfStatement";
 
 public:
     CIfStatement(Location location, IExpression* expression, IStatement* trueStatement, IStatement* falseStatement) :
@@ -94,6 +82,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
     IStatement* TrueStatement;
@@ -102,11 +91,7 @@ public:
 
 //"while" "(" Expression ")" Statement
 class CWhileStatement : public IStatement {
-    std::string name = "CWhileStatement";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CWhileStatement";
 
 public:
     CWhileStatement(Location location, IExpression* expression, IStatement* statement) :
@@ -119,6 +104,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
     IStatement* Statement;
@@ -127,11 +113,8 @@ public:
 
 //	"System.out.println" "(" Expression ")" ";"
 class CPrintStatement : public IStatement {
-    std::string name = "CWhileStatement";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CWhileStatement";
+
 public:
     CPrintStatement(Location location, IExpression* expression) :
             IStatement(location),
@@ -141,18 +124,15 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
 };
 
 // Identifier "=" Expression ";
 class CAssignmentStatement : public IStatement {
-    std::string name = "CAssignmentStatement";
+    const std::string name = "CAssignmentStatement";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
             IStatement(location),
@@ -164,6 +144,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
     CIdentifier* Identifier;
@@ -174,12 +155,8 @@ public:
 // Second Expression is Expression
 
 class CIntArrayAssignmentStatement : public IStatement {
-    std::string name = "CIntArrayAssignmentStatement";
+    const std::string name = "CIntArrayAssignmentStatement";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CIntArrayAssignmentStatement(Location location, IExpression* expression,
                                  IExpression* index, CIdentifier* identifier) :
@@ -194,6 +171,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
     IExpression* Index;

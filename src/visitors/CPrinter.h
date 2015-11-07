@@ -14,10 +14,6 @@ public:
 
     virtual void Visit( const CConstant* constant );
 
-    virtual void Visit( const CBasicType* basicType );
-
-    virtual void Visit( const CClassType* classType );
-
     virtual void Visit( const CBinaryExpression* binaryExpression );
 
     virtual void Visit( const CNotExpression* notExpression );

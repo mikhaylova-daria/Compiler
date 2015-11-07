@@ -11,11 +11,8 @@
 
 // Arguments of function call
 class CExpressionList : public IToken {
-    std::string name = "CExpressionList";
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
+    const std::string name = "CExpressionList";
+
 public:
     CExpressionList(Location location, IExpression* expression, CExpressionList* expressionList) :
             IToken(location),
@@ -27,18 +24,16 @@ public:
     }
 
     void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
+
     const IExpression* Expression;
     const CExpressionList* ExpressionList;
 };
 
 //It's a dot. Rule  Expression "." Identifier "(" ( Expression ( "," Expression )* )?
 class CInvocation : public IExpression {
-    std::string name = "CInvocation";
+    const std::string name = "CInvocation";
 
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
 public:
     CInvocation(Location location, IExpression* expression, CIdentifier* identifier, CExpressionList* expressionList) :
         IExpression(location),
@@ -52,6 +47,7 @@ public:
     }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
     CIdentifier* Identifier;

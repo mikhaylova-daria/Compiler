@@ -76,7 +76,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 44 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1909  */
+#line 48 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1909  */
 
     IExpression* expression;
     CExpressionList* expressionList;
@@ -84,7 +84,7 @@ union YYSTYPE
     IStatement* statement;
     CStatementList* statementList;
     CMethodBodyDeclaration* methodBodyDeclaration;
-    IType* type;
+    CType* type;
     CVarDeclaration* varDeclaration;
     CMethodArgumentsList* methodArgumentsList;
     CMethodHeaderDeclaration* methodHeaderDeclaration;

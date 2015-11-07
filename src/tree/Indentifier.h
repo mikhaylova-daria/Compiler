@@ -7,34 +7,19 @@
 
 #include "Location.h"
 #include "Visitor.h"
-#include "Expression.h"
+#include "../symbol/Symbol.h"
 
-class CIdentifier : public IExpression {
-    std::string name = "CIdentifier";
+using namespace Symbol;
+
+class CIdentifier : public IToken {
+    const std::string name = "CIdentifier";
 
 public:
-    const std::string& GetName() const{
-	    return name;
-    }
-public:
-    CIdentifier(Location location, const char* id) : IExpression(location), Id(id) {}
+    CIdentifier(Location location, const CSymbol* symbol) : IToken(location), Symbol(symbol) {}
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
-    std::string Id;
+    const CSymbol* Symbol;
 };
-
-class CThisIdentifier : public CIdentifier {
-    std::string name = "CThisIdentifier";
-
-public:
-    const std::string& GetName() const {
-	    return name;
-    }
-public:
-    CThisIdentifier(Location location) : CIdentifier(location, "this") {}
-
-    virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
-};
-
 #endif //MINIJAVACOMPILER_INDENTIFIER_H
