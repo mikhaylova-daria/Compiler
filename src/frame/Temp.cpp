@@ -6,3 +6,9 @@
 int Temp::CLabel::nextUniqueId = 0;
 
 std::string Temp::CLabel::generatedNameStart = "CLabelGeneratedName";
+
+
+int Temp::CTemp::nextUniqueId = 0;
+
+std::string Temp::CTemp::generatedNameStart = "CTempGeneratedName";
+

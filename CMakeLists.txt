@@ -54,6 +54,9 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/visitors/type_checking/SymbolTableBuilder.h
         src/symbol/Symbol.h
         src/Utils/ConsolePrinter.hpp
-)
+        src/frame/Temp.hpp
+        src/frame/Temp.cpp
+        src/IR/tree/IRTree.hpp
+        src/IR/tree/Expressions.hpp src/IR/tree/Statements.hpp src/IR/translate/translate.hpp)
 
 add_executable(mjc ${SOURCE_FILES})
