@@ -391,7 +391,7 @@ EXPR :
 }
 | '(' EXPR ')' {
     processRule(@$, "EXPR");
-    $$ = new CLengthExpression(getLocation(), $2);
+    $$ = new CBracketExpression(getLocation(), $2);
 }
 | NEW_EXPR {
     processRule(@$, "EXPR");

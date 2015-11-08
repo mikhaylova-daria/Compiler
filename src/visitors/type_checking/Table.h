@@ -45,10 +45,11 @@ public:
 
 class CClassInfo {
 public:
-    CClassInfo(const CSymbol *name) : Name(name) { }
+    CClassInfo(const CSymbol* name, const CSymbol* base) : Name(name), Base(base) { }
     CClassInfo() : Name(nullptr) {}
 
     const CSymbol* Name;
+    const CSymbol* Base;
     std::vector<CVarInfo> Vars;
     std::vector<CMethodInfo> Methods;
 };

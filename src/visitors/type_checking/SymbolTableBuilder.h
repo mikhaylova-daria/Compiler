@@ -13,7 +13,7 @@ extern void printTextPart(Location loc, std::ostream &out);
 
 class CSymbolTableBuilder : public IVisitor {
 public:
-    CSymbolTableBuilder(CTable& table) : table(table) {}
+    CSymbolTableBuilder(CTable& table, CStorage& storage) : table(table), storage(storage) {}
     virtual ~CSymbolTableBuilder();
     virtual void Visit(const CType* type) override;
     virtual void Visit(const CVariable* variable) override;
@@ -49,11 +49,6 @@ public:
     bool IsError() { return isError; }
 
 private:
-    CClassInfo currentClass;
-    CMethodInfo currentMethod;
-    CTable& table;
-    std::vector<CVarInfo> currentValList;
-    bool isError = false;
     template<class T, const CSymbol* T::*NAME>
     bool checkDuplicateDefinition(const std::vector<T> &list, const T& object) {
         for (size_t i = 0; i < list.size(); i++) {
@@ -68,6 +63,13 @@ private:
         std::cerr << "Type error: " << reason << std::endl;
         printTextPart(token->location, std::cerr);
     }
+
+    CClassInfo currentClass;
+    CMethodInfo currentMethod;
+    CTable& table;
+    CStorage &storage;
+    std::vector<CVarInfo> currentValList;
+    bool isError = false;
 };
 
 

@@ -45,9 +45,13 @@ public:
     virtual void Visit(const CClassDeclarationList *classDeclarationList);
     virtual void Visit(const CGoal *goal);
 
+    bool IsError() {
+        return isError;
+    }
+
 private:
     void processError(const std::string& reason, const IToken* token) {
-        isError = false;
+        isError = true;
         std::cerr << "Type error: " << reason << std::endl;
         printTextPart(token->location, std::cerr);
     }
@@ -65,7 +69,7 @@ private:
 
     template<class T, const CSymbol* T::*NAME>
     bool isContain(const std::vector<T> &list, const CSymbol* symbol) {
-        return find<T,NAME>(list, symbol) == list.end();
+        return find<T,NAME>(list, symbol) != list.end();
     }
 
     bool isComplementaryTypes(const std::vector<CVarInfo>& varInfoList, const std::vector<CTypeInfo>& typeInfoList) {
@@ -80,13 +84,25 @@ private:
         return true;
     }
 
+    bool isCyclicInheritance(const CSymbol* classSymbol) {
+        auto classIterator = find<CClassInfo,&CClassInfo::Name>(table.Classes, classSymbol);
+        size_t counter = 0;
+        while (classSymbol != nullptr && classIterator != table.Classes.end() && counter <= table.Classes.size()) {
+            classSymbol = classIterator->Base;
+            classIterator = find<CClassInfo,&CClassInfo::Name>(table.Classes, classSymbol);
+            assert(!(classSymbol == nullptr && classIterator != table.Classes.end()));
+            counter++;
+        }
+        return counter > table.Classes.size();
+    }
+
     CClassInfo currentClass;
     CMethodInfo currentMethod;
     CTypeInfo lastType;
     std::vector<CTypeInfo> lastTypeList;
     const CTable& table;
     CStorage &storage;
-    bool isError;
+    bool isError = false;
 };
 
 
