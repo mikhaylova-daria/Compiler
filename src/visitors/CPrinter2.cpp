@@ -17,11 +17,9 @@ void CPrinter2::Visit( const CBinaryExpression* binaryExpression ) {
 
 void CPrinter2::Visit( const CType* type ) {
     ++treeDeep;
-	print( type->GetName() );
+	print( type->GetName() + " " + type->Name->GetName() );
 
-    print( type->Name->GetName() );
-
-	std::cout << type->Name->GetName() << " ";
+	//std::cout << type->Name->GetName() << " ";
     --treeDeep;
 }
 
@@ -29,7 +27,7 @@ void CPrinter2::Visit( const CVariable* variable ) {
     ++treeDeep;
 
     print( variable->GetName() );
-	std::cout << variable->Identifier->GetName()<<" ";
+	//std::cout << variable->Identifier->GetName()<<" ";
     variable->Identifier->Accept( this );
     --treeDeep;
 }
@@ -148,8 +146,8 @@ void CPrinter2::Visit( const CStatementList* statementList ) {
 void CPrinter2::Visit( const CVarDeclaration* varDeclaration ) {
     ++treeDeep;
 	print( varDeclaration->GetName());
-	printTabs();
-	std::cout << varDeclaration->Type->Name->GetName() << " " << varDeclaration->Identifier->Symbol->GetName() <<";"<<std::endl;
+	//printTabs();
+	//std::cout << varDeclaration->Type->Name->GetName() << " " << varDeclaration->Identifier->Symbol->GetName() <<";"<<std::endl;
 	varDeclaration->Type->Accept( this );
 	varDeclaration->Identifier->Accept( this );
     --treeDeep;
@@ -312,8 +310,8 @@ void CPrinter2::Visit( const CMainClass* mainClass ) {
     ++treeDeep;
 	print( mainClass->GetName());
 
-	std::cout << "class " << mainClass->ClassName->Symbol->GetName() << " {" << std::endl;
-	std::cout << "\tpublic static void main( String[] " << mainClass->ArgumentName->Symbol->GetName() << " ) {" << std::endl;
+	//std::cout << "class " << mainClass->ClassName->Symbol->GetName() << " {" << std::endl;
+	//std::cout << "\tpublic static void main( String[] " << mainClass->ArgumentName->Symbol->GetName() << " ) {" << std::endl;
 	mainClass->ClassName->Accept( this );
 	
 	mainClass->ArgumentName->Accept( this );
