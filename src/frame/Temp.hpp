@@ -21,7 +21,7 @@ namespace Temp {
 	    CLabel( const Symbol::CSymbol* symbol ) : name( name ) { }
 
 	    const std::string& GetName() const {
-		    name->GetName();
+		    return name->GetName();
 	    }
 
 	private:
@@ -42,7 +42,7 @@ namespace Temp {
         CTemp( const Symbol::CSymbol* symbol ) : name( name ) { }
 
         const std::string& GetName() const {
-	        name->GetName();
+	        return name->GetName();
         }
 
     private:
@@ -52,7 +52,7 @@ namespace Temp {
         static std::string generatedNameStart;
 
     };
-	
+
 
 }
 
