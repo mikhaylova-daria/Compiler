@@ -15,20 +15,31 @@ void CTypeChecker::Visit(const CType* type) {
 
 void CTypeChecker::Visit(const CVariable* variable) {
     variable->Identifier->Accept(this);
-    if (!isContain<CVarInfo,&CVarInfo::VarName>(currentMethod.Arguments, variable->Identifier->Symbol)
-                && !isContain<CVarInfo,&CVarInfo::VarName>(currentMethod.Vars, variable->Identifier->Symbol)
-                && !isContain<CVarInfo,&CVarInfo::VarName>(currentClass.Vars, variable->Identifier->Symbol)) {
-        processError("undefined variable '" + variable->Identifier->Symbol->GetName() + "'", variable);
-    }
     const CSymbol* vasSymbol = variable->Identifier->Symbol;
     auto varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Arguments, vasSymbol);
     if (varIterator == currentMethod.Arguments.end()) {
         varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Vars, vasSymbol);
         if (varIterator == currentMethod.Vars.end()) {
-            varIterator = find<CVarInfo,&CVarInfo::VarName>(currentClass.Vars, vasSymbol);
+            varIterator = find<CVarInfo, &CVarInfo::VarName>(currentClass.Vars, vasSymbol);
             if (varIterator == currentClass.Vars.end()) {
-                processError("undefined varialbe '" + vasSymbol->GetName() + "'", variable);
-                return;
+                const CSymbol *classSymbol = currentClass.Base;
+                bool isFound = false;
+                for (size_t i = 0; i < table.Classes.size(); i++) {
+                    auto classIterator = find<CClassInfo, &CClassInfo::Name>(table.Classes, classSymbol);
+                    if (classIterator == table.Classes.end()) {
+                        break;
+                    }
+                    varIterator = find<CVarInfo, &CVarInfo::VarName>(classIterator->Vars, vasSymbol);
+                    if (varIterator != classIterator->Vars.end()) {
+                        isFound = true;
+                        break;
+                    }
+                    classSymbol = classIterator->Base;
+                }
+                if (!isFound) {
+                    processError("undefined varialbe '" + vasSymbol->GetName() + "'", variable);
+                    return;
+                }
             }
         }
     }
@@ -45,7 +56,7 @@ void CTypeChecker::Visit(const CBinaryExpression *binaryExpression) {
     CTypeInfo typeInfo = lastType;
     binaryExpression->RightExpr->Accept(this);
 
-    static_assert(TType::T_COUNT == 4, "TType switch failed");
+    static_assert(TBinaryExpression::BE_COUNT == 7, "TBinaryExpression switch failed");
     switch (binaryExpression->BinaryExpressionType) {
         case TBinaryExpression::BE_AND :
         case TBinaryExpression::BE_EQUAL :
@@ -125,13 +136,29 @@ void CTypeChecker::Visit(const CInvocation *invocation) {
     const CClassInfo& classInfo = *classIterator;
 
     invocation->Identifier->Accept(this);
+    const CSymbol* methodSymbol = invocation->Identifier->Symbol;
     auto methodIterator = find<CMethodInfo,&CMethodInfo::Name>(classInfo.Methods, invocation->Identifier->Symbol);
     if (methodIterator == classInfo.Methods.end()) {
-        processError("unable to find method '" + invocation->Identifier->Symbol->GetName() + "' in class '"
-                + classInfo.Name->GetName() + "'", invocation);
-        invocation->ExpressionList->Accept(this);
-        lastType = CTypeInfo(storage.Get("int"), TType::T_INT);
-        return;
+        const CSymbol* classSymbol = currentClass.Base;
+        bool isFound = false;
+        for (size_t i = 0; i < table.Classes.size(); i++) {
+            auto baseIterator = find<CClassInfo, &CClassInfo::Name>(table.Classes, classSymbol);
+            if (baseIterator == table.Classes.end()) {
+                break;
+            }
+            methodIterator = find<CMethodInfo, &CMethodInfo::Name>(baseIterator->Methods, methodSymbol);
+            if (methodIterator != baseIterator->Methods.end()) {
+                isFound = true;
+                break;
+            }
+            classSymbol = baseIterator->Base;
+        }
+        if (!isFound) {
+            processError("unable to find method '" + methodSymbol->GetName() + "'", invocation);
+            invocation->ExpressionList->Accept(this);
+            lastType = CTypeInfo(storage.Get("int"), TType::T_INT);
+            return;
+        }
     }
     const CMethodInfo& methodInfo = *methodIterator;
 
@@ -201,23 +228,10 @@ void CTypeChecker::Visit(const CPrintStatement *printStatement) {
 }
 
 void CTypeChecker::Visit(const CAssignmentStatement *assignmentStatement) {
-    assignmentStatement->Identifier->Accept(this);
+    assignmentStatement->Variable->Accept(this);
+    CTypeInfo variableType = lastType;
     assignmentStatement->Expression->Accept(this);
-
-    const CSymbol* vasSymbol = assignmentStatement->Identifier->Symbol;
-    auto varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Arguments, vasSymbol);
-    if (varIterator == currentMethod.Arguments.end()) {
-        varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Vars, vasSymbol);
-        if (varIterator == currentMethod.Vars.end()) {
-            varIterator = find<CVarInfo,&CVarInfo::VarName>(currentClass.Vars, vasSymbol);
-            if (varIterator == currentClass.Vars.end()) {
-                processError("undefined varialbe '" + vasSymbol->GetName() + "'", assignmentStatement);
-                return;
-            }
-        }
-    }
-    const CVarInfo& varInfo = *varIterator;
-    if (varInfo.TypeInfo != lastType) {
+    if (variableType != lastType) {
         processError("different types", assignmentStatement);
     }
 }
@@ -231,23 +245,9 @@ void CTypeChecker::Visit(const CIntArrayAssignmentStatement *intArrayAssignmentS
     if (lastType.VarType != TType::T_INT) {
         processError("expected int type value", intArrayAssignmentStatement);
     }
-
-    const CSymbol* vasSymbol = intArrayAssignmentStatement->Identifier->Symbol;
-    auto varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Arguments, vasSymbol);
-    if (varIterator == currentMethod.Arguments.end()) {
-        varIterator = find<CVarInfo,&CVarInfo::VarName>(currentMethod.Vars, vasSymbol);
-        if (varIterator == currentMethod.Vars.end()) {
-            varIterator = find<CVarInfo,&CVarInfo::VarName>(currentClass.Vars, vasSymbol);
-            if (varIterator == currentClass.Vars.end()) {
-                processError("undefined varialbe '" + vasSymbol->GetName() + "'", intArrayAssignmentStatement);
-                return;
-            }
-        }
-    }
-    const CVarInfo& varInfo = *varIterator;
-
-    if (varInfo.TypeInfo.VarType != TType::T_INT_ARRAY) {
-        processError("different types", intArrayAssignmentStatement);
+    intArrayAssignmentStatement->Variable->Accept(this);
+    if (lastType.VarType != TType::T_INT_ARRAY) {
+        processError("expected int[] type variable", intArrayAssignmentStatement);
     }
 }
 

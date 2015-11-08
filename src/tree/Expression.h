@@ -59,7 +59,8 @@ enum TBinaryExpression {
     BE_AND,
     BE_EQUAL,
     //squere brackets
-    BE_SQ_BRACKETS
+    BE_SQ_BRACKETS,
+    BE_COUNT
 };
 
 class CBinaryExpression : public IExpression {

@@ -86,11 +86,11 @@ void CSymbolTableBuilder::Visit(const CPrintStatement *printStatement) {
 
 void CSymbolTableBuilder::Visit(const CAssignmentStatement *assignmentStatement) {
     assignmentStatement->Expression->Accept(this);
-    assignmentStatement->Identifier->Accept(this);
+    assignmentStatement->Variable->Accept(this);
 }
 
 void CSymbolTableBuilder::Visit(const CIntArrayAssignmentStatement *intArrayAssignmentStatement) {
-    intArrayAssignmentStatement->Identifier->Accept(this);
+    intArrayAssignmentStatement->Variable->Accept(this);
     intArrayAssignmentStatement->Expression->Accept(this);
     intArrayAssignmentStatement->Index->Accept(this);
 }

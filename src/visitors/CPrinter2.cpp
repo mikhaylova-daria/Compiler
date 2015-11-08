@@ -191,7 +191,7 @@ void CPrinter2::Visit( const CAssignmentStatement* assignmentStatement ) {
 	print( assignmentStatement->GetName());
 
 	
-	assignmentStatement->Identifier->Accept( this );
+	assignmentStatement->Variable->Accept( this );
 	
 	assignmentStatement->Expression->Accept( this );
     --treeDeep;
@@ -201,7 +201,7 @@ void CPrinter2::Visit( const CIntArrayAssignmentStatement* intArrayAssignmentSta
 	print( intArrayAssignmentStatement->GetName());
 
 	
-	intArrayAssignmentStatement->Identifier->Accept( this );
+	intArrayAssignmentStatement->Variable->Accept( this );
 	
 	intArrayAssignmentStatement->Index->Accept( this );
 	

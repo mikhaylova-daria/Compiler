@@ -2031,7 +2031,7 @@ yyreduce:
 #line 336 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ASSIGNMENT");
-    (yyval.statement) = new CAssignmentStatement(getLocation(), (yyvsp[-1].expression), (yyvsp[-3].identifier));
+    (yyval.statement) = new CAssignmentStatement(getLocation(), (yyvsp[-1].expression), new CVariable(getLocation(), (yyvsp[-3].identifier)));
 }
 #line 2037 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
@@ -2050,7 +2050,7 @@ yyreduce:
 #line 346 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "ARRAY_ASSIGNMENT");
-    (yyval.statement) = new CIntArrayAssignmentStatement(getLocation(), (yyvsp[-4].expression), (yyvsp[-1].expression), (yyvsp[-6].identifier));
+    (yyval.statement) = new CIntArrayAssignmentStatement(getLocation(), (yyvsp[-4].expression), (yyvsp[-1].expression), new CVariable(getLocation(), (yyvsp[-6].identifier)));
 }
 #line 2056 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;

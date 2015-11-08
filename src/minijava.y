@@ -335,7 +335,7 @@ PRINT_STATEMENT : PRINT '(' EXPR ')' ';' {
 
 ASSIGNMENT : ID '=' EXPR ';' {
     processRule(@$, "ASSIGNMENT");
-    $$ = new CAssignmentStatement(getLocation(), $3, $1);
+    $$ = new CAssignmentStatement(getLocation(), $3, new CVariable(getLocation(), $1));
 }
 | ID '=' error ';' {
     processRule(@$, "ASSIGNMENT");
@@ -345,7 +345,7 @@ ASSIGNMENT : ID '=' EXPR ';' {
 
 ARRAY_ASSIGNMENT : ID '[' EXPR ']' '=' EXPR ';' {
     processRule(@$, "ARRAY_ASSIGNMENT");
-    $$ = new CIntArrayAssignmentStatement(getLocation(), $3, $6, $1);
+    $$ = new CIntArrayAssignmentStatement(getLocation(), $3, $6, new CVariable(getLocation(), $1));
 }
 | ID '[' error ']' '=' EXPR ';' {
     processRule(@$, "ARRAY_ASSIGNMENT");

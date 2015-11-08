@@ -135,20 +135,20 @@ class CAssignmentStatement : public IStatement {
     const std::string name = "CAssignmentStatement";
 
 public:
-    CAssignmentStatement(Location location, IExpression* expression, CIdentifier* identifier) :
+    CAssignmentStatement(Location location, IExpression* expression, CVariable* variable) :
             IStatement(location),
             Expression(expression),
-            Identifier(identifier) {}
+            Variable(variable) {}
     virtual ~CAssignmentStatement() {
         delete Expression;
-        delete Identifier;
+        delete Variable;
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
     virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
-    CIdentifier* Identifier;
+    CVariable* Variable;
 };
 
 //Identifier "[" Expression "]" "=" Expression ";"
@@ -160,15 +160,15 @@ class CIntArrayAssignmentStatement : public IStatement {
 
 public:
     CIntArrayAssignmentStatement(Location location, IExpression* expression,
-                                 IExpression* index, CIdentifier* identifier) :
+                                 IExpression* index, CVariable* variable) :
 		    IStatement(location),
 		    Expression(expression),
 		    Index(index),
-		    Identifier(identifier) {}
+            Variable(variable) {}
     virtual ~CIntArrayAssignmentStatement() {
 	    delete Expression;
 	    delete Index;
-	    delete Identifier;
+	    delete Variable;
     }
 
     virtual void Accept(IVisitor* visitor) const { return visitor->Visit(this); }
@@ -176,7 +176,7 @@ public:
 
     IExpression* Expression;
     IExpression* Index;
-    CIdentifier* Identifier;
+    CVariable* Variable;
 };
 
 #endif //MINIJAVACOMPILER_STATMENT_H
