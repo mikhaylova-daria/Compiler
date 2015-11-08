@@ -183,9 +183,8 @@ void CSymbolTableBuilder::Visit(const CClassDeclaration *classDeclaration) {
         currentClass.Vars.swap(currentValList);
         classDeclaration->VarDeclarationList->Accept(this);
         currentClass.Vars.swap(currentValList);
-        currentClass.Vars.push_back(CVarInfo(storage.Get("this"), CTypeInfo(currentClass.Name, TType::T_CLASS)));
-
     }
+    currentClass.Vars.push_back(CVarInfo(storage.Get("this"), CTypeInfo(currentClass.Name, TType::T_CLASS)));
     if (classDeclaration->MethodDeclarationList != nullptr) {
         classDeclaration->MethodDeclarationList->Accept(this);
     }

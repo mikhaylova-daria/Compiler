@@ -436,7 +436,7 @@ CONSTANT : INT_VALUE {
 }
 | BOOL_VALUE {
     processRule(@$, "CONSTANT");
-    $$ = new CConstant(getLocation(), new CType(getLocation(), T_BOOL, globalStorage.Get("bool")), yytext);
+    $$ = new CConstant(getLocation(), new CType(getLocation(), T_BOOL, globalStorage.Get("boolean")), yytext);
 }
 
 
@@ -448,9 +448,9 @@ PARAMS : {
     processRule(@$, "PARAMS");
     $$ = new CExpressionList(getLocation(), $1, 0);
 }
-| PARAMS ',' EXPR {
+| EXPR ',' PARAMS{
     processRule(@$, "PARAMS");
-    $$ = new CExpressionList(getLocation(), $3, $1);
+    $$ = new CExpressionList(getLocation(), $1, $3);
 }
 
 NEW_EXPR :

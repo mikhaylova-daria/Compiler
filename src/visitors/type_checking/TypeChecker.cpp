@@ -48,7 +48,6 @@ void CTypeChecker::Visit(const CVariable* variable) {
 
 void CTypeChecker::Visit(const CConstant *constant) {
     constant->Type->Accept(this);
-    lastType = CTypeInfo(constant->Type->Name, constant->Type->Type);
 }
 
 void CTypeChecker::Visit(const CBinaryExpression *binaryExpression) {
@@ -97,8 +96,8 @@ void CTypeChecker::Visit(const CNotExpression *notExpression) {
 
 void CTypeChecker::Visit(const CLengthExpression *lengthExpression) {
     lengthExpression->Expression->Accept(this);
-    if (lastType.VarType != TType::T_CLASS) {
-        processError("expected class expression", lengthExpression);
+    if (lastType.VarType != TType::T_INT_ARRAY) {
+        processError("expected int[] type expression", lengthExpression);
     }
     lastType = CTypeInfo(storage.Get("int"), TType::T_INT);
 }
@@ -167,7 +166,7 @@ void CTypeChecker::Visit(const CInvocation *invocation) {
         invocation->ExpressionList->Accept(this);
     }
     if (!isComplementaryTypes(methodInfo.Arguments, lastTypeList)) {
-        processError("invalid invoation arguments type", invocation);
+        processError("invalid invocation arguments type", invocation);
     }
     lastType = methodInfo.ReturnType;
 }
