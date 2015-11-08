@@ -58,18 +58,17 @@ int main(int argc, const char* argv[])
     CPrinter2 printer2;
     printer2.Visit(Goal.get());
     CTable table;
-    CSymbolTableBuilder symbolTableBuilder(table);
+    CSymbolTableBuilder symbolTableBuilder(table, globalStorage);
     symbolTableBuilder.Visit(Goal.get());
-    return 0;
-}
-
-/*
-int main(int argc, char **argv) {
-    if (argc != 2) {
-        cerr << "USING: mjc filename";
+    if (symbolTableBuilder.IsError()) {
+        std::cout << "type error" << std::endl;
         return -1;
     }
-    freopen(argv[1], "r", stdin);
-    return yyparse();
+    CTypeChecker typeChecker(table, globalStorage);
+    typeChecker.Visit(Goal.get());
+    if (typeChecker.IsError()) {
+        std::cout << "type error" << std::endl;
+        return -1;
+    }
+    return 0;
 }
- */

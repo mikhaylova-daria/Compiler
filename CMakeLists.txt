@@ -45,8 +45,6 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/tree/Statment.h
         src/tree/Declaration.h
         src/tree/TreeBuildHelp.h
-        src/visitors/CPrinter.h
-        src/visitors/CPrinter.cpp
         src/visitors/CPrinter2.cpp
         src/visitors/CPrinter2.hpp
         src/visitors/type_checking/TypeChecker.cpp
