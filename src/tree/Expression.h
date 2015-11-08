@@ -7,6 +7,7 @@
 
 #include "Location.h"
 #include "Visitor.h"
+#include "Type.h"
 
 class IExpression : public IToken {
 public:
@@ -16,6 +17,39 @@ public:
     virtual void Accept(IVisitor* visitor) const = 0;
 };
 
+class CVariable : public IExpression {
+    const std::string name = "CVariable";
+
+public:
+    CVariable(Location location, CIdentifier* identifier) : IExpression(location), Identifier(identifier) {}
+    ~CVariable() {
+        delete Identifier;
+    }
+
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
+
+    CIdentifier* Identifier;
+};
+
+class CConstant : public IExpression {
+    const std::string name = "CConstant";
+
+public:
+    CConstant(const Location location, const CType* type, const char* value) :
+            IExpression(location), Type(type), Value(value) { }
+    virtual ~CConstant() {
+        delete Type;
+    }
+
+    void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+
+    virtual const std::string& GetName() const { return name; }
+    const CType* Type;
+    const std::string Value;
+};
+
+
 //Types of binary expression
 enum TBinaryExpression {
     BE_PLUS,
@@ -23,11 +57,14 @@ enum TBinaryExpression {
     BE_MULTIPLICATION,
     BE_LESS,
     BE_AND,
+    BE_EQUAL,
     //squere brackets
     BE_SQ_BRACKETS
 };
 
 class CBinaryExpression : public IExpression {
+    const std::string name = "CBinaryExpression";
+
 public:
     CBinaryExpression(Location location, const IExpression* leftExpr,
                       const IExpression* rightExpr, TBinaryExpression type) :
@@ -36,31 +73,53 @@ public:
             RightExpr(rightExpr),
             BinaryExpressionType(type) {}
 
-    const IExpression* LeftExpr;
-    const IExpression* RightExpr;
-    TBinaryExpression BinaryExpressionType;
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
     virtual ~CBinaryExpression() {
         delete LeftExpr;
         delete RightExpr;
     }
+
+    const IExpression* LeftExpr;
+    const IExpression* RightExpr;
+    TBinaryExpression BinaryExpressionType;
 };
 
 class CNotExpression : public IExpression {
+    const std::string name = "CNotExpression";
+
 public:
     CNotExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CNotExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
 };
 
 class CLengthExpression : public IExpression {
+    const std::string name = "CLengthExpression";
+
+public:
     CLengthExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
     virtual ~CLengthExpression() { delete Expression; }
 
     virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
+
+    IExpression* Expression;
+};
+
+class CBracketExpression : public IExpression {
+    const std::string name = "CBracketExpression";
+
+public:
+    CBracketExpression(Location location, IExpression* expression) : IExpression(location), Expression(expression) {}
+    virtual ~CBracketExpression() { delete Expression; }
+
+    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
+    virtual const std::string& GetName() const { return name; }
 
     IExpression* Expression;
 };

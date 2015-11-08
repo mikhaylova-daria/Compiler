@@ -5,8 +5,6 @@
 #ifndef MINIJAVACOMPILER_MINIJAVATREE_H
 #define MINIJAVACOMPILER_MINIJAVATREE_H
 
-#include "Assignment.h"
-#include "Constant.h"
 #include "Declaration.h"
 #include "Expression.h"
 #include "Indentifier.h"

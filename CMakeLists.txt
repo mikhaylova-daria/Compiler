@@ -32,4 +32,32 @@ ENDIF()
 
 set(SOURCE_FILES ${BisonOutput} ${FlexOutput} src/main.cpp src/tokens_processing.cpp src/tokens_processing.h src/Declaration.h src/JavaHelp.h src/Utils.cpp src/tree/MinijavaTree.h src/tree/Location.h src/tree/Visitor.h src/tree/Type.h src/tree/Constant.h src/tree/Expression.h src/tree/Invocation.h src/tree/Indentifier.h src/tree/Assignment.h src/tree/NewExpression.h src/tree/Statment.h src/tree/Declaration.h src/tree/CPrinter.cpp src/tree/CPrinter.h)
 
+set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
+        src/main.cpp src/tokens_processing.cpp
+        src/tokens_processing.h src/Declaration.h
+        src/JavaHelp.h src/Utils.cpp
+        src/tree/MinijavaTree.h
+        src/tree/Location.h
+        src/tree/Visitor.h
+        src/tree/Type.h
+        src/tree/Expression.h
+        src/tree/Invocation.h
+        src/tree/Indentifier.h
+        src/tree/NewExpression.h
+        src/tree/Statment.h
+        src/tree/Declaration.h
+        src/tree/TreeBuildHelp.h
+        src/visitors/CPrinter.h
+        src/visitors/CPrinter.cpp
+        src/visitors/CPrinter2.cpp
+        src/visitors/CPrinter2.hpp
+        src/visitors/type_checking/TypeChecker.cpp
+        src/visitors/type_checking/TypeChecker.h
+        src/visitors/type_checking/Table.h
+        src/visitors/type_checking/SymbolTableBuilder.cpp
+        src/visitors/type_checking/SymbolTableBuilder.h
+        src/symbol/Symbol.h
+        src/Utils/ConsolePrinter.hpp
+)
+
 add_executable(mjc ${SOURCE_FILES})

@@ -8,6 +8,8 @@
 #include <cassert>
 #include "Location.h"
 #include "Visitor.h"
+#include "Indentifier.h"
+#include "../symbol/Symbol.h"
 
 /* IType is an interface all types should implement according to the rule
  Type ::="int" "[" "]"
@@ -23,39 +25,17 @@ enum TType {
     T_CLASS
 };
 
-class IType : public IToken {
+class CType : public IToken {
+    const std::string name = "CType";
 public:
-    IType(Location location, TType type) : IToken(location), Type(type) {}
-    virtual ~IType() {}
+    CType(Location location, TType type, const CSymbol* symbol) : IToken(location), Type(type), Name(symbol) {}
+    virtual ~CType() {}
+
+    virtual void Accept(IVisitor* visit) { visit->Visit(this); }
+    const std::string& GetName() const { return name; }
 
     TType Type;
-    virtual void Accept(IVisitor* visit) const = 0;
-};
-
-//All types in one
-/*  Type ::="int" "[" "]"
-|	"boolean"
-|	"int" */
-
-class CBasicType : public IType {
-public:
-    CBasicType(Location location, TType type) : IType(location, type) {
-        assert(type == T_INT || type == T_INT_ARRAY || type == T_BOOL);
-    }
-    virtual ~CBasicType() {}
-    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
-};
-
-//Class type
-/* Type ::= Identifier */
-class CClassType : public IType {
-public:
-    CClassType(Location location, const char* className) :
-            IType(location, T_CLASS),
-            ClassName(className) {}
-    virtual ~CClassType() {}
-    virtual void Accept(IVisitor* visitor) const { visitor->Visit(this); }
-    const std::string ClassName;
+    const CSymbol* Name;
 };
 
 #endif //MINIJAVACOMPILER_TYPE_H

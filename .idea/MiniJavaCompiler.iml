@@ -6,13 +6,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Declaration.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/JavaHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Utils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Utils/ConsolePrinter.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/bison.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/flex.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/symbol/Symbol.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tokens_processing.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tokens_processing.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/tree/Assignment.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/tree/Constant.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Declaration.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Expression.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Indentifier.h" isTestSource="false" />
@@ -21,8 +21,18 @@
       <sourceFolder url="file://$MODULE_DIR$/src/tree/MinijavaTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/NewExpression.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Statment.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/tree/TreeBuildHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Visitor.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/Table.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/TypeChecker.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/TypeChecker.h" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
     </content>
     <orderEntry type="inheritedJdk" />

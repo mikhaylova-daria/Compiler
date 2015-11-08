@@ -6,6 +6,7 @@
 #define MINIJAVACOMPILER_LOCATION_H
 
 #include <iostream>
+#include <typeinfo>
 
 struct Location  {
     int firstLine;
@@ -32,7 +33,7 @@ class IToken {
 public:
     Location location;
     IToken(const Location &location) : location(location) {}
-    virtual ~IToken() = 0 {}
+    virtual ~IToken() {}
 };
 
 #endif //MINIJAVACOMPILER_LOCATION_H

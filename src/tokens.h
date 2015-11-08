@@ -60,26 +60,46 @@ extern int yydebug;
     THIS = 270,
     INT = 271,
     BOOL = 272,
-    ID = 273,
-    INT_VALUE = 274,
-    BOOL_VALUE = 275,
-    OR = 276,
-    AND = 277,
-    GE = 278,
-    LE = 279,
-    GT = 280,
-    LT = 281,
-    EQ = 282,
-    NEQ = 283,
-    NOT = 284,
-    IF = 285,
-    ELSE = 286
+    INT_VALUE = 273,
+    BOOL_VALUE = 274,
+    AND = 275,
+    EQ = 276,
+    NOT = 277,
+    _ID = 278,
+    IF = 279,
+    ELSE = 280
   };
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
+union YYSTYPE
+{
+#line 48 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1909  */
+
+    IExpression* expression;
+    CExpressionList* expressionList;
+    CConstant* constant;
+    IStatement* statement;
+    CStatementList* statementList;
+    CMethodBodyDeclaration* methodBodyDeclaration;
+    CType* type;
+    CVarDeclaration* varDeclaration;
+    CMethodArgumentsList* methodArgumentsList;
+    CMethodHeaderDeclaration* methodHeaderDeclaration;
+    CMethodDeclaration* methodDeclaration;
+    CMethodDeclarationList* methodDeclarationList;
+    CIdentifier* identifier;
+    CClassDeclaration* classDeclaration;
+    CMainClass* mainClass;
+    CClassDeclarationList* classDeclarationList;
+
+    TVarAndStatementDeclaration varAndStatementDeclaration;
+    TVarAndMethodDeclaration varAndMethodDeclaration;
+
+#line 102 "/home/nicolai/work/MiniJavaCompiler/src/tokens.h" /* yacc.c:1909  */
+};
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
