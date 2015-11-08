@@ -138,9 +138,9 @@ void CPrinter2::Visit( const CStatementList* statementList ) {
 
 	
 	statementList->Statement->Accept( this );
-	if ( statementList->Next ) {
+	if ( statementList->StatementList ) {
 		
-		statementList->Next->Accept( this );
+		statementList->StatementList->Accept( this );
 	}
     --treeDeep;
 }
@@ -184,7 +184,7 @@ void CPrinter2::Visit( const CBracketStatement* bracketStatement ) {
 	print( bracketStatement->GetName());
 
 	
-	bracketStatement->Statement->Accept( this );
+	bracketStatement->StatementList->Accept( this );
     --treeDeep;
 }
 
@@ -215,7 +215,7 @@ void CPrinter2::Visit( const CBracketExpression* bracketExpression ) {
     ++treeDeep;
 	print( bracketExpression->GetName());
 
-	
+
 	bracketExpression->Expression->Accept( this );
     --treeDeep;
 }

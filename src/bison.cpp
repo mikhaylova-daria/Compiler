@@ -2144,7 +2144,7 @@ yyreduce:
 #line 392 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1646  */
     {
     processRule((yyloc), "EXPR");
-    (yyval.expression) = new CLengthExpression(getLocation(), (yyvsp[-1].expression));
+    (yyval.expression) = new CBracketExpression(getLocation(), (yyvsp[-1].expression));
 }
 #line 2150 "/home/nicolai/work/MiniJavaCompiler/src/bison.cpp" /* yacc.c:1646  */
     break;
