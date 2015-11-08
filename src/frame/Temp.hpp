@@ -32,6 +32,28 @@ namespace Temp {
 
 	};
 
+    class CTemp {
+
+    public:
+        CTemp (CStorage& storage) {
+	        name = storage.Get(generatedNameStart + nextUniqueId);
+        }
+
+        CTemp( const Symbol::CSymbol* symbol ) : name( name ) { }
+
+        const std::string& GetName() const {
+	        name->GetName();
+        }
+
+    private:
+
+        const Symbol::CSymbol* name;
+        static int nextUniqueId;
+        static std::string generatedNameStart;
+
+    };
+	
+
 }
 
 
