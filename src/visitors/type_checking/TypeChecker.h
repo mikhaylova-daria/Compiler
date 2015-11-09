@@ -78,7 +78,24 @@ private:
         }
         for (size_t i = 0; i < varInfoList.size(); i++) {
             if (varInfoList[i].TypeInfo != typeInfoList[i]) {
-                return false;
+                if (varInfoList[i].TypeInfo.VarType == TType::T_CLASS) {
+                    const CSymbol* classSymbol = typeInfoList[i].TypeName;
+                    for (size_t j = 0; j <= table.Classes.size(); j++) {
+                        auto it = find<CClassInfo,&CClassInfo::Name>(table.Classes, classSymbol);
+                        if (it == table.Classes.end()) {
+                            return false;
+                        }
+                        classSymbol = it->Base;
+                        if (classSymbol == varInfoList[i].TypeInfo.TypeName) {
+                            break;
+                        }
+                    }
+                    if (classSymbol != varInfoList[i].TypeInfo.TypeName) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }
         }
         return true;
