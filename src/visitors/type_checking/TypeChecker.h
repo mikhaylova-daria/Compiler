@@ -53,6 +53,7 @@ private:
     void processError(const std::string& reason, const IToken* token) {
         isError = true;
         std::cerr << "Type error: " << reason << std::endl;
+        std::cerr << "..Line " << token->location.firstLine << " Position " << token->location.firstColumn << std::endl;
         printTextPart(token->location, std::cerr);
     }
 
