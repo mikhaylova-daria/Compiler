@@ -108,7 +108,7 @@ void CPrettyPrinter::Visit( const CNewExpression* newExpression ) {
 	std::cout<< "new ";
 	
 	newExpression->Id->Accept( this );
-	std::cout << "()";
+	std::cout << "( )";
 
 }
 
@@ -186,7 +186,7 @@ void CPrettyPrinter::Visit( const CAssignmentStatement* assignmentStatement ) {
    
 	//print( assignmentStatement->GetName());
 
-	assignmentStatement->Identifier->Accept( this );
+	assignmentStatement->Variable->Accept( this );
 	std::cout << " = ";
 	assignmentStatement->Expression->Accept( this );
 	std::cout<<";\n";
@@ -197,7 +197,7 @@ void CPrettyPrinter::Visit( const CIntArrayAssignmentStatement* intArrayAssignme
 	//print( intArrayAssignmentStatement->GetName());
 
 
-	intArrayAssignmentStatement->Identifier->Accept( this );
+	intArrayAssignmentStatement->Variable->Accept( this );
 
 	std::cout << "[";
 
@@ -225,8 +225,8 @@ void CPrettyPrinter::Visit( const CMethodArgumentsList* methodArgumentsList ) {
 }
 
 void CPrettyPrinter::Visit( const CMethodHeaderDeclaration* methodHeaderDeclaration ) {
-	std::cout << "\n";
 	printTabs();
+	std::cout << "public ";
 	methodHeaderDeclaration->ReturnType->Accept( this );
 	std::cout << " ";
 	methodHeaderDeclaration->MethodName->Accept( this );
@@ -256,6 +256,7 @@ void CPrettyPrinter::Visit( const CMethodBodyDeclaration* methodBodyDeclaration 
 	--treeDeep;
 	printTabs();
 	std::cout << "}\n";
+	std::cout << "\n";
     
 }
 
@@ -281,12 +282,12 @@ void CPrettyPrinter::Visit( const CMethodDeclarationList* methodDeclarationList 
 }
 
 void CPrettyPrinter::Visit( const CClassDeclaration* classDeclaration ) {
-	std::cout << "\n";
+	std::cout << "\n\n";
 	printTabs();
 	std::cout << "class ";
 	classDeclaration->ClassName->Accept( this );
     if (classDeclaration->BaseClassName) {
-		std::cout << " expend ";
+		std::cout << " expends ";
         classDeclaration->BaseClassName->Accept(this);
     }
 	std::cout << " {\n\n";

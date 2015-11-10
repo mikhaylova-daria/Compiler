@@ -3,7 +3,7 @@
 #include <iostream>
 #include "symbol/Symbol.h"
 #include "tree/MinijavaTree.h"
-#include "visitors/CPrinter2.hpp"
+#include "visitors/CPrettyPrinter.hpp"
 #include "visitors/type_checking/TypeChecker.h"
 #include "visitors/type_checking/SymbolTableBuilder.h"
 
@@ -55,7 +55,7 @@ int main(int argc, const char* argv[])
 
     yyin = fopen(argv[1], "r");
     yyparse();
-    CPrinter2 printer2;
+    CPrettyPrinter printer2;
     printer2.Visit(Goal.get());
     CTable table;
     CSymbolTableBuilder symbolTableBuilder(table, globalStorage);
