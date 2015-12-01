@@ -7,13 +7,20 @@
 
 #include <assert.h>
 
-template <class Target, class Visitor>
-class CAcceptVisitor {
+template <class Target, class Visitor, class Base>
+class CAcceptVisitor : public Base {
 public:
 	virtual void Accept(Visitor* visitor) {
 		assert(visitor != nullptr);
 		visitor->visit(static_cast<Target* const>(this));
 	}
+
+};
+
+template <class Visitor>
+class IAcceptVisitor  {
+public:
+    virtual void Accept(Visitor* visitor) = 0;
 
 };
 

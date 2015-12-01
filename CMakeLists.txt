@@ -55,7 +55,7 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/symbol/Symbol.h
         src/Utils/ConsolePrinter.hpp
         src/IR/tree/IRTree.hpp
-        src/IR/tree/Expressions.hpp src/IR/tree/Statements.hpp src/IR/translate/translate.hpp src/visitors/CIRTreeBuilder.cpp src/visitors/CIRTreeBuilder.h)
-        src/IR/tree/Expressions.hpp src/IR/tree/Statements.hpp src/IR/translate/translate.hpp src/visitors/template_visitor.hpp)
+        src/IR/tree/Expressions.hpp src/IR/tree/Statements.hpp src/IR/translate/translate.hpp src/visitors/CIRTreeBuilder.cpp src/visitors/CIRTreeBuilder.h
+        src/visitors/accept_visitor_template.hpp src/visitors/IRtree/IIRTreeVisitor.hpp src/visitors/IRtree/CIRTreePrinter.cpp src/visitors/IRtree/CIRTreePrinter.hpp)
 
 add_executable(mjc ${SOURCE_FILES})

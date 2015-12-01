@@ -7,7 +7,9 @@
 
 #include "../../frame/Temp.hpp"
 #include <memory>
-
+#include "../../visitors/accept_visitor_template.hpp"
+#include "../../visitors/IRtree/IIRTreeVisitor.hpp"
+//public CAcceptVisitor<,IIRTreeVisitor>
 
 namespace IRTree {
 
@@ -43,14 +45,20 @@ namespace IRTree {
 		UGE
 	};
 
-	class IExpression {
+	class IExpression: public IAcceptVisitor<IIRTreeVisitor> {
+	protected:
+	    std::string name;
 
-    };
+	public:
+	    const std::string& getName() const {
+		    return name;
+	    }
+	};
 
-	class ConstExp : public IExpression {
+	class ConstExp : public CAcceptVisitor<ConstExp,IIRTreeVisitor, IExpression>{
 		int value;
 	public:
-	    ConstExp( int value ) : value( value ) { }
+	    ConstExp( int value ) : value( value ) { name = "ConstExp"; }
 
 	    int getValue() const {
 		    return value;
@@ -61,20 +69,20 @@ namespace IRTree {
 		PCT_POINTER_SIZE
 	};
 
-	class PlatformConstExp : public IExpression {
+	class PlatformConstExp : public CAcceptVisitor<PlatformConstExp,IIRTreeVisitor, IExpression> {
 	public:
-		PlatformConstExp(TPlatformConstType platformConstType) : PlatformConstType(platformConstType) {}
+		PlatformConstExp(TPlatformConstType platformConstType) : PlatformConstType(platformConstType) { name = "PlatformConstExp"; }
 		TPlatformConstType GetConstType() const { return PlatformConstType; }
 	private:
 		TPlatformConstType PlatformConstType;
 	};
 
 
-	class NameExp : public IExpression {
+	class NameExp : public CAcceptVisitor<NameExp,IIRTreeVisitor,IExpression> {
 		LabelPtr label;
 
 	public:
-	    NameExp( const LabelPtr& label ) : label( label ) { }
+	    NameExp( const LabelPtr& label ) : label( label ) { name = "NameExp"; }
 
 
 	    const LabelPtr& getLabel() const {
@@ -83,11 +91,11 @@ namespace IRTree {
 	};
 
 
-	class TempExp : public IExpression {
+	class TempExp :public CAcceptVisitor<TempExp,IIRTreeVisitor, IExpression> {
 		CTempPtr cTemp;
 
 	public:
-	    TempExp( const CTempPtr& cTemp ) : cTemp( cTemp ) { }
+	    TempExp( const CTempPtr& cTemp ) : cTemp( cTemp ) { name = "TempExp"; }
 
 
 	    const CTempPtr& getCTemp() const {
@@ -96,7 +104,7 @@ namespace IRTree {
 	};
 
 
-	class BinopExp : public IExpression {
+	class BinopExp : public CAcceptVisitor<BinopExp,IIRTreeVisitor, IExpression> {
 		BINOP binop;
 		ExpPtr left;
 		ExpPtr right;
@@ -104,7 +112,7 @@ namespace IRTree {
 
 	public:
 	    BinopExp( const BINOP& binop, const ExpPtr& left, const ExpPtr& right ) : binop( binop ), left( left ),
-	                                                                              right( right ) { }
+	                                                                              right( right ) { name = "BinopExp"; }
 	    const BINOP& getBinop() const {
 		    return binop;
 	    }
@@ -120,20 +128,20 @@ namespace IRTree {
 
 
 	//Mem - получение значения по адресу
-    class MemExp : public IExpression {
+    class MemExp : public CAcceptVisitor<MemExp,IIRTreeVisitor, IExpression> {
 		ExpPtr exp;
 
 	public:
-	    MemExp( const ExpPtr& exp ) : exp( exp ) { }
+	    MemExp( const ExpPtr& exp ) : exp( exp ) { name = "MemExp"; }
 	};
 
 
-	class ExpList {
+	class ExpList: public CAcceptVisitor<ExpList, IIRTreeVisitor, IExpression> {
 		ExpPtr head;
 		ExpPtr next;
 
 	public:
-	    ExpList( const ExpPtr& head, const ExpPtr& next ) : head( head ), next( next ) { }
+	    ExpList( const ExpPtr& head, const ExpPtr& next ) : head( head ), next( next ) { name = "ExpList"; }
 
 	    const ExpPtr& getHead() const {
 		    return head;
@@ -145,12 +153,12 @@ namespace IRTree {
 	};
 
 
-	class CallExp {
+	class CallExp: public CAcceptVisitor<CallExp,IIRTreeVisitor, IExpression> {
 		ExpPtr func;
 		ExpListPtr args;
 
 	public:
-	    CallExp( const ExpPtr& func, const ExpListPtr& args ) : func( func ), args( args ) { }
+	    CallExp( const ExpPtr& func, const ExpListPtr& args ) : func( func ), args( args ) { name = "CallExp"; }
 
 
 	    const ExpPtr& getFunc() const {
@@ -163,14 +171,14 @@ namespace IRTree {
 	};
 
 
-	class ESEQExp {
+	class ESEQExp: public CAcceptVisitor<ESEQExp,IIRTreeVisitor, IExpression> {
 		StatementPtr statement;
 		ExpPtr expression;
 
 
 	public:
 	    ESEQExp( const StatementPtr& statement, const ExpPtr& expression ) : statement( statement ),
-	                                                                         expression( expression ) { }
+	                                                                         expression( expression ) { name = "ESEQExp"; }
 
 	    const StatementPtr& getStatement() const {
 		    return statement;
