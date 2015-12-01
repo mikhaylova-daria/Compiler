@@ -31,6 +31,8 @@ namespace Frame {
 	private:
 		//vector<IAccess> formals;
 	};
+
+	static const int PointerSize = sizeof(void*);
 }
 
 
