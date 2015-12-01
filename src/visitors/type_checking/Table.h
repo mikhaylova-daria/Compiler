@@ -119,17 +119,17 @@ namespace SymbolTable {
             return FindMethodBase(currClass->Base, methodName);
         }
 
-        CTypeInfo FindMethonTypeInfo(const CSymbol *className, const CSymbol *methodName) {
+        CMethodInfo FindMethodInfo(const CSymbol *className, const CSymbol *methodName) {
             auto currClass = FindClass(className);
             if (currClass == Classes.end()) {
-                return CTypeInfo();
+                return CMethodInfo();
             }
             for (size_t i = 0; i < currClass->Methods.size(); i++) {
                 if (currClass->Methods[i].Name == methodName) {
-                    return currClass->Methods[i].ReturnType;
+                    return currClass->Methods[i];
                 }
             }
-            return FindMethonTypeInfo(currClass->Base, methodName);
+            return FindMethodInfo(currClass->Base, methodName);
         }
 
         int FindVarPosition(const CSymbol *className, const CSymbol *varName) {

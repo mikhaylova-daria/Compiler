@@ -19,6 +19,10 @@ using namespace Temp;
 class CIRTreeBuilder : public IVisitor {
 
 public:
+
+
+    CIRTreeBuilder(CStorage &storage, CTable &table) : storage(storage), table(table) { }
+
     virtual void Visit(const CConstant *constant);
 
     virtual void Visit(const CVariable *variable);
@@ -80,11 +84,12 @@ public:
     virtual void Visit(const CGoal *goal);
 
     struct Function {
+        Function(const std::shared_ptr<ISubtreeWrapper> &root, const CSymbol *name) : root(root), name(name) { }
+
         std::shared_ptr<ISubtreeWrapper> root;
         const CSymbol* name;
     };
     std::vector<Function> functions;
-    std::shared_ptr<ISubtreeWrapper> currNode;
 
 private:
     CStorage& storage;
@@ -92,15 +97,22 @@ private:
     CMethodInfo currentMethod;
     CTypeInfo lastType;
     CTable& table;
+    std::shared_ptr<ISubtreeWrapper> currNode;
 
     const CSymbol* genFunctionName(const CSymbol* className, const CSymbol* funcName) {
         return storage.Get(std::string("#") + className->GetName() + "." + funcName->GetName());
+    }
+    const CSymbol* genClassVarName(const CSymbol* name) {
+        return storage.Get(std::string("#this_") + name->GetName());
     }
     const std::string getNewFuncName() {
         return "#new";
     }
     const std::string getPrintFuncName() {
         return "#print";
+    }
+    const std::string getMainFuncName() {
+        return "#main";
     }
     // В условных (void*)-ах
     ExpPtr buildZeroInitTree(ExpPtr allocationExpr, int size) {

@@ -3,7 +3,7 @@
 //
 
 #include "CIRTreeBuilder.h"
-#include "../frame/Frame.hpp"
+//#include "../frame/Frame.hpp"
 #include <cmath>
 
 void CIRTreeBuilder::Visit(const CConstant *constant) {
@@ -14,11 +14,15 @@ void CIRTreeBuilder::Visit(const CConstant *constant) {
 // возвращает значение, записанное в переменной. а не адрес
 void CIRTreeBuilder::Visit(const CVariable *variable) {
     variable->Identifier->Accept(this);
-    // заворачиваем в Temp, т.к. значение может жить в памяти или в регистре
-    currNode = new TempExp(new Temp::CTemp(variable->Identifier->Symbol));
     CVarInfo varInfo = currentMethod.FindVarInfo(variable->Identifier->Symbol);
     if (varInfo.VarName == nullptr) {
         varInfo = table.FindVarInfo(currentClass.Name, variable->Identifier->Symbol);
+        assert(varInfo.VarName != nullptr);
+        //int shift = table.FindVarPosition(currentClass.Name, variable->Identifier->Symbol);
+        currNode = new TempExp(new Temp::CTemp(genClassVarName(variable->Identifier->Symbol)));
+    } else {
+        // заворачиваем в Temp, т.к. значение может жить в памяти или в регистре
+        currNode = new TempExp(new Temp::CTemp(variable->Identifier->Symbol));
     }
     assert(varInfo.VarName != nullptr);
     lastType = varInfo.TypeInfo;
@@ -95,7 +99,7 @@ void CIRTreeBuilder::Visit(const CExpressionList *expressionList) {
     }
 }
 
-void CIRTreeBuilder::Visit(const CIdentifier *identifier) {
+void CIRTreeBuilder::Visit(const CIdentifier *) {
 
 }
 
@@ -111,7 +115,7 @@ void CIRTreeBuilder::Visit(const CInvocation *invocation) {
     assert(methodBase != nullptr);
     const CSymbol* funcName = genFunctionName(methodBase, currentMethod.Name);
     currNode = new CallExp(new NameExp(new CLabel(funcName)), callList);
-    lastType = table.FindMethonTypeInfo(currentClass.Name, currentMethod.Name);
+    lastType = table.FindMethodInfo(currentClass.Name, currentMethod.Name).ReturnType;
     assert(lastType.TypeName != nullptr);
 }
 
@@ -246,49 +250,97 @@ void CIRTreeBuilder::Visit(const CIntArrayAssignmentStatement *intArrayAssignmen
 }
 
 void CIRTreeBuilder::Visit(const CVarDeclaration *varDeclaration) {
-
+    varDeclaration->Identifier->Accept(this);
+    varDeclaration->Type->Accept(this);
 }
 
 void CIRTreeBuilder::Visit(const CVarDeclarationList *varDeclarationList) {
-
+    varDeclarationList->VarDeclaration->Accept(this);
+    if (varDeclarationList->Next != nullptr) {
+        varDeclarationList->Next->Accept(this);
+    }
 }
 
 void CIRTreeBuilder::Visit(const CBracketExpression *bracketExpression) {
-
+    bracketExpression->Expression->Accept(this);
 }
 
 void CIRTreeBuilder::Visit(const CMethodArgumentsList *methodArgumentsList) {
-
+    methodArgumentsList->VarDeclaration->Accept(this);
+    if (methodArgumentsList->Next != nullptr) {
+        methodArgumentsList->Next->Accept(this);
+    }
 }
 
 void CIRTreeBuilder::Visit(const CMethodHeaderDeclaration *methodHeaderDeclaration) {
-
+    if (methodHeaderDeclaration->MethodArgumentList != nullptr) {
+        methodHeaderDeclaration->MethodArgumentList->Accept(this);
+    }
+    methodHeaderDeclaration->MethodName->Accept(this);
+    methodHeaderDeclaration->ReturnType->Accept(this);
 }
 
 void CIRTreeBuilder::Visit(const CMethodBodyDeclaration *methodBodyDeclaration) {
-
+    methodBodyDeclaration->ReturnExpression->Accept(this);
+    ExpPtr returnExp = currNode;
+    if (methodBodyDeclaration->VarDeclarationList != nullptr) {
+        methodBodyDeclaration->VarDeclarationList->Accept(this);
+    }
+    if (methodBodyDeclaration->StatementList != nullptr) {
+        methodBodyDeclaration->StatementList->Accept(this);
+    }
+    currNode = new ESEQExp(currNode, returnExp);
 }
 
 void CIRTreeBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
-
+    const CSymbol* methodSymbol = methodDeclaration->MethodHeaderDeclaration->MethodName->Symbol;
+    currentMethod = table.FindMethodInfo(currentClass.Name, methodSymbol);
+    methodDeclaration->MethodHeaderDeclaration->Accept(this);
+    methodDeclaration->MethodBodyDeclaration->Accept(this);
+    functions.push_back(Function(currNode, genFunctionName(currentClass.Name, methodSymbol)));
 }
 
 void CIRTreeBuilder::Visit(const CMethodDeclarationList *methodDeclarationList) {
-
+    methodDeclarationList->MethodDeclaration->Accept(this);
+    if (methodDeclarationList->MethodDeclarationList != nullptr) {
+        methodDeclarationList->MethodDeclarationList->Accept(this);
+    }
 }
 
 void CIRTreeBuilder::Visit(const CClassDeclaration *classDeclaration) {
-
+    const CSymbol* classSymbol = classDeclaration->ClassName->Symbol;
+    auto iter = table.FindClass(classSymbol);
+    assert(iter != table.Classes.end());
+    currentClass = *iter;
+    if (classDeclaration->BaseClassName != nullptr) {
+        classDeclaration->BaseClassName->Accept(this);
+    }
+    classDeclaration->ClassName->Accept(this);
+    if (classDeclaration->VarDeclarationList != nullptr) {
+        classDeclaration->VarDeclarationList->Accept(this);
+    }
+    if (classDeclaration->MethodDeclarationList != nullptr) {
+        classDeclaration->MethodDeclarationList->Accept(this);
+    }
 }
 
 void CIRTreeBuilder::Visit(const CMainClass *mainClass) {
-
+    mainClass->ArgumentName->Accept(this);
+    mainClass->ClassName->Accept(this);
+    mainClass->MainFunctionStatement->Accept(this);
+    functions.push_back(Function(currNode, storage.Get(getMainFuncName())));
 }
 
 void CIRTreeBuilder::Visit(const CClassDeclarationList *classDeclarationList) {
-
+    classDeclarationList->ClassDeclaration->Accept(this);
+    if (classDeclarationList->ClassDeclarationList != nullptr) {
+        classDeclarationList->ClassDeclarationList->Accept(this);
+    }
 }
 
 void CIRTreeBuilder::Visit(const CGoal *goal) {
-
+    goal->MainClass->Accept(this);
+    if (goal->ClassDeclarationList != nullptr) {
+        goal->ClassDeclarationList->Accept(this);
+    }
 }

@@ -9,7 +9,9 @@
 #include "../../tree/MinijavaTree.h"
 #include "Table.h"
 
-extern void printTextPart(Location loc, std::ostream &out);
+//extern void printTextPart(Location loc, std::ostream &out);
+
+using namespace SymbolTable;
 
 class CSymbolTableBuilder : public IVisitor {
 public:
@@ -58,12 +60,13 @@ private:
         }
         return true;
     }
+    /*
     void processError(const std::string& reason, const IToken* token) {
         isError = true;
         std::cerr << "Type error: " << reason << std::endl;
         printTextPart(token->location, std::cerr);
     }
-
+    */
     CClassInfo currentClass;
     CMethodInfo currentMethod;
     CTable& table;

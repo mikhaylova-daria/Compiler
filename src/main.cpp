@@ -6,6 +6,7 @@
 #include "visitors/CPrettyPrinter.hpp"
 #include "visitors/type_checking/TypeChecker.h"
 #include "visitors/type_checking/SymbolTableBuilder.h"
+#include "visitors/CIRTreeBuilder.h"
 
 Symbol::CStorage globalStorage;
 extern std::shared_ptr<CGoal> Goal;
@@ -70,5 +71,7 @@ int main(int argc, const char* argv[])
         std::cout << "type error" << std::endl;
         return -1;
     }
+    CIRTreeBuilder irTreeBuilder(globalStorage, table);
+    std::cout << "built IRTtree" << std::endl;
     return 0;
 }

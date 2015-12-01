@@ -11,11 +11,18 @@
 
 namespace Temp {
 
+
+    std::string IntToStr(int val) {
+        char buf[20];
+        sprintf(buf, "%d", val);
+        return buf;
+    }
+
 	class CLabel {
 
 	public:
 		CLabel (CStorage& storage) {
-			name = storage.Get(generatedNameStart + nextUniqueId);
+			name = storage.Get(generatedNameStart + IntToStr(nextUniqueId));
 		}
 
 	    CLabel( const Symbol::CSymbol* symbol ) : name( name ) { }
@@ -36,7 +43,7 @@ namespace Temp {
 
     public:
         CTemp (CStorage& storage) {
-	        name = storage.Get(generatedNameStart + nextUniqueId);
+	        name = storage.Get(generatedNameStart + IntToStr(nextUniqueId));
         }
 
         CTemp( const Symbol::CSymbol* symbol ) : name( name ) { }

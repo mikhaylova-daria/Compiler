@@ -100,9 +100,6 @@ void CSymbolTableBuilder::Visit(const CVarDeclaration *varDeclaration) {
 
     CTypeInfo typeInfo = CTypeInfo(varDeclaration->Type->Name, varDeclaration->Type->Type);
     CVarInfo varInfo(varDeclaration->Identifier->Symbol, typeInfo);//lastType);
-    if (!checkDuplicateDefinition<CVarInfo,&CVarInfo::VarName>(currentValList, varInfo)) {
-        processError("duplicate variable declaration", varDeclaration);
-    }
     currentValList.push_back(varInfo);
 
     varDeclaration->Identifier->Accept(this);
@@ -157,9 +154,6 @@ void CSymbolTableBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
     methodDeclaration->MethodBodyDeclaration->Accept(this);
     currentMethod.Vars.swap(currentValList);
 
-    if (!checkDuplicateDefinition<CMethodInfo,&CMethodInfo::Name>(currentClass.Methods, currentMethod)) {
-        processError("duplicate class declaration", methodDeclaration);
-    }
     currentClass.Methods.push_back(currentMethod);
 }
 
@@ -189,9 +183,6 @@ void CSymbolTableBuilder::Visit(const CClassDeclaration *classDeclaration) {
         classDeclaration->MethodDeclarationList->Accept(this);
     }
 
-    if (!checkDuplicateDefinition<CClassInfo,&CClassInfo::Name>(table.Classes, currentClass)) {
-        processError("duplicate class declaration", classDeclaration);
-    }
     table.Classes.push_back(currentClass);
 }
 
