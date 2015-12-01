@@ -1,0 +1,15 @@
+//
+// Created by Ава Катушка on 01.12.15.
+//
+
+#ifndef MINIJAVACOMPILER_IIRTREEVISITOR_HPP
+#define MINIJAVACOMPILER_IIRTREEVISITOR_HPP
+
+
+class IIRTreeVisitor {
+
+
+};
+
+
+#endif //MINIJAVACOMPILER_IIRTREEVISITOR_HPP

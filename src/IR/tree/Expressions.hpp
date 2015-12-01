@@ -119,7 +119,8 @@ namespace IRTree {
 	};
 
 
-	class MemExp : public IExpression {
+	//Mem - получение значения по адресу
+    class MemExp : public IExpression {
 		ExpPtr exp;
 
 	public:
@@ -130,7 +131,6 @@ namespace IRTree {
 	class ExpList {
 		ExpPtr head;
 		ExpPtr next;
-
 
 	public:
 	    ExpList( const ExpPtr& head, const ExpPtr& next ) : head( head ), next( next ) { }
