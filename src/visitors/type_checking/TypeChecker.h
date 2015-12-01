@@ -8,6 +8,8 @@
 #include "../../tree/MinijavaTree.h"
 #include "Table.h"
 
+using namespace SymbolTable;
+
 extern void printTextPart(Location loc, std::ostream &out);
 
 class CTypeChecker : public IVisitor {

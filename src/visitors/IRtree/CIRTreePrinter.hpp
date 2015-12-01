@@ -1,0 +1,14 @@
+//
+// Created by Ава Катушка on 01.12.15.
+//
+
+#ifndef MINIJAVACOMPILER_CIRTREEPRINTER_HPP
+#define MINIJAVACOMPILER_CIRTREEPRINTER_HPP
+
+
+class CIRTreePrinter {
+
+};
+
+
+#endif //MINIJAVACOMPILER_CIRTREEPRINTER_HPP

@@ -58,6 +58,17 @@ namespace IRTree {
 		COUNT,
 	};
 
+    class JumpStatement: public IStatement {
+    public:
+        JumpStatement(std::vector<LabelPtr> labelList, const ExpPtr expPtr) :
+                labelList(labelList), expPtr(expPtr) {}
+        const std::vector<LabelPtr> GetLabelList() const { return labelList; }
+        const ExpPtr&
+    private:
+        std::vector<LabelPtr> labelList;
+        const ExpPtr expPtr;
+    };
+
 	class CJumpStatement : public IStatement {
 		CJUMP op;
 		ExpPtr left;
@@ -108,6 +119,21 @@ namespace IRTree {
 	    const StatementPtr& getRight() const {
 		    return right;
 	    }
+	};
+
+	class StatementList {
+		StatementPtr head;
+		StatementPtr next;
+	public:
+        StatementList( const StatementPtr& head, const StatementPtr& next ) : head( head ), next( next ) { }
+
+		const StatementPtr& getHead() const {
+			return head;
+		}
+
+		const StatementPtr& getNext() const {
+			return next;
+		}
 	};
 
 

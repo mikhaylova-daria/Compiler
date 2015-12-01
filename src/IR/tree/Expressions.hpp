@@ -31,6 +31,16 @@ namespace IRTree {
 		ARSHIFT,
 		XOR,
 		COUNT,
+
+		EQ,
+		NE,
+		LT,
+		LE,
+		GE,
+		ULT,
+		ULE,
+		UGT,
+		UGE
 	};
 
 	class IExpression {
@@ -45,6 +55,18 @@ namespace IRTree {
 	    int getValue() const {
 		    return value;
 	    }
+	};
+
+	enum TPlatformConstType {
+		PCT_POINTER_SIZE
+	};
+
+	class PlatformConstExp : public IExpression {
+	public:
+		PlatformConstExp(TPlatformConstType platformConstType) : PlatformConstType(platformConstType) {}
+		TPlatformConstType GetConstType() const { return PlatformConstType; }
+	private:
+		TPlatformConstType PlatformConstType;
 	};
 
 
