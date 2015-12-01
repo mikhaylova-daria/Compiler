@@ -1,0 +1,15 @@
+//
+// Created by Ава Катушка on 01.12.15.
+//
+
+#ifndef MINIJAVACOMPILER_TEMPLATE_VISITOR_HPP
+#define MINIJAVACOMPILER_TEMPLATE_VISITOR_HPP
+
+class CAcceptVisitor {
+
+};
+
+
+
+
+#endif //MINIJAVACOMPILER_TEMPLATE_VISITOR_HPP
