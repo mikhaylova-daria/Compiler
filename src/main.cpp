@@ -10,6 +10,7 @@
 
 Symbol::CStorage globalStorage;
 extern std::shared_ptr<CGoal> Goal;
+#include "visitors/IRtree/CIRTreePrinter.hpp"
 
 extern "C" {
     int yylex();
@@ -22,6 +23,7 @@ extern int yyparse();
 using namespace std;
 
 vector<string> text;
+
 
 void printTextPart(Location loc, ostream &out = std::cout)
 {
@@ -73,5 +75,8 @@ int main(int argc, const char* argv[])
     }
     CIRTreeBuilder irTreeBuilder(globalStorage, table);
     std::cout << "built IRTtree" << std::endl;
+	CIRTreePrinter* printer = new CIRTreePrinter;
+	irTreeBuilder.functions[0].root->ToStm()->Accept(printer);
+
     return 0;
 }

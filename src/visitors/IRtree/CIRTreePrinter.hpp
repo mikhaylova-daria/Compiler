@@ -12,6 +12,10 @@
 namespace IRTree {
 
     class CIRTreePrinter : public IIRTreeVisitor {
+    public:
+	    CIRTreePrinter() {
+
+	    }
 
         virtual void Visit( const MoveStatement* moveStatement );
 
@@ -59,47 +63,47 @@ namespace IRTree {
 
         void print( const CJUMP& op ) {
 	        switch ( op ) {
-		        case CJUMP::EQ: {
+		        case CJUMP::J_EQ: {
 			        print( "EQ" );
 			        break;
 		        }
-		        case CJUMP::NE: {
+		        case CJUMP::J_NE: {
 			        print( "NE" );
 			        break;
 		        }
-		        case CJUMP::LT: {
+		        case CJUMP::J_LT: {
 			        print( "LT" );
 			        break;
 		        }
-		        case CJUMP::GE: {
+		        case CJUMP::J_GE: {
 			        print( "GE" );
 			        break;
 		        }
-		        case CJUMP::ULT: {
+		        case CJUMP::J_ULT: {
 			        print( "ULT" );
 			        break;
 		        }
-		        case CJUMP::ULE: {
+		        case CJUMP::J_ULE: {
 			        print( "ULE" );
 			        break;
 		        }
-		        case CJUMP::UGT: {
+		        case CJUMP::J_UGT: {
 			        print( "UGT" );
 			        break;
 		        }
-		        case CJUMP::UGE: {
+		        case CJUMP::J_UGE: {
 			        print( "UGE" );
 			        break;
 		        }
-		        case CJUMP::COUNT: {
+		        case CJUMP::J_COUNT: {
 			        print( "COUNT" );
 			        break;
 		        }
-		        case CJUMP::GT: {
+		        case CJUMP::J_GT: {
 			        print( "GT" );
 			        break;
 		        }
-		        case CJUMP::LE: {
+		        case CJUMP::J_LE: {
 			        print( "LE" );
 			        break;
 		        }
