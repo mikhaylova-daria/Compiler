@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Compiler.iml" filepath="$PROJECT_DIR$/.idea/Compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" filepath="$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" />
     </modules>
   </component>
 </project>

@@ -4,11 +4,18 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Declaration.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/IR/translate/translate.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/IR/tree/Expressions.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/IR/tree/IRTree.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/IR/tree/Statements.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/JavaHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Utils/ConsolePrinter.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/bison.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/flex.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/frame/Frame.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/frame/Temp.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/frame/Temp.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/symbol/Symbol.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tokens_processing.cpp" isTestSource="false" />
@@ -24,10 +31,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/tree/TreeBuildHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tree/Visitor.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CIRTreeBuilder.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CIRTreeBuilder.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrettyPrinter.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrettyPrinter.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/Table.h" isTestSource="false" />
