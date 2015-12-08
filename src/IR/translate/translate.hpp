@@ -17,6 +17,7 @@ namespace Translate {
         virtual const IRTree::StatementPtr ToStm() const = 0; // как Stm
         virtual const IRTree::StatementPtr ToConditional(
 		        const IRTree::LabelPtr t, const IRTree::LabelPtr f) const = 0; // как if/jump
+        //virtual const IRTree::ExpListPtr ToExpList() const = 0;
     };
 
     class CExpConverter : public ISubtreeWrapper {

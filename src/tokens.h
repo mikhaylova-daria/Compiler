@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
-# define YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED
+#ifndef YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
+# define YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -76,7 +76,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 48 "/home/daria/Compiler/src/minijava.y" /* yacc.c:1909  */
+#line 48 "/home/nicolai/work/MiniJavaCompiler/src/minijava.y" /* yacc.c:1909  */
 
     IExpression* expression;
     CExpressionList* expressionList;
@@ -98,7 +98,7 @@ union YYSTYPE
     TVarAndStatementDeclaration varAndStatementDeclaration;
     TVarAndMethodDeclaration varAndMethodDeclaration;
 
-#line 102 "/home/daria/Compiler/src/tokens.h" /* yacc.c:1909  */
+#line 102 "/home/nicolai/work/MiniJavaCompiler/src/tokens.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -123,4 +123,4 @@ extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_DARIA_COMPILER_SRC_TOKENS_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NICOLAI_WORK_MINIJAVACOMPILER_SRC_TOKENS_H_INCLUDED  */

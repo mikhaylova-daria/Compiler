@@ -13,11 +13,12 @@
 
 namespace IRTree {
 
-	class IStatement;
+	class IIRStatement;
+    class IIRExpression;
 
-    using ExpPtr = std::shared_ptr<IExpression>;
+    using ExpPtr = std::shared_ptr<IIRExpression>;
 	using ExpListPtr = std::shared_ptr<ExpList>;
-	using StatementPtr = std::shared_ptr<IStatement>;
+	using StatementPtr = std::shared_ptr<IIRStatement>;
     using LabelPtr = std::shared_ptr<Temp::CLabel>;
     using CTempPtr = std::shared_ptr<Temp::CTemp>;
 
@@ -45,7 +46,7 @@ namespace IRTree {
 		UGE
 	};
 
-	class IExpression: public IAcceptVisitor<IIRTreeVisitor> {
+	class IIRExpression: public IAcceptVisitor<IIRTreeVisitor> {
 	protected:
 	    std::string name;
 
@@ -55,7 +56,7 @@ namespace IRTree {
 	    }
 	};
 
-	class ConstExp : public CAcceptVisitor<ConstExp,IIRTreeVisitor, IExpression>{
+	class ConstExp : public CAcceptVisitor<ConstExp,IIRTreeVisitor, IIRExpression>{
 		int value;
 	public:
 	    ConstExp( int value ) : value( value ) { name = "ConstExp"; }
@@ -69,7 +70,7 @@ namespace IRTree {
 		PCT_POINTER_SIZE
 	};
 
-	class PlatformConstExp : public CAcceptVisitor<PlatformConstExp,IIRTreeVisitor, IExpression> {
+	class PlatformConstExp : public CAcceptVisitor<PlatformConstExp,IIRTreeVisitor, IIRExpression> {
 	public:
 		PlatformConstExp(TPlatformConstType platformConstType) : PlatformConstType(platformConstType) { name = "PlatformConstExp"; }
 		TPlatformConstType GetConstType() const { return PlatformConstType; }
@@ -78,7 +79,7 @@ namespace IRTree {
 	};
 
 
-	class NameExp : public CAcceptVisitor<NameExp,IIRTreeVisitor,IExpression> {
+	class NameExp : public CAcceptVisitor<NameExp,IIRTreeVisitor,IIRExpression> {
 		LabelPtr label;
 
 	public:
@@ -91,7 +92,7 @@ namespace IRTree {
 	};
 
 
-	class TempExp :public CAcceptVisitor<TempExp,IIRTreeVisitor, IExpression> {
+	class TempExp :public CAcceptVisitor<TempExp,IIRTreeVisitor, IIRExpression> {
 		CTempPtr cTemp;
 
 	public:
@@ -104,7 +105,7 @@ namespace IRTree {
 	};
 
 
-	class BinopExp : public CAcceptVisitor<BinopExp,IIRTreeVisitor, IExpression> {
+	class BinopExp : public CAcceptVisitor<BinopExp,IIRTreeVisitor, IIRExpression> {
 		BINOP binop;
 		ExpPtr left;
 		ExpPtr right;
@@ -128,7 +129,7 @@ namespace IRTree {
 
 
 	//Mem - получение значения по адресу
-    class MemExp : public CAcceptVisitor<MemExp,IIRTreeVisitor, IExpression> {
+    class MemExp : public CAcceptVisitor<MemExp,IIRTreeVisitor, IIRExpression> {
 		ExpPtr exp;
 
 	public:
@@ -136,7 +137,7 @@ namespace IRTree {
 	};
 
 
-	class ExpList: public CAcceptVisitor<ExpList, IIRTreeVisitor, IExpression> {
+	class ExpList: public CAcceptVisitor<ExpList, IIRTreeVisitor, IIRExpression> {
 		ExpPtr head;
 		ExpPtr next;
 
@@ -153,7 +154,7 @@ namespace IRTree {
 	};
 
 
-	class CallExp: public CAcceptVisitor<CallExp,IIRTreeVisitor, IExpression> {
+	class CallExp: public CAcceptVisitor<CallExp,IIRTreeVisitor, IIRExpression> {
 		ExpPtr func;
 		ExpListPtr args;
 
@@ -171,7 +172,7 @@ namespace IRTree {
 	};
 
 
-	class ESEQExp: public CAcceptVisitor<ESEQExp,IIRTreeVisitor, IExpression> {
+	class ESEQExp: public CAcceptVisitor<ESEQExp,IIRTreeVisitor, IIRExpression> {
 		StatementPtr statement;
 		ExpPtr expression;
 

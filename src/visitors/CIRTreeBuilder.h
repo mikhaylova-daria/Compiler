@@ -120,23 +120,23 @@ private:
             return allocationExpr;
         }
         assert(size > 0);
-        CTempPtr addr = new CTemp(storage);
-        StatementPtr root = new MoveStatement(new TempExp(addr), allocationExpr);
+        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage))));
+        StatementPtr root(new MoveStatement(addr, allocationExpr));
         for (int i = 0; i < size; i++) {
-            ExpPtr shift = new BinopExp(BINOP::MUL, new ConstExp(i),
-                                        new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE));
-            ExpPtr nextAddr = new BinopExp(BINOP::PLUS, addr, shift);
-            root = new SEQStatement(root, new MoveStatement(nextAddr, new ConstExp(0)));
+            ExpPtr shift(new BinopExp(BINOP::MUL, ExpPtr(new ConstExp(i)),
+                                      ExpPtr(new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE))));
+            ExpPtr nextAddr(ExpPtr(new BinopExp(BINOP::PLUS, addr, shift)));
+            root = StatementPtr(new SEQStatement(root, StatementPtr(new MoveStatement(nextAddr, ExpPtr(new ConstExp(0))))));
         }
-        return new ESEQExp(root, addr);
+        return ExpPtr(new ESEQExp(root, addr));
     }
 
     // В условных (void*)-ах
     ExpPtr buildZeroInitTree(ExpPtr allocationExpr, ExpPtr sizeExpr) {
-        CTempPtr size = new CTemp(storage);
-        CTempPtr addr = new CTemp(storage);
-        StatementPtr root = new MoveStatement(new TempExp(addr), allocationExpr);
-        root = new SEQStatement(root, new MoveStatement(new TempExp(size), sizeExpr));
+        ExpPtr size(new TempExp(CTempPtr(new CTemp(storage))));
+        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage))));
+        StatementPtr root(new MoveStatement(addr, allocationExpr));
+        root = StatementPtr(new SEQStatement(root, StatementPtr(new MoveStatement(size, sizeExpr))));
         /*
          * forLabel
          * jump expr trueLab falseLab
@@ -145,26 +145,35 @@ private:
          * jump forLabel
          * falseLab
          */
-        ExpPtr trueLabel = new Temp::CTemp(storage);
-        ExpPtr falseLabel = new Temp::CTemp(storage);
-        ExpPtr forLabel = new Temp::CTemp(storage);
-        StatementPtr jumpForLabel = new JumpStatement({forLabel}, new ConstExp(0));
-        StatementPtr jumpTrueFalseLabel = new CJumpStatement(CJUMP::EQ, size, new ConstExp(0), trueLabel, falseLabel);
-        ExpPtr div = new BinopExp(BINOP::DIV, size, new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE));
-        ExpPtr shift = new BinopExp(BINOP::MUL, size,
-                                    new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE));
-        ExpPtr nextAddr = new BinopExp(BINOP::PLUS, addr, shift);
-        StatementPtr move = new MoveStatement(nextAddr, new ConstExp(0));
+        LabelPtr trueLabel(new Temp::CLabel(storage));
+        LabelPtr falseLabel(new Temp::CLabel(storage));
+        LabelPtr forLabel(new Temp::CLabel(storage));
+        ExpPtr zero(new ConstExp(0));
+        ExpPtr one(new ConstExp(1));
+        ExpPtr pointerSize(new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE));
+        StatementPtr jumpForLabel(new JumpStatement({forLabel}, zero));
+        StatementPtr jumpTrueFalseLabel(new CJumpStatement(CJUMP::J_EQ, size, zero, trueLabel, falseLabel));
+        StatementPtr div(new MoveStatement(size, ExpPtr(new BinopExp(BINOP::DIV, size, one))));
+        ExpPtr shift(new BinopExp(BINOP::MUL, size, pointerSize));
+        ExpPtr nextAddr(new BinopExp(BINOP::PLUS, addr, shift));
+        StatementPtr move(new MoveStatement(nextAddr, zero));
 
-        root = new SEQStatement(root, forLabel);
-        root = new SEQStatement(root, jumpTrueFalseLabel);
-        root = new SEQStatement(root, trueLabel);
-        root = new SEQStatement(root, div);
-        root = new SEQStatement(root, move);
-        root = new SEQStatement(root, jumpForLabel);
-        root = new SEQStatement(root, falseLabel);
+        root = StatementPtr(new SEQStatement(root, StatementPtr(new LabelStatement(forLabel))));
+        root = StatementPtr(new SEQStatement(root, jumpTrueFalseLabel));
+        root = StatementPtr(new SEQStatement(root, StatementPtr(new LabelStatement(trueLabel))));
+        root = StatementPtr(new SEQStatement(root, div));
+        root = StatementPtr(new SEQStatement(root, move));
+        root = StatementPtr(new SEQStatement(root, jumpForLabel));
+        root = StatementPtr(new SEQStatement(root, StatementPtr(new LabelStatement(falseLabel))));
 
-        return new ESEQExp(root, addr);
+        return ExpPtr(new ESEQExp(root, addr));
+    }
+
+    std::shared_ptr<ISubtreeWrapper> getNode(ExpPtr exp) {
+        return std::shared_ptr<ISubtreeWrapper>(new CExpConverter(exp));
+    }
+    std::shared_ptr<ISubtreeWrapper> getNode(StatementPtr exp) {
+        return std::shared_ptr<ISubtreeWrapper>(new CStatementConverter(exp));
     }
 };
 

@@ -12,7 +12,7 @@
 
 namespace IRTree {
 
-    class IStatement: public IAcceptVisitor<IIRTreeVisitor> {
+    class IIRStatement: public IAcceptVisitor<IIRTreeVisitor> {
     protected:
         std::string name;
 
@@ -22,7 +22,7 @@ namespace IRTree {
         }
     };
 
-    class MoveStatement : public CAcceptVisitor<MoveStatement,IIRTreeVisitor, IStatement> {
+    class MoveStatement : public CAcceptVisitor<MoveStatement,IIRTreeVisitor, IIRStatement> {
         ExpPtr destination;
         ExpPtr source;
 
@@ -41,7 +41,7 @@ namespace IRTree {
     };
 
 
-    class ExpressionStatement : public CAcceptVisitor<ExpressionStatement,IIRTreeVisitor, IStatement> {
+    class ExpressionStatement : public CAcceptVisitor<ExpressionStatement,IIRTreeVisitor, IIRStatement> {
         ExpPtr expression;
 
     public:
@@ -54,20 +54,20 @@ namespace IRTree {
     };
 
     enum CJUMP {
-        EQ,
-        NE,
-        LT,
-        GT,
-        LE,
-        GE,
-        ULT,
-        ULE,
-        UGT,
-        UGE,
-        COUNT,
+        J_EQ,
+        J_NE,
+        J_LT,
+        J_GT,
+        J_LE,
+        J_GE,
+        J_ULT,
+        J_ULE,
+        J_UGT,
+        J_UGE,
+        J_COUNT,
     };
 
-    class JumpStatement :  public CAcceptVisitor<JumpStatement,IIRTreeVisitor, IStatement> {
+    class JumpStatement :  public CAcceptVisitor<JumpStatement,IIRTreeVisitor, IIRStatement> {
     public:
         JumpStatement( std::vector < LabelPtr > labelList, const ExpPtr expPtr ) :
 		        labelList( labelList ), expPtr( expPtr ) { name = "JumpStatement"; }
@@ -87,7 +87,7 @@ namespace IRTree {
         const ExpPtr expPtr;
     };
 
-    class CJumpStatement : public CAcceptVisitor<CJumpStatement,IIRTreeVisitor, IStatement> {
+    class CJumpStatement : public CAcceptVisitor<CJumpStatement,IIRTreeVisitor, IIRStatement> {
         CJUMP op;
         ExpPtr left;
         ExpPtr right;
@@ -121,7 +121,7 @@ namespace IRTree {
         }
     };
 
-    class SEQStatement :  public CAcceptVisitor<SEQStatement,IIRTreeVisitor, IStatement> {
+    class SEQStatement :  public CAcceptVisitor<SEQStatement,IIRTreeVisitor, IIRStatement> {
         StatementPtr left;
         StatementPtr right;
 
@@ -139,7 +139,7 @@ namespace IRTree {
         }
     };
 
-    class StatementList: public CAcceptVisitor<StatementList,IIRTreeVisitor, IStatement> {
+    class StatementList: public CAcceptVisitor<StatementList,IIRTreeVisitor, IIRStatement> {
         StatementPtr head;
         StatementPtr next;
     public:
@@ -155,7 +155,7 @@ namespace IRTree {
     };
 
 
-    class LabelStatement : public CAcceptVisitor<LabelStatement, IIRTreeVisitor, IStatement> {
+    class LabelStatement : public CAcceptVisitor<LabelStatement, IIRTreeVisitor, IIRStatement> {
         LabelPtr label;
 
     public:

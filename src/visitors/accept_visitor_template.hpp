@@ -12,7 +12,7 @@ class CAcceptVisitor : public Base {
 public:
 	virtual void Accept(Visitor* visitor) {
 		assert(visitor != nullptr);
-		visitor->visit(static_cast<Target* const>(this));
+		visitor->Visit(static_cast<Target* const>(this));
 	}
 
 };

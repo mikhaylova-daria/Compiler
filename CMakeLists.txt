@@ -60,6 +60,9 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/IR/translate/translate.hpp
         src/visitors/CIRTreeBuilder.cpp
         src/visitors/CIRTreeBuilder.h
+        src/frame/Temp.hpp
+        src/frame/Temp.cpp
+        src/frame/Frame.hpp
 )
 
 add_executable(mjc ${SOURCE_FILES})

@@ -31,6 +31,7 @@ namespace IRTree {
 
 
     class IIRTreeVisitor {
+    public:
         //virtual void Visit( const ) = 0;
         virtual void Visit( const MoveStatement* moveStatement ) = 0;
         virtual void Visit( const ExpressionStatement* expressionStatement) = 0;
