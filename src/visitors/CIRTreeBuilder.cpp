@@ -20,11 +20,14 @@ void CIRTreeBuilder::Visit(const CVariable *variable) {
     if (varInfo.VarName == nullptr) {
         varInfo = table.FindVarInfo(currentClass.Name, variable->Identifier->Symbol);
         assert(varInfo.VarName != nullptr);
-        //int shift = table.FindVarPosition(currentClass.Name, variable->Identifier->Symbol);
-        currNode = NodePtr(new CExpConverter(ExpPtr(new TempExp(CTempPtr(new Temp::CTemp(genClassVarName(variable->Identifier->Symbol)))))));
+        // так как член класса может жить в регистре, передаем сдвиг
+        // если в регистре не будет значения, то придется добавить код для вычисления адреса относитьельно this
+        int shift = table.FindVarPosition(currentClass.Name, variable->Identifier->Symbol);
+        CTempPtr tempPtr(new Temp::CTemp(storage.Get("this"))); //genClassVarName(variable->Identifier->Symbol)));
+        currNode = getNode(ExpPtr(new TempExp(tempPtr, shift)));
     } else {
         // заворачиваем в Temp, т.к. значение может жить в памяти или в регистре
-        currNode = NodePtr(new CExpConverter(ExpPtr(new TempExp(CTempPtr(new Temp::CTemp(variable->Identifier->Symbol))))));
+        currNode = getNode(ExpPtr(new TempExp(CTempPtr(new Temp::CTemp(variable->Identifier->Symbol)), 0)));
     }
     assert(varInfo.VarName != nullptr);
     lastType = varInfo.TypeInfo;
@@ -48,9 +51,11 @@ void CIRTreeBuilder::Visit(const CBinaryExpression *binaryExpression) {
             break;
         case TBinaryExpression::BE_EQUAL :
             currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::EQ, leftExpr, rightExpr))));
+            lastType = CTypeInfo(storage.Get("boolean"), TType::T_BOOL);
             break;
         case TBinaryExpression::BE_LESS :
             currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::LT, leftExpr, rightExpr))));
+            lastType = CTypeInfo(storage.Get("boolean"), TType::T_BOOL);
             break;
         case TBinaryExpression::BE_MINUS :
             currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::MINUS, leftExpr, rightExpr))));
@@ -115,11 +120,11 @@ void CIRTreeBuilder::Visit(const CInvocation *invocation) {
     invocation->Identifier->Accept(this);
     invocation->Expression->Accept(this);
     assert(lastType.VarType == TType::T_CLASS);
-    const CSymbol* methodBase = table.FindMethodBase(currentClass.Name, currentMethod.Name);
+    const CSymbol* methodBase = table.FindMethodBase(lastType.TypeName, invocation->Identifier->Symbol);
     assert(methodBase != nullptr);
-    const CSymbol* funcName = genFunctionName(methodBase, currentMethod.Name);
+    const CSymbol* funcName = genFunctionName(methodBase, invocation->Identifier->Symbol);
     currNode = getNode(ExpPtr(new CallExp(ExpPtr(new NameExp(LabelPtr(new CLabel(funcName)))), callList)));
-    lastType = table.FindMethodInfo(currentClass.Name, currentMethod.Name).ReturnType;
+    lastType = table.FindMethodInfo(lastType.TypeName, invocation->Identifier->Symbol).ReturnType;
     assert(lastType.TypeName != nullptr);
 }
 
@@ -236,7 +241,7 @@ void CIRTreeBuilder::Visit(const CAssignmentStatement *assignmentStatement) {
     assignmentStatement->Variable->Accept(this);
     CTypeInfo variableType = lastType;
     assignmentStatement->Expression->Accept(this);
-    ExpPtr left(new TempExp(CTempPtr(new CTemp(assignmentStatement->Variable->Identifier->Symbol))));
+    ExpPtr left(new TempExp(CTempPtr(new CTemp(assignmentStatement->Variable->Identifier->Symbol)), 0));
     currNode = getNode(StatementPtr(new MoveStatement(left, currNode->ToExp())));
     assert(variableType == lastType);
 }

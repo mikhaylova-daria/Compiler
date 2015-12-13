@@ -94,15 +94,17 @@ namespace IRTree {
 
 	class TempExp :public CAcceptVisitor<TempExp,IIRTreeVisitor, IIRExpression> {
 		CTempPtr cTemp;
-
+		int shift;
 	public:
-	    TempExp( const CTempPtr& cTemp ) : cTemp( cTemp ) { name = "TempExp"; }
-
+	    TempExp( const CTempPtr& cTemp, int shift ) : cTemp( cTemp ), shift(shift) { name = "TempExp"; }
 
 	    const CTempPtr& getCTemp() const {
 		    return cTemp;
 	    }
-	};
+        int GetShift() const {
+            return shift;
+        }
+    };
 
 
 	class BinopExp : public CAcceptVisitor<BinopExp,IIRTreeVisitor, IIRExpression> {

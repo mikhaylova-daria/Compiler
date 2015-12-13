@@ -34,7 +34,7 @@ namespace Translate {
         }
 
         virtual const IRTree::StatementPtr ToStm() const {
-	        throw std::runtime_error("Unsupported operation: expression to statement");
+            return IRTree::StatementPtr(new IRTree::ExpressionStatement(expr));
         }
 
         virtual const IRTree::StatementPtr ToConditional( const IRTree::LabelPtr t, const IRTree::LabelPtr f ) const {

@@ -63,6 +63,11 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/frame/Temp.hpp
         src/frame/Temp.cpp
         src/frame/Frame.hpp
+        src/visitors/IRtree/CIRTreePrinter.hpp
+        src/visitors/IRtree/CIRTreePrinter.cpp
+        src/visitors/IRtree/IIRTreeVisitor.hpp
+        src/visitors/CPrinter2.hpp
+        src/visitors/CPrinter2.cpp
 )
 
 add_executable(mjc ${SOURCE_FILES})

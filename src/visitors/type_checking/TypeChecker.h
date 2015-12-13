@@ -75,25 +75,28 @@ private:
         return find<T,NAME>(list, symbol) != list.end();
     }
 
-    bool isComplementaryTypes(const std::vector<CVarInfo>& varInfoList, const std::vector<CTypeInfo>& typeInfoList) {
-        if (varInfoList.size() != typeInfoList.size()) {
+    bool isCorrectInvocation(const std::vector<CVarInfo>& methodSignature, const std::vector<CTypeInfo>& typeInfoList) {
+        // у метода неявный this в начале, который уже добавлен явно для упрощения проверки типов
+        assert(methodSignature.size() > 0 && methodSignature[0].VarName->GetName() == "this");
+        if (methodSignature.size() != 1 + typeInfoList.size()) {
             return false;
         }
-        for (size_t i = 0; i < varInfoList.size(); i++) {
-            if (varInfoList[i].TypeInfo != typeInfoList[i]) {
-                if (varInfoList[i].TypeInfo.VarType == TType::T_CLASS) {
-                    const CSymbol* classSymbol = typeInfoList[i].TypeName;
+        for (size_t i = 1; i < methodSignature.size(); i++) {
+            if (methodSignature[i].TypeInfo != typeInfoList[i - 1]) {
+                // возможно, работает полиморфизм. идем по родителям аргумента
+                if (methodSignature[i].TypeInfo.VarType == TType::T_CLASS) {
+                    const CSymbol* classSymbol = typeInfoList[i - 1].TypeName;
                     for (size_t j = 0; j <= table.Classes.size(); j++) {
                         auto it = find<CClassInfo,&CClassInfo::Name>(table.Classes, classSymbol);
                         if (it == table.Classes.end()) {
                             return false;
                         }
                         classSymbol = it->Base;
-                        if (classSymbol == varInfoList[i].TypeInfo.TypeName) {
+                        if (classSymbol == methodSignature[i].TypeInfo.TypeName) {
                             break;
                         }
                     }
-                    if (classSymbol != varInfoList[i].TypeInfo.TypeName) {
+                    if (classSymbol != methodSignature[i].TypeInfo.TypeName) {
                         return false;
                     }
                 } else {

@@ -165,7 +165,7 @@ void CTypeChecker::Visit(const CInvocation *invocation) {
     if (invocation->ExpressionList != nullptr) {
         invocation->ExpressionList->Accept(this);
     }
-    if (!isComplementaryTypes(methodInfo.Arguments, lastTypeList)) {
+    if (!isCorrectInvocation(methodInfo.Arguments, lastTypeList)) {
         processError("invalid invocation arguments type", invocation);
     }
     lastType = methodInfo.ReturnType;

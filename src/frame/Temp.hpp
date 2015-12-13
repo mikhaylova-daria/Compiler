@@ -18,7 +18,7 @@ namespace Temp {
 			name = storage.Get(generatedNameStart + std::to_string(nextUniqueId));
 		}
 
-	    CLabel( const Symbol::CSymbol* symbol ) : name( name ) { }
+	    CLabel( const Symbol::CSymbol* symbol ) : name( symbol ) { }
 
 	    const std::string& GetName() const {
 		    return name->GetName();
@@ -39,7 +39,7 @@ namespace Temp {
 	        name = storage.Get(generatedNameStart + std::to_string(nextUniqueId));
         }
 
-        CTemp( const Symbol::CSymbol* symbol ) : name( name ) { }
+        CTemp( const Symbol::CSymbol* symbol ) : name( symbol ) { }
 
         const std::string& GetName() const {
 	        return name->GetName();

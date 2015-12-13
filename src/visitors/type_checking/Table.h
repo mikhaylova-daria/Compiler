@@ -65,6 +65,11 @@ namespace SymbolTable {
                     return Vars[i];
                 }
             }
+            for (size_t i = 0; i < Arguments.size(); i++) {
+                if (Arguments[i].VarName == varName) {
+                    return Arguments[i];
+                }
+            }
             return CVarInfo();
         }
 

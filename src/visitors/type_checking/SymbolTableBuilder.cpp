@@ -147,6 +147,7 @@ void CSymbolTableBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
     currentMethod = CMethodInfo(methodDeclaration->MethodHeaderDeclaration->MethodName->Symbol, returnTypeInfo);
 
     currentMethod.Arguments.swap(currentValList);
+    currentValList.push_back(CVarInfo(storage.Get("this"), CTypeInfo(currentClass.Name, TType::T_CLASS)));
     methodDeclaration->MethodHeaderDeclaration->Accept(this);
     currentMethod.Arguments.swap(currentValList);
 
@@ -178,7 +179,8 @@ void CSymbolTableBuilder::Visit(const CClassDeclaration *classDeclaration) {
         classDeclaration->VarDeclarationList->Accept(this);
         currentClass.Vars.swap(currentValList);
     }
-    currentClass.Vars.push_back(CVarInfo(storage.Get("this"), CTypeInfo(currentClass.Name, TType::T_CLASS)));
+    // this первый аргумент метода, а не поле класса
+    //currentClass.Vars.push_back(CVarInfo(storage.Get("this"), CTypeInfo(currentClass.Name, TType::T_CLASS)));
     if (classDeclaration->MethodDeclarationList != nullptr) {
         classDeclaration->MethodDeclarationList->Accept(this);
     }
@@ -190,6 +192,8 @@ void CSymbolTableBuilder::Visit(const CMainClass *mainClass) {
     mainClass->ClassName->Accept(this);
     mainClass->ArgumentName->Accept(this);
     mainClass->MainFunctionStatement->Accept(this);
+    //CClassInfo mainClassInfo(mainClass->ClassName->Symbol, nullptr);
+    //CMethodInfo mainMethodInfo(storage.Get("#main"))
 }
 
 void CSymbolTableBuilder::Visit(const CClassDeclarationList *classDeclarationList) {

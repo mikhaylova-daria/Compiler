@@ -7,6 +7,7 @@
 #include "visitors/type_checking/TypeChecker.h"
 #include "visitors/type_checking/SymbolTableBuilder.h"
 #include "visitors/CIRTreeBuilder.h"
+#include "visitors/CPrinter2.hpp"
 
 Symbol::CStorage globalStorage;
 extern std::shared_ptr<CGoal> Goal;
@@ -58,8 +59,11 @@ int main(int argc, const char* argv[])
 
     yyin = fopen(argv[1], "r");
     yyparse();
-    CPrettyPrinter printer2;
-    printer2.Visit(Goal.get());
+    //CPrettyPrinter printer2;
+    //printer2.Visit(Goal.get());
+    CPrinter2 astPrinter;
+    astPrinter.Visit(Goal.get());
+    std::cout << "--- end ---" << std::endl;
     CTable table;
     CSymbolTableBuilder symbolTableBuilder(table, globalStorage);
     symbolTableBuilder.Visit(Goal.get());
@@ -74,9 +78,12 @@ int main(int argc, const char* argv[])
         return -1;
     }
     CIRTreeBuilder irTreeBuilder(globalStorage, table);
+    irTreeBuilder.Visit(Goal.get());
     std::cout << "built IRTtree" << std::endl;
 	CIRTreePrinter* printer = new CIRTreePrinter;
-	irTreeBuilder.functions[0].root->ToStm()->Accept(printer);
-
+    for (int i = 0; i < irTreeBuilder.functions.size(); i++) {
+        std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
+        irTreeBuilder.functions[i].root->ToStm()->Accept(printer);
+    }
     return 0;
 }

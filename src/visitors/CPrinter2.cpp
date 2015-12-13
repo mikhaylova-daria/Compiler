@@ -8,10 +8,10 @@ void CPrinter2::Visit( const CBinaryExpression* binaryExpression ) {
     ++treeDeep;
 	print( binaryExpression->GetName());
 	binaryExpression->LeftExpr->Accept( this );
+	++treeDeep;
 	print( binaryExpression->BinaryExpressionType );
+	--treeDeep;
 	binaryExpression->RightExpr->Accept( this );
-
-
     --treeDeep;
 }
 

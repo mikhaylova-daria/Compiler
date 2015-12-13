@@ -102,9 +102,10 @@ private:
     const CSymbol* genFunctionName(const CSymbol* className, const CSymbol* funcName) {
         return storage.Get(std::string("#") + className->GetName() + "." + funcName->GetName());
     }
-    const CSymbol* genClassVarName(const CSymbol* name) {
-        return storage.Get(std::string("#this_") + name->GetName());
-    }
+    //
+    //const CSymbol* genClassVarName(const CSymbol* name) {
+    //    return storage.Get(std::string("#this_") + name->GetName());
+    //}
     const std::string getNewFuncName() {
         return "#new";
     }
@@ -120,7 +121,7 @@ private:
             return allocationExpr;
         }
         assert(size > 0);
-        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage))));
+        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage)), 0));
         StatementPtr root(new MoveStatement(addr, allocationExpr));
         for (int i = 0; i < size; i++) {
             ExpPtr shift(new BinopExp(BINOP::MUL, ExpPtr(new ConstExp(i)),
@@ -133,8 +134,8 @@ private:
 
     // В условных (void*)-ах
     ExpPtr buildZeroInitTree(ExpPtr allocationExpr, ExpPtr sizeExpr) {
-        ExpPtr size(new TempExp(CTempPtr(new CTemp(storage))));
-        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage))));
+        ExpPtr size(new TempExp(CTempPtr(new CTemp(storage)), 0));
+        ExpPtr addr(new TempExp(CTempPtr(new CTemp(storage)), 0));
         StatementPtr root(new MoveStatement(addr, allocationExpr));
         root = StatementPtr(new SEQStatement(root, StatementPtr(new MoveStatement(size, sizeExpr))));
         /*
