@@ -9,7 +9,13 @@
 typedef std::shared_ptr<ISubtreeWrapper> NodePtr;
 
 void CIRTreeBuilder::Visit(const CConstant *constant) {
-    currNode = NodePtr(new CExpConverter(ExpPtr(new ConstExp(std::stoi(constant->Value)))));
+    if (constant->Type->Type == TType::T_INT) {
+        currNode = NodePtr(new CExpConverter(ExpPtr(new ConstExp(std::stoi(constant->Value)))));
+    } else if (constant->Type->Type == TType::T_BOOL) {
+        currNode = NodePtr(new CExpConverter(ExpPtr(new ConstExp(constant->Value == "true"))));
+    } else {
+        assert(false);
+    }
     constant->Type->Accept(this);
 }
 
@@ -113,10 +119,13 @@ void CIRTreeBuilder::Visit(const CIdentifier *) {
 }
 
 void CIRTreeBuilder::Visit(const CInvocation *invocation) {
+    ExpListPtr callList;
     if (invocation->ExpressionList != nullptr) {
         invocation->ExpressionList->Accept(this);
+        callList = std::dynamic_pointer_cast<ExpList>(currNode->ToExp());
+    } else {
+        callList = nullptr;
     }
-    ExpListPtr callList = std::dynamic_pointer_cast<ExpList>(currNode->ToExp());
     invocation->Identifier->Accept(this);
     invocation->Expression->Accept(this);
     assert(lastType.VarType == TType::T_CLASS);
