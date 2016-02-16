@@ -161,13 +161,15 @@ void CTypeChecker::Visit(const CInvocation *invocation) {
     }
     const CMethodInfo& methodInfo = *methodIterator;
 
-    lastTypeList.clear();
+    std::vector<CTypeInfo> curTypeList;
+    curTypeList.swap(lastTypeList);
     if (invocation->ExpressionList != nullptr) {
         invocation->ExpressionList->Accept(this);
     }
     if (!isCorrectInvocation(methodInfo.Arguments, lastTypeList)) {
         processError("invalid invocation arguments type", invocation);
     }
+    curTypeList.swap(lastTypeList);
     lastType = methodInfo.ReturnType;
 }
 

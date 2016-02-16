@@ -106,7 +106,7 @@ namespace SymbolTable {
                 return NOT_FOUND;
             }
             int size = static_cast<int>(classInfo->Vars.size());
-            int baseClassSize = (classInfo->Base == nullptr ? 0 : FindClassSize(classInfo->Name));
+            int baseClassSize = (classInfo->Base == nullptr ? 0 : FindClassSize(classInfo->Base));
             assert(baseClassSize != NOT_FOUND);
             return size + baseClassSize;
         }

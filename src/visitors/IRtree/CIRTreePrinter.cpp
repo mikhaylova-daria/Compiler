@@ -85,8 +85,7 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::NameExp* nameExp ) {
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::TempExp* tempExp ) {
 	TreeWalker treeWalker(this);
-	print(tempExp->getName());
-	print(tempExp->getCTemp()->GetName());
+	print(tempExp->getName() + ' ' + tempExp->getCTemp()->GetName() + " + " + std::to_string(tempExp->GetShift()));
 }
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::BinopExp* binopExp ) {
@@ -100,6 +99,8 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::BinopExp* binopExp ) {
 void IRTree::CIRTreePrinter::Visit( const IRTree::MemExp* memExp ) {
 	TreeWalker treeWalker(this);
 	print(memExp->getName());
+    memExp->getExp()->Accept(this);
+
 }
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::ExpList* expList ) {

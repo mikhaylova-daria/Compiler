@@ -35,6 +35,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/CIRTreeBuilder.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrettyPrinter.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrettyPrinter.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/CPrinter2.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/IRtree/CIRTreePrinter.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/IRtree/CIRTreePrinter.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/visitors/IRtree/IIRTreeVisitor.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/SymbolTableBuilder.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/visitors/type_checking/Table.h" isTestSource="false" />

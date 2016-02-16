@@ -8,6 +8,7 @@
 
 #include "../../tree/MinijavaTree.h"
 #include "Table.h"
+#include "TypeChecker.h"
 
 //extern void printTextPart(Location loc, std::ostream &out);
 
@@ -60,13 +61,13 @@ private:
         }
         return true;
     }
-    /*
+
     void processError(const std::string& reason, const IToken* token) {
         isError = true;
         std::cerr << "Type error: " << reason << std::endl;
         printTextPart(token->location, std::cerr);
     }
-    */
+
     CClassInfo currentClass;
     CMethodInfo currentMethod;
     CTable& table;

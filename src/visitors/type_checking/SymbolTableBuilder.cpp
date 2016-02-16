@@ -100,6 +100,11 @@ void CSymbolTableBuilder::Visit(const CVarDeclaration *varDeclaration) {
 
     CTypeInfo typeInfo = CTypeInfo(varDeclaration->Type->Name, varDeclaration->Type->Type);
     CVarInfo varInfo(varDeclaration->Identifier->Symbol, typeInfo);//lastType);
+    for (int i = 0; i < currentValList.size(); i++ ) {
+        if (varInfo.VarName == currentValList[i].VarName) {
+            processError("redefinition ", varDeclaration);
+        }
+    }
     currentValList.push_back(varInfo);
 
     varDeclaration->Identifier->Accept(this);

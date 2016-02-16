@@ -135,6 +135,11 @@ namespace IRTree {
 		ExpPtr exp;
 
 	public:
+		const ExpPtr &getExp() const {
+			return exp;
+		}
+
+	public:
 	    MemExp( const ExpPtr& exp ) : exp( exp ) { name = "MemExp"; }
 	};
 
