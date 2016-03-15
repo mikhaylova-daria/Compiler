@@ -17,12 +17,33 @@ public:
 
 };
 
+
+class IdHolder {
+    static int id;
+
+public:
+
+    static int getId() {
+	    return id++;
+    }
+};
+
+
 template <class Visitor>
 class IAcceptVisitor  {
+
 public:
     virtual void Accept(Visitor* visitor) = 0;
+	int id;
+
+	IAcceptVisitor() {
+		id = IdHolder::getId();
+	}
 
 };
+
+
+
 
 
 #endif //MINIJAVACOMPILER_TEMPLATE_VISITOR_HPP

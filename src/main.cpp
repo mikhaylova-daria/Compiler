@@ -85,5 +85,6 @@ int main(int argc, const char* argv[])
         std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
         irTreeBuilder.functions[i].root->ToStm()->Accept(printer);
     }
+	delete printer;
     return 0;
 }

@@ -57,6 +57,10 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/IR/tree/IRTree.hpp
         src/IR/tree/Expressions.hpp
         src/IR/tree/Statements.hpp
+        src/IR/tree/IdHolder.cpp
+        src/visitors/IRtree/CIRTreePrinter.cpp
+        src/visitors/IRtree/CIRTreePrinter.hpp
+        src/visitors/IRtree/IIRTreeVisitor.hpp
         src/IR/translate/translate.hpp
         src/visitors/CIRTreeBuilder.cpp
         src/visitors/CIRTreeBuilder.h

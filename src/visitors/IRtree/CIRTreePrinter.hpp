@@ -5,6 +5,7 @@
 #ifndef MINIJAVACOMPILER_CIRTREEPRINTER_HPP
 #define MINIJAVACOMPILER_CIRTREEPRINTER_HPP
 
+#include <fstream>
 #include "IIRTreeVisitor.hpp"
 #include "../../Utils/ConsolePrinter.hpp"
 #include "../../IR/tree/Statements.hpp"
@@ -12,9 +13,26 @@
 namespace IRTree {
 
     class CIRTreePrinter : public IIRTreeVisitor {
+        std::ofstream tree_file;
+
     public:
 	    CIRTreePrinter() {
+		    tree_file.open ("tree.txt");
+		    tree_file << "digraph {" << std::endl;
 
+	    }
+
+	    void printConnection(int parent, int child) {
+		    tree_file << parent << " -> " << child << ";" << std::endl;
+	    }
+
+	    void defineName(std::string name, int id) {
+		    tree_file << id << "[label=\"" << name << "(" << id << ")\"]" << std::endl;
+	    }
+
+	    virtual ~CIRTreePrinter() {
+		    tree_file << "} " << std::endl;
+		    tree_file.close();
 	    }
 
         virtual void Visit( const MoveStatement* moveStatement );
@@ -192,6 +210,91 @@ namespace IRTree {
 		        case UGE: {
 			        print( "UGE" );
 			        break;
+		        };;
+	        }
+        }
+
+        std::string strBinop( const BINOP& op ) {
+	        switch ( op ) {
+		        case PLUS: {
+			        return "PLUS" ;
+
+		        };
+		        case MINUS: {
+			        return "MINUS" ;
+
+		        };;
+		        case MUL: {
+			        return "MUL" ;
+
+		        };;
+		        case DIV: {
+			        return "DIV" ;
+
+		        };;
+		        case AND: {
+			        return "AND" ;
+
+		        };;
+		        case OR: {
+			        return "OR" ;
+
+		        };;
+		        case LSHIFT: {
+			        return "LSHIFT" ;
+
+		        };;
+		        case RSHIFT: {
+			        return "RSHIFT" ;
+
+		        };;
+		        case ARSHIFT: {
+			        return "ARSHIFT" ;
+
+		        };;
+		        case XOR: {
+			        return "XOR" ;
+
+		        };;
+		        case COUNT: {
+			        return "COUNT" ;
+
+		        };;
+		        case EQ: {
+			        return "EQ" ;
+
+		        };;
+		        case NE: {
+			        return "NE" ;
+
+		        };;
+		        case LT: {
+			        return "LT" ;
+
+		        };;
+		        case LE: {
+			        return "LE" ;
+
+		        };;
+		        case GE: {
+			        return "GE" ;
+
+		        };;
+		        case ULT: {
+			        return "ULT" ;
+
+		        };;
+		        case ULE: {
+			        return "ULE" ;
+
+		        };;
+		        case UGT: {
+			        return "UGT" ;
+
+		        };;
+		        case UGE: {
+			        return "UGE" ;
+
 		        };;
 	        }
         }

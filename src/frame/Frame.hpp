@@ -20,13 +20,13 @@ namespace Frame {
 
 		}
 
-		int FormalsCount() const {
-			// return formals.size();
-		}
-
-		const IAccess* Formal( size_t index) const {
-			// return formals[index];
-		}
+//		int FormalsCount() const {
+//			// return formals.size();
+//		}
+//
+//		const IAccess* Formal( size_t index) const {
+//			// return formals[index];
+//		}
 
 	private:
 		//vector<IAccess> formals;
