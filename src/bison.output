@@ -1,11 +1,11 @@
-Grammar
+Грамматика
 
     0 $accept: GOAL $end
 
     1 GOAL: MAIN_CLASS CLASS_LIST
 
     2 CLASS_LIST: CLASS_DECLARATION CLASS_LIST
-    3           | /* empty */
+    3           | %empty
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
@@ -13,14 +13,14 @@ Grammar
 
     7 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
 
-    8 BASE_CLASS: /* empty */
+    8 BASE_CLASS: %empty
     9           | EXTENDS ID
 
    10 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION VAR_AND_METHOD_DECLARATION
    11                           | METHOD_DECLARATION_LIST
 
    12 METHOD_DECLARATION_LIST: METHOD_DECLARATION METHOD_DECLARATION_LIST
-   13                        | /* empty */
+   13                        | %empty
 
    14 VAR_DECLARATION: TYPE ID ';'
    15                | error ID ';'
@@ -31,7 +31,7 @@ Grammar
    18              | PUBLIC TYPE ID '(' error ')'
    19              | error ID '(' ARGS_DECLARATION ')'
 
-   20 ARGS_DECLARATION: /* empty */
+   20 ARGS_DECLARATION: %empty
    21                 | PARAM_DECLARATION
    22                 | PARAM_DECLARATION ',' ARGS_DECLARATION
 
@@ -51,7 +51,7 @@ Grammar
    32                               | STATEMENT_DECLARATION
 
    33 STATEMENT_DECLARATION: STATEMENT STATEMENT_DECLARATION
-   34                      | /* empty */
+   34                      | %empty
 
    35 STATEMENT: '{' STATEMENT_DECLARATION '}'
    36          | IF_STATEMENT
@@ -99,7 +99,7 @@ Grammar
    71 CONSTANT: INT_VALUE
    72         | BOOL_VALUE
 
-   73 PARAMS: /* empty */
+   73 PARAMS: %empty
    74       | EXPR
    75       | EXPR ',' PARAMS
 
@@ -111,7 +111,7 @@ Grammar
    80 ID: _ID
 
 
-Terminals, with rules where they appear
+Терминальные символы с правилами, в которых они появляются
 
 $end (0) 0
 '(' (40) 4 5 6 17 18 19 41 42 43 44 45 46 47 48 61 69 70 78 79
@@ -146,756 +146,757 @@ INT (271) 26 28 29 76 77
 BOOL (272) 25
 INT_VALUE (273) 71
 BOOL_VALUE (274) 72
-NOT (275) 60
+AND (275) 57
 EQ (276) 59
-AND (277) 57
+NOT (277) 60
 _ID (278) 80
 IF (279) 41 42 43 44
 ELSE (280) 41 42 43 44
 
 
-Nonterminals, with rules where they appear
+Нетерминальные символы с правилами, в которых они появляются
 
 $accept (40)
-    on left: 0
+    налево: 0
 GOAL (41)
-    on left: 1, on right: 0
+    налево: 1, направо: 0
 CLASS_LIST (42)
-    on left: 2 3, on right: 1 2
+    налево: 2 3, направо: 1 2
 MAIN_CLASS (43)
-    on left: 4 5 6, on right: 1
+    налево: 4 5 6, направо: 1
 CLASS_DECLARATION (44)
-    on left: 7, on right: 2
+    налево: 7, направо: 2
 BASE_CLASS (45)
-    on left: 8 9, on right: 7
+    налево: 8 9, направо: 7
 VAR_AND_METHOD_DECLARATION (46)
-    on left: 10 11, on right: 7 10
+    налево: 10 11, направо: 7 10
 METHOD_DECLARATION_LIST (47)
-    on left: 12 13, on right: 11 12
+    налево: 12 13, направо: 11 12
 VAR_DECLARATION (48)
-    on left: 14 15, on right: 10 31
+    налево: 14 15, направо: 10 31
 METHOD_DECLARATION (49)
-    on left: 16, on right: 12
+    налево: 16, направо: 12
 METHOD_HEADER (50)
-    on left: 17 18 19, on right: 16
+    налево: 17 18 19, направо: 16
 ARGS_DECLARATION (51)
-    on left: 20 21 22, on right: 17 19 22
+    налево: 20 21 22, направо: 17 19 22
 PARAM_DECLARATION (52)
-    on left: 23, on right: 21 22
+    налево: 23, направо: 21 22
 TYPE (53)
-    on left: 24 25 26 27, on right: 14 17 18 23
+    налево: 24 25 26 27, направо: 14 17 18 23
 INT_ARRAY (54)
-    on left: 28 29, on right: 24
+    налево: 28 29, направо: 24
 METHOD_BODY (55)
-    on left: 30, on right: 16
+    налево: 30, направо: 16
 VAR_AND_STATEMENT_DECLARATIONS (56)
-    on left: 31 32, on right: 30 31
+    налево: 31 32, направо: 30 31
 STATEMENT_DECLARATION (57)
-    on left: 33 34, on right: 32 33 35
+    налево: 33 34, направо: 32 33 35
 STATEMENT (58)
-    on left: 35 36 37 38 39 40, on right: 4 5 6 33 41 42 43 44 45 46
+    налево: 35 36 37 38 39 40, направо: 4 5 6 33 41 42
+    43 44 45 46
 IF_STATEMENT (59)
-    on left: 41 42 43 44, on right: 36
+    налево: 41 42 43 44, направо: 36
 WHILE_STATEMENT (60)
-    on left: 45 46, on right: 37
+    налево: 45 46, направо: 37
 PRINT_STATEMENT (61)
-    on left: 47 48, on right: 38
+    налево: 47 48, направо: 38
 ASSIGNMENT (62)
-    on left: 49 50, on right: 39
+    налево: 49 50, направо: 39
 ARRAY_ASSIGNMENT (63)
-    on left: 51 52 53, on right: 40
+    налево: 51 52 53, направо: 40
 EXPR (64)
-    on left: 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70,
-    on right: 30 41 43 44 45 47 49 51 52 53 54 55 56 57 58 59 60 61
-    66 67 68 69 70 74 75 76
+    налево: 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70,
+    направо: 30 41 43 44 45 47 49 51 52 53 54 55 56 57 58 59
+    60 61 66 67 68 69 70 74 75 76
 CONSTANT (65)
-    on left: 71 72, on right: 65
+    налево: 71 72, направо: 65
 PARAMS (66)
-    on left: 73 74 75, on right: 69 75
+    налево: 73 74 75, направо: 69 75
 NEW_EXPR (67)
-    on left: 76 77 78 79, on right: 62
+    налево: 76 77 78 79, направо: 62
 ID (68)
-    on left: 80, on right: 4 5 6 7 9 14 15 17 18 19 23 27 49 50 51
-    52 53 63 69 70 78 79
+    налево: 80, направо: 4 5 6 7 9 14 15 17 18 19 23 27
+    49 50 51 52 53 63 69 70 78 79
 
 
-state 0
+State 0
 
     0 $accept: . GOAL $end
 
-    CLASS  shift, and go to state 1
+    CLASS  сдвиг, и переход в состояние 1
 
-    GOAL        go to state 2
-    MAIN_CLASS  go to state 3
+    GOAL        переход в состояние 2
+    MAIN_CLASS  переход в состояние 3
 
 
-state 1
+State 1
 
     4 MAIN_CLASS: CLASS . ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS . ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
     6           | CLASS . ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 5
+    ID  переход в состояние 5
 
 
-state 2
+State 2
 
     0 $accept: GOAL . $end
 
-    $end  shift, and go to state 6
+    $end  сдвиг, и переход в состояние 6
 
 
-state 3
+State 3
 
     1 GOAL: MAIN_CLASS . CLASS_LIST
 
-    CLASS  shift, and go to state 7
+    CLASS  сдвиг, и переход в состояние 7
 
-    $default  reduce using rule 3 (CLASS_LIST)
+    $default  вывод с использованием правила 3 (CLASS_LIST)
 
-    CLASS_LIST         go to state 8
-    CLASS_DECLARATION  go to state 9
+    CLASS_LIST         переход в состояние 8
+    CLASS_DECLARATION  переход в состояние 9
 
 
-state 4
+State 4
 
    80 ID: _ID .
 
-    $default  reduce using rule 80 (ID)
+    $default  вывод с использованием правила 80 (ID)
 
 
-state 5
+State 5
 
     4 MAIN_CLASS: CLASS ID . '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID . '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
     6           | CLASS ID . '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    '{'  shift, and go to state 10
+    '{'  сдвиг, и переход в состояние 10
 
 
-state 6
+State 6
 
     0 $accept: GOAL $end .
 
-    $default  accept
+    $default  принять
 
 
-state 7
+State 7
 
     7 CLASS_DECLARATION: CLASS . ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 11
+    ID  переход в состояние 11
 
 
-state 8
+State 8
 
     1 GOAL: MAIN_CLASS CLASS_LIST .
 
-    $default  reduce using rule 1 (GOAL)
+    $default  вывод с использованием правила 1 (GOAL)
 
 
-state 9
+State 9
 
     2 CLASS_LIST: CLASS_DECLARATION . CLASS_LIST
 
-    CLASS  shift, and go to state 7
+    CLASS  сдвиг, и переход в состояние 7
 
-    $default  reduce using rule 3 (CLASS_LIST)
+    $default  вывод с использованием правила 3 (CLASS_LIST)
 
-    CLASS_LIST         go to state 12
-    CLASS_DECLARATION  go to state 9
+    CLASS_LIST         переход в состояние 12
+    CLASS_DECLARATION  переход в состояние 9
 
 
-state 10
+State 10
 
     4 MAIN_CLASS: CLASS ID '{' . PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' . PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
     6           | CLASS ID '{' . error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    error   shift, and go to state 13
-    PUBLIC  shift, and go to state 14
+    error   сдвиг, и переход в состояние 13
+    PUBLIC  сдвиг, и переход в состояние 14
 
 
-state 11
+State 11
 
     7 CLASS_DECLARATION: CLASS ID . BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}'
 
-    EXTENDS  shift, and go to state 15
+    EXTENDS  сдвиг, и переход в состояние 15
 
-    $default  reduce using rule 8 (BASE_CLASS)
+    $default  вывод с использованием правила 8 (BASE_CLASS)
 
-    BASE_CLASS  go to state 16
+    BASE_CLASS  переход в состояние 16
 
 
-state 12
+State 12
 
     2 CLASS_LIST: CLASS_DECLARATION CLASS_LIST .
 
-    $default  reduce using rule 2 (CLASS_LIST)
+    $default  вывод с использованием правила 2 (CLASS_LIST)
 
 
-state 13
+State 13
 
     6 MAIN_CLASS: CLASS ID '{' error . MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    MAIN  shift, and go to state 17
+    MAIN  сдвиг, и переход в состояние 17
 
 
-state 14
+State 14
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC . STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC . STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
 
-    STATIC  shift, and go to state 18
+    STATIC  сдвиг, и переход в состояние 18
 
 
-state 15
+State 15
 
     9 BASE_CLASS: EXTENDS . ID
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 19
+    ID  переход в состояние 19
 
 
-state 16
+State 16
 
     7 CLASS_DECLARATION: CLASS ID BASE_CLASS . '{' VAR_AND_METHOD_DECLARATION '}'
 
-    '{'  shift, and go to state 20
+    '{'  сдвиг, и переход в состояние 20
 
 
-state 17
+State 17
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN . '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    '('  shift, and go to state 21
+    '('  сдвиг, и переход в состояние 21
 
 
-state 18
+State 18
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC . VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC STATIC . VOID MAIN '(' error ')' '{' STATEMENT '}' '}'
 
-    VOID  shift, and go to state 22
+    VOID  сдвиг, и переход в состояние 22
 
 
-state 19
+State 19
 
     9 BASE_CLASS: EXTENDS ID .
 
-    $default  reduce using rule 9 (BASE_CLASS)
+    $default  вывод с использованием правила 9 (BASE_CLASS)
 
 
-state 20
+State 20
 
     7 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' . VAR_AND_METHOD_DECLARATION '}'
 
-    error   shift, and go to state 23
-    PUBLIC  shift, and go to state 24
-    INT     shift, and go to state 25
-    BOOL    shift, and go to state 26
-    _ID     shift, and go to state 4
+    error   сдвиг, и переход в состояние 23
+    PUBLIC  сдвиг, и переход в состояние 24
+    INT     сдвиг, и переход в состояние 25
+    BOOL    сдвиг, и переход в состояние 26
+    _ID     сдвиг, и переход в состояние 4
 
-    '}'  reduce using rule 13 (METHOD_DECLARATION_LIST)
+    '}'  вывод с использованием правила 13 (METHOD_DECLARATION_LIST)
 
-    VAR_AND_METHOD_DECLARATION  go to state 27
-    METHOD_DECLARATION_LIST     go to state 28
-    VAR_DECLARATION             go to state 29
-    METHOD_DECLARATION          go to state 30
-    METHOD_HEADER               go to state 31
-    TYPE                        go to state 32
-    INT_ARRAY                   go to state 33
-    ID                          go to state 34
+    VAR_AND_METHOD_DECLARATION  переход в состояние 27
+    METHOD_DECLARATION_LIST     переход в состояние 28
+    VAR_DECLARATION             переход в состояние 29
+    METHOD_DECLARATION          переход в состояние 30
+    METHOD_HEADER               переход в состояние 31
+    TYPE                        переход в состояние 32
+    INT_ARRAY                   переход в состояние 33
+    ID                          переход в состояние 34
 
 
-state 21
+State 21
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' . MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
 
-    MAIN_ARGS  shift, and go to state 35
+    MAIN_ARGS  сдвиг, и переход в состояние 35
 
 
-state 22
+State 22
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID . MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC STATIC VOID . MAIN '(' error ')' '{' STATEMENT '}' '}'
 
-    MAIN  shift, and go to state 36
+    MAIN  сдвиг, и переход в состояние 36
 
 
-state 23
+State 23
 
    15 VAR_DECLARATION: error . ID ';'
    19 METHOD_HEADER: error . ID '(' ARGS_DECLARATION ')'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 37
+    ID  переход в состояние 37
 
 
-state 24
+State 24
 
    17 METHOD_HEADER: PUBLIC . TYPE ID '(' ARGS_DECLARATION ')'
    18              | PUBLIC . TYPE ID '(' error ')'
 
-    INT   shift, and go to state 25
-    BOOL  shift, and go to state 26
-    _ID   shift, and go to state 4
+    INT   сдвиг, и переход в состояние 25
+    BOOL  сдвиг, и переход в состояние 26
+    _ID   сдвиг, и переход в состояние 4
 
-    TYPE       go to state 38
-    INT_ARRAY  go to state 33
-    ID         go to state 34
+    TYPE       переход в состояние 38
+    INT_ARRAY  переход в состояние 33
+    ID         переход в состояние 34
 
 
-state 25
+State 25
 
    26 TYPE: INT .
    28 INT_ARRAY: INT . '[' ']'
    29          | INT . '[' error ']'
 
-    '['  shift, and go to state 39
+    '['  сдвиг, и переход в состояние 39
 
-    $default  reduce using rule 26 (TYPE)
+    $default  вывод с использованием правила 26 (TYPE)
 
 
-state 26
+State 26
 
    25 TYPE: BOOL .
 
-    $default  reduce using rule 25 (TYPE)
+    $default  вывод с использованием правила 25 (TYPE)
 
 
-state 27
+State 27
 
     7 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION . '}'
 
-    '}'  shift, and go to state 40
+    '}'  сдвиг, и переход в состояние 40
 
 
-state 28
+State 28
 
    11 VAR_AND_METHOD_DECLARATION: METHOD_DECLARATION_LIST .
 
-    $default  reduce using rule 11 (VAR_AND_METHOD_DECLARATION)
+    $default  вывод с использованием правила 11 (VAR_AND_METHOD_DECLARATION)
 
 
-state 29
+State 29
 
    10 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION . VAR_AND_METHOD_DECLARATION
 
-    error   shift, and go to state 23
-    PUBLIC  shift, and go to state 24
-    INT     shift, and go to state 25
-    BOOL    shift, and go to state 26
-    _ID     shift, and go to state 4
+    error   сдвиг, и переход в состояние 23
+    PUBLIC  сдвиг, и переход в состояние 24
+    INT     сдвиг, и переход в состояние 25
+    BOOL    сдвиг, и переход в состояние 26
+    _ID     сдвиг, и переход в состояние 4
 
-    '}'  reduce using rule 13 (METHOD_DECLARATION_LIST)
+    '}'  вывод с использованием правила 13 (METHOD_DECLARATION_LIST)
 
-    VAR_AND_METHOD_DECLARATION  go to state 41
-    METHOD_DECLARATION_LIST     go to state 28
-    VAR_DECLARATION             go to state 29
-    METHOD_DECLARATION          go to state 30
-    METHOD_HEADER               go to state 31
-    TYPE                        go to state 32
-    INT_ARRAY                   go to state 33
-    ID                          go to state 34
+    VAR_AND_METHOD_DECLARATION  переход в состояние 41
+    METHOD_DECLARATION_LIST     переход в состояние 28
+    VAR_DECLARATION             переход в состояние 29
+    METHOD_DECLARATION          переход в состояние 30
+    METHOD_HEADER               переход в состояние 31
+    TYPE                        переход в состояние 32
+    INT_ARRAY                   переход в состояние 33
+    ID                          переход в состояние 34
 
 
-state 30
+State 30
 
    12 METHOD_DECLARATION_LIST: METHOD_DECLARATION . METHOD_DECLARATION_LIST
 
-    error   shift, and go to state 42
-    PUBLIC  shift, and go to state 24
+    error   сдвиг, и переход в состояние 42
+    PUBLIC  сдвиг, и переход в состояние 24
 
-    '}'  reduce using rule 13 (METHOD_DECLARATION_LIST)
+    '}'  вывод с использованием правила 13 (METHOD_DECLARATION_LIST)
 
-    METHOD_DECLARATION_LIST  go to state 43
-    METHOD_DECLARATION       go to state 30
-    METHOD_HEADER            go to state 31
+    METHOD_DECLARATION_LIST  переход в состояние 43
+    METHOD_DECLARATION       переход в состояние 30
+    METHOD_HEADER            переход в состояние 31
 
 
-state 31
+State 31
 
    16 METHOD_DECLARATION: METHOD_HEADER . '{' METHOD_BODY '}'
 
-    '{'  shift, and go to state 44
+    '{'  сдвиг, и переход в состояние 44
 
 
-state 32
+State 32
 
    14 VAR_DECLARATION: TYPE . ID ';'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 45
+    ID  переход в состояние 45
 
 
-state 33
+State 33
 
    24 TYPE: INT_ARRAY .
 
-    $default  reduce using rule 24 (TYPE)
+    $default  вывод с использованием правила 24 (TYPE)
 
 
-state 34
+State 34
 
    27 TYPE: ID .
 
-    $default  reduce using rule 27 (TYPE)
+    $default  вывод с использованием правила 27 (TYPE)
 
 
-state 35
+State 35
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS . ID ')' '{' STATEMENT '}' '}'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 46
+    ID  переход в состояние 46
 
 
-state 36
+State 36
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN . '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC STATIC VOID MAIN . '(' error ')' '{' STATEMENT '}' '}'
 
-    '('  shift, and go to state 47
+    '('  сдвиг, и переход в состояние 47
 
 
-state 37
+State 37
 
    15 VAR_DECLARATION: error ID . ';'
    19 METHOD_HEADER: error ID . '(' ARGS_DECLARATION ')'
 
-    '('  shift, and go to state 48
-    ';'  shift, and go to state 49
+    '('  сдвиг, и переход в состояние 48
+    ';'  сдвиг, и переход в состояние 49
 
 
-state 38
+State 38
 
    17 METHOD_HEADER: PUBLIC TYPE . ID '(' ARGS_DECLARATION ')'
    18              | PUBLIC TYPE . ID '(' error ')'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 50
+    ID  переход в состояние 50
 
 
-state 39
+State 39
 
    28 INT_ARRAY: INT '[' . ']'
    29          | INT '[' . error ']'
 
-    error  shift, and go to state 51
-    ']'    shift, and go to state 52
+    error  сдвиг, и переход в состояние 51
+    ']'    сдвиг, и переход в состояние 52
 
 
-state 40
+State 40
 
     7 CLASS_DECLARATION: CLASS ID BASE_CLASS '{' VAR_AND_METHOD_DECLARATION '}' .
 
-    $default  reduce using rule 7 (CLASS_DECLARATION)
+    $default  вывод с использованием правила 7 (CLASS_DECLARATION)
 
 
-state 41
+State 41
 
    10 VAR_AND_METHOD_DECLARATION: VAR_DECLARATION VAR_AND_METHOD_DECLARATION .
 
-    $default  reduce using rule 10 (VAR_AND_METHOD_DECLARATION)
+    $default  вывод с использованием правила 10 (VAR_AND_METHOD_DECLARATION)
 
 
-state 42
+State 42
 
    19 METHOD_HEADER: error . ID '(' ARGS_DECLARATION ')'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 53
+    ID  переход в состояние 53
 
 
-state 43
+State 43
 
    12 METHOD_DECLARATION_LIST: METHOD_DECLARATION METHOD_DECLARATION_LIST .
 
-    $default  reduce using rule 12 (METHOD_DECLARATION_LIST)
+    $default  вывод с использованием правила 12 (METHOD_DECLARATION_LIST)
 
 
-state 44
+State 44
 
    16 METHOD_DECLARATION: METHOD_HEADER '{' . METHOD_BODY '}'
 
-    error  shift, and go to state 54
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    INT    shift, and go to state 25
-    BOOL   shift, and go to state 26
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    error  сдвиг, и переход в состояние 54
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    INT    сдвиг, и переход в состояние 25
+    BOOL   сдвиг, и переход в состояние 26
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    RETURN  reduce using rule 34 (STATEMENT_DECLARATION)
+    RETURN  вывод с использованием правила 34 (STATEMENT_DECLARATION)
 
-    VAR_DECLARATION                 go to state 59
-    TYPE                            go to state 32
-    INT_ARRAY                       go to state 33
-    METHOD_BODY                     go to state 60
-    VAR_AND_STATEMENT_DECLARATIONS  go to state 61
-    STATEMENT_DECLARATION           go to state 62
-    STATEMENT                       go to state 63
-    IF_STATEMENT                    go to state 64
-    WHILE_STATEMENT                 go to state 65
-    PRINT_STATEMENT                 go to state 66
-    ASSIGNMENT                      go to state 67
-    ARRAY_ASSIGNMENT                go to state 68
-    ID                              go to state 69
+    VAR_DECLARATION                 переход в состояние 59
+    TYPE                            переход в состояние 32
+    INT_ARRAY                       переход в состояние 33
+    METHOD_BODY                     переход в состояние 60
+    VAR_AND_STATEMENT_DECLARATIONS  переход в состояние 61
+    STATEMENT_DECLARATION           переход в состояние 62
+    STATEMENT                       переход в состояние 63
+    IF_STATEMENT                    переход в состояние 64
+    WHILE_STATEMENT                 переход в состояние 65
+    PRINT_STATEMENT                 переход в состояние 66
+    ASSIGNMENT                      переход в состояние 67
+    ARRAY_ASSIGNMENT                переход в состояние 68
+    ID                              переход в состояние 69
 
 
-state 45
+State 45
 
    14 VAR_DECLARATION: TYPE ID . ';'
 
-    ';'  shift, and go to state 70
+    ';'  сдвиг, и переход в состояние 70
 
 
-state 46
+State 46
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID . ')' '{' STATEMENT '}' '}'
 
-    ')'  shift, and go to state 71
+    ')'  сдвиг, и переход в состояние 71
 
 
-state 47
+State 47
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' . MAIN_ARGS ID ')' '{' STATEMENT '}' '}'
     5           | CLASS ID '{' PUBLIC STATIC VOID MAIN '(' . error ')' '{' STATEMENT '}' '}'
 
-    error      shift, and go to state 72
-    MAIN_ARGS  shift, and go to state 73
+    error      сдвиг, и переход в состояние 72
+    MAIN_ARGS  сдвиг, и переход в состояние 73
 
 
-state 48
+State 48
 
    19 METHOD_HEADER: error ID '(' . ARGS_DECLARATION ')'
 
-    INT   shift, and go to state 25
-    BOOL  shift, and go to state 26
-    _ID   shift, and go to state 4
+    INT   сдвиг, и переход в состояние 25
+    BOOL  сдвиг, и переход в состояние 26
+    _ID   сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 20 (ARGS_DECLARATION)
+    $default  вывод с использованием правила 20 (ARGS_DECLARATION)
 
-    ARGS_DECLARATION   go to state 74
-    PARAM_DECLARATION  go to state 75
-    TYPE               go to state 76
-    INT_ARRAY          go to state 33
-    ID                 go to state 34
+    ARGS_DECLARATION   переход в состояние 74
+    PARAM_DECLARATION  переход в состояние 75
+    TYPE               переход в состояние 76
+    INT_ARRAY          переход в состояние 33
+    ID                 переход в состояние 34
 
 
-state 49
+State 49
 
    15 VAR_DECLARATION: error ID ';' .
 
-    $default  reduce using rule 15 (VAR_DECLARATION)
+    $default  вывод с использованием правила 15 (VAR_DECLARATION)
 
 
-state 50
+State 50
 
    17 METHOD_HEADER: PUBLIC TYPE ID . '(' ARGS_DECLARATION ')'
    18              | PUBLIC TYPE ID . '(' error ')'
 
-    '('  shift, and go to state 77
+    '('  сдвиг, и переход в состояние 77
 
 
-state 51
+State 51
 
    29 INT_ARRAY: INT '[' error . ']'
 
-    ']'  shift, and go to state 78
+    ']'  сдвиг, и переход в состояние 78
 
 
-state 52
+State 52
 
    28 INT_ARRAY: INT '[' ']' .
 
-    $default  reduce using rule 28 (INT_ARRAY)
+    $default  вывод с использованием правила 28 (INT_ARRAY)
 
 
-state 53
+State 53
 
    19 METHOD_HEADER: error ID . '(' ARGS_DECLARATION ')'
 
-    '('  shift, and go to state 48
+    '('  сдвиг, и переход в состояние 48
 
 
-state 54
+State 54
 
    15 VAR_DECLARATION: error . ID ';'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 79
+    ID  переход в состояние 79
 
 
-state 55
+State 55
 
    45 WHILE_STATEMENT: WHILE . '(' EXPR ')' STATEMENT
    46                | WHILE . '(' error ')' STATEMENT
 
-    '('  shift, and go to state 80
+    '('  сдвиг, и переход в состояние 80
 
 
-state 56
+State 56
 
    47 PRINT_STATEMENT: PRINT . '(' EXPR ')' ';'
    48                | PRINT . '(' error ')' ';'
 
-    '('  shift, and go to state 81
+    '('  сдвиг, и переход в состояние 81
 
 
-state 57
+State 57
 
    41 IF_STATEMENT: IF . '(' EXPR ')' STATEMENT ELSE STATEMENT
    42             | IF . '(' error ')' STATEMENT ELSE STATEMENT
    43             | IF . '(' EXPR ')' error ELSE STATEMENT
    44             | IF . '(' EXPR ')' STATEMENT ELSE error
 
-    '('  shift, and go to state 82
+    '('  сдвиг, и переход в состояние 82
 
 
-state 58
+State 58
 
    35 STATEMENT: '{' . STATEMENT_DECLARATION '}'
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    $default  reduce using rule 34 (STATEMENT_DECLARATION)
+    $default  вывод с использованием правила 34 (STATEMENT_DECLARATION)
 
-    STATEMENT_DECLARATION  go to state 83
-    STATEMENT              go to state 63
-    IF_STATEMENT           go to state 64
-    WHILE_STATEMENT        go to state 65
-    PRINT_STATEMENT        go to state 66
-    ASSIGNMENT             go to state 67
-    ARRAY_ASSIGNMENT       go to state 68
-    ID                     go to state 84
+    STATEMENT_DECLARATION  переход в состояние 83
+    STATEMENT              переход в состояние 63
+    IF_STATEMENT           переход в состояние 64
+    WHILE_STATEMENT        переход в состояние 65
+    PRINT_STATEMENT        переход в состояние 66
+    ASSIGNMENT             переход в состояние 67
+    ARRAY_ASSIGNMENT       переход в состояние 68
+    ID                     переход в состояние 84
 
 
-state 59
+State 59
 
    31 VAR_AND_STATEMENT_DECLARATIONS: VAR_DECLARATION . VAR_AND_STATEMENT_DECLARATIONS
 
-    error  shift, and go to state 54
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    INT    shift, and go to state 25
-    BOOL   shift, and go to state 26
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    error  сдвиг, и переход в состояние 54
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    INT    сдвиг, и переход в состояние 25
+    BOOL   сдвиг, и переход в состояние 26
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    RETURN  reduce using rule 34 (STATEMENT_DECLARATION)
+    RETURN  вывод с использованием правила 34 (STATEMENT_DECLARATION)
 
-    VAR_DECLARATION                 go to state 59
-    TYPE                            go to state 32
-    INT_ARRAY                       go to state 33
-    VAR_AND_STATEMENT_DECLARATIONS  go to state 85
-    STATEMENT_DECLARATION           go to state 62
-    STATEMENT                       go to state 63
-    IF_STATEMENT                    go to state 64
-    WHILE_STATEMENT                 go to state 65
-    PRINT_STATEMENT                 go to state 66
-    ASSIGNMENT                      go to state 67
-    ARRAY_ASSIGNMENT                go to state 68
-    ID                              go to state 69
+    VAR_DECLARATION                 переход в состояние 59
+    TYPE                            переход в состояние 32
+    INT_ARRAY                       переход в состояние 33
+    VAR_AND_STATEMENT_DECLARATIONS  переход в состояние 85
+    STATEMENT_DECLARATION           переход в состояние 62
+    STATEMENT                       переход в состояние 63
+    IF_STATEMENT                    переход в состояние 64
+    WHILE_STATEMENT                 переход в состояние 65
+    PRINT_STATEMENT                 переход в состояние 66
+    ASSIGNMENT                      переход в состояние 67
+    ARRAY_ASSIGNMENT                переход в состояние 68
+    ID                              переход в состояние 69
 
 
-state 60
+State 60
 
    16 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY . '}'
 
-    '}'  shift, and go to state 86
+    '}'  сдвиг, и переход в состояние 86
 
 
-state 61
+State 61
 
    30 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS . RETURN EXPR ';'
 
-    RETURN  shift, and go to state 87
+    RETURN  сдвиг, и переход в состояние 87
 
 
-state 62
+State 62
 
    32 VAR_AND_STATEMENT_DECLARATIONS: STATEMENT_DECLARATION .
 
-    $default  reduce using rule 32 (VAR_AND_STATEMENT_DECLARATIONS)
+    $default  вывод с использованием правила 32 (VAR_AND_STATEMENT_DECLARATIONS)
 
 
-state 63
+State 63
 
    33 STATEMENT_DECLARATION: STATEMENT . STATEMENT_DECLARATION
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    $default  reduce using rule 34 (STATEMENT_DECLARATION)
+    $default  вывод с использованием правила 34 (STATEMENT_DECLARATION)
 
-    STATEMENT_DECLARATION  go to state 88
-    STATEMENT              go to state 63
-    IF_STATEMENT           go to state 64
-    WHILE_STATEMENT        go to state 65
-    PRINT_STATEMENT        go to state 66
-    ASSIGNMENT             go to state 67
-    ARRAY_ASSIGNMENT       go to state 68
-    ID                     go to state 84
+    STATEMENT_DECLARATION  переход в состояние 88
+    STATEMENT              переход в состояние 63
+    IF_STATEMENT           переход в состояние 64
+    WHILE_STATEMENT        переход в состояние 65
+    PRINT_STATEMENT        переход в состояние 66
+    ASSIGNMENT             переход в состояние 67
+    ARRAY_ASSIGNMENT       переход в состояние 68
+    ID                     переход в состояние 84
 
 
-state 64
+State 64
 
    36 STATEMENT: IF_STATEMENT .
 
-    $default  reduce using rule 36 (STATEMENT)
+    $default  вывод с использованием правила 36 (STATEMENT)
 
 
-state 65
+State 65
 
    37 STATEMENT: WHILE_STATEMENT .
 
-    $default  reduce using rule 37 (STATEMENT)
+    $default  вывод с использованием правила 37 (STATEMENT)
 
 
-state 66
+State 66
 
    38 STATEMENT: PRINT_STATEMENT .
 
-    $default  reduce using rule 38 (STATEMENT)
+    $default  вывод с использованием правила 38 (STATEMENT)
 
 
-state 67
+State 67
 
    39 STATEMENT: ASSIGNMENT .
 
-    $default  reduce using rule 39 (STATEMENT)
+    $default  вывод с использованием правила 39 (STATEMENT)
 
 
-state 68
+State 68
 
    40 STATEMENT: ARRAY_ASSIGNMENT .
 
-    $default  reduce using rule 40 (STATEMENT)
+    $default  вывод с использованием правила 40 (STATEMENT)
 
 
-state 69
+State 69
 
    27 TYPE: ID .
    49 ASSIGNMENT: ID . '=' EXPR ';'
@@ -904,171 +905,171 @@ state 69
    52                 | ID . '[' error ']' '=' EXPR ';'
    53                 | ID . '[' EXPR ']' '=' error ';'
 
-    '['  shift, and go to state 89
-    '='  shift, and go to state 90
+    '['  сдвиг, и переход в состояние 89
+    '='  сдвиг, и переход в состояние 90
 
-    $default  reduce using rule 27 (TYPE)
+    $default  вывод с использованием правила 27 (TYPE)
 
 
-state 70
+State 70
 
    14 VAR_DECLARATION: TYPE ID ';' .
 
-    $default  reduce using rule 14 (VAR_DECLARATION)
+    $default  вывод с использованием правила 14 (VAR_DECLARATION)
 
 
-state 71
+State 71
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' . '{' STATEMENT '}' '}'
 
-    '{'  shift, and go to state 91
+    '{'  сдвиг, и переход в состояние 91
 
 
-state 72
+State 72
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error . ')' '{' STATEMENT '}' '}'
 
-    ')'  shift, and go to state 92
+    ')'  сдвиг, и переход в состояние 92
 
 
-state 73
+State 73
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS . ID ')' '{' STATEMENT '}' '}'
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 93
+    ID  переход в состояние 93
 
 
-state 74
+State 74
 
    19 METHOD_HEADER: error ID '(' ARGS_DECLARATION . ')'
 
-    ')'  shift, and go to state 94
+    ')'  сдвиг, и переход в состояние 94
 
 
-state 75
+State 75
 
    21 ARGS_DECLARATION: PARAM_DECLARATION .
    22                 | PARAM_DECLARATION . ',' ARGS_DECLARATION
 
-    ','  shift, and go to state 95
+    ','  сдвиг, и переход в состояние 95
 
-    $default  reduce using rule 21 (ARGS_DECLARATION)
+    $default  вывод с использованием правила 21 (ARGS_DECLARATION)
 
 
-state 76
+State 76
 
    23 PARAM_DECLARATION: TYPE . ID
 
-    _ID  shift, and go to state 4
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 96
+    ID  переход в состояние 96
 
 
-state 77
+State 77
 
    17 METHOD_HEADER: PUBLIC TYPE ID '(' . ARGS_DECLARATION ')'
    18              | PUBLIC TYPE ID '(' . error ')'
 
-    error  shift, and go to state 97
-    INT    shift, and go to state 25
-    BOOL   shift, and go to state 26
-    _ID    shift, and go to state 4
+    error  сдвиг, и переход в состояние 97
+    INT    сдвиг, и переход в состояние 25
+    BOOL   сдвиг, и переход в состояние 26
+    _ID    сдвиг, и переход в состояние 4
 
-    ')'  reduce using rule 20 (ARGS_DECLARATION)
+    ')'  вывод с использованием правила 20 (ARGS_DECLARATION)
 
-    ARGS_DECLARATION   go to state 98
-    PARAM_DECLARATION  go to state 75
-    TYPE               go to state 76
-    INT_ARRAY          go to state 33
-    ID                 go to state 34
+    ARGS_DECLARATION   переход в состояние 98
+    PARAM_DECLARATION  переход в состояние 75
+    TYPE               переход в состояние 76
+    INT_ARRAY          переход в состояние 33
+    ID                 переход в состояние 34
 
 
-state 78
+State 78
 
    29 INT_ARRAY: INT '[' error ']' .
 
-    $default  reduce using rule 29 (INT_ARRAY)
+    $default  вывод с использованием правила 29 (INT_ARRAY)
 
 
-state 79
+State 79
 
    15 VAR_DECLARATION: error ID . ';'
 
-    ';'  shift, and go to state 49
+    ';'  сдвиг, и переход в состояние 49
 
 
-state 80
+State 80
 
    45 WHILE_STATEMENT: WHILE '(' . EXPR ')' STATEMENT
    46                | WHILE '(' . error ')' STATEMENT
 
-    error       shift, and go to state 99
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 99
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 106
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 106
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 81
+State 81
 
    47 PRINT_STATEMENT: PRINT '(' . EXPR ')' ';'
    48                | PRINT '(' . error ')' ';'
 
-    error       shift, and go to state 110
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 110
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 111
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 111
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 82
+State 82
 
    41 IF_STATEMENT: IF '(' . EXPR ')' STATEMENT ELSE STATEMENT
    42             | IF '(' . error ')' STATEMENT ELSE STATEMENT
    43             | IF '(' . EXPR ')' error ELSE STATEMENT
    44             | IF '(' . EXPR ')' STATEMENT ELSE error
 
-    error       shift, and go to state 112
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 112
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 113
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 113
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 83
+State 83
 
    35 STATEMENT: '{' STATEMENT_DECLARATION . '}'
 
-    '}'  shift, and go to state 114
+    '}'  сдвиг, и переход в состояние 114
 
 
-state 84
+State 84
 
    49 ASSIGNMENT: ID . '=' EXPR ';'
    50           | ID . '=' error ';'
@@ -1076,246 +1077,246 @@ state 84
    52                 | ID . '[' error ']' '=' EXPR ';'
    53                 | ID . '[' EXPR ']' '=' error ';'
 
-    '['  shift, and go to state 89
-    '='  shift, and go to state 90
+    '['  сдвиг, и переход в состояние 89
+    '='  сдвиг, и переход в состояние 90
 
 
-state 85
+State 85
 
    31 VAR_AND_STATEMENT_DECLARATIONS: VAR_DECLARATION VAR_AND_STATEMENT_DECLARATIONS .
 
-    $default  reduce using rule 31 (VAR_AND_STATEMENT_DECLARATIONS)
+    $default  вывод с использованием правила 31 (VAR_AND_STATEMENT_DECLARATIONS)
 
 
-state 86
+State 86
 
    16 METHOD_DECLARATION: METHOD_HEADER '{' METHOD_BODY '}' .
 
-    $default  reduce using rule 16 (METHOD_DECLARATION)
+    $default  вывод с использованием правила 16 (METHOD_DECLARATION)
 
 
-state 87
+State 87
 
    30 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN . EXPR ';'
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 115
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 115
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 88
+State 88
 
    33 STATEMENT_DECLARATION: STATEMENT STATEMENT_DECLARATION .
 
-    $default  reduce using rule 33 (STATEMENT_DECLARATION)
+    $default  вывод с использованием правила 33 (STATEMENT_DECLARATION)
 
 
-state 89
+State 89
 
    51 ARRAY_ASSIGNMENT: ID '[' . EXPR ']' '=' EXPR ';'
    52                 | ID '[' . error ']' '=' EXPR ';'
    53                 | ID '[' . EXPR ']' '=' error ';'
 
-    error       shift, and go to state 116
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 116
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 117
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 117
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 90
+State 90
 
    49 ASSIGNMENT: ID '=' . EXPR ';'
    50           | ID '=' . error ';'
 
-    error       shift, and go to state 118
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 118
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 119
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 119
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 91
+State 91
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' . STATEMENT '}' '}'
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 120
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 120
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 92
+State 92
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' . '{' STATEMENT '}' '}'
 
-    '{'  shift, and go to state 121
+    '{'  сдвиг, и переход в состояние 121
 
 
-state 93
+State 93
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID . ')' '{' STATEMENT '}' '}'
 
-    ')'  shift, and go to state 122
+    ')'  сдвиг, и переход в состояние 122
 
 
-state 94
+State 94
 
    19 METHOD_HEADER: error ID '(' ARGS_DECLARATION ')' .
 
-    $default  reduce using rule 19 (METHOD_HEADER)
+    $default  вывод с использованием правила 19 (METHOD_HEADER)
 
 
-state 95
+State 95
 
    22 ARGS_DECLARATION: PARAM_DECLARATION ',' . ARGS_DECLARATION
 
-    INT   shift, and go to state 25
-    BOOL  shift, and go to state 26
-    _ID   shift, and go to state 4
+    INT   сдвиг, и переход в состояние 25
+    BOOL  сдвиг, и переход в состояние 26
+    _ID   сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 20 (ARGS_DECLARATION)
+    $default  вывод с использованием правила 20 (ARGS_DECLARATION)
 
-    ARGS_DECLARATION   go to state 123
-    PARAM_DECLARATION  go to state 75
-    TYPE               go to state 76
-    INT_ARRAY          go to state 33
-    ID                 go to state 34
+    ARGS_DECLARATION   переход в состояние 123
+    PARAM_DECLARATION  переход в состояние 75
+    TYPE               переход в состояние 76
+    INT_ARRAY          переход в состояние 33
+    ID                 переход в состояние 34
 
 
-state 96
+State 96
 
    23 PARAM_DECLARATION: TYPE ID .
 
-    $default  reduce using rule 23 (PARAM_DECLARATION)
+    $default  вывод с использованием правила 23 (PARAM_DECLARATION)
 
 
-state 97
+State 97
 
    18 METHOD_HEADER: PUBLIC TYPE ID '(' error . ')'
 
-    ')'  shift, and go to state 124
+    ')'  сдвиг, и переход в состояние 124
 
 
-state 98
+State 98
 
    17 METHOD_HEADER: PUBLIC TYPE ID '(' ARGS_DECLARATION . ')'
 
-    ')'  shift, and go to state 125
+    ')'  сдвиг, и переход в состояние 125
 
 
-state 99
+State 99
 
    46 WHILE_STATEMENT: WHILE '(' error . ')' STATEMENT
 
-    ')'  shift, and go to state 126
+    ')'  сдвиг, и переход в состояние 126
 
 
-state 100
+State 100
 
    76 NEW_EXPR: NEW . INT '[' EXPR ']'
    77         | NEW . INT '[' error ']'
    78         | NEW . ID '(' ')'
    79         | NEW . ID '(' error ')'
 
-    INT  shift, and go to state 127
-    _ID  shift, and go to state 4
+    INT  сдвиг, и переход в состояние 127
+    _ID  сдвиг, и переход в состояние 4
 
-    ID  go to state 128
+    ID  переход в состояние 128
 
 
-state 101
+State 101
 
    64 EXPR: THIS .
 
-    $default  reduce using rule 64 (EXPR)
+    $default  вывод с использованием правила 64 (EXPR)
 
 
-state 102
+State 102
 
    71 CONSTANT: INT_VALUE .
 
-    $default  reduce using rule 71 (CONSTANT)
+    $default  вывод с использованием правила 71 (CONSTANT)
 
 
-state 103
+State 103
 
    72 CONSTANT: BOOL_VALUE .
 
-    $default  reduce using rule 72 (CONSTANT)
+    $default  вывод с использованием правила 72 (CONSTANT)
 
 
-state 104
+State 104
 
    60 EXPR: NOT . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 129
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 129
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 105
+State 105
 
    61 EXPR: '(' . EXPR ')'
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 130
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 130
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 106
+State 106
 
    45 WHILE_STATEMENT: WHILE '(' EXPR . ')' STATEMENT
    54 EXPR: EXPR . '+' EXPR
@@ -1330,46 +1331,46 @@ state 106
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ')'  shift, and go to state 139
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ')'  сдвиг, и переход в состояние 139
 
 
-state 107
+State 107
 
    65 EXPR: CONSTANT .
 
-    $default  reduce using rule 65 (EXPR)
+    $default  вывод с использованием правила 65 (EXPR)
 
 
-state 108
+State 108
 
    62 EXPR: NEW_EXPR .
 
-    $default  reduce using rule 62 (EXPR)
+    $default  вывод с использованием правила 62 (EXPR)
 
 
-state 109
+State 109
 
    63 EXPR: ID .
 
-    $default  reduce using rule 63 (EXPR)
+    $default  вывод с использованием правила 63 (EXPR)
 
 
-state 110
+State 110
 
    48 PRINT_STATEMENT: PRINT '(' error . ')' ';'
 
-    ')'  shift, and go to state 140
+    ')'  сдвиг, и переход в состояние 140
 
 
-state 111
+State 111
 
    47 PRINT_STATEMENT: PRINT '(' EXPR . ')' ';'
    54 EXPR: EXPR . '+' EXPR
@@ -1384,25 +1385,25 @@ state 111
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ')'  shift, and go to state 141
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ')'  сдвиг, и переход в состояние 141
 
 
-state 112
+State 112
 
    42 IF_STATEMENT: IF '(' error . ')' STATEMENT ELSE STATEMENT
 
-    ')'  shift, and go to state 142
+    ')'  сдвиг, и переход в состояние 142
 
 
-state 113
+State 113
 
    41 IF_STATEMENT: IF '(' EXPR . ')' STATEMENT ELSE STATEMENT
    43             | IF '(' EXPR . ')' error ELSE STATEMENT
@@ -1419,25 +1420,25 @@ state 113
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ')'  shift, and go to state 143
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ')'  сдвиг, и переход в состояние 143
 
 
-state 114
+State 114
 
    35 STATEMENT: '{' STATEMENT_DECLARATION '}' .
 
-    $default  reduce using rule 35 (STATEMENT)
+    $default  вывод с использованием правила 35 (STATEMENT)
 
 
-state 115
+State 115
 
    30 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR . ';'
    54 EXPR: EXPR . '+' EXPR
@@ -1452,25 +1453,25 @@ state 115
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ';'  shift, and go to state 144
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ';'  сдвиг, и переход в состояние 144
 
 
-state 116
+State 116
 
    52 ARRAY_ASSIGNMENT: ID '[' error . ']' '=' EXPR ';'
 
-    ']'  shift, and go to state 145
+    ']'  сдвиг, и переход в состояние 145
 
 
-state 117
+State 117
 
    51 ARRAY_ASSIGNMENT: ID '[' EXPR . ']' '=' EXPR ';'
    53                 | ID '[' EXPR . ']' '=' error ';'
@@ -1486,25 +1487,25 @@ state 117
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ']'  shift, and go to state 146
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ']'  сдвиг, и переход в состояние 146
 
 
-state 118
+State 118
 
    50 ASSIGNMENT: ID '=' error . ';'
 
-    ';'  shift, and go to state 147
+    ';'  сдвиг, и переход в состояние 147
 
 
-state 119
+State 119
 
    49 ASSIGNMENT: ID '=' EXPR . ';'
    54 EXPR: EXPR . '+' EXPR
@@ -1519,107 +1520,107 @@ state 119
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ';'  shift, and go to state 148
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ';'  сдвиг, и переход в состояние 148
 
 
-state 120
+State 120
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT . '}' '}'
 
-    '}'  shift, and go to state 149
+    '}'  сдвиг, и переход в состояние 149
 
 
-state 121
+State 121
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' . STATEMENT '}' '}'
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 150
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 150
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 122
+State 122
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' . '{' STATEMENT '}' '}'
 
-    '{'  shift, and go to state 151
+    '{'  сдвиг, и переход в состояние 151
 
 
-state 123
+State 123
 
    22 ARGS_DECLARATION: PARAM_DECLARATION ',' ARGS_DECLARATION .
 
-    $default  reduce using rule 22 (ARGS_DECLARATION)
+    $default  вывод с использованием правила 22 (ARGS_DECLARATION)
 
 
-state 124
+State 124
 
    18 METHOD_HEADER: PUBLIC TYPE ID '(' error ')' .
 
-    $default  reduce using rule 18 (METHOD_HEADER)
+    $default  вывод с использованием правила 18 (METHOD_HEADER)
 
 
-state 125
+State 125
 
    17 METHOD_HEADER: PUBLIC TYPE ID '(' ARGS_DECLARATION ')' .
 
-    $default  reduce using rule 17 (METHOD_HEADER)
+    $default  вывод с использованием правила 17 (METHOD_HEADER)
 
 
-state 126
+State 126
 
    46 WHILE_STATEMENT: WHILE '(' error ')' . STATEMENT
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 152
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 152
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 127
+State 127
 
    76 NEW_EXPR: NEW INT . '[' EXPR ']'
    77         | NEW INT . '[' error ']'
 
-    '['  shift, and go to state 153
+    '['  сдвиг, и переход в состояние 153
 
 
-state 128
+State 128
 
    78 NEW_EXPR: NEW ID . '(' ')'
    79         | NEW ID . '(' error ')'
 
-    '('  shift, and go to state 154
+    '('  сдвиг, и переход в состояние 154
 
 
-state 129
+State 129
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -1634,17 +1635,17 @@ state 129
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 60 (EXPR)
+    $default  вывод с использованием правила 60 (EXPR)
 
 
-state 130
+State 130
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -1659,369 +1660,344 @@ state 130
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ')'  shift, and go to state 155
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ')'  сдвиг, и переход в состояние 155
 
 
-state 131
-
-   59 EXPR: EXPR EQ . EXPR
-
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
-
-    EXPR      go to state 156
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
-
-
-state 132
+State 131
 
    57 EXPR: EXPR AND . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 157
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 156
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 133
+State 132
+
+   59 EXPR: EXPR EQ . EXPR
+
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
+
+    EXPR      переход в состояние 157
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
+
+
+State 133
 
    54 EXPR: EXPR '+' . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 158
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 158
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 134
+State 134
 
    55 EXPR: EXPR '-' . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 159
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 159
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 135
+State 135
 
    68 EXPR: EXPR '.' . LENGTH
    69     | EXPR '.' . ID '(' PARAMS ')'
    70     | EXPR '.' . ID '(' error ')'
 
-    LENGTH  shift, and go to state 160
-    _ID     shift, and go to state 4
+    LENGTH  сдвиг, и переход в состояние 160
+    _ID     сдвиг, и переход в состояние 4
 
-    ID  go to state 161
+    ID  переход в состояние 161
 
 
-state 136
+State 136
 
    58 EXPR: EXPR '<' . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 162
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 162
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 137
+State 137
 
    56 EXPR: EXPR '*' . EXPR
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 163
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 163
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 138
+State 138
 
    66 EXPR: EXPR '[' . EXPR ']'
    67     | EXPR '[' . error ']'
 
-    error       shift, and go to state 164
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 164
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 165
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 165
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 139
+State 139
 
    45 WHILE_STATEMENT: WHILE '(' EXPR ')' . STATEMENT
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 166
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 166
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 140
+State 140
 
    48 PRINT_STATEMENT: PRINT '(' error ')' . ';'
 
-    ';'  shift, and go to state 167
+    ';'  сдвиг, и переход в состояние 167
 
 
-state 141
+State 141
 
    47 PRINT_STATEMENT: PRINT '(' EXPR ')' . ';'
 
-    ';'  shift, and go to state 168
+    ';'  сдвиг, и переход в состояние 168
 
 
-state 142
+State 142
 
    42 IF_STATEMENT: IF '(' error ')' . STATEMENT ELSE STATEMENT
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 169
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 169
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 143
+State 143
 
    41 IF_STATEMENT: IF '(' EXPR ')' . STATEMENT ELSE STATEMENT
    43             | IF '(' EXPR ')' . error ELSE STATEMENT
    44             | IF '(' EXPR ')' . STATEMENT ELSE error
 
-    error  shift, and go to state 170
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    error  сдвиг, и переход в состояние 170
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 171
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 171
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 144
+State 144
 
    30 METHOD_BODY: VAR_AND_STATEMENT_DECLARATIONS RETURN EXPR ';' .
 
-    $default  reduce using rule 30 (METHOD_BODY)
+    $default  вывод с использованием правила 30 (METHOD_BODY)
 
 
-state 145
+State 145
 
    52 ARRAY_ASSIGNMENT: ID '[' error ']' . '=' EXPR ';'
 
-    '='  shift, and go to state 172
+    '='  сдвиг, и переход в состояние 172
 
 
-state 146
+State 146
 
    51 ARRAY_ASSIGNMENT: ID '[' EXPR ']' . '=' EXPR ';'
    53                 | ID '[' EXPR ']' . '=' error ';'
 
-    '='  shift, and go to state 173
+    '='  сдвиг, и переход в состояние 173
 
 
-state 147
+State 147
 
    50 ASSIGNMENT: ID '=' error ';' .
 
-    $default  reduce using rule 50 (ASSIGNMENT)
+    $default  вывод с использованием правила 50 (ASSIGNMENT)
 
 
-state 148
+State 148
 
    49 ASSIGNMENT: ID '=' EXPR ';' .
 
-    $default  reduce using rule 49 (ASSIGNMENT)
+    $default  вывод с использованием правила 49 (ASSIGNMENT)
 
 
-state 149
+State 149
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' . '}'
 
-    '}'  shift, and go to state 174
+    '}'  сдвиг, и переход в состояние 174
 
 
-state 150
+State 150
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT . '}' '}'
 
-    '}'  shift, and go to state 175
+    '}'  сдвиг, и переход в состояние 175
 
 
-state 151
+State 151
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' . STATEMENT '}' '}'
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 176
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 176
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 152
+State 152
 
    46 WHILE_STATEMENT: WHILE '(' error ')' STATEMENT .
 
-    $default  reduce using rule 46 (WHILE_STATEMENT)
+    $default  вывод с использованием правила 46 (WHILE_STATEMENT)
 
 
-state 153
+State 153
 
    76 NEW_EXPR: NEW INT '[' . EXPR ']'
    77         | NEW INT '[' . error ']'
 
-    error       shift, and go to state 177
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 177
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 178
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 178
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 154
+State 154
 
    78 NEW_EXPR: NEW ID '(' . ')'
    79         | NEW ID '(' . error ')'
 
-    error  shift, and go to state 179
-    ')'    shift, and go to state 180
+    error  сдвиг, и переход в состояние 179
+    ')'    сдвиг, и переход в состояние 180
 
 
-state 155
+State 155
 
    61 EXPR: '(' EXPR ')' .
 
-    $default  reduce using rule 61 (EXPR)
+    $default  вывод с использованием правила 61 (EXPR)
 
 
-state 156
-
-   54 EXPR: EXPR . '+' EXPR
-   55     | EXPR . '-' EXPR
-   56     | EXPR . '*' EXPR
-   57     | EXPR . AND EXPR
-   58     | EXPR . '<' EXPR
-   59     | EXPR . EQ EXPR
-   59     | EXPR EQ EXPR .
-   66     | EXPR . '[' EXPR ']'
-   67     | EXPR . '[' error ']'
-   68     | EXPR . '.' LENGTH
-   69     | EXPR . '.' ID '(' PARAMS ')'
-   70     | EXPR . '.' ID '(' error ')'
-
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-
-    $default  reduce using rule 59 (EXPR)
-
-
-state 157
+State 156
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2036,17 +2012,42 @@ state 157
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 57 (EXPR)
+    $default  вывод с использованием правила 57 (EXPR)
 
 
-state 158
+State 157
+
+   54 EXPR: EXPR . '+' EXPR
+   55     | EXPR . '-' EXPR
+   56     | EXPR . '*' EXPR
+   57     | EXPR . AND EXPR
+   58     | EXPR . '<' EXPR
+   59     | EXPR . EQ EXPR
+   59     | EXPR EQ EXPR .
+   66     | EXPR . '[' EXPR ']'
+   67     | EXPR . '[' error ']'
+   68     | EXPR . '.' LENGTH
+   69     | EXPR . '.' ID '(' PARAMS ')'
+   70     | EXPR . '.' ID '(' error ')'
+
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+
+    $default  вывод с использованием правила 59 (EXPR)
+
+
+State 158
 
    54 EXPR: EXPR . '+' EXPR
    54     | EXPR '+' EXPR .
@@ -2061,13 +2062,13 @@ state 158
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 54 (EXPR)
+    $default  вывод с использованием правила 54 (EXPR)
 
 
-state 159
+State 159
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2082,28 +2083,28 @@ state 159
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 55 (EXPR)
+    $default  вывод с использованием правила 55 (EXPR)
 
 
-state 160
+State 160
 
    68 EXPR: EXPR '.' LENGTH .
 
-    $default  reduce using rule 68 (EXPR)
+    $default  вывод с использованием правила 68 (EXPR)
 
 
-state 161
+State 161
 
    69 EXPR: EXPR '.' ID . '(' PARAMS ')'
    70     | EXPR '.' ID . '(' error ')'
 
-    '('  shift, and go to state 181
+    '('  сдвиг, и переход в состояние 181
 
 
-state 162
+State 162
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2118,13 +2119,13 @@ state 162
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 58 (EXPR)
+    $default  вывод с использованием правила 58 (EXPR)
 
 
-state 163
+State 163
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2139,19 +2140,19 @@ state 163
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    '['  shift, and go to state 138
+    '['  сдвиг, и переход в состояние 138
 
-    $default  reduce using rule 56 (EXPR)
+    $default  вывод с использованием правила 56 (EXPR)
 
 
-state 164
+State 164
 
    67 EXPR: EXPR '[' error . ']'
 
-    ']'  shift, and go to state 182
+    ']'  сдвиг, и переход в состояние 182
 
 
-state 165
+State 165
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2166,127 +2167,127 @@ state 165
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ']'  shift, and go to state 183
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ']'  сдвиг, и переход в состояние 183
 
 
-state 166
+State 166
 
    45 WHILE_STATEMENT: WHILE '(' EXPR ')' STATEMENT .
 
-    $default  reduce using rule 45 (WHILE_STATEMENT)
+    $default  вывод с использованием правила 45 (WHILE_STATEMENT)
 
 
-state 167
+State 167
 
    48 PRINT_STATEMENT: PRINT '(' error ')' ';' .
 
-    $default  reduce using rule 48 (PRINT_STATEMENT)
+    $default  вывод с использованием правила 48 (PRINT_STATEMENT)
 
 
-state 168
+State 168
 
    47 PRINT_STATEMENT: PRINT '(' EXPR ')' ';' .
 
-    $default  reduce using rule 47 (PRINT_STATEMENT)
+    $default  вывод с использованием правила 47 (PRINT_STATEMENT)
 
 
-state 169
+State 169
 
    42 IF_STATEMENT: IF '(' error ')' STATEMENT . ELSE STATEMENT
 
-    ELSE  shift, and go to state 184
+    ELSE  сдвиг, и переход в состояние 184
 
 
-state 170
+State 170
 
    43 IF_STATEMENT: IF '(' EXPR ')' error . ELSE STATEMENT
 
-    ELSE  shift, and go to state 185
+    ELSE  сдвиг, и переход в состояние 185
 
 
-state 171
+State 171
 
    41 IF_STATEMENT: IF '(' EXPR ')' STATEMENT . ELSE STATEMENT
    44             | IF '(' EXPR ')' STATEMENT . ELSE error
 
-    ELSE  shift, and go to state 186
+    ELSE  сдвиг, и переход в состояние 186
 
 
-state 172
+State 172
 
    52 ARRAY_ASSIGNMENT: ID '[' error ']' '=' . EXPR ';'
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 187
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 187
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 173
+State 173
 
    51 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' . EXPR ';'
    53                 | ID '[' EXPR ']' '=' . error ';'
 
-    error       shift, and go to state 188
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 188
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    EXPR      go to state 189
-    CONSTANT  go to state 107
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 189
+    CONSTANT  переход в состояние 107
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 174
+State 174
 
     6 MAIN_CLASS: CLASS ID '{' error MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}' .
 
-    $default  reduce using rule 6 (MAIN_CLASS)
+    $default  вывод с использованием правила 6 (MAIN_CLASS)
 
 
-state 175
+State 175
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' . '}'
 
-    '}'  shift, and go to state 190
+    '}'  сдвиг, и переход в состояние 190
 
 
-state 176
+State 176
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT . '}' '}'
 
-    '}'  shift, and go to state 191
+    '}'  сдвиг, и переход в состояние 191
 
 
-state 177
+State 177
 
    77 NEW_EXPR: NEW INT '[' error . ']'
 
-    ']'  shift, and go to state 192
+    ']'  сдвиг, и переход в состояние 192
 
 
-state 178
+State 178
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2301,128 +2302,128 @@ state 178
    70     | EXPR . '.' ID '(' error ')'
    76 NEW_EXPR: NEW INT '[' EXPR . ']'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ']'  shift, and go to state 193
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ']'  сдвиг, и переход в состояние 193
 
 
-state 179
+State 179
 
    79 NEW_EXPR: NEW ID '(' error . ')'
 
-    ')'  shift, and go to state 194
+    ')'  сдвиг, и переход в состояние 194
 
 
-state 180
+State 180
 
    78 NEW_EXPR: NEW ID '(' ')' .
 
-    $default  reduce using rule 78 (NEW_EXPR)
+    $default  вывод с использованием правила 78 (NEW_EXPR)
 
 
-state 181
+State 181
 
    69 EXPR: EXPR '.' ID '(' . PARAMS ')'
    70     | EXPR '.' ID '(' . error ')'
 
-    error       shift, and go to state 195
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    error       сдвиг, и переход в состояние 195
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    ')'  reduce using rule 73 (PARAMS)
+    ')'  вывод с использованием правила 73 (PARAMS)
 
-    EXPR      go to state 196
-    CONSTANT  go to state 107
-    PARAMS    go to state 197
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 196
+    CONSTANT  переход в состояние 107
+    PARAMS    переход в состояние 197
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 182
+State 182
 
    67 EXPR: EXPR '[' error ']' .
 
-    $default  reduce using rule 67 (EXPR)
+    $default  вывод с использованием правила 67 (EXPR)
 
 
-state 183
+State 183
 
    66 EXPR: EXPR '[' EXPR ']' .
 
-    $default  reduce using rule 66 (EXPR)
+    $default  вывод с использованием правила 66 (EXPR)
 
 
-state 184
+State 184
 
    42 IF_STATEMENT: IF '(' error ')' STATEMENT ELSE . STATEMENT
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 198
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 198
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 185
+State 185
 
    43 IF_STATEMENT: IF '(' EXPR ')' error ELSE . STATEMENT
 
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 199
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 199
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 186
+State 186
 
    41 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE . STATEMENT
    44             | IF '(' EXPR ')' STATEMENT ELSE . error
 
-    error  shift, and go to state 200
-    WHILE  shift, and go to state 55
-    PRINT  shift, and go to state 56
-    _ID    shift, and go to state 4
-    IF     shift, and go to state 57
-    '{'    shift, and go to state 58
+    error  сдвиг, и переход в состояние 200
+    WHILE  сдвиг, и переход в состояние 55
+    PRINT  сдвиг, и переход в состояние 56
+    _ID    сдвиг, и переход в состояние 4
+    IF     сдвиг, и переход в состояние 57
+    '{'    сдвиг, и переход в состояние 58
 
-    STATEMENT         go to state 201
-    IF_STATEMENT      go to state 64
-    WHILE_STATEMENT   go to state 65
-    PRINT_STATEMENT   go to state 66
-    ASSIGNMENT        go to state 67
-    ARRAY_ASSIGNMENT  go to state 68
-    ID                go to state 84
+    STATEMENT         переход в состояние 201
+    IF_STATEMENT      переход в состояние 64
+    WHILE_STATEMENT   переход в состояние 65
+    PRINT_STATEMENT   переход в состояние 66
+    ASSIGNMENT        переход в состояние 67
+    ARRAY_ASSIGNMENT  переход в состояние 68
+    ID                переход в состояние 84
 
 
-state 187
+State 187
 
    52 ARRAY_ASSIGNMENT: ID '[' error ']' '=' EXPR . ';'
    54 EXPR: EXPR . '+' EXPR
@@ -2437,25 +2438,25 @@ state 187
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ';'  shift, and go to state 202
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ';'  сдвиг, и переход в состояние 202
 
 
-state 188
+State 188
 
    53 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' error . ';'
 
-    ';'  shift, and go to state 203
+    ';'  сдвиг, и переход в состояние 203
 
 
-state 189
+State 189
 
    51 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' EXPR . ';'
    54 EXPR: EXPR . '+' EXPR
@@ -2470,60 +2471,60 @@ state 189
    69     | EXPR . '.' ID '(' PARAMS ')'
    70     | EXPR . '.' ID '(' error ')'
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ';'  shift, and go to state 204
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ';'  сдвиг, и переход в состояние 204
 
 
-state 190
+State 190
 
     5 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' error ')' '{' STATEMENT '}' '}' .
 
-    $default  reduce using rule 5 (MAIN_CLASS)
+    $default  вывод с использованием правила 5 (MAIN_CLASS)
 
 
-state 191
+State 191
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' . '}'
 
-    '}'  shift, and go to state 205
+    '}'  сдвиг, и переход в состояние 205
 
 
-state 192
+State 192
 
    77 NEW_EXPR: NEW INT '[' error ']' .
 
-    $default  reduce using rule 77 (NEW_EXPR)
+    $default  вывод с использованием правила 77 (NEW_EXPR)
 
 
-state 193
+State 193
 
    76 NEW_EXPR: NEW INT '[' EXPR ']' .
 
-    $default  reduce using rule 76 (NEW_EXPR)
+    $default  вывод с использованием правила 76 (NEW_EXPR)
 
 
-state 194
+State 194
 
    79 NEW_EXPR: NEW ID '(' error ')' .
 
-    $default  reduce using rule 79 (NEW_EXPR)
+    $default  вывод с использованием правила 79 (NEW_EXPR)
 
 
-state 195
+State 195
 
    70 EXPR: EXPR '.' ID '(' error . ')'
 
-    ')'  shift, and go to state 206
+    ')'  сдвиг, и переход в состояние 206
 
 
-state 196
+State 196
 
    54 EXPR: EXPR . '+' EXPR
    55     | EXPR . '-' EXPR
@@ -2539,119 +2540,119 @@ state 196
    74 PARAMS: EXPR .
    75       | EXPR . ',' PARAMS
 
-    EQ   shift, and go to state 131
-    AND  shift, and go to state 132
-    '+'  shift, and go to state 133
-    '-'  shift, and go to state 134
-    '.'  shift, and go to state 135
-    '<'  shift, and go to state 136
-    '*'  shift, and go to state 137
-    '['  shift, and go to state 138
-    ','  shift, and go to state 207
+    AND  сдвиг, и переход в состояние 131
+    EQ   сдвиг, и переход в состояние 132
+    '+'  сдвиг, и переход в состояние 133
+    '-'  сдвиг, и переход в состояние 134
+    '.'  сдвиг, и переход в состояние 135
+    '<'  сдвиг, и переход в состояние 136
+    '*'  сдвиг, и переход в состояние 137
+    '['  сдвиг, и переход в состояние 138
+    ','  сдвиг, и переход в состояние 207
 
-    $default  reduce using rule 74 (PARAMS)
+    $default  вывод с использованием правила 74 (PARAMS)
 
 
-state 197
+State 197
 
    69 EXPR: EXPR '.' ID '(' PARAMS . ')'
 
-    ')'  shift, and go to state 208
+    ')'  сдвиг, и переход в состояние 208
 
 
-state 198
+State 198
 
    42 IF_STATEMENT: IF '(' error ')' STATEMENT ELSE STATEMENT .
 
-    $default  reduce using rule 42 (IF_STATEMENT)
+    $default  вывод с использованием правила 42 (IF_STATEMENT)
 
 
-state 199
+State 199
 
    43 IF_STATEMENT: IF '(' EXPR ')' error ELSE STATEMENT .
 
-    $default  reduce using rule 43 (IF_STATEMENT)
+    $default  вывод с использованием правила 43 (IF_STATEMENT)
 
 
-state 200
+State 200
 
    44 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE error .
 
-    $default  reduce using rule 44 (IF_STATEMENT)
+    $default  вывод с использованием правила 44 (IF_STATEMENT)
 
 
-state 201
+State 201
 
    41 IF_STATEMENT: IF '(' EXPR ')' STATEMENT ELSE STATEMENT .
 
-    $default  reduce using rule 41 (IF_STATEMENT)
+    $default  вывод с использованием правила 41 (IF_STATEMENT)
 
 
-state 202
+State 202
 
    52 ARRAY_ASSIGNMENT: ID '[' error ']' '=' EXPR ';' .
 
-    $default  reduce using rule 52 (ARRAY_ASSIGNMENT)
+    $default  вывод с использованием правила 52 (ARRAY_ASSIGNMENT)
 
 
-state 203
+State 203
 
    53 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' error ';' .
 
-    $default  reduce using rule 53 (ARRAY_ASSIGNMENT)
+    $default  вывод с использованием правила 53 (ARRAY_ASSIGNMENT)
 
 
-state 204
+State 204
 
    51 ARRAY_ASSIGNMENT: ID '[' EXPR ']' '=' EXPR ';' .
 
-    $default  reduce using rule 51 (ARRAY_ASSIGNMENT)
+    $default  вывод с использованием правила 51 (ARRAY_ASSIGNMENT)
 
 
-state 205
+State 205
 
     4 MAIN_CLASS: CLASS ID '{' PUBLIC STATIC VOID MAIN '(' MAIN_ARGS ID ')' '{' STATEMENT '}' '}' .
 
-    $default  reduce using rule 4 (MAIN_CLASS)
+    $default  вывод с использованием правила 4 (MAIN_CLASS)
 
 
-state 206
+State 206
 
    70 EXPR: EXPR '.' ID '(' error ')' .
 
-    $default  reduce using rule 70 (EXPR)
+    $default  вывод с использованием правила 70 (EXPR)
 
 
-state 207
+State 207
 
    75 PARAMS: EXPR ',' . PARAMS
 
-    NEW         shift, and go to state 100
-    THIS        shift, and go to state 101
-    INT_VALUE   shift, and go to state 102
-    BOOL_VALUE  shift, and go to state 103
-    NOT         shift, and go to state 104
-    _ID         shift, and go to state 4
-    '('         shift, and go to state 105
+    NEW         сдвиг, и переход в состояние 100
+    THIS        сдвиг, и переход в состояние 101
+    INT_VALUE   сдвиг, и переход в состояние 102
+    BOOL_VALUE  сдвиг, и переход в состояние 103
+    NOT         сдвиг, и переход в состояние 104
+    _ID         сдвиг, и переход в состояние 4
+    '('         сдвиг, и переход в состояние 105
 
-    $default  reduce using rule 73 (PARAMS)
+    $default  вывод с использованием правила 73 (PARAMS)
 
-    EXPR      go to state 196
-    CONSTANT  go to state 107
-    PARAMS    go to state 209
-    NEW_EXPR  go to state 108
-    ID        go to state 109
+    EXPR      переход в состояние 196
+    CONSTANT  переход в состояние 107
+    PARAMS    переход в состояние 209
+    NEW_EXPR  переход в состояние 108
+    ID        переход в состояние 109
 
 
-state 208
+State 208
 
    69 EXPR: EXPR '.' ID '(' PARAMS ')' .
 
-    $default  reduce using rule 69 (EXPR)
+    $default  вывод с использованием правила 69 (EXPR)
 
 
-state 209
+State 209
 
    75 PARAMS: EXPR ',' PARAMS .
 
-    $default  reduce using rule 75 (PARAMS)
+    $default  вывод с использованием правила 75 (PARAMS)

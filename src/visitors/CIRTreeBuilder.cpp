@@ -168,9 +168,11 @@ void CIRTreeBuilder::Visit(const CStatementList *statementList) {
 
     if (statementList->StatementList != nullptr) {
         statementList->StatementList->Accept(this);
-        currNode = getNode(StatementPtr(new StatementList(leftStm, std::dynamic_pointer_cast<StatementList>(currNode->ToStm()))));
+        currNode = getNode(StatementPtr(new SEQStatement(leftStm, currNode->ToStm())));
+        //currNode = getNode(StatementPtr(new StatementList(leftStm, std::dynamic_pointer_cast<StatementList>(currNode->ToStm()))));
     } else {
-        currNode = getNode(StatementPtr(new StatementList(leftStm, nullptr)));
+        //currNode = getNode()
+        //currNode = getNode(StatementPtr(new StatementList(leftStm, nullptr)));
     }
 }
 
@@ -193,7 +195,7 @@ void CIRTreeBuilder::Visit(const CIfStatement *ifStatement) {
     LabelPtr trueLabel(new Temp::CLabel(storage));
     LabelPtr falseLabel(new Temp::CLabel(storage));
     LabelPtr finLabel(new Temp::CLabel(storage));
-    StatementPtr jump(new CJumpStatement(CJUMP::J_EQ, expPtr, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
+    StatementPtr jump(new CJumpStatement(CJUMP::J_NE, expPtr, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
     /*
      * jump exp trueLab falseLab:
      *   trueLab
@@ -230,7 +232,7 @@ void CIRTreeBuilder::Visit(const CWhileStatement *whileStatement) {
     LabelPtr falseLabel(new Temp::CLabel(storage));
     LabelPtr whileLabel(new Temp::CLabel(storage));
     StatementPtr jumpWhileLabel(new JumpStatement({whileLabel}, ExpPtr(new ConstExp(0))));
-    StatementPtr jumpTrueFalseLabel(new CJumpStatement(CJUMP::J_EQ, exp, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
+    StatementPtr jumpTrueFalseLabel(new CJumpStatement(CJUMP::J_NE, exp, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
     StatementPtr root;
     root = StatementPtr(new SEQStatement(jumpWhileLabel, StatementPtr(new LabelStatement(falseLabel))));
     root = StatementPtr(new SEQStatement(statementPtr, root));

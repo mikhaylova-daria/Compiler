@@ -72,6 +72,7 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/visitors/IRtree/IIRTreeVisitor.hpp
         src/visitors/CPrinter2.hpp
         src/visitors/CPrinter2.cpp
-)
+        src/visitors/IRtree/CIRTreeCanonizator.h
+        src/visitors/IRtree/CIRTreeCanonizator.cpp)
 
 add_executable(mjc ${SOURCE_FILES})
