@@ -46,7 +46,10 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::JumpStatement* jumpStatement )
 void IRTree::CIRTreePrinter::Visit( const IRTree::CJumpStatement* cJumpStatement ) {
 	TreeWalker treeWalker(this);
 	print(cJumpStatement->getName());
-	defineName(cJumpStatement->getName() + "\nif True: " + cJumpStatement->getIfTrue()->GetName() + "\nif False: " + cJumpStatement->getIfFalse()->GetName()
+	defineName(cJumpStatement->getName()
+			   + "\nif True: " + cJumpStatement->getIfTrue()->GetName()
+               + "\nif False: " + cJumpStatement->getIfFalse()->GetName()
+               + "\noperation: " + CIRTreePrinter::strCJUMP(cJumpStatement->getOp())
 			, cJumpStatement->id);
 	print("if True: " + cJumpStatement->getIfTrue()->GetName());
 

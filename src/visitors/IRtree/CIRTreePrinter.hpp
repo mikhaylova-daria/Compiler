@@ -214,6 +214,55 @@ namespace IRTree {
 	        }
         }
 
+		std::string strCJUMP( const CJUMP& op) {
+			switch(op) {
+				case CJUMP::J_EQ: {
+					return ("EQ");
+
+				}
+				case CJUMP::J_NE: {
+					return ("NE");
+
+				}
+				case CJUMP::J_LT: {
+					return ("LT");
+
+				}
+				case CJUMP::J_GE: {
+					return ("GE");
+
+				}
+				case CJUMP::J_ULT: {
+					return ("ULT");
+
+				}
+				case CJUMP::J_ULE: {
+					return ("ULE");
+
+				}
+				case CJUMP::J_UGT: {
+					return ("UGT");
+
+				}
+				case CJUMP::J_UGE: {
+					return ("UGE");
+
+				}
+				case CJUMP::J_COUNT: {
+					return ("COUNT");
+
+				}
+				case CJUMP::J_GT: {
+					return ("GT");
+
+				}
+				case CJUMP::J_LE: {
+					return ("LE");
+
+				}
+			}
+		}
+
         std::string strBinop( const BINOP& op ) {
 	        switch ( op ) {
 		        case PLUS: {
