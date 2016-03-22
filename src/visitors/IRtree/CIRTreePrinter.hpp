@@ -16,8 +16,8 @@ namespace IRTree {
         std::ofstream tree_file;
 
     public:
-	    CIRTreePrinter() {
-		    tree_file.open ("tree.txt");
+	    CIRTreePrinter(const std::string filename) {
+		    tree_file.open (filename);
 		    tree_file << "digraph {" << std::endl;
 
 	    }

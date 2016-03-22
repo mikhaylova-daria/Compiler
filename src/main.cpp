@@ -81,14 +81,14 @@ int main(int argc, const char* argv[])
     CIRTreeBuilder irTreeBuilder(globalStorage, table);
     irTreeBuilder.Visit(Goal.get());
     std::cout << "built IRTtree" << std::endl;
-	CIRTreePrinter* printer = new CIRTreePrinter;
+	CIRTreePrinter firstPrinter("tree_first.gv");
+    CIRTreePrinter canonicalPrinter("tree_canon.gv");
     CIRTreeCanonizator canonizator(globalStorage);
     for (int i = 0; i < irTreeBuilder.functions.size(); i++) {
         std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
         irTreeBuilder.functions[i].root->ToStm()->Accept(&canonizator);
-        canonizator.GetRoot()->Accept(printer);
-        //irTreeBuilder.functions[i].root->ToStm()->Accept(printer);
+        canonizator.GetRoot()->Accept(&canonicalPrinter);
+        irTreeBuilder.functions[i].root->ToStm()->Accept(&firstPrinter);
     }
-	delete printer;
     return 0;
 }

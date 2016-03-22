@@ -131,7 +131,7 @@ void CIRTreeCanonizator::Visit(const CallExp *callExp) {
 
         callExp->getArgs()->Accept(this);
         ExpListPtr expList = currentNode;
-        StmExpList ordered = reorder(currentNode);
+        StmExpList ordered = reorder(expList);
 
         ExpPtr newCall(new CallExp(callExp->getFunc(), ordered.expList));
         ExpPtr exp = wrap(ordered.statement, ExpPtr(new CMovedCallExp(newCall)));
@@ -156,5 +156,8 @@ void CIRTreeCanonizator::Visit(const ESEQExp *eseqExp) {
 
 void CIRTreeCanonizator::Visit(const CMovedCallExp *movedCallExp) {
     ExpPtr tempExp(new TempExp( CTempPtr(new Temp::CTemp(storage)), 0) );
-    currentNode = StatementPtr(new MoveStatement(tempExp, movedCallExp->CallExp));
+    StatementPtr move(new MoveStatement(tempExp, movedCallExp->CallExp));
+    //ExpPtr read(new TempExp())
+    ExpPtr eseq(new ESEQExp(move, tempExp));
+    currentNode = eseq;
 }
