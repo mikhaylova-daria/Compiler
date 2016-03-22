@@ -76,3 +76,4 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/visitors/IRtree/CIRTreeCanonizator.cpp)
 
 add_executable(mjc ${SOURCE_FILES})
+add_subdirectory(tests)
