@@ -21,6 +21,7 @@ namespace IRTree {
 	using StatementPtr = std::shared_ptr<IIRStatement>;
     using LabelPtr = std::shared_ptr<Temp::CLabel>;
     using CTempPtr = std::shared_ptr<Temp::CTemp>;
+    using NameExpPtr = std::shared_ptr<NameExp>;
 
 	enum BINOP {
 		PLUS,
@@ -114,7 +115,7 @@ namespace IRTree {
 
 
 	public:
-	    BinopExp( const BINOP& binop, const ExpPtr& left, const ExpPtr& right ) : binop( binop ), left( left ),
+	    BinopExp( BINOP binop, const ExpPtr& left, const ExpPtr& right ) : binop( binop ), left( left ),
 	                                                                              right( right ) { name = "BinopExp"; }
 	    const BINOP& getBinop() const {
 		    return binop;
@@ -146,30 +147,29 @@ namespace IRTree {
 
 	class ExpList: public CAcceptVisitor<ExpList, IIRTreeVisitor, IIRExpression> {
 		ExpPtr head;
-		ExpPtr next;
+		ExpListPtr next;
 
 	public:
-	    ExpList( const ExpPtr& head, const ExpPtr& next ) : head( head ), next( next ) { name = "ExpList"; }
+	    ExpList( const ExpPtr& head, const ExpListPtr& next ) : head( head ), next( next ) { name = "ExpList"; }
 
 	    const ExpPtr& getHead() const {
 		    return head;
 	    }
 
-	    const ExpPtr& getNext() const {
+	    const ExpListPtr& getNext() const {
 		    return next;
 	    }
 	};
 
-
 	class CallExp: public CAcceptVisitor<CallExp,IIRTreeVisitor, IIRExpression> {
-		ExpPtr func;
+		NameExpPtr func;
 		ExpListPtr args;
 
 	public:
-	    CallExp( const ExpPtr& func, const ExpListPtr& args ) : func( func ), args( args ) { name = "CallExp"; }
+	    CallExp( const NameExpPtr& func, const ExpListPtr& args ) : func( func ), args( args ) { name = "CallExp"; }
 
 
-	    const ExpPtr& getFunc() const {
+	    const NameExpPtr& getFunc() const {
 		    return func;
 	    }
 

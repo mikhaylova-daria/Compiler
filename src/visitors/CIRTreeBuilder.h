@@ -170,6 +170,9 @@ private:
         return ExpPtr(new ESEQExp(root, addr));
     }
 
+    std::shared_ptr<ISubtreeWrapper> getNode(ExpListPtr exp) {
+        return std::shared_ptr<ISubtreeWrapper>(new CExpListConverter(exp));
+    }
     std::shared_ptr<ISubtreeWrapper> getNode(ExpPtr exp) {
         return std::shared_ptr<ISubtreeWrapper>(new CExpConverter(exp));
     }

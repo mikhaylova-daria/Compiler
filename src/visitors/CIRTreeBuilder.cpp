@@ -6,6 +6,8 @@
 //#include "../frame/Frame.hpp"
 #include <cmath>
 
+using namespace IRTree;
+
 typedef std::shared_ptr<ISubtreeWrapper> NodePtr;
 
 void CIRTreeBuilder::Visit(const CConstant *constant) {
@@ -108,9 +110,9 @@ void CIRTreeBuilder::Visit(const CExpressionList *expressionList) {
     ExpPtr leftExpr = currNode->ToExp();
     if (expressionList->ExpressionList != nullptr) {
         expressionList->ExpressionList->Accept(this);
-        currNode = getNode(ExpPtr(new ExpList(leftExpr, currNode->ToExp())));
+        currNode = getNode(ExpListPtr(new ExpList(leftExpr, currNode->ToExpList())));
     } else {
-        currNode = getNode(ExpPtr(new ExpList(leftExpr, nullptr)));
+        currNode = getNode(ExpListPtr(new ExpList(leftExpr, nullptr)));
     }
 }
 
@@ -122,7 +124,7 @@ void CIRTreeBuilder::Visit(const CInvocation *invocation) {
     ExpListPtr callList;
     if (invocation->ExpressionList != nullptr) {
         invocation->ExpressionList->Accept(this);
-        callList = std::dynamic_pointer_cast<ExpList>(currNode->ToExp());
+        callList = currNode->ToExpList();
     } else {
         callList = nullptr;
     }
@@ -132,7 +134,7 @@ void CIRTreeBuilder::Visit(const CInvocation *invocation) {
     const CSymbol* methodBase = table.FindMethodBase(lastType.TypeName, invocation->Identifier->Symbol);
     assert(methodBase != nullptr);
     const CSymbol* funcName = genFunctionName(methodBase, invocation->Identifier->Symbol);
-    currNode = getNode(ExpPtr(new CallExp(ExpPtr(new NameExp(LabelPtr(new CLabel(funcName)))), callList)));
+    currNode = getNode(ExpPtr(new CallExp(NameExpPtr(new NameExp(LabelPtr(new CLabel(funcName)))), callList)));
     lastType = table.FindMethodInfo(lastType.TypeName, invocation->Identifier->Symbol).ReturnType;
     assert(lastType.TypeName != nullptr);
 }
@@ -142,7 +144,7 @@ void CIRTreeBuilder::Visit(const CNewExpression *newExpression) {
 
     int size = table.FindClassSize(newExpression->Id->Symbol);
     assert(size != NOT_FOUND);
-    currNode = getNode(ExpPtr(new CallExp(ExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getNewFuncName()))))),
+    currNode = getNode(ExpPtr(new CallExp(NameExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getNewFuncName()))))),
                                           ExpListPtr(new ExpList(ExpPtr(new ConstExp(size)), nullptr)))));
     // инициализация
     currNode = getNode(buildZeroInitTree(currNode->ToExp(), size));
@@ -155,7 +157,7 @@ void CIRTreeBuilder::Visit(const CIntArrayNewExpression *intArrayNewExpression) 
     intArrayNewExpression->Expression->Accept(this);
     assert(lastType.VarType == TType::T_INT);
     ExpPtr size = currNode->ToExp();
-    currNode = getNode(ExpPtr(new CallExp(ExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getNewFuncName()))))),
+    currNode = getNode(ExpPtr(new CallExp(NameExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getNewFuncName()))))),
                                           ExpListPtr(new ExpList(size, nullptr)))));
     // инициализация
     currNode = getNode(buildZeroInitTree(currNode->ToExp(), size));
@@ -244,8 +246,8 @@ void CIRTreeBuilder::Visit(const CWhileStatement *whileStatement) {
 void CIRTreeBuilder::Visit(const CPrintStatement *printStatement) {
     printStatement->Expression->Accept(this);
     assert (lastType.VarType == TType::T_INT);
-    currNode = getNode(ExpPtr(new CallExp(ExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getPrintFuncName()))))),
-                                  ExpListPtr(new ExpList(currNode->ToExp(), nullptr)))));
+    currNode = getNode(ExpPtr(new CallExp(NameExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getPrintFuncName()))))),
+                                  ExpListPtr(currNode->ToExp(), nullptr))));
 }
 
 void CIRTreeBuilder::Visit(const CAssignmentStatement *assignmentStatement) {

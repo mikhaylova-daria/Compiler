@@ -8,16 +8,17 @@
 #include "../tree/IRTree.hpp"
 #include <exception>
 
+using namespace IRTree;
+
 namespace Translate {
 
     class ISubtreeWrapper {
     public:
         virtual ~ISubtreeWrapper() { }
         virtual const IRTree::ExpPtr ToExp() const = 0; // как Expr
+        virtual const IRTree::ExpListPtr ToExpList() const = 0;
         virtual const IRTree::StatementPtr ToStm() const = 0; // как Stm
-        virtual const IRTree::StatementPtr ToConditional(
-		        const IRTree::LabelPtr t, const IRTree::LabelPtr f) const = 0; // как if/jump
-        //virtual const IRTree::ExpListPtr ToExpList() const = 0;
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr& left, IRTree::ExpPtr& right) const = 0; //как if/jump
     };
 
     class CExpConverter : public ISubtreeWrapper {
@@ -25,24 +26,49 @@ namespace Translate {
     public:
         CExpConverter( const IRTree::ExpPtr& expr ) : expr( expr ) { }
 
-        const IRTree::ExpPtr& getExpr() const {
+        virtual const IRTree::ExpPtr ToExp() const override {
 	        return expr;
         }
 
-        virtual const IRTree::ExpPtr ToExp() const {
-	        return expr;
-        }
-
-        virtual const IRTree::StatementPtr ToStm() const {
+        virtual const IRTree::StatementPtr ToStm() const override {
             return IRTree::StatementPtr(new IRTree::ExpressionStatement(expr));
         }
 
-        virtual const IRTree::StatementPtr ToConditional( const IRTree::LabelPtr t, const IRTree::LabelPtr f ) const {
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr&, IRTree::ExpPtr&) const override{
 	        throw std::runtime_error("Unsupported operation: expression to conditional statement");
+        }
+
+        virtual const IRTree::ExpListPtr ToExpList() const override {
+            throw std::runtime_error("Unsupported operation: expression to expression list");
         }
 
     private:
         IRTree::ExpPtr expr;
+    };
+
+    class CExpListConverter : public ISubtreeWrapper {
+
+    public:
+        CExpListConverter( const IRTree::ExpListPtr& expr ) : exprList( expr ) { }
+
+        virtual const IRTree::ExpPtr ToExp() const override {
+            throw std::runtime_error("Unsupported operation: expression list to expression");
+        }
+
+        virtual const IRTree::StatementPtr ToStm() const override {
+            throw std::runtime_error("Unsupported operation: expression list to statement");
+        }
+
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr&, IRTree::ExpPtr& ) const override {
+            throw std::runtime_error("Unsupported operation: expression list to conditional statement");
+        }
+
+        virtual const IRTree::ExpListPtr ToExpList() const override {
+            return exprList;
+        }
+
+    private:
+        IRTree::ExpListPtr exprList;
     };
 
     class CStatementConverter : public ISubtreeWrapper {
@@ -50,20 +76,20 @@ namespace Translate {
     public:
         CStatementConverter( const IRTree::StatementPtr& statement ) : statement( statement ) { }
 
-        const IRTree::StatementPtr& getStatement() const {
-	        return statement;
-        }
-
-        virtual const IRTree::ExpPtr ToExp() const {
+        virtual const IRTree::ExpPtr ToExp() const override {
 	        throw std::runtime_error("Unsupported operation: statement to expression");
         }
 
-        virtual const IRTree::StatementPtr ToStm() const {
+        virtual const IRTree::StatementPtr ToStm() const override {
 	       return statement;
         }
 
-        virtual const IRTree::StatementPtr ToConditional( const IRTree::LabelPtr t, const IRTree::LabelPtr f ) const {
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr&, IRTree::ExpPtr& ) const override {
 	        throw std::runtime_error("Unsupported operation: statement to conditional statement");
+        }
+
+        virtual const IRTree::ExpListPtr ToExpList() const override {
+            throw std::runtime_error("Unsupported operation: statement to expression list");
         }
 
     private:
@@ -74,26 +100,32 @@ namespace Translate {
     class CConditionalStatementConverter : public ISubtreeWrapper {
 
     public:
-        CConditionalStatementConverter( const IRTree::StatementPtr& statement ) : statement( statement ) { }
+        CConditionalStatementConverter( const ExpPtr& leftExp, const ExpPtr& rightExp, CJUMP op) :
+                leftExp(leftExp), rightExp(rightExp), op(op) { }
 
-        const IRTree::StatementPtr& getStatement() const {
-	        return statement;
+        virtual const IRTree::ExpPtr ToExp() const override {
+	        throw std::runtime_error("Unsupported operation: conditional to expression");
         }
 
-        virtual const IRTree::ExpPtr ToExp() const {
-	        throw std::runtime_error("Unsupported operation: statement to expression");
+        virtual const IRTree::StatementPtr ToStm() const override {
+	        throw std::runtime_error("Unsupported operation: conditional to expression");
         }
 
-        virtual const IRTree::StatementPtr ToStm() const {
-	        return statement;
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr& left, IRTree::ExpPtr& right) const override {
+	        left = leftExp;
+            right = rightExp;
+            return op;
         }
 
-        virtual const IRTree::StatementPtr ToConditional( const IRTree::LabelPtr t, const IRTree::LabelPtr f ) const {
-	        return statement;
+        virtual const IRTree::ExpListPtr ToExpList() const override {
+            throw std::runtime_error("Unsupported operation: condition to expression list");
         }
+        const ExpPtr& leftExp;
+        const ExpPtr& rightExp;
+        CJUMP op;
 
     private:
-        IRTree::StatementPtr statement;
+
     };
 
 }

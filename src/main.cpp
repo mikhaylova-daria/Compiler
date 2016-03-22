@@ -12,6 +12,7 @@
 Symbol::CStorage globalStorage;
 extern std::shared_ptr<CGoal> Goal;
 #include "visitors/IRtree/CIRTreePrinter.hpp"
+#include "visitors/IRtree/CIRTreeCanonizator.h"
 
 extern "C" {
     int yylex();
@@ -81,9 +82,12 @@ int main(int argc, const char* argv[])
     irTreeBuilder.Visit(Goal.get());
     std::cout << "built IRTtree" << std::endl;
 	CIRTreePrinter* printer = new CIRTreePrinter;
+    CIRTreeCanonizator canonizator(globalStorage);
     for (int i = 0; i < irTreeBuilder.functions.size(); i++) {
         std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
-        irTreeBuilder.functions[i].root->ToStm()->Accept(printer);
+        irTreeBuilder.functions[i].root->ToStm()->Accept(&canonizator);
+        canonizator.GetRoot()->Accept(printer);
+        //irTreeBuilder.functions[i].root->ToStm()->Accept(printer);
     }
 	delete printer;
     return 0;
