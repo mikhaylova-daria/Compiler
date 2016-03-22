@@ -84,9 +84,13 @@ public:
     virtual void Visit(const CGoal *goal);
 
     struct Function {
-        Function(const std::shared_ptr<ISubtreeWrapper> &root, const CSymbol *name) : root(root), name(name) { }
+        Function(const std::shared_ptr<ISubtreeWrapper> &_root, const CSymbol *name, CStorage& storage) : name(name) {
+            ExpPtr ret(new TempExp(CTempPtr(new Temp::CTemp(storage.Get(CIRTreeBuilder::getRetName()))), 0));
+            root = StatementPtr(new MoveStatement(ret, _root->ToExp()));
+        }
 
-        std::shared_ptr<ISubtreeWrapper> root;
+        //std::shared_ptr<ISubtreeWrapper> root;
+        StatementPtr root;
         const CSymbol* name;
     };
     std::vector<Function> functions;
@@ -106,14 +110,17 @@ private:
     //const CSymbol* genClassVarName(const CSymbol* name) {
     //    return storage.Get(std::string("#this_") + name->GetName());
     //}
-    const std::string getNewFuncName() {
+    static const std::string getNewFuncName() {
         return "#new";
     }
-    const std::string getPrintFuncName() {
+    static const std::string getPrintFuncName() {
         return "#print";
     }
-    const std::string getMainFuncName() {
+    static const std::string getMainFuncName() {
         return "#main";
+    }
+    static const std::string getRetName() {
+        return "ret";
     }
     // В условных (void*)-ах
     ExpPtr buildZeroInitTree(ExpPtr allocationExpr, int size) {

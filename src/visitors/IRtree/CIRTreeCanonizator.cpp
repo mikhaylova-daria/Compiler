@@ -136,9 +136,9 @@ void CIRTreeCanonizator::Visit(const CallExp *callExp) {
         ExpPtr newCall(new CallExp(callExp->getFunc(), ordered.expList));
         ExpPtr exp = wrap(ordered.statement, ExpPtr(new CMovedCallExp(newCall)));
         exp->Accept(this);
+    } else {
+        currentNode = ExpPtr(new CallExp(callExp->getFunc(), nullptr));
     }
-
-    currentNode = ExpPtr(new CallExp(callExp->getFunc(), nullptr));
 }
 
 void CIRTreeCanonizator::Visit(const ESEQExp *eseqExp) {

@@ -247,7 +247,7 @@ void CIRTreeBuilder::Visit(const CPrintStatement *printStatement) {
     printStatement->Expression->Accept(this);
     assert (lastType.VarType == TType::T_INT);
     currNode = getNode(ExpPtr(new CallExp(NameExpPtr(new NameExp(LabelPtr(new CLabel(storage.Get(getPrintFuncName()))))),
-                                  ExpListPtr(currNode->ToExp(), nullptr))));
+                                  ExpListPtr(new ExpList(currNode->ToExp(), nullptr)))));
 }
 
 void CIRTreeBuilder::Visit(const CAssignmentStatement *assignmentStatement) {
@@ -322,7 +322,7 @@ void CIRTreeBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
     currentMethod = table.FindMethodInfo(currentClass.Name, methodSymbol);
     methodDeclaration->MethodHeaderDeclaration->Accept(this);
     methodDeclaration->MethodBodyDeclaration->Accept(this);
-    functions.push_back(Function(currNode, genFunctionName(currentClass.Name, methodSymbol)));
+    functions.push_back(Function(currNode, genFunctionName(currentClass.Name, methodSymbol), storage));
 }
 
 void CIRTreeBuilder::Visit(const CMethodDeclarationList *methodDeclarationList) {
@@ -353,7 +353,7 @@ void CIRTreeBuilder::Visit(const CMainClass *mainClass) {
     mainClass->ArgumentName->Accept(this);
     mainClass->ClassName->Accept(this);
     mainClass->MainFunctionStatement->Accept(this);
-    functions.push_back(Function(currNode, storage.Get(getMainFuncName())));
+    functions.push_back(Function(currNode, storage.Get(getMainFuncName()), storage));
 }
 
 void CIRTreeBuilder::Visit(const CClassDeclarationList *classDeclarationList) {

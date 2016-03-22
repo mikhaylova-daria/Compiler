@@ -127,7 +127,10 @@ namespace IRTree {
 
 
     public:
-        SEQStatement( const StatementPtr& left, const StatementPtr& right ) : left( left ), right( right ) { name = "SEQStatement"; }
+        SEQStatement( const StatementPtr& left, const StatementPtr& right ) : left( left ), right( right ) {
+            assert(left != nullptr && right != nullptr);
+            name = "SEQStatement";
+        }
 
 
         const StatementPtr& getLeft() const {

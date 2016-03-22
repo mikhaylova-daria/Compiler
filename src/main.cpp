@@ -86,9 +86,9 @@ int main(int argc, const char* argv[])
     CIRTreeCanonizator canonizator(globalStorage);
     for (int i = 0; i < irTreeBuilder.functions.size(); i++) {
         std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
-        irTreeBuilder.functions[i].root->ToStm()->Accept(&canonizator);
+        irTreeBuilder.functions[i].root->Accept(&canonizator);
         canonizator.GetRoot()->Accept(&canonicalPrinter);
-        irTreeBuilder.functions[i].root->ToStm()->Accept(&firstPrinter);
+        irTreeBuilder.functions[i].root->Accept(&firstPrinter);
     }
     return 0;
 }
