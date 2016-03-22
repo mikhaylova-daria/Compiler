@@ -30,6 +30,11 @@ namespace IRTree {
 		    tree_file << id << "[label=\"" << name << "(" << id << ")\"]" << std::endl;
 	    }
 
+	    void setColor(int id, std::string color) {
+		    tree_file << id << "[style=filled, color=\"" << color << "\"]" << std::endl;
+
+	    }
+
 	    virtual ~CIRTreePrinter() {
 		    tree_file << "} " << std::endl;
 		    tree_file.close();

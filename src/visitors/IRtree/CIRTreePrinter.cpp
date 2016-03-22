@@ -69,8 +69,9 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::SEQStatement* seqStatement ) {
 	seqStatement->getLeft()->Accept(this);
 	seqStatement->getRight()->Accept(this);
 	printConnection(seqStatement->id, seqStatement->getLeft()->id);
+	setColor(seqStatement->getLeft()->id, "lightblue");
 	printConnection(seqStatement->id, seqStatement->getRight()->id);
-
+	setColor(seqStatement->getRight()->id, "aquamarine");
 }
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::StatementList* statementList ) {
@@ -97,6 +98,7 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::ConstExp* constExp ) {
 	TreeWalker treeWalker(this);
 	print(constExp->getName());
 	defineName(constExp->getName() + "\nvalue: " + std::to_string(constExp->getValue()), constExp->id);
+	setColor(constExp->id, "lemonchiffon");
 	print("value: " + std::to_string(constExp->getValue()));
 }
 
@@ -111,6 +113,7 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::NameExp* nameExp ) {
 	print(nameExp->getName());
 	defineName(nameExp->getName() + "\n" + nameExp->getLabel()->GetName(), nameExp->id);
 	print(nameExp->getLabel()->GetName());
+	setColor(nameExp->id, "thistle");
 }
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::TempExp* tempExp ) {
@@ -118,12 +121,14 @@ void IRTree::CIRTreePrinter::Visit( const IRTree::TempExp* tempExp ) {
 
 	print(tempExp->getName() + ' ' + tempExp->getCTemp()->GetName() + " + " + std::to_string(tempExp->GetShift()));
 	defineName(tempExp->getName() + ' ' + tempExp->getCTemp()->GetName() + " + " + std::to_string(tempExp->GetShift()), tempExp->id);
+	setColor(tempExp->id, "darkseagreen");
 }
 
 void IRTree::CIRTreePrinter::Visit( const IRTree::BinopExp* binopExp ) {
 	TreeWalker treeWalker(this);
 	print(binopExp->getName());
 	defineName(binopExp->getName() + "\n" + strBinop(binopExp->getBinop()), binopExp->id);
+	setColor(binopExp->id, "lightpink");
 	print(binopExp->getBinop());
 	binopExp->getLeft()->Accept(this);
 	binopExp->getRight()->Accept(this);
