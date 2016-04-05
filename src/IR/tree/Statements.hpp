@@ -140,6 +140,10 @@ namespace IRTree {
         const StatementPtr& getRight() const {
 	        return right;
         }
+
+        void setRight( const StatementPtr& _right ) {
+            right = _right;
+        }
     };
 
     class StatementList: public CAcceptVisitor<StatementList,IIRTreeVisitor, IIRStatement> {

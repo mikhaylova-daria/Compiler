@@ -13,6 +13,7 @@ Symbol::CStorage globalStorage;
 extern std::shared_ptr<CGoal> Goal;
 #include "visitors/IRtree/CIRTreePrinter.hpp"
 #include "visitors/IRtree/CIRTreeCanonizator.h"
+#include "visitors/IRtree/CIRTreeLinearizator.h"
 
 extern "C" {
     int yylex();
@@ -83,12 +84,28 @@ int main(int argc, const char* argv[])
     std::cout << "built IRTtree" << std::endl;
 	CIRTreePrinter firstPrinter("tree_first.gv");
     CIRTreePrinter canonicalPrinter("tree_canon.gv");
+    CIRTreePrinter linearPrinter("tree_linear.gv");
     CIRTreeCanonizator canonizator(globalStorage);
-    for (int i = 0; i < irTreeBuilder.functions.size(); i++) {
-        std::cout << irTreeBuilder.functions[i].name->GetName() << std::endl;
-        irTreeBuilder.functions[i].root->Accept(&canonizator);
-        canonizator.GetRoot()->Accept(&canonicalPrinter);
-        irTreeBuilder.functions[i].root->Accept(&firstPrinter);
+
+    std::vector<CIRTreeBuilder::Function> functions = irTreeBuilder.functions;
+    for (int i = 0; i < functions.size(); i++) {
+        std::cout << functions[i].name->GetName() << std::endl;
+        functions[i].root->Accept(&firstPrinter);
+    }
+    for( int i = 0; i < functions.size(); i++) {
+        std::cout << functions[i].name->GetName() << std::endl;
+        functions[i].root->Accept(&canonizator);
+        functions[i].root = canonizator.GetRoot();
+    }
+    for( int i = 0; i < functions.size(); i++) {
+        functions[i].root->Accept(&canonicalPrinter);
+    }
+
+    CIRTreeLinearizatior linearizatior;
+    std::vector<std::shared_ptr<StatementList>> stmLists;
+    for( int i = 0; i < functions.size(); i++) {
+        stmLists.push_back(linearizatior.Linearize(functions[i].root));
+        stmLists.back()->Accept(&linearPrinter);
     }
     return 0;
 }
