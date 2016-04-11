@@ -135,7 +135,9 @@ namespace IRTree {
             }
             if( commute(tailList.statement, eseq->getExpression())) {
                 if( tailList.statement != nullptr) {
-                    tailList.statement = StatementPtr(new SEQStatement(tailList.statement, eseq->getStatement()));
+                    // !!!!
+                    //tailList.statement = StatementPtr(new SEQStatement(tailList.statement, eseq->getStatement()));
+                    tailList.statement = StatementPtr(new SEQStatement(eseq->getStatement(), tailList.statement));
                 } else {
                     tailList.statement = eseq->getStatement();
                 }

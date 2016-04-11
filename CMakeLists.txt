@@ -75,7 +75,7 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/visitors/IRtree/CIRTreeCanonizator.h
         src/visitors/IRtree/CIRTreeCanonizator.cpp
         src/visitors/IRtree/CIRTreeLinearizator.h
-        src/visitors/IRtree/CIRTreeLinearizator.cpp)
+        src/visitors/IRtree/CIRTreeLinearizator.cpp src/visitors/IRtree/CIRTreeJumpOptimizer.cpp src/visitors/IRtree/CIRTreeJumpOptimizer.h)
 
 add_executable(mjc ${SOURCE_FILES})
 add_subdirectory(tests)

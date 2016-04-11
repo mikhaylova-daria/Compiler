@@ -34,8 +34,10 @@ namespace Translate {
             return IRTree::StatementPtr(new IRTree::ExpressionStatement(expr));
         }
 
-        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr&, IRTree::ExpPtr&) const override{
-	        throw std::runtime_error("Unsupported operation: expression to conditional statement");
+        virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr& left, IRTree::ExpPtr& right) const override{
+	        left = expr;
+            right = ExpPtr(new ConstExp(0));
+            return CJUMP::J_NE;
         }
 
         virtual const IRTree::ExpListPtr ToExpList() const override {
@@ -100,11 +102,14 @@ namespace Translate {
     class CConditionalStatementConverter : public ISubtreeWrapper {
 
     public:
-        CConditionalStatementConverter( const ExpPtr& leftExp, const ExpPtr& rightExp, CJUMP op) :
-                leftExp(leftExp), rightExp(rightExp), op(op) { }
+        CConditionalStatementConverter( BINOP op, const ExpPtr& leftExp, const ExpPtr& rightExp ) :
+                leftExp(leftExp), rightExp(rightExp), op(op) {
+            assert(leftExp != nullptr && rightExp != nullptr);
+            jmp = convert(op);
+        }
 
         virtual const IRTree::ExpPtr ToExp() const override {
-	        throw std::runtime_error("Unsupported operation: conditional to expression");
+            return ExpPtr(new BinopExp(op, leftExp, rightExp));
         }
 
         virtual const IRTree::StatementPtr ToStm() const override {
@@ -114,18 +119,32 @@ namespace Translate {
         virtual const IRTree::CJUMP ToConditional( IRTree::ExpPtr& left, IRTree::ExpPtr& right) const override {
 	        left = leftExp;
             right = rightExp;
-            return op;
+            return jmp;
         }
 
         virtual const IRTree::ExpListPtr ToExpList() const override {
             throw std::runtime_error("Unsupported operation: condition to expression list");
         }
-        const ExpPtr& leftExp;
-        const ExpPtr& rightExp;
-        CJUMP op;
+        ExpPtr leftExp;
+        ExpPtr rightExp;
+        BINOP op;
+        CJUMP jmp;
 
     private:
-
+        CJUMP convert(BINOP op) {
+            switch(op) {
+                case BINOP::EQ : return CJUMP::J_EQ;
+                case BINOP::GE : return CJUMP::J_GE;
+                case BINOP::LE : return CJUMP::J_LE;
+                case BINOP::LT : return CJUMP::J_LT;
+                case BINOP::NE : return CJUMP::J_NE;
+                case BINOP::UGE : return CJUMP::J_UGE;
+                case BINOP::UGT : return CJUMP::J_UGT;
+                case BINOP::ULT : return CJUMP::J_ULT;
+                case BINOP::ULE : return CJUMP::J_ULE;
+                default: assert(false);
+            }
+        }
     };
 
 }

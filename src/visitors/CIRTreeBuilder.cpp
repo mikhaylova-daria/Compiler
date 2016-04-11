@@ -58,11 +58,11 @@ void CIRTreeBuilder::Visit(const CBinaryExpression *binaryExpression) {
             currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::AND, leftExpr, rightExpr))));
             break;
         case TBinaryExpression::BE_EQUAL :
-            currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::EQ, leftExpr, rightExpr))));
+            currNode = NodePtr(new CConditionalStatementConverter(BINOP::EQ, leftExpr, rightExpr));
             lastType = CTypeInfo(storage.Get("boolean"), TType::T_BOOL);
             break;
         case TBinaryExpression::BE_LESS :
-            currNode = NodePtr(new CExpConverter(ExpPtr(new BinopExp(BINOP::LT, leftExpr, rightExpr))));
+            currNode = NodePtr(new CConditionalStatementConverter(BINOP::LT, leftExpr, rightExpr));
             lastType = CTypeInfo(storage.Get("boolean"), TType::T_BOOL);
             break;
         case TBinaryExpression::BE_MINUS :
@@ -189,7 +189,10 @@ void CIRTreeBuilder::Visit(const CBracketStatement *bracketStatement) {
 void CIRTreeBuilder::Visit(const CIfStatement *ifStatement) {
     ifStatement->Expression->Accept(this);
     assert(lastType.VarType == TType::T_BOOL);
-    ExpPtr expPtr = currNode->ToExp();
+    //ExpPtr expPtr = currNode->ToExp();
+    ExpPtr leftExp;
+    ExpPtr rightExp;
+    CJUMP cjump = currNode->ToConditional(leftExp, rightExp);
     ifStatement->TrueStatement->Accept(this);
     StatementPtr trueStatement = currNode->ToStm();
     ifStatement->FalseStatement->Accept(this);
@@ -197,7 +200,7 @@ void CIRTreeBuilder::Visit(const CIfStatement *ifStatement) {
     LabelPtr trueLabel(new Temp::CLabel(storage));
     LabelPtr falseLabel(new Temp::CLabel(storage));
     LabelPtr finLabel(new Temp::CLabel(storage));
-    StatementPtr jump(new CJumpStatement(CJUMP::J_NE, expPtr, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
+    StatementPtr jump(new CJumpStatement(cjump, leftExp, rightExp, trueLabel, falseLabel));
     /*
      * jump exp trueLab falseLab:
      *   trueLab
@@ -219,7 +222,10 @@ void CIRTreeBuilder::Visit(const CIfStatement *ifStatement) {
 void CIRTreeBuilder::Visit(const CWhileStatement *whileStatement) {
     whileStatement->Expression->Accept(this);
     assert(lastType.VarType == TType::T_BOOL);
-    ExpPtr exp = currNode->ToExp();
+    //ExpPtr exp = currNode->ToExp();
+    ExpPtr leftExp;
+    ExpPtr rightExp;
+    CJUMP cjump = currNode->ToConditional(leftExp, rightExp);
     whileStatement->Statement->Accept(this);
     StatementPtr statementPtr = currNode->ToStm();
     /*
@@ -234,7 +240,7 @@ void CIRTreeBuilder::Visit(const CWhileStatement *whileStatement) {
     LabelPtr falseLabel(new Temp::CLabel(storage));
     LabelPtr whileLabel(new Temp::CLabel(storage));
     StatementPtr jumpWhileLabel(new JumpStatement({whileLabel}, ExpPtr(new ConstExp(0))));
-    StatementPtr jumpTrueFalseLabel(new CJumpStatement(CJUMP::J_NE, exp, ExpPtr(new ConstExp(0)), trueLabel, falseLabel));
+    StatementPtr jumpTrueFalseLabel(new CJumpStatement(cjump, leftExp, rightExp, trueLabel, falseLabel));
     StatementPtr root;
     root = StatementPtr(new SEQStatement(jumpWhileLabel, StatementPtr(new LabelStatement(falseLabel))));
     root = StatementPtr(new SEQStatement(statementPtr, root));
