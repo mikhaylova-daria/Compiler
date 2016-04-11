@@ -148,15 +148,16 @@ namespace IRTree {
 
     class StatementList: public CAcceptVisitor<StatementList,IIRTreeVisitor, IIRStatement> {
         StatementPtr head;
-        StatementPtr next;
+        std::shared_ptr<StatementList> next;
     public:
-        StatementList( const StatementPtr& head, const StatementPtr& next ) : head( head ), next( next ) { name = "StatementList"; }
+        StatementList( const StatementPtr& head, const std::shared_ptr<StatementList> &next )
+                : head( head ), next( next ) { name = "StatementList"; }
 
         const StatementPtr& getHead() const {
 	        return head;
         }
 
-        const StatementPtr& getNext() const {
+        const std::shared_ptr<StatementList>& getNext() const {
 	        return next;
         }
     };

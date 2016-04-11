@@ -14,6 +14,7 @@ extern std::shared_ptr<CGoal> Goal;
 #include "visitors/IRtree/CIRTreePrinter.hpp"
 #include "visitors/IRtree/CIRTreeCanonizator.h"
 #include "visitors/IRtree/CIRTreeLinearizator.h"
+#include "visitors/IRtree/CIRTreeJumpOptimizer.h"
 
 extern "C" {
     int yylex();
@@ -85,6 +86,7 @@ int main(int argc, const char* argv[])
 	CIRTreePrinter firstPrinter("tree_first.gv");
     CIRTreePrinter canonicalPrinter("tree_canon.gv");
     CIRTreePrinter linearPrinter("tree_linear.gv");
+    CIRTreePrinter optPrinter("tree_opt.gv");
     CIRTreeCanonizator canonizator(globalStorage);
 
     std::vector<CIRTreeBuilder::Function> functions = irTreeBuilder.functions;
@@ -106,6 +108,11 @@ int main(int argc, const char* argv[])
     for( int i = 0; i < functions.size(); i++) {
         stmLists.push_back(linearizatior.Linearize(functions[i].root));
         stmLists.back()->Accept(&linearPrinter);
+    }
+    CIRTreeJumpOptimizer optimizer(globalStorage);
+    for( int i = 0; i < functions.size(); i++) {
+        stmLists[i] = optimizer.Optimize(stmLists[i]);
+        stmLists[i]->Accept(&optPrinter);
     }
     return 0;
 }
