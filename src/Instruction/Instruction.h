@@ -16,30 +16,37 @@ namespace CodeGeneration {
         //const char* AsmCode;
         virtual ~IInstruction() {}
         const std::vector<IRTree::CTempPtr>& UsedVars() const { return usedVars; }
-        const std::vector<IRTree::CTempPtr>& DefindedVars() const { return  defindedVars; }
+        const std::vector<IRTree::CTempPtr>& definedVars() const { return  definedVars; }
         const std::vector<IRTree::LabelPtr>& JumpTargets() const { return jumpTargets; }
         std::string Format( const std::map<Temp::CTemp*, std::string>& varsMapping ) const;
+	    std::string Print() const;
     protected:
         std::vector<IRTree::CTempPtr> usedVars;
-        std::vector<IRTree::CTempPtr> defindedVars;
+        std::vector<IRTree::CTempPtr> definedVars;
         std::vector<IRTree::LabelPtr> jumpTargets;
         std::string text;
     };
 
     typedef std::vector<std::shared_ptr<IInstruction>> CCode ;
 
+	void PrintCode(CCode code) {
+		for (auto instraction: code) {
+			cout << instraction->Print() << endl;
+		}
+	}
+
     class OPER : public IInstruction {
     public:
         OPER( const std::string& text,
               std::vector<IRTree::CTempPtr> usedVars,
-              std::vector<IRTree::CTempPtr> defindedVars,
+              std::vector<IRTree::CTempPtr> definedVars,
               std::vector<IRTree::LabelPtr> jumpTargets ) :
-                text(text), usedVars(usedVars), defindedVars(defindedVars), jumpTargets(jumpTargets) {}
+                text(text), usedVars(usedVars), definedVars(definedVars), jumpTargets(jumpTargets) {}
 
         OPER( const std::string& text,
               std::vector<IRTree::CTempPtr> usedVars,
-              std::vector<IRTree::CTempPtr> defindedVars ) :
-                text(text), usedVars(usedVars), defindedVars(defindedVars) {}
+              std::vector<IRTree::CTempPtr> definedVars ) :
+                text(text), usedVars(usedVars), definedVars(definedVars) {}
 
         OPER( const std::string& text,
               std::vector<IRTree::CTempPtr> usedVars ) :
@@ -53,8 +60,8 @@ namespace CodeGeneration {
 
     class MOVE : public IInstruction {
     public:
-        MOVE( IRTree::CTempPtr from, IRTree::CTempPtr to, std::vector<IRTree::CTempPtr> defindedVars )
-                : usedVars({from, to}), text("movl %{0} %{1}"), defindedVars(defindedVars) {}
+        MOVE( IRTree::CTempPtr from, IRTree::CTempPtr to, std::vector<IRTree::CTempPtr> definedVars )
+                : usedVars({from, to}), text("movl %{0} %{1}"), definedVars(definedVars) {}
     };
 
     std::string IInstruction::Format(const std::map<Temp::CTemp*, std::string>& varsMapping) const {
@@ -69,7 +76,7 @@ namespace CodeGeneration {
                 if( text[i] == ']') {
                     result += jumpTargets[val]->GetName();
                 } else {
-                    auto &vars = text[i] == '}' ? usedVars : defindedVars;
+                    auto &vars = text[i] == '}' ? usedVars : definedVars;
                     result += varsMapping[vars[i].get()];
                 }
                 lastOpened = -1;
