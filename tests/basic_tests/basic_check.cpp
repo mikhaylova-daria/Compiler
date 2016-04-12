@@ -182,3 +182,172 @@ TEST( CorrectProgramm, TreeVisitor
 	EXPECT_EQ( 0, return_code );
 
 }
+
+TEST( BagProgramm, TreeVisitor
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	const char* command = "../../Compiler/bag_programms/tree_visitor.mj";
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+TEST( BagProgramm, Factorial
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	char command [90]= "../../Compiler/bag_programms/factorial.mj";
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+TEST( BagProgramm, BinarySearch
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+
+	char command[90] = "../../Compiler/bag_programms/binary_search.mj";
+
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+TEST( BagProgramm, BinaryTree
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+
+	char command[90] = "../../Compiler/bag_programms/binary_tree.mj";
+
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+
+TEST( BagProgramm, BubbleSort
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	const char* command = "../../Compiler/bag_programms/bubble_sort.mj";
+
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+
+TEST( BagProgramm, LinearSearch
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	const char* command = "../../Compiler/bag_programms/linear_search.mj";
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+
+TEST( BagProgramm, LinkedList
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	const char* command = "../../Compiler/bag_programms/linked_list.mj";
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+TEST( BagProgramm, QuickSort
+) {
+	char path_exe[90] = "../../Compiler/bin/mjc ";
+	char** argv = new char*[2];
+	argv[0] = (char*)malloc(sizeof(char)*strlen(path_exe));
+	for (int i = 0; i < strlen(path_exe); ++i) {
+		argv[0][i] = path_exe[i];
+	}
+	const char* command = "../../Compiler/bag_programms/quick_sort.mj";
+	argv[1] = (char*) malloc(sizeof(char) * strlen(command));
+	for (int i = 0; i < strlen(command); ++i) {
+		argv[1][i] = command[i];
+	}
+
+	FILE* stream = popen(strcat(path_exe, command),"r");
+	int return_code = pclose(stream);
+	ASSERT_TRUE( 0 != return_code );
+
+}
+
+
