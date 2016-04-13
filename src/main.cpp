@@ -15,6 +15,8 @@ extern std::shared_ptr<CGoal> Goal;
 #include "visitors/IRtree/CIRTreeCanonizator.h"
 #include "visitors/IRtree/CIRTreeLinearizator.h"
 #include "visitors/IRtree/CIRTreeJumpOptimizer.h"
+#include "visitors/IRtree/CIRTreeCodeGenerator.h"
+#include "Instruction/Instruction.h"
 
 extern "C" {
     int yylex();
@@ -113,6 +115,13 @@ int main(int argc, const char* argv[])
     for( int i = 0; i < functions.size(); i++) {
         stmLists[i] = optimizer.Optimize(stmLists[i]);
         stmLists[i]->Accept(&optPrinter);
+    }
+    std::vector<CodeGeneration::CCode> codes;
+    CIRTreeCodeGenerator codeGenerator(globalStorage, 4);
+    ofstream codeOut("code.txt");
+    for( int i = 0; i < stmLists.size(); i++) {
+        codes.push_back(codeGenerator.Generate(stmLists[i]));
+        CodeGeneration::PrintCode(codes.back(), codeOut);
     }
     return 0;
 }

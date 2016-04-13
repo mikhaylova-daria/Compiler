@@ -3,7 +3,6 @@
 //
 
 #include "CIRTreeJumpOptimizer.h"
-#include "../../IR/tree/IRTree.hpp"
 
 using namespace IRTree;
 

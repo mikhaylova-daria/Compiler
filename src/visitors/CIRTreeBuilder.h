@@ -87,6 +87,8 @@ public:
         Function(const std::shared_ptr<ISubtreeWrapper> &_root, const CSymbol *name, CStorage& storage) : name(name) {
             ExpPtr ret(new TempExp(CTempPtr(new Temp::CTemp(storage.Get(CIRTreeBuilder::getRetName()))), 0));
             root = StatementPtr(new MoveStatement(ret, _root->ToExp()));
+            StatementPtr func(new LabelStatement(LabelPtr(new Temp::CLabel(name))));
+            root = StatementPtr(new SEQStatement(func, root));
         }
 
         //std::shared_ptr<ISubtreeWrapper> root;
