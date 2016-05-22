@@ -8,10 +8,15 @@
 #include <vector>
 #include <memory>
 #include "../symbol/Symbol.h"
+#include "Instruction.h"
 #include <map>
+#include <set>
 
-using InstructionPtr = std::shared_ptr < IInstruction >;
-using CTempPtr = std::shared_ptr < CTemp >;
+using namespace Temp;
+
+namespace CodeGeneration {
+	using InstructionPtr = std::shared_ptr<IInstruction>;
+	using CTempPtr = std::shared_ptr<CTemp>;
 
 //%var1
 //%var3
@@ -35,51 +40,52 @@ using CTempPtr = std::shared_ptr < CTemp >;
 //		addl %var2, %tmp4
 //		movl %tmp4, (var5)
 
-std::vector < InstructionPtr > AddTemps( std::vector < CTempPtr >& vars, std::vector < InstructionPtr >& instructions,
-                                         CStorage& storage ) {
-	std::vector < InstructionPtr > result;
-	std::set < CTempPtr > varsSet( vars.begin(), vars.end());
+	std::vector<InstructionPtr> AddTemps(std::vector<CTempPtr> &vars, std::vector<InstructionPtr> &instructions,
+										 CStorage &storage) {
+		std::vector<InstructionPtr> result;
+		std::set<CTempPtr> varsSet(vars.begin(), vars.end());
 
-	for ( auto ins: instructions ) {
-		//TODO: Check instruction is operation (not label)
-		std::vector <CTempPtr> usedVars;
+		for (auto ins: instructions) {
+			//TODO: Check instruction is operation (not label)
+			std::vector<CTempPtr> usedVars;
 
-		for ( auto used: ins.UsedVars()) {
-			if ( varsSet.find( used ) != varsSet.end()) {
-				CTempPtr tempPtr = CTempPtr( new CTemp( storage ));
-				InstructionPtr new_inst = InstructionPtr( new OPER( "movl ({0}) <0>", { used }, { tempPtr }, { } ));
-				result.push_back( new_inst );
-				usedVars.push_back( tempPtr );
-			} else {
-				usedVars.push_back(used);
+			for (auto used: ins->UsedVars()) {
+				if (varsSet.find(used) != varsSet.end()) {
+					CTempPtr tempPtr = CTempPtr(new CTemp(storage));
+					InstructionPtr new_inst = InstructionPtr(new OPER("movl ({0}) <0>", {used}, {tempPtr}, {}));
+					result.push_back(new_inst);
+					usedVars.push_back(tempPtr);
+				} else {
+					usedVars.push_back(used);
+				}
 			}
-		}
-		std::vector <CTempPtr> definedVars;
-		std::map <CTempPtr, CTempPtr> definedTempsToReal;
+			std::vector<CTempPtr> definedVars;
+			std::map<CTempPtr, CTempPtr> definedTempsToReal;
 
-		for ( auto defined: ins.DefinedVars()) {
-			if ( varsSet.find( defined ) != varsSet.end()) {
-				CTempPtr tempPtr = CTempPtr( new CTemp( storage ));
-				InstructionPtr new_inst = InstructionPtr( new OPER( "movl ({0}) <0>", { defined }, { tempPtr }, { } ));
-				result.push_back( new_inst );
-				definedVars.push_back( tempPtr );
-				definedTempsToReal.emplace({tempPtr, defined});
+			for (auto defined: ins->DefinedVars()) {
+				if (varsSet.find(defined) != varsSet.end()) {
+					CTempPtr tempPtr = CTempPtr(new CTemp(storage));
+					InstructionPtr new_inst = InstructionPtr(new OPER("movl ({0}) <0>", {defined}, {tempPtr}, {}));
+					result.push_back(new_inst);
+					definedVars.push_back(tempPtr);
+					definedTempsToReal.emplace({tempPtr, defined});
 
-			} else {
-				definedVars.push_back(defined);
+				} else {
+					definedVars.push_back(defined);
+				}
 			}
-		}
-		//TODO: Change instruction, not create a new one
-		result.push_back( new OPER( ins.Text(), usedVars, definedVars, ins.JumpTargets()));
+			//TODO: Change instruction, not create a new one
+			result.push_back(new OPER(ins->Text(), usedVars, definedVars, ins->JumpTargets()));
 
-		for (auto it = definedTempsToReal.begin(); it != definedTempsToReal.end(); ++it) {
-			InstructionPtr new_inst = InstructionPtr(
-					new OPER( "movl ({0}) <0>", { it->first }, { it->second }, { } ));
-			result.push_back( new_inst );
+			for (auto it = definedTempsToReal.begin(); it != definedTempsToReal.end(); ++it) {
+				InstructionPtr new_inst = InstructionPtr(
+						new OPER("movl ({0}) <0>", {it->first}, {it->second}, {}));
+				result.push_back(new_inst);
+			}
+
 		}
 
 	}
 
 }
-
 #endif //MINIJAVACOMPILER_INSTRUCTIONOPERATIONS_HPP
