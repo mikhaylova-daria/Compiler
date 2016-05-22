@@ -25,6 +25,7 @@ namespace CodeGeneration {
         const std::vector<IRTree::CTempPtr>& UsedVars() const { return usedVars; }
         const std::vector<IRTree::CTempPtr>& DefinedVars() const { return  definedVars; }
         const std::vector<IRTree::LabelPtr>& JumpTargets() const { return jumpTargets; }
+	    std::string Text() const { return text; }
         std::string Format( std::map<Temp::CTemp*, std::string>& varsMapping ) const;
 	    std::string Print() const;
     protected:
