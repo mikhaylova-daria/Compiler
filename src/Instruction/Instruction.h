@@ -59,7 +59,10 @@ namespace CodeGeneration {
 
     class LABEL : public IInstruction {
     public:
-        LABEL( IRTree::LabelPtr label ) : IInstruction(label->GetName() + ":", {}, {}, {}) {}
+        LABEL( IRTree::LabelPtr label ) : IInstruction(label->GetName() + ":", {}, {}, {}), label(label) {}
+        const IRTree::LabelPtr& Label() const { return label; }
+    private:
+        IRTree::LabelPtr label;
     };
 
     class MOVE : public IInstruction {
