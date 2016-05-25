@@ -131,6 +131,7 @@ void CIRTreeBuilder::Visit(const CInvocation *invocation) {
     invocation->Identifier->Accept(this);
     invocation->Expression->Accept(this);
     assert(lastType.VarType == TType::T_CLASS);
+    callList = ExpListPtr(new ExpList(currNode->ToExp(), callList));
     const CSymbol* methodBase = table.FindMethodBase(lastType.TypeName, invocation->Identifier->Symbol);
     assert(methodBase != nullptr);
     const CSymbol* funcName = genFunctionName(methodBase, invocation->Identifier->Symbol);
@@ -326,9 +327,13 @@ void CIRTreeBuilder::Visit(const CMethodBodyDeclaration *methodBodyDeclaration) 
 void CIRTreeBuilder::Visit(const CMethodDeclaration *methodDeclaration) {
     const CSymbol* methodSymbol = methodDeclaration->MethodHeaderDeclaration->MethodName->Symbol;
     currentMethod = table.FindMethodInfo(currentClass.Name, methodSymbol);
+    std::vector<Temp::CTempPtr> arguments;
+    for( auto& arg : currentMethod.Arguments ) {
+        arguments.emplace_back(new Temp::CTemp(arg.VarName));
+    }
     methodDeclaration->MethodHeaderDeclaration->Accept(this);
     methodDeclaration->MethodBodyDeclaration->Accept(this);
-    functions.push_back(Function(currNode, genFunctionName(currentClass.Name, methodSymbol), storage));
+    functions.push_back(Function(currNode, genFunctionName(currentClass.Name, methodSymbol), arguments, storage));
 }
 
 void CIRTreeBuilder::Visit(const CMethodDeclarationList *methodDeclarationList) {
@@ -359,7 +364,7 @@ void CIRTreeBuilder::Visit(const CMainClass *mainClass) {
     mainClass->ArgumentName->Accept(this);
     mainClass->ClassName->Accept(this);
     mainClass->MainFunctionStatement->Accept(this);
-    functions.push_back(Function(currNode, storage.Get(getMainFuncName()), storage));
+    functions.push_back(Function(currNode, storage.Get(getMainFuncName()), {}, storage));
 }
 
 void CIRTreeBuilder::Visit(const CClassDeclarationList *classDeclarationList) {

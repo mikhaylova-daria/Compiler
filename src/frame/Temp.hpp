@@ -45,6 +45,10 @@ namespace Temp {
 	        return name->GetName();
         }
 
+		bool operator==(const CTemp& other) const { return name == other.name; }
+        bool operator<(const CTemp& other) const { return name < other.name; }
+        bool operator!=(const CTemp& other) const { return !(*this == other);}
+
     private:
 
         const Symbol::CSymbol* name;
@@ -53,6 +57,12 @@ namespace Temp {
 
     };
 
+    class CTempCompare {
+    public:
+        bool operator()(const CTemp* lhs, const CTemp* rhs) const { return *lhs < *rhs; }
+    };
+
+	typedef std::shared_ptr<CTemp> CTempPtr;
 
 }
 

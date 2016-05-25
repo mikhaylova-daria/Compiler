@@ -17,6 +17,9 @@ extern std::shared_ptr<CGoal> Goal;
 #include "visitors/IRtree/CIRTreeJumpOptimizer.h"
 #include "visitors/IRtree/CIRTreeCodeGenerator.h"
 #include "Instruction/Instruction.h"
+#include "Instruction/InstructionOperations.hpp"
+#include "Instruction/RegisterMapper.h"
+#include "visitors/IRtree/CIRTreeLin.h"
 
 extern "C" {
     int yylex();
@@ -105,7 +108,7 @@ int main(int argc, const char* argv[])
         functions[i].root->Accept(&canonicalPrinter);
     }
 
-    CIRTreeLinearizatior linearizatior;
+    CIRTreeLin linearizatior;
     std::vector<std::shared_ptr<StatementList>> stmLists;
     for( int i = 0; i < functions.size(); i++) {
         stmLists.push_back(linearizatior.Linearize(functions[i].root));
@@ -117,11 +120,41 @@ int main(int argc, const char* argv[])
         stmLists[i]->Accept(&optPrinter);
     }
     std::vector<CodeGeneration::CCode> codes;
-    CIRTreeCodeGenerator codeGenerator(globalStorage, 4);
+    std::vector<CodeGeneration::CCode> mappedCodes;
+    CodeGeneration::CGenerator generator(globalStorage);
+    CodeGeneration::CRegisterMapper mapper(generator);
+    CIRTreeCodeGenerator codeGenerator(generator, 4);
     ofstream codeOut("code.txt");
+    ofstream mappedCodeOut("code_mapped.txt");
+    ofstream codeFinal("code_final.s");
+
+    ifstream templ("./assembly_functions/template.txt");
+    std::string str;
+    while( getline(templ, str) ) {
+        codeFinal << str << endl;
+    }
+
     for( int i = 0; i < stmLists.size(); i++) {
-        codes.push_back(codeGenerator.Generate(stmLists[i]));
+        codes.push_back(codeGenerator.Generate(stmLists[i], functions[i].Arguments));
         CodeGeneration::PrintCode(codes.back(), codeOut);
+        std::vector<CTemp*> args;
+        for( auto& arg : functions[i].Arguments ) {
+            args.push_back(arg.get());
+        }
+        cout << functions[i].name->GetName() << ": Map register started" << endl;
+        auto mapResult = mapper.Map(codes.back(), args);
+        cout << functions[i].name->GetName() << ": Map register finished" << endl;
+        mappedCodes.push_back(mapResult.Code);
+        CodeGeneration::PrintCode(mappedCodes.back(), mappedCodeOut, mapResult.TempToReg);
+
+        CodeGeneration::CGenerator::CFunctionGenerateArg arg;
+        arg.tempMap = mapResult.TempToReg;
+        arg.args = functions[i].Arguments;
+        //arg.all = mapResult.All;
+        arg.onStack.insert(mapResult.OnStack.begin(), mapResult.OnStack.end());
+        CodeGeneration::CCode finCode = generator.GenerateFunctionFinalCode(mappedCodes.back(), arg,
+                                                                            functions[i].name->GetName());
+        CodeGeneration::PrintCode(finCode, codeFinal, arg.tempMap);
     }
     return 0;
 }

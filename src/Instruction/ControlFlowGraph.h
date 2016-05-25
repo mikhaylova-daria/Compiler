@@ -21,15 +21,17 @@ namespace CodeGeneration {
             TEdge(int to) : To(to) {}
         };
         struct TNode {
-            std::set<Temp::CTemp *> LiveIn;
-            std::set<Temp::CTemp *> LiveOut;
-            std::set<Temp::CTemp *> Defined;
+            std::set<Temp::CTemp *, Temp::CTempCompare> LiveIn;
+            std::set<Temp::CTemp *, Temp::CTempCompare> LiveOut;
+            std::set<Temp::CTemp *, Temp::CTempCompare> Defined;
             std::vector<TEdge> Edges;
             std::vector<TEdge> BackEdges;
             std::shared_ptr<IInstruction> Instruct;
         };
 
         std::vector<TNode> Nodes;
+
+        void Dump(std::ostream& out);
 
     private:
         void process();

@@ -80,7 +80,14 @@ set(SOURCE_FILES ${BisonOutput} ${FlexOutput}
         src/visitors/IRtree/CIRTreeJumpOptimizer.h src/Instruction/Instruction.h
         src/visitors/IRtree/CIRTreeCodeGenerator.h src/visitors/IRtree/CIRTreeCodeGenerator.cpp
         src/Instruction/Instruction.cpp
-        src/Instruction/ControlFlowGraph.h src/Instruction/ControlFlowGraph.cpp src/Instruction/VarInteractGraph.h src/Instruction/VarInteractGraph.cpp src/Instruction/RegisterMapper.h)
+        src/Instruction/ControlFlowGraph.h
+        src/Instruction/ControlFlowGraph.cpp
+        src/Instruction/VarInteractGraph.h
+        src/Instruction/VarInteractGraph.cpp
+        src/Instruction/RegisterMapper.h
+        src/Instruction/InstructionOperations.hpp
+        src/Instruction/InstructionOperations.cpp
+        src/visitors/IRtree/CIRTreeLin.h src/visitors/IRtree/CIRTreeLin.cpp)
 
 add_executable(mjc ${SOURCE_FILES})
 add_subdirectory(tests)

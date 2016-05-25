@@ -4,6 +4,7 @@
 
 
 #include "ControlFlowGraph.h"
+#include "InstructionOperations.hpp"
 
 #include <map>
 
@@ -22,7 +23,7 @@ namespace CodeGeneration {
             Nodes[i].Instruct = instructions[i];
             for( auto& l : instructions[i]->JumpTargets()) {
                 Nodes[i].Edges.push_back(TEdge(labels[l.get()]));
-                Nodes[Nodes[i].Edges.back().To].Edges.push_back(TEdge(i));
+                Nodes[Nodes[i].Edges.back().To].BackEdges.push_back(TEdge(i));
             }
             if( i + 1 < instructions.size()) {
                 Nodes[i].Edges.push_back(TEdge(i + 1));
@@ -30,9 +31,14 @@ namespace CodeGeneration {
             }
             auto& usedVars = instructions[i]->UsedVars();
             auto& definedVars = instructions[i]->DefinedVars();
-            Nodes[i].LiveIn.insert(usedVars.begin(), usedVars.end());
-            Nodes[i].Defined.insert(definedVars.begin(), definedVars.end());
+            for( auto& var : usedVars) {
+                Nodes[i].LiveIn.insert(var.get());
+            }
+            for( auto& var: definedVars) {
+                Nodes[i].Defined.insert(var.get());
+            }
         }
+        process();
     }
 
     void CControlFlowGraph::process() {
@@ -57,6 +63,19 @@ namespace CodeGeneration {
                 }
             }
         }
+    }
+
+    void CControlFlowGraph::Dump(std::ostream &out) {
+        out << "digraph {" << std::endl;
+        for( int i = 0; i < Nodes.size(); i++) {
+            out << i << "[label=\"" << Nodes[i].Instruct->Print() << " (" << i << ")\"]" << std::endl;
+        }
+        for( int i = 0; i < Nodes.size(); i++) {
+            for( auto& edge : Nodes[i].Edges ) {
+                out << i << " -> " << edge.To << ";" << std::endl;
+            }
+        }
+        out << "}\n";
     }
 }
 

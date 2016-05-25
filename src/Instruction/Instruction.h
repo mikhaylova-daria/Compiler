@@ -26,7 +26,7 @@ namespace CodeGeneration {
         const std::vector<IRTree::CTempPtr>& DefinedVars() const { return  definedVars; }
         const std::vector<IRTree::LabelPtr>& JumpTargets() const { return jumpTargets; }
 	    std::string Text() const { return text; }
-        std::string Format( std::map<Temp::CTemp*, std::string>& varsMapping ) const;
+        std::string Format( std::map<Temp::CTemp*, std::string, Temp::CTempCompare>& varsMapping ) const;
 	    std::string Print() const;
     protected:
         std::vector<IRTree::CTempPtr> usedVars;
@@ -38,7 +38,8 @@ namespace CodeGeneration {
     typedef std::vector<std::shared_ptr<IInstruction>> CCode ;
     typedef std::shared_ptr<IInstruction> InstructionPtr;
 
-    void PrintCode(CCode code, std::ostream& out);
+    void PrintCode(const CCode& code, std::ostream& out);
+    void PrintCode(const CCode& code, std::ostream& out, std::map<Temp::CTemp*,Temp::CTemp*,Temp::CTempCompare>& map );
 
     class OPER : public IInstruction {
     public:
@@ -68,8 +69,18 @@ namespace CodeGeneration {
 
     class MOVE : public IInstruction {
     public:
-        MOVE( IRTree::CTempPtr from, IRTree::CTempPtr to, std::vector<IRTree::CTempPtr> definedVars )
-                : IInstruction("movl %{0} %{1}", {from, to}, definedVars, {}) {}
+        MOVE( IRTree::CTempPtr from, IRTree::CTempPtr to)  //, std::vector<IRTree::CTempPtr> definedVars )
+                : IInstruction("movq %{0}, %<0>", {from}, {to}, {}) {}
+    };
+
+    class LOAD : public IInstruction {
+    public:
+        LOAD( const std::vector<Temp::CTempPtr>& args ) : IInstruction("//----- load arguments ----", args, {}, {}) {}
+    };
+
+    class STORE : public  IInstruction {
+    public:
+        STORE( const std::vector<Temp::CTempPtr>& args ) : IInstruction("//----- store arguments ----", args, {}, {}) {}
     };
 }
 

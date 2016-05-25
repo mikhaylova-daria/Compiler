@@ -8,6 +8,7 @@
 
 #include "IIRTreeVisitor.hpp"
 #include "../../Instruction/Instruction.h"
+#include "../../Instruction/InstructionOperations.hpp"
 
 namespace IRTree {
 
@@ -15,9 +16,11 @@ namespace IRTree {
 
     public:
 
-        CIRTreeCodeGenerator( CStorage& storage, int bytes = 4) : storage(storage), Bytes(bytes) {}
+        CIRTreeCodeGenerator( CodeGeneration::CGenerator& generator,
+                              int bytes = 8) :
+                storage(generator.GetStorage()), Bytes(bytes), generator(generator) {}
 
-        CodeGeneration::CCode Generate( StatementPtr ptr );
+        CodeGeneration::CCode Generate( StatementPtr ptr, const std::vector<Temp::CTempPtr>& args );
 
         virtual void Visit(const MoveStatement *moveStatement) override;
 
@@ -54,7 +57,10 @@ namespace IRTree {
         const int Bytes;
         CodeGeneration::CCode code;
         CStorage& storage;
+        CodeGeneration::CGenerator& generator;
+        const std::vector<Temp::CTempPtr>* argsOnStack;
         CTempPtr target;
+        bool isStartLabel;
 
         std::string toStr(CJUMP op) {
             switch (op) {

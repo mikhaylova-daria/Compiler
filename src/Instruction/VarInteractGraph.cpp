@@ -7,13 +7,15 @@
 namespace CodeGeneration {
 
     CVarInteractGraph::CVarInteractGraph(const CControlFlowGraph &cfGraph,
-                                         const std::map<Temp::CTemp*, int>& colored,
-                                         int maxColors) :
-            k(maxColors), colored(colored) {
-        std::set<Temp::CTemp*> nodes;
+                                         const std::map<Temp::CTemp*, int, Temp::CTempCompare>& colored,
+                                         int maxColors,
+                                         CStorage& storage) :
+            k(maxColors), colored(colored), storage(storage) {
+        std::set<Temp::CTemp*,Temp::CTempCompare> nodes;
         for( auto& node : cfGraph.Nodes) {
             nodes.insert(node.LiveOut.begin(), node.LiveOut.end());
             nodes.insert(node.LiveIn.begin(), node.LiveIn.end());
+            nodes.insert(node.Defined.begin(), node.Defined.end());
         }
         for( auto& node: nodes) {
             int ind = static_cast<int>(Nodes.size());
@@ -24,8 +26,9 @@ namespace CodeGeneration {
         }
         std::set<std::pair<int,int>> edges;
         for( auto& node: cfGraph.Nodes ) {
-            bool isMove = dynamic_cast<MOVE*>(node.Instruct.get()) == nullptr;
-            int escape = isMove ? VarMap[node.Instruct->UsedVars()[0].get()] : -1;
+            bool isMove = dynamic_cast<MOVE*>(node.Instruct.get()) != nullptr;
+            auto& usedVars = node.Instruct->UsedVars();
+            int escape = isMove ? VarMap[usedVars[0].get()] : -1;
             for( auto& def : node.Defined ) {
                 int defInd = VarMap[def];
                 for (auto out : node.LiveOut) {
@@ -50,12 +53,15 @@ namespace CodeGeneration {
             }
         }
         for( auto& pair : edges) {
-            Nodes[pair.first].Edges.push_back(TEdge(pair.second));
+            if( pair.first != pair.second ) {
+                Nodes[pair.first].Edges.push_back(TEdge(pair.second));
+            }
         }
     }
 
     void CVarInteractGraph::simplify() {
         while( true ) {
+            dump();
             if( nodeSet.empty() && nodeMoveSet.empty() ) {
                 break;
             }
@@ -83,89 +89,36 @@ namespace CodeGeneration {
             }
             int node = nodeSet.begin()->second;
             nodeSet.erase(nodeSet.begin());
-            stack.push_back(node);
+            int toStack = Nodes[node].Merged.empty() ? node : Nodes[node].Merged[0];
+            stack.push_back(toStack);
             isDeleted[node] = true;
             for( auto& edge : Nodes[node].Edges ) {
+                auto iter1 = nodeMoveSet.find({edgesCount[edge.To], edge.To});
+                auto iter2 = nodeSet.find({edgesCount[edge.To], edge.To});
                 edgesCount[edge.To]--;
+                if( iter1 != nodeMoveSet.end() ) {
+                    nodeMoveSet.erase(iter1);
+                    nodeMoveSet.insert({edgesCount[edge.To], edge.To});
+                }
+                if( iter2 != nodeSet.end() ) {
+                    nodeSet.erase(iter2);
+                    nodeSet.insert({edgesCount[edge.To], edge.To});
+                }
             }
         }
     }
 
     void CVarInteractGraph::coalesce() {
+        //dump();
         for( auto p : nodeMoveSet ) {
             int node = p.second;
+            assert(!isDeleted[node]);
             for( auto& edge : Nodes[node].MoveEdges ) {
                 bool skip = isDeleted[edge.To] || (Nodes[node].isColored && Nodes[edge.To].isColored);
                 if( !skip && edgesCount[node] + edgesCount[edge.To] < k) {
                     // merge node and edge.To
-                    nodeMoveSet.erase(nodeMoveSet.begin());
-                    nodeMoveSet.erase({edgesCount[edge.To], edge.To});
-                    isDeleted[edge.To] = true;
-                    TNode oldNode;
-                    std::vector<int> decreased;
-                    std::swap(oldNode, Nodes[node]);
-                    {
-                        std::set<int> nodeEdges;
-                        std::set<int> toEdges;
-                        std::set<int> nodeMoveEdges;
-                        std::set<int> toMoveEdges;
-                        for (auto &e : oldNode.Edges) {
-                            if (!isDeleted[e.To]) {
-                                nodeEdges.insert(e.To);
-                            }
-                        }
-                        for (auto &e : oldNode.MoveEdges) {
-                            if (!isDeleted[e.To] && e.To != edge.To) {
-                                nodeMoveEdges.insert(e.To);
-                            }
-                        }
-                        for (auto &e : Nodes[edge.To].Edges) {
-                            if (!isDeleted[e.To]) {
-                                toEdges.insert(e.To);
-                            }
-                        }
-                        for (auto &e : Nodes[edge.To].MoveEdges) {
-                            if (!isDeleted[e.To]) {
-                                toMoveEdges.insert(e.To);
-                            }
-                        }
 
-                        for( auto& e : nodeEdges ) {
-                            if( toEdges.find(e) != toEdges.end()) {
-                                decreased.push_back(e);
-                            }
-                        }
-
-                        std::set<int> commEdges(nodeEdges);
-                        commEdges.insert(toEdges.begin(), toEdges.end());
-                        std::set<int> commMoveEdges(nodeMoveEdges);
-                        commMoveEdges.insert(toMoveEdges.begin(), toMoveEdges.end());
-                        commEdges.erase(node);
-                        commEdges.erase(edge.To);
-                        commEdges.erase(commEdges.begin(), commEdges.end());
-                        Nodes[node].Edges.assign(commEdges.begin(), commEdges.end());
-                        Nodes[node].MoveEdges.assign(commMoveEdges.begin(), commMoveEdges.end());
-                    }
-                    for( auto& e : Nodes[edge.To].Edges ) {
-                        Nodes[e.To].Edges.push_back(node);
-                    }
-                    for( auto& e : Nodes[node].MoveEdges ) {
-                        Nodes[e.To].MoveEdges.push_back(node);
-                    }
-
-                    Nodes[node].isColored = oldNode.isColored || Nodes[edge.To].isColored;
-
-                    simplify();
-
-                    for( auto& e : Nodes[edge.To].Edges ) {
-                        Nodes[e.To].Edges.pop_back();
-                    }
-                    for( auto& e : Nodes[node].MoveEdges ) {
-                        Nodes[e.To].MoveEdges.pop_back();
-                    }
-                    Nodes[node] = oldNode;
-                    Nodes[node].Merged.push_back(edge.To);
-                    Nodes[edge.To].Merged.push_back(node);
+                    merge(node, edge.To);
                     return;
                 }
             }
@@ -189,7 +142,7 @@ namespace CodeGeneration {
         for( int i = 0; i < Nodes.size(); i++ ) {
             if( Nodes[i].isColored ) {
                 isColored[i] = true;
-                colors[i] = colored[Nodes[i].Var];
+                colors[i] = colored.find(Nodes[i].Var)->second;
             }
         }
         while( !stack.empty() ) {
@@ -204,7 +157,7 @@ namespace CodeGeneration {
                 while( !toVisit.empty()) {
                     int next = toVisit.back();
                     toVisit.pop_back();
-                    for( auto& to : Nodes[next].Merged ) {
+                    for( auto to : Nodes[next].Merged ) {
                         if( merged.find(to) == merged.end() ) {
                             merged.insert(to);
                             toVisit.push_back(to);
@@ -216,16 +169,22 @@ namespace CodeGeneration {
                 for( int next : merged) {
                     for( auto& edge : Nodes[next].Edges ) {
                         if( isColored[edge.To] ) {
-                            usedColors[edge.To] = true;
+                            usedColors[colors[edge.To]] = true;
                         }
                     }
                 }
 
                 int color = -1;
-                for( int i = 0; i < usedColors.size(); i++ ) {
+                for( int next : merged ) {
+                    if( isColored[next] ) {
+                        assert(color == -1 || colors[next] == color);
+                        color = colors[next];
+                    }
+                }
+
+                for( int i = 0; i < usedColors.size() && color == -1; i++ ) {
                     if( !usedColors[i] ) {
                         color = i;
-                        break;
                     }
                 }
 
@@ -240,6 +199,130 @@ namespace CodeGeneration {
             }
         }
         return nullptr;
+    }
+
+    void CVarInteractGraph::merge(int from, int to) {
+        int next = static_cast<int>(Nodes.size());
+        Nodes.push_back(TNode());
+        TNode& nextNode = Nodes.back();
+        TNode& fromNode = Nodes[from];
+        TNode& toNode = Nodes[to];
+
+        Temp::CTempPtr var( new Temp::CTemp(storage.Get(fromNode.Var->GetName() + " + " + toNode.Var->GetName())));
+
+        nextNode.Var = var.get();
+        nextNode.isColored = fromNode.isColored || toNode.isColored;
+
+        std::vector<bool> hasEdge(Nodes.size(), false);
+        std::vector<bool> hasMoveEdge(Nodes.size(), false);
+
+        for( auto& edge : fromNode.Edges ) {
+            if( isDeleted[edge.To]) {
+                continue;
+            }
+            hasEdge[edge.To] = true;
+            nextNode.Edges.push_back(edge);
+            Nodes[edge.To].Edges.push_back(TEdge(next));
+        }
+
+        for(auto& edge : toNode.Edges) {
+            if( isDeleted[edge.To]) {
+                continue;
+            }
+            if( !hasEdge[edge.To] ) {
+                hasEdge[edge.To] = true;
+                nextNode.Edges.push_back(edge);
+                Nodes[edge.To].Edges.push_back(TEdge(next));
+            } else {
+                nodeSet.erase({edgesCount[edge.To], edge.To});
+                nodeMoveSet.erase({edgesCount[edge.To], edge.To});
+                edgesCount[edge.To]--;
+                if( Nodes[edge.To].MoveEdges.size() == 0) {
+                    nodeSet.insert({edgesCount[edge.To], edge.To});
+                } else {
+                    nodeMoveSet.insert({edgesCount[edge.To], edge.To});
+                }
+            }
+        }
+
+        for( auto& edge : fromNode.MoveEdges ) {
+            if( isDeleted[edge.To]) {
+                continue;
+            }
+            if( !hasEdge[edge.To] && !edge.To == to ) {
+                hasMoveEdge[edge.To] = true;
+                nextNode.MoveEdges.push_back(edge);
+                Nodes[edge.To].MoveEdges.push_back(TEdge(next));
+            }
+        }
+
+        for(auto& edge : toNode.MoveEdges) {
+            if( isDeleted[edge.To]) {
+                continue;
+            }
+            if( !hasEdge[edge.To] && !hasMoveEdge[edge.To] && !edge.To == from ) {
+                hasMoveEdge[edge.To] = true;
+                nextNode.MoveEdges.push_back(edge);
+                Nodes[edge.To].MoveEdges.push_back(TEdge(next));
+            }
+        }
+
+        isDeleted[from] = true;
+        isDeleted[to] = true;
+        nodeSet.erase({edgesCount[from], from});
+        nodeSet.erase({edgesCount[to], to});
+        nodeMoveSet.erase({edgesCount[from], from});
+        nodeMoveSet.erase({edgesCount[to], to});
+        int fromMerge = fromNode.Merged.empty() ? from : fromNode.Merged[0];
+        int toMerge = toNode.Merged.empty() ? to : toNode.Merged[0];
+        Nodes[fromMerge].Merged.push_back(toMerge);
+        Nodes[toMerge].Merged.push_back(fromMerge);
+        nextNode.Merged.push_back(fromMerge);
+        nextNode.Merged.push_back(to);
+
+        isDeleted.push_back(false);
+        edgesCount.push_back(nextNode.Edges.size());
+
+        if( nextNode.MoveEdges.empty() ) {
+            nodeSet.insert({edgesCount[next], next});
+        } else {
+            nodeMoveSet.insert({edgesCount[next], next});
+        }
+
+        simplify();
+
+        for( auto& edge : Nodes[next].Edges ) {
+            Nodes[edge.To].Edges.pop_back();
+        }
+        for( auto& edge : Nodes[next].MoveEdges ) {
+            Nodes[edge.To].MoveEdges.pop_back();
+        }
+        Nodes.pop_back();
+    }
+
+    void CVarInteractGraph::Dump(std::ostream &out) {
+        out << "digraph {" << std::endl;
+        out << "concentrate=true" << std::endl;
+        for( int i = 0; i < Nodes.size(); i++) {
+            if( isDeleted.size() == 0 || !isDeleted[i] ) {
+                out << i << "[label=\"" << Nodes[i].Var->GetName() << " (" << i << ")\"]" << std::endl;
+            }
+        }
+        for( int i = 0; i < Nodes.size(); i++) {
+            if( isDeleted.size() == 0 || !isDeleted[i] ) {
+                for (auto &edge : Nodes[i].Edges) {
+                    out << i << " -> " << edge.To << "[arrowhead=none]" << ";" << std::endl;
+                }
+            }
+        }
+        for( int i = 0; i < Nodes.size(); i++) {
+            if( isDeleted.size() == 0 || !isDeleted[i] ) {
+                for (auto &edge : Nodes[i].MoveEdges) {
+                    out << i << " -> " << edge.To << "[arrowhead=none,style=dotted]" << ";" << std::endl;
+                }
+            }
+        }
+        out << "}\n";
     }
 }
 

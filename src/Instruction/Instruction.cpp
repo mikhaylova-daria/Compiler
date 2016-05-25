@@ -6,7 +6,7 @@
 
 namespace CodeGeneration {
     std::string IInstruction::Print() const {
-	    std::map < Temp::CTemp*, std::string > varsMapping;
+	    std::map<Temp::CTemp*, std::string, Temp::CTempCompare> varsMapping;
 	    for ( auto var : usedVars ) {
 		    varsMapping.emplace( var.get(), var->GetName());
 	    }
@@ -16,12 +16,29 @@ namespace CodeGeneration {
 	    return Format( varsMapping );
     }
 
-	void PrintCode(CCode code, std::ostream& out) {
+	void PrintCode(const CCode& code, std::ostream& out) {
 		for (auto instraction: code) {
 			out << instraction->Print() << std::endl;
 		}
 	}
-	std::string IInstruction::Format(std::map<Temp::CTemp*, std::string>& varsMapping) const {
+
+	void PrintCode(const CCode& code, std::ostream& out, std::map<Temp::CTemp*,Temp::CTemp*,Temp::CTempCompare>& map ) {
+		std::map <Temp::CTemp*, std::string,Temp::CTempCompare> varsMapping;
+		for( auto& p : map) {
+			varsMapping[p.first] = p.second->GetName();
+		}
+		for( auto& instruction : code ) {
+			MOVE* move = dynamic_cast<MOVE*>(instruction.get());
+            if( move != nullptr ) {
+                if( *map[move->UsedVars()[0].get()] == *map[move->DefinedVars()[0].get()]) {
+                    continue;
+                }
+            }
+			out << instruction->Format(varsMapping) << std::endl;
+		}
+	}
+
+	std::string IInstruction::Format(std::map<Temp::CTemp*, std::string, Temp::CTempCompare>& varsMapping) const {
 		int lastOpened = -1;
 		std::string result;
 		for( int i = 0; i < text.size(); i++) {

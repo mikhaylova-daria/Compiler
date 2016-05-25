@@ -5,10 +5,10 @@
 
 int Temp::CLabel::nextUniqueId = 0;
 
-std::string Temp::CLabel::generatedNameStart = "CLabelGeneratedName";
+std::string Temp::CLabel::generatedNameStart = "CLabel_";
 
 
 int Temp::CTemp::nextUniqueId = 0;
 
-std::string Temp::CTemp::generatedNameStart = "CTempGeneratedName";
+std::string Temp::CTemp::generatedNameStart = "CTemp_";
 

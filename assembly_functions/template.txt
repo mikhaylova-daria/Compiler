@@ -1,0 +1,27 @@
+.globl main
+
+.data
+    .printf_format: .string "%d\n"
+print:
+     push %rbp
+     movq %rsp, %rbp
+     movq 16(%rbp), %rbx
+     push %rbx
+     movq %rbx, %rsi
+     leaq .printf_format, %rdi
+     movl $0, %eax
+     call printf
+     pop %rbx
+     movq %rbp, %rsp
+     pop %rbp
+     ret $8
+
+new:
+	push %rbp
+	movq %rsp, %rbp
+	movq 16(%rbp), %rdi
+	call malloc
+	movq %rbp, %rsp
+	pop  %rbp
+	ret  $8
+

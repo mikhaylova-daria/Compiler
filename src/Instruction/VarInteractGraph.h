@@ -5,6 +5,7 @@
 #ifndef MINIJAVACOMPILER_VARINTERACTGRAPH_H
 #define MINIJAVACOMPILER_VARINTERACTGRAPH_H
 
+#include <fstream>
 #include "ControlFlowGraph.h"
 
 namespace CodeGeneration {
@@ -12,7 +13,10 @@ namespace CodeGeneration {
     class CVarInteractGraph {
     public:
 
-        CVarInteractGraph(const CControlFlowGraph& cfGraph, const std::map<Temp::CTemp*, int>& colored, int maxColors);
+        CVarInteractGraph(const CControlFlowGraph& cfGraph,
+                          const std::map<Temp::CTemp*, int, Temp::CTempCompare>& colored,
+                          int maxColors,
+                          CStorage& storage);
 
         struct TEdge {
             int To;
@@ -28,7 +32,10 @@ namespace CodeGeneration {
 
         Temp::CTemp* Paint( std::vector<int>& colors );
         const std::vector<TNode>& GetNodes() const { return Nodes; }
+
+        void Dump(std::ostream& out);
     private:
+        CStorage& storage;
 
         std::vector<bool> isDeleted;
         std::vector<int> edgesCount;
@@ -37,15 +44,19 @@ namespace CodeGeneration {
         std::set<std::pair<int, int>> nodeSet;
         std::set<std::pair<int, int>> nodeMoveSet;
 
-        const std::map<Temp::CTemp*, int>& colored;
+        const std::map<Temp::CTemp*, int, Temp::CTempCompare>& colored;
 
         std::vector<TNode> Nodes;
-        std::map<Temp::CTemp*, int> VarMap;
+        std::map<Temp::CTemp*, int, Temp::CTempCompare> VarMap;
         int k;
 
         void simplify();
         void coalesce();
-
+        void merge(int from ,int to);
+        void dump() {
+            std::ofstream out("vig.gv");
+            Dump(out);
+        }
 
     };
 

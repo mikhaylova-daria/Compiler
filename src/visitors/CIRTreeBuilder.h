@@ -84,15 +84,17 @@ public:
     virtual void Visit(const CGoal *goal);
 
     struct Function {
-        Function(const std::shared_ptr<ISubtreeWrapper> &_root, const CSymbol *name, CStorage& storage) : name(name) {
+        Function(const std::shared_ptr<ISubtreeWrapper> &_root, const CSymbol *name,
+                 const std::vector<Temp::CTempPtr>& arguments, CStorage& storage) : name(name), Arguments(arguments) {
             ExpPtr ret(new TempExp(CTempPtr(new Temp::CTemp(storage.Get(CIRTreeBuilder::getRetName()))), 0));
             root = StatementPtr(new MoveStatement(ret, _root->ToExp()));
-            StatementPtr func(new LabelStatement(LabelPtr(new Temp::CLabel(name))));
-            root = StatementPtr(new SEQStatement(func, root));
+            //StatementPtr func(new LabelStatement(LabelPtr(new Temp::CLabel(name))));
+            //root = StatementPtr(new SEQStatement(func, root));
         }
 
         //std::shared_ptr<ISubtreeWrapper> root;
         StatementPtr root;
+        std::vector<Temp::CTempPtr> Arguments;
         const CSymbol* name;
     };
     std::vector<Function> functions;
@@ -106,23 +108,23 @@ private:
     std::shared_ptr<ISubtreeWrapper> currNode;
 
     const CSymbol* genFunctionName(const CSymbol* className, const CSymbol* funcName) {
-        return storage.Get(std::string("#") + className->GetName() + "." + funcName->GetName());
+        return storage.Get(className->GetName() + "." + funcName->GetName());
     }
     //
     //const CSymbol* genClassVarName(const CSymbol* name) {
     //    return storage.Get(std::string("#this_") + name->GetName());
     //}
     static const std::string getNewFuncName() {
-        return "#new";
+        return "new";
     }
     static const std::string getPrintFuncName() {
-        return "#print";
+        return "print";
     }
     static const std::string getMainFuncName() {
-        return "#main";
+        return "main";
     }
     static const std::string getRetName() {
-        return "ret";
+        return "rax";
     }
     // В условных (void*)-ах
     ExpPtr buildZeroInitTree(ExpPtr allocationExpr, int size) {
@@ -163,7 +165,7 @@ private:
         ExpPtr pointerSize(new PlatformConstExp(TPlatformConstType::PCT_POINTER_SIZE));
         StatementPtr jumpForLabel(new JumpStatement({forLabel}, zero));
         StatementPtr jumpTrueFalseLabel(new CJumpStatement(CJUMP::J_EQ, size, zero, trueLabel, falseLabel));
-        StatementPtr div(new MoveStatement(size, ExpPtr(new BinopExp(BINOP::DIV, size, one))));
+        StatementPtr div(new MoveStatement(size, ExpPtr(new BinopExp(BINOP::MINUS, size, one))));
         ExpPtr shift(new BinopExp(BINOP::MUL, size, pointerSize));
         ExpPtr nextAddr(new BinopExp(BINOP::PLUS, addr, shift));
         StatementPtr move(new MoveStatement(nextAddr, zero));
